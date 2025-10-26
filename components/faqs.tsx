@@ -12,33 +12,34 @@ export default function FAQs() {
   const faqItems = [
     {
       id: "item-1",
-      question: "How long does shipping take?",
+      question: "How is usage calculated, and what happens if I hit my limit?",
       answer:
-        "Standard shipping takes 3-5 business days, depending on your location. Express shipping options are available at checkout for 1-2 business day delivery.",
+        "Usage is tracked by <strong>uploaded minutes of audio/video</strong> across your entire organization. If you reach your limit, your team can still view and export existing case studies, but you will need to upgrade your plan to upload more files.",
     },
     {
       id: "item-2",
-      question: "What payment methods do you accept?",
+      question: "What file types do you accept for customer interviews?",
       answer:
-        "We accept all major credit cards (Visa, Mastercard, American Express), PayPal, Apple Pay, and Google Pay. For enterprise customers, we also offer invoicing options.",
+        "We support all common audio and video formats, including <strong>MP3, MP4, MOV, WAV, and M4A</strong>. Simply drag and drop your files into the Casevia dashboard, and our AI will handle the transcription and analysis.",
     },
     {
       id: "item-3",
-      question: "Can I change or cancel my order?",
+      question: "Can I customize the structure of the generated case studies?",
       answer:
-        "You can modify or cancel your order within 1 hour of placing it. After this window, please contact our customer support team who will assist you with any changes.",
+        "Yes! While the default structure is the best-practice <strong>Challenge → Solution → Results</strong> format, you can use our in-app editor to customize, refine, and re-order sections before exporting.",
     },
     {
       id: "item-4",
-      question: "Do you ship internationally?",
+      question: "How secure is my data and who manages user authentication?",
+      // FIX APPLIED: Using <strong> tags instead of **
       answer:
-        "Yes, we ship to over 50 countries worldwide. International shipping typically takes 7-14 business days. Additional customs fees may apply depending on your country's import regulations.",
+        "Your data is highly secure. Customer data is stored privately via <strong>Supabase</strong>. We use <strong>Better Auth</strong> for enterprise-grade login and organization management, ensuring team data is segmented and protected.",
     },
     {
       id: "item-5",
-      question: "What is your return policy?",
+      question: "Do you offer a plan for a solo professional or freelancer?",
       answer:
-        "We offer a 30-day return policy for most items. Products must be in original condition with tags attached. Some specialty items may have different return terms, which will be noted on the product page.",
+        "Yes, our <strong>Free tier</strong> is perfect for solo users who need occasional social proof. Our <strong>Starter Plan</strong> is cost-effective and removes the Casevia watermark for professional use.",
     },
   ];
 
@@ -61,7 +62,17 @@ export default function FAQs() {
                     {item.question}
                   </AccordionTrigger>
                   <AccordionContent>
-                    <p className="text-base">{item.answer}</p>
+                    {/* NOTE: You will need to use dangerouslySetInnerHTML here 
+                       to render the <strong> tags from the string.
+                       If you cannot use dangerouslySetInnerHTML, you should 
+                       change the 'answer' property to be a JSX element (ReactNode).
+                       
+                       Assuming you can use dangerouslySetInnerHTML for this common pattern:
+                    */}
+                    <p
+                      className="text-base"
+                      dangerouslySetInnerHTML={{ __html: item.answer }}
+                    ></p>
                   </AccordionContent>
                 </AccordionItem>
                 <hr className="mx-5 -mb-px group-last:hidden peer-data-[state=open]:opacity-0 md:mx-7" />
@@ -71,7 +82,10 @@ export default function FAQs() {
 
           <p className="text-muted-foreground text-center">
             Can't find what you're looking for? Contact our{" "}
-            <Link href="#" className="text-primary font-medium hover:underline">
+            <Link
+              href="/support"
+              className="text-primary font-medium hover:underline"
+            >
               customer support team
             </Link>
           </p>

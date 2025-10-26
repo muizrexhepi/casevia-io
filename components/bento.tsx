@@ -6,11 +6,12 @@ export default function BentoSection() {
     <section className="pt-12 lg:pt-20  dark:bg-transparent container border-x border-border space-y-12">
       <div className="relative z-10 grid items-center gap-4 md:grid-cols-2 md:gap-12 px-2">
         <h2 className="text-4xl font-semibold max-w-xl">
-          The Lyra ecosystem brings together our models
+          One platform to automate your entire case study workflow
         </h2>
         <p className="max-w-sm sm:ml-auto text-muted-foreground">
-          Empower your team with workflows that adapt to your needs, whether you
-          prefer git synchronization or a AI Agents interface.
+          Casevia streamlines everything from transcription and AI analysis to
+          final narrative generation, turning raw interviews into publish-ready
+          assets in minutes.
         </p>
       </div>
       <div className="p-2 rounded-lg bg-accent">
@@ -95,11 +96,12 @@ export default function BentoSection() {
                 </div>
                 <div className="relative z-10 mt-6 space-y-2 text-center">
                   <h2 className="group-hover:text-secondary-950 text-lg font-medium transition dark:text-white">
-                    Secure by default
+                    AI Analysis & Structuring
                   </h2>
                   <p className="text-foreground">
-                    Provident fugit and vero voluptate. magnam magni doloribus
-                    dolores voluptates a sapiente nisi.
+                    Our models (DeepSeek and GPT-4o) automatically extract the
+                    Challenge, Solution, Results, and key quotes from the
+                    transcript
                   </p>
                 </div>
               </CardContent>
@@ -190,11 +192,12 @@ export default function BentoSection() {
                 </div>
                 <div className="relative z-10 mt-14 space-y-2 text-center">
                   <h2 className="text-lg font-medium transition">
-                    Faster than light
+                    Structured Narrative Generation
                   </h2>
                   <p className="text-foreground">
-                    Provident fugit vero voluptate. magnam magni doloribus
-                    dolores voluptates inventore nisi.
+                    Eliminate inconsistency. The AI drafts a clean, professional
+                    case study narrative following the required industry
+                    standard format.
                   </p>
                 </div>
               </CardContent>
@@ -207,11 +210,12 @@ export default function BentoSection() {
                   </div>
                   <div className="space-y-2">
                     <h2 className="group-hover:text-secondary-950 text-lg font-medium text-zinc-800 transition dark:text-white">
-                      Faster than light
+                      Flexible Export Options
                     </h2>
                     <p className="text-foreground">
-                      Provident fugit vero voluptate. Voluptates a sapiente
-                      inventore nisi.
+                      Publish anywhere. Export your final case study as Markdown
+                      (for your CMS), PDF (for clients), or a full SEO-friendly
+                      post (Pro+ plans).
                     </p>
                   </div>
                 </div>
@@ -272,11 +276,12 @@ export default function BentoSection() {
                   </div>
                   <div className="space-y-2">
                     <h2 className="text-lg font-medium transition">
-                      Keep your loved ones safe
+                      Template & Branding Control
                     </h2>
                     <p className="text-foreground">
-                      Voluptate. magnam magni doloribus dolores voluptates a
-                      sapiente inventore nisi.
+                      Choose from up to 10 professional templates to ensure a
+                      consistent look. PDF exports come without a watermark on
+                      all paid plans.
                     </p>
                   </div>
                 </div>

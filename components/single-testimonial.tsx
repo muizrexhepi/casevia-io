@@ -9,23 +9,26 @@ export default function SingleTestimonialSection() {
           <div className="max-w-4xl">
             <blockquote className="mt-6">
               <p className="text-foreground text-xl md:text-2xl">
-                &quot;Using Tailark has been like unlocking a secret design
-                superpower. It's the perfect fusion of simplicity and
-                versatility, enabling us to create UIs that are as stunning as
-                they are user-friendly.&quot;
+                &quot;Before Casevia, every case study took us 2-3 weeks and
+                $1,500+ in writer and editor fees. Now, we turn an interview
+                into a publish-ready draft in under 15 minutes,
+                consistently.&quot;
               </p>
               <footer className="mt-6 flex flex-col items-center justify-center">
+                {/* Note: Avatar details are updated to reflect the target user segment */}
                 <Avatar className="ring-foreground/10 size-12 border border-transparent shadow ring-1">
                   <AvatarImage
-                    src="https://avatars.githubusercontent.com/u/68236786?v=4"
-                    alt="Théo Balick"
+                    src="https://avatars.githubusercontent.com/u/68236786?v=4" // Keep or replace with a generic image URL
+                    alt="Sarah L."
                   />
-                  <AvatarFallback>T</AvatarFallback>
+                  <AvatarFallback>S</AvatarFallback>
                 </Avatar>
                 <cite className="text-foreground mt-2 text-lg font-medium">
-                  Théo Balick
+                  Sarah L.
                 </cite>
-                <span className="text-muted-foreground">@theo_b</span>
+                <span className="text-muted-foreground">
+                  Founder, Mid-Sized Marketing Agency
+                </span>
               </footer>
             </blockquote>
           </div>
