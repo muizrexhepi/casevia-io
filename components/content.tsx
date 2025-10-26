@@ -20,19 +20,19 @@ export default function ContentSection() {
 
   const images = {
     "item-1": {
-      image: "/charts.png",
+      image: "/images/charts.png",
       alt: "Database visualization",
     },
     "item-2": {
-      image: "/music.png",
+      image: "/images/music.png",
       alt: "Security authentication",
     },
     "item-3": {
-      image: "/mail2.png",
+      image: "/images/mail2.png",
       alt: "Identity management",
     },
     "item-4": {
-      image: "/payments.png",
+      image: "/images/payments.png",
       alt: "Analytics dashboard",
     },
   };
