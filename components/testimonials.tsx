@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "./ui/separator";
 
 type Testimonial = {
   name: string;
@@ -117,64 +118,62 @@ const testimonialChunks = chunkArray(
 
 export default function TestimonialsSection() {
   return (
-    <section className="relative container border-x">
-      <div className="py-12 lg:py-24">
-        <div className="mx-auto">
-          <div className="text-center">
-            <h2 className="text-4xl font-semibold">
-              The Social Proof Engine Trusted by Pros
-            </h2>
-            <p className="mt-6 text-muted-foreground">
-              Casevia delivers consistent, high-quality case studies—the
-              essential social proof—without the usual time and cost
-              bottlenecks.
-            </p>
-          </div>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 md:mt-12 lg:grid-cols-3 [mask-image:radial-gradient(ellipse_90%_50%_at_50%_50%,#000_70%,transparent_100%)] bg-muted p-2">
-            {testimonialChunks.map((chunk, chunkIndex) => (
-              <div key={chunkIndex} className="space-y-3">
-                {chunk.map(({ name, role, quote, image }, index) => (
-                  <Card key={index}>
-                    <CardContent className="grid grid-cols-[auto_1fr] gap-3 pt-6">
-                      <Avatar className="size-9">
-                        <AvatarImage
-                          alt={name}
-                          src={image}
-                          loading="lazy"
-                          width="120"
-                          height="120"
-                        />
-                        <AvatarFallback>
-                          {/* Simple fallback using first letters of first two words of the name */}
-                          {name
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")
-                            .substring(0, 2)
-                            .toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
+    <section className="relative">
+      <div className="text-center py-12 lg:py-24 container border-x">
+        <h2 className="text-3xl md:text-4xl font-semibold">
+          The Social Proof Engine <br />
+          <span className="text-muted-foreground">Trusted by Pros</span>
+        </h2>
+        <p className="mt-6 text-muted-foreground max-w-2xl mx-auto">
+          Casevia delivers consistent, high-quality case studies—the essential
+          social proof—without the usual time and cost bottlenecks.
+        </p>
+      </div>
+      <Separator />
 
-                      <div>
-                        <h3 className="font-medium">{name}</h3>
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 bg-muted p-2 container border-x">
+        {testimonialChunks.map((chunk, chunkIndex) => (
+          <div key={chunkIndex} className="space-y-3">
+            {chunk.map(({ name, role, quote, image }, index) => (
+              <Card key={index}>
+                <CardContent className="grid grid-cols-[auto_1fr] gap-3 pt-6">
+                  <Avatar className="size-9">
+                    <AvatarImage
+                      alt={name}
+                      src={image}
+                      loading="lazy"
+                      width="120"
+                      height="120"
+                    />
+                    <AvatarFallback>
+                      {/* Simple fallback using first letters of first two words of the name */}
+                      {name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")
+                        .substring(0, 2)
+                        .toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
 
-                        <span className="text-muted-foreground block text-sm tracking-wide">
-                          {role}
-                        </span>
+                  <div>
+                    <h3 className="font-medium">{name}</h3>
 
-                        <blockquote className="mt-3">
-                          <p className="text-gray-700 dark:text-gray-300">
-                            {quote}
-                          </p>
-                        </blockquote>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+                    <span className="text-muted-foreground block text-sm tracking-wide">
+                      {role}
+                    </span>
+
+                    <blockquote className="mt-3">
+                      <p className="text-gray-700 dark:text-gray-300">
+                        {quote}
+                      </p>
+                    </blockquote>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
-        </div>
+        ))}
       </div>
     </section>
   );

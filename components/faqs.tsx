@@ -44,11 +44,12 @@ export default function FAQs() {
   ];
 
   return (
-    <section className="py-16 md:py-24 border-x container">
-      <div className="mx-auto max-w-2xl px-6">
+    <section className="py-16 md:py-24 border-x container ">
+      <div className="mx-auto max-w-2xl">
         <div className="space-y-12">
-          <h2 className="text-foreground text-center text-4xl font-semibold">
-            Your questions answered
+          <h2 className="text-3xl md:text-4xl font-semibold text-center">
+            Your questions <br />
+            <span className="text-muted-foreground">answered</span>
           </h2>
 
           <Accordion type="single" collapsible className="-mx-2 sm:mx-0">

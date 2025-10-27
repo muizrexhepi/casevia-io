@@ -11,7 +11,7 @@ export default function FeaturesSection() {
         <div>
           <div className="grid gap-12 md:grid-cols-5">
             <div className="md:col-span-2 px-2">
-              <h2 className="text-foreground text-balance text-4xl font-semibold">
+              <h2 className="text-3xl md:text-4xl font-semibold">
                 The AI Engine That Transforms Interviews Into Case Studies
               </h2>
               <Button className="mt-8 pr-2" variant="outline" asChild>
@@ -33,10 +33,9 @@ export default function FeaturesSection() {
                   </h3>
                 </div>
                 <p className="text-muted-foreground mt-3 text-balance">
-                  Our **GPT-4o** and **DeepSeek** models analyze your full
-                  interview transcript to automatically pull out the core
-                  **Challenge, Solution, Results,** and compelling client
-                  quotes.
+                  Our AI models analyze your full interview transcript to
+                  automatically pull out the core **Challenge, Solution,
+                  Results,** and compelling client quotes.
                 </p>
               </div>
 

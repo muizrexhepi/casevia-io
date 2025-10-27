@@ -1,11 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Shield, Users } from "lucide-react";
+import { Separator } from "./ui/separator";
 
 export default function BentoSection() {
   return (
-    <section className="pt-12 lg:pt-20  dark:bg-transparent container border-x border-border space-y-12">
-      <div className="relative z-10 grid items-center gap-4 md:grid-cols-2 md:gap-12 px-2">
-        <h2 className="text-4xl font-semibold max-w-xl">
+    <section className="">
+      <div className="relative z-10 grid items-center gap-4 md:grid-cols-2 md:gap-12 container border-x py-12 lg:py-24 px-2 ">
+        <h2 className="text-3xl md:text-4xl font-semibold max-w-xl">
           One platform to automate your entire case study workflow
         </h2>
         <p className="max-w-sm sm:ml-auto text-muted-foreground">
@@ -14,9 +15,10 @@ export default function BentoSection() {
           assets in minutes.
         </p>
       </div>
-      <div className="p-2 rounded-lg bg-accent">
+      <Separator />
+      <div className="p-2 container border-x bg-muted">
         <div className="relative">
-          <div className="relative z-10 grid grid-cols-6 gap-3">
+          <div className="relative z-10 grid grid-cols-6 gap-2">
             <Card className="relative col-span-full flex overflow-hidden lg:col-span-2">
               <CardContent className="relative m-auto size-fit pt-6">
                 <div className="relative flex h-24 w-56 items-center">
@@ -98,10 +100,9 @@ export default function BentoSection() {
                   <h2 className="group-hover:text-secondary-950 text-lg font-medium transition dark:text-white">
                     AI Analysis & Structuring
                   </h2>
-                  <p className="text-foreground">
-                    Our models (DeepSeek and GPT-4o) automatically extract the
-                    Challenge, Solution, Results, and key quotes from the
-                    transcript
+                  <p className="text-muted-foreground">
+                    Our models automatically extract the Challenge, Solution,
+                    Results, and key quotes from the transcript
                   </p>
                 </div>
               </CardContent>
@@ -194,7 +195,7 @@ export default function BentoSection() {
                   <h2 className="text-lg font-medium transition">
                     Structured Narrative Generation
                   </h2>
-                  <p className="text-foreground">
+                  <p className="text-muted-foreground">
                     Eliminate inconsistency. The AI drafts a clean, professional
                     case study narrative following the required industry
                     standard format.
@@ -212,7 +213,7 @@ export default function BentoSection() {
                     <h2 className="group-hover:text-secondary-950 text-lg font-medium text-zinc-800 transition dark:text-white">
                       Flexible Export Options
                     </h2>
-                    <p className="text-foreground">
+                    <p className="text-muted-foreground">
                       Publish anywhere. Export your final case study as Markdown
                       (for your CMS), PDF (for clients), or a full SEO-friendly
                       post (Pro+ plans).
@@ -278,7 +279,7 @@ export default function BentoSection() {
                     <h2 className="text-lg font-medium transition">
                       Template & Branding Control
                     </h2>
-                    <p className="text-foreground">
+                    <p className="text-muted-foreground">
                       Choose from up to 10 professional templates to ensure a
                       consistent look. PDF exports come without a watermark on
                       all paid plans.

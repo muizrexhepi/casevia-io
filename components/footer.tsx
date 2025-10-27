@@ -82,15 +82,14 @@ const links = [
 
 export default function FooterSection() {
   return (
-    <footer className="bg-background border-b pt-12 lg:pt-24 container">
-      <div className="">
+    <footer className="bg-muted border-b pt-12 lg:pt-24 ">
+      <div className="container">
         <div className="grid gap-12 md:grid-cols-5">
           <div className="md:col-span-2">
-            <Link href="/" aria-label="go home" className="block size-fit">
-              <span className="text-2xl font-semibold">Casevia.io</span>{" "}
-              {/* Logo */}
+            <Link href="/" className="flex items-center gap-2">
+              <img src={"/logo.svg"} className="object-contain w-auto h-10" />
             </Link>
-            <p className="mt-4 text-sm text-muted-foreground max-w-xs">
+            <p className="mt-4 text-sm text-muted-foreground max-w-md">
               The AI-powered platform for agencies and marketers to generate,
               manage, and scale social proof effortlessly.
             </p>
@@ -104,7 +103,7 @@ export default function FooterSection() {
                   <Link
                     key={index}
                     href={item.href}
-                    className="text-muted-foreground hover:text-primary block duration-150"
+                    className="text-muted-foreground text-sm hover:text-primary block duration-150"
                   >
                     <span>{item.title}</span>
                   </Link>
@@ -122,7 +121,7 @@ export default function FooterSection() {
           <div className="order-first flex flex-wrap justify-center gap-6 text-sm md:order-last">
             {/* X/Twitter - Updated href to a placeholder for your social handle */}
             <Link
-              href="https://x.com/yourcaseviahandle"
+              href="https://x.com/muiz_rexhepi"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="X/Twitter"
@@ -144,7 +143,7 @@ export default function FooterSection() {
 
             {/* LinkedIn - Updated href */}
             <Link
-              href="https://linkedin.com/company/casevia"
+              href="https://linkedin.com/in/muiz-rexhepi"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
