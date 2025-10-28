@@ -58,7 +58,7 @@ export const PLANS: Plan[] = [
       prioritySupport: false,
       dedicatedManager: false,
     },
-    cta: "Current Plan",
+    cta: "Get Started",
     popular: false,
   },
   {
@@ -323,7 +323,7 @@ export default function PricingClient() {
                   <div className="mt-4 flex items-center gap-2">
                     <div className="flex items-baseline gap-2">
                       <span className="text-5xl font-medium tracking-tight">
-                        {isContactSales ? plan.price : `${Math.round(price)}`}
+                        {isContactSales ? plan.price : `$${Math.round(price)}`}
                       </span>
                       {!isContactSales && price !== 0 && (
                         <span className="text-muted-foreground text-sm">

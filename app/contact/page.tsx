@@ -292,7 +292,7 @@ export default function ContactPage() {
                     <p className="text-xs text-center text-muted-foreground">
                       By submitting this form, you agree to our{" "}
                       <Link
-                        href="/privacy"
+                        href="/privacy-policy"
                         className="text-foreground underline hover:no-underline"
                       >
                         privacy policy

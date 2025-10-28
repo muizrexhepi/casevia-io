@@ -70,10 +70,7 @@ export default function FAQs() {
                        
                        Assuming you can use dangerouslySetInnerHTML for this common pattern:
                     */}
-                    <p
-                      className="text-base"
-                      dangerouslySetInnerHTML={{ __html: item.answer }}
-                    ></p>
+                    <p dangerouslySetInnerHTML={{ __html: item.answer }}></p>
                   </AccordionContent>
                 </AccordionItem>
                 <hr className="mx-5 -mb-px group-last:hidden peer-data-[state=open]:opacity-0 md:mx-7" />
@@ -84,7 +81,7 @@ export default function FAQs() {
           <p className="text-muted-foreground text-center">
             Can't find what you're looking for? Contact our{" "}
             <Link
-              href="/support"
+              href="/contact"
               className="text-primary font-medium hover:underline"
             >
               customer support team

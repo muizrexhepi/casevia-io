@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-// Update the import for the second icon
 import { Target, FileText, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,8 +33,11 @@ export default function FeaturesSection() {
                 </div>
                 <p className="text-muted-foreground mt-3 text-balance">
                   Our AI models analyze your full interview transcript to
-                  automatically pull out the core **Challenge, Solution,
-                  Results,** and compelling client quotes.
+                  automatically pull out the core{" "}
+                  <strong className="font-semibold text-foreground">
+                    Challenge, Solution, Results,
+                  </strong>{" "}
+                  and compelling client quotes.
                 </p>
               </div>
 
@@ -50,7 +52,10 @@ export default function FeaturesSection() {
                 <p className="text-muted-foreground mt-3 text-balance">
                   The AI uses the extracted data to instantly draft a clean,
                   structured narrative, ready for publishing. Export as
-                  **Markdown, PDF, or an SEO-friendly post.**
+                  <strong className="font-semibold text-foreground">
+                    {" "}
+                    Markdown, PDF, or an SEO-friendly post.
+                  </strong>
                 </p>
               </div>
             </div>

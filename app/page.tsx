@@ -25,8 +25,8 @@ export default function Home() {
       <Separator />
       <FeaturesSection />
       <Separator />
-      <TestimonialsSection />
-      <Separator />
+      {/* <TestimonialsSection /> */}
+      {/* <Separator /> */}
       <CtaSection />
       <Separator />
       <FAQs />
