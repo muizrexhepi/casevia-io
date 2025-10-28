@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { href: "/pricing", label: "Pricing" },
-  { href: "/examples", label: "Examples" },
+  { href: "/example", label: "Example" },
   { href: "/contact", label: "Contact" },
 ];
 

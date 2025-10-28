@@ -65,7 +65,7 @@ const links = [
       },
       {
         title: "Privacy Policy", // Updated title
-        href: "/privacy", // Updated link
+        href: "/privacy-policy", // Updated link
       },
       {
         title: "Cookie Policy", // Updated title

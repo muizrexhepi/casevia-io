@@ -39,7 +39,7 @@ export default function CtaSection() {
             {/* Secondary CTA: For high-value leads (Agencies) to book a call */}
             <Button asChild variant="outline" className="pl-2.5">
               <Link href="/schedule-demo">
-                <Calendar className="!size-3.5 opacity-50" strokeWidth={2.5} />
+                <Calendar className="size-3.5! opacity-50" strokeWidth={2.5} />
                 Request a Demo
               </Link>
             </Button>
