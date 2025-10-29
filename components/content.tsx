@@ -1,16 +1,12 @@
 "use client";
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  Zap, // For AI Generation
-  Pencil, // For Customization/Editing
-  Share2, // For Exporting/Sharing
-  ShieldCheck, // For Security/Data
-} from "lucide-react";
+import { Zap, Pencil, Share2, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { Separator } from "./ui/separator";
@@ -19,7 +15,6 @@ export default function ContentSection() {
   type ImageKey = "item-1" | "item-2" | "item-3" | "item-4";
   const [activeItem, setActiveItem] = useState<ImageKey>("item-1");
 
-  // NOTE: Image paths updated to reflect files found in your project explorer
   const images = {
     "item-1": {
       image: "/images/casevia-generation.png",
@@ -41,26 +36,28 @@ export default function ContentSection() {
 
   return (
     <section className="relative">
-      {/* Background Styling (kept from original) */}
+      {/* Background Styling */}
       <div className="bg-linear-to-b absolute inset-0 -z-10 sm:inset-6 sm:rounded-b-3xl dark:block dark:to-[color-mix(in_oklab,var(--color-zinc-900)_75%,var(--color-background))]"></div>
 
       <div className="px-2 dark:[--color-border:color-mix(in_oklab,var(--color-white)_10%,transparent)]">
-        {/* Header (Updated for Casevia) */}
+        {/* Header */}
         <div className="py-12 lg:py-24 border-x container relative z-10 mx-auto space-y-6 text-center">
           <h2 className="text-3xl md:text-4xl font-semibold">
-            Go from interview to final <br />
+            Go from interview to final <br className="hidden md:block" />
             <span className="text-muted-foreground">
-              case study, instantly.
+              case study — instantly.
             </span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Casevia transforms raw customer interviews (audio/video) into
-            high-quality, structured social proof, cutting weeks of manual work
-            down to minutes.
+            Casevia turns raw client interviews into structured, publish-ready
+            stories in minutes — no forms, no manual writing. Just upload and
+            let the AI do the work.
           </p>
         </div>
+
         <Separator />
-        <div className="flex flex-col gap-12 sm:px-12 md:flex-row lg:gap-20 p-2 border-x container">
+
+        <div className="flex flex-col gap-12 px-4 md:flex-row lg:gap-20 p-2 border-x container">
           {/* Accordion Feature List */}
           <Accordion
             type="single"
@@ -77,10 +74,10 @@ export default function ContentSection() {
                 </div>
               </AccordionTrigger>
               <AccordionContent>
-                Upload your customer interview (audio or video), and our AI
-                extracts key quotes and automatically drafts a complete
-                Challenge → Solution → Results narrative. No more transcription
-                or drafting from scratch.
+                Upload your interview — video, audio, or transcript. Casevia’s
+                AI extracts key quotes and automatically crafts a full{" "}
+                <strong>Challenge → Solution → Results</strong> narrative. No
+                transcription, no drafts, no starting from scratch.
               </AccordionContent>
             </AccordionItem>
 
@@ -93,10 +90,9 @@ export default function ContentSection() {
                 </div>
               </AccordionTrigger>
               <AccordionContent>
-                Refine the AI's draft using our powerful editor. You can adjust
-                the tone, change the persona, and integrate additional data
-                points to ensure the final story perfectly matches your brand
-                voice.
+                Make it yours. Edit tone, structure, or pull in extra details
+                with one click. Our smart editor lets you tweak content while
+                maintaining Casevia’s professionally written flow.
               </AccordionContent>
             </AccordionItem>
 
@@ -109,10 +105,9 @@ export default function ContentSection() {
                 </div>
               </AccordionTrigger>
               <AccordionContent>
-                Instantly export your case study in multiple formats:
-                SEO-friendly Web content, PDF for sales collateral, and
-                pre-formatted social media posts (LinkedIn, X, etc.) to maximize
-                reach.
+                Export your final case study in any format: PDF for clients,
+                Markdown or HTML for your CMS, or ready-to-post social snippets
+                for platforms like LinkedIn and X — all instantly optimized.
               </AccordionContent>
             </AccordionItem>
 
@@ -125,10 +120,9 @@ export default function ContentSection() {
                 </div>
               </AccordionTrigger>
               <AccordionContent>
-                Keep your customer data secure with enterprise-grade
-                authentication and private storage. Manage team access and
-                permissions easily, ensuring compliance and data integrity
-                across your organization.
+                Casevia uses enterprise-grade encryption and private workspace
+                access. Manage teams, control permissions, and ensure your
+                clients’ data stays protected — always.
               </AccordionContent>
             </AccordionItem>
           </Accordion>

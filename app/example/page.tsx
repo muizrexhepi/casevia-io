@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import FooterSection from "@/components/footer";
+import { WaitlistForm } from "@/components/emails/waitlist-form";
 
 export default function ExamplePage() {
   return (
@@ -390,7 +391,7 @@ export default function ExamplePage() {
               publish-ready case studies with AI.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          {/* <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button asChild size="lg">
               <Link href="/signup">
                 Start for free
@@ -400,7 +401,8 @@ export default function ExamplePage() {
             <Button asChild variant="outline" size="lg">
               <Link href="/pricing">View pricing</Link>
             </Button>
-          </div>
+          </div> */}
+          <WaitlistForm />
         </div>
 
         <Separator />

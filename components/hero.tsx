@@ -18,7 +18,7 @@ export function HeroSection() {
       </Badge>
 
       {/* Headline */}
-      <h1 className="text-4xl md:text-5xl lg:text-7xl tracking-tight text-center font-medium leading-[1em]">
+      <h1 className="text-4xl md:text-5xl lg:text-6xl tracking-tight text-center font-medium leading-[1em]">
         Automate Your <br />
         <span className="text-muted-foreground">Case Study Pipeline.</span>
       </h1>

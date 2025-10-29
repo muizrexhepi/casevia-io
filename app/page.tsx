@@ -23,8 +23,8 @@ export default function Home() {
       <Separator />
       <ContentSection />
       <Separator />
-      <FeaturesSection />
-      <Separator />
+      {/* <FeaturesSection /> */}
+      {/* <Separator /> */}
       {/* <TestimonialsSection /> */}
       {/* <Separator /> */}
       <CtaSection />

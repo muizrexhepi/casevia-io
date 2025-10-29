@@ -63,11 +63,11 @@ export default function ContactPage() {
 
         {/* Main Content */}
         <div className="bg-muted border-x container">
-          <div className="grid lg:grid-cols-5 gap-2 p-2">
+          <div className="grid lg:grid-cols-5 gap-2 py-4">
             {/* Left Column - Contact Cards */}
             <div className="lg:col-span-2 space-y-2">
               {/* Email Card */}
-              <Card className="p-6 bg-background">
+              <Card className="p-4 bg-background">
                 <div className="flex items-start gap-4">
                   <div className="p-2.5 rounded-lg bg-primary/10">
                     <Mail className="h-5 w-5 text-primary" />
@@ -314,7 +314,8 @@ export default function ContactPage() {
             Ready to get started?
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Try Casevia free for 14 days. No credit card required.
+            Start using Casevia today — it’s free forever, no credit card
+            required.
           </p>
           <Button asChild size="lg">
             <Link href="/dashboard">

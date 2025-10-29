@@ -10,9 +10,9 @@ export default function BentoSection() {
           One platform to automate your entire case study workflow
         </h2>
         <p className="max-w-sm sm:ml-auto text-muted-foreground">
-          Casevia streamlines everything from transcription and AI analysis to
-          final narrative generation, turning raw interviews into publish-ready
-          assets in minutes.
+          From raw interviews to publish-ready case studies — Casevia handles
+          transcription, analysis, and writing in minutes. You just drag, drop,
+          and download.
         </p>
       </div>
       <Separator />
@@ -101,8 +101,9 @@ export default function BentoSection() {
                     AI Analysis & Structuring
                   </h2>
                   <p className="text-muted-foreground">
-                    Our models automatically extract the Challenge, Solution,
-                    Results, and key quotes from the transcript
+                    Casevia’s AI identifies your customer’s Challenge, Solution,
+                    and Results — plus key quotes — and automatically structures
+                    them into a professional case study framework.
                   </p>
                 </div>
               </CardContent>
@@ -196,9 +197,9 @@ export default function BentoSection() {
                     Structured Narrative Generation
                   </h2>
                   <p className="text-muted-foreground">
-                    Eliminate inconsistency. The AI drafts a clean, professional
-                    case study narrative following the required industry
-                    standard format.
+                    Say goodbye to messy notes. Casevia writes a clear, on-brand
+                    case study narrative that reads like it was crafted by a
+                    professional content team — instantly.
                   </p>
                 </div>
               </CardContent>
@@ -214,9 +215,9 @@ export default function BentoSection() {
                       Flexible Export Options
                     </h2>
                     <p className="text-muted-foreground">
-                      Publish anywhere. Export your final case study as Markdown
-                      (for your CMS), PDF (for clients), or a full SEO-friendly
-                      post (Pro+ plans).
+                      Export to Markdown for your CMS, PDF for clients, or HTML
+                      for SEO publishing. Casevia fits seamlessly into your
+                      content workflow — no copy-paste chaos.
                     </p>
                   </div>
                 </div>
@@ -280,9 +281,9 @@ export default function BentoSection() {
                       Template & Branding Control
                     </h2>
                     <p className="text-muted-foreground">
-                      Choose from up to 10 professional templates to ensure a
-                      consistent look. PDF exports come without a watermark on
-                      all paid plans.
+                      Choose from professional templates that match your brand’s
+                      look and feel. Keep consistency across every case study —
+                      no watermarks, no limits.
                     </p>
                   </div>
                 </div>
