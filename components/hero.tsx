@@ -39,7 +39,7 @@ export function HeroSection() {
           alt="Casevia product dashboard screenshot"
           width={1920}
           height={1080}
-          className="object-contain rounded-lg lg:h-96 w-full"
+          className="object-contain rounded-lg lg:h-140 w-fit bg-muted mx-auto p-2 shadow"
         />
       </div>
     </section>

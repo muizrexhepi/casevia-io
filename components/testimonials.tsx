@@ -69,7 +69,6 @@ const testimonials: Testimonial[] = [
       "The fact that my team can collaborate, see shared usage limits, and manage everything from the dashboard is exactly what we needed for operational control.",
   },
 
-  // --- LAST FOUR TESTIMONIALS FIX APPLIED HERE ---
   {
     name: "Khatab W.",
     role: "Agency Content Lead",
@@ -146,7 +145,6 @@ export default function TestimonialsSection() {
                       height="120"
                     />
                     <AvatarFallback>
-                      {/* Simple fallback using first letters of first two words of the name */}
                       {name
                         .split(" ")
                         .map((n) => n[0])

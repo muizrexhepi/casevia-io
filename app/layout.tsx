@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-// Assuming Geist fonts are correct, no change needed here.
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Toaster } from "@/components/ui/sonner";
@@ -15,13 +14,18 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const playfair = Playfair_Display({
+  variable: "--font-heading",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
 export const metadata: Metadata = {
   title:
     "Casevia: Turn Customer Interviews into Publish-Ready Case Studies, Instantly.",
   description:
     "The Case Study Engine. Upload any video or audio interview and generate structured, high-quality social proof in minutes—not weeks. Built for agencies to scale faster.",
 };
-// ---------------------------------
 
 export default function RootLayout({
   children,
@@ -31,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased`}
       >
         <Toaster />
         <Navbar />

@@ -63,9 +63,9 @@ export default function ContactPage() {
 
         {/* Main Content */}
         <div className="bg-muted border-x container">
-          <div className="grid lg:grid-cols-5 gap-2 py-4">
+          <div className="grid lg:grid-cols-5 gap-4 px-0 sm:px-4 p-4 bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_8px)]">
             {/* Left Column - Contact Cards */}
-            <div className="lg:col-span-2 space-y-2">
+            <div className="lg:col-span-2 space-y-4">
               {/* Email Card */}
               <Card className="p-4 bg-background">
                 <div className="flex items-start gap-4">
@@ -170,7 +170,7 @@ export default function ContactPage() {
 
             {/* Right Column - Form */}
             <div className="lg:col-span-3">
-              <Card className="p-8 md:p-10 bg-background h-full">
+              <Card className="p-8 bg-background h-full">
                 <h2 className="text-2xl font-semibold mb-6">
                   Send us a message
                 </h2>

@@ -97,7 +97,7 @@ export default function BentoSection() {
                   </svg>
                 </div>
                 <div className="relative z-10 mt-6 space-y-2 text-center">
-                  <h2 className="group-hover:text-secondary-950 text-lg font-medium transition dark:text-white">
+                  <h2 className="group-hover:text-secondary-950 text-lg font-semibold transition dark:text-white">
                     AI Analysis & Structuring
                   </h2>
                   <p className="text-muted-foreground">
@@ -193,7 +193,7 @@ export default function BentoSection() {
                   </svg>
                 </div>
                 <div className="relative z-10 mt-14 space-y-2 text-center">
-                  <h2 className="text-lg font-medium transition">
+                  <h2 className="text-lg font-semibold transition">
                     Structured Narrative Generation
                   </h2>
                   <p className="text-muted-foreground">
@@ -211,7 +211,7 @@ export default function BentoSection() {
                     <Shield className="m-auto size-5" strokeWidth={1} />
                   </div>
                   <div className="space-y-2">
-                    <h2 className="group-hover:text-secondary-950 text-lg font-medium text-zinc-800 transition dark:text-white">
+                    <h2 className="group-hover:text-secondary-950 text-lg font-semibold text-zinc-800 transition dark:text-white">
                       Flexible Export Options
                     </h2>
                     <p className="text-muted-foreground">
@@ -277,7 +277,7 @@ export default function BentoSection() {
                     <Users className="m-auto size-6" strokeWidth={1} />
                   </div>
                   <div className="space-y-2">
-                    <h2 className="text-lg font-medium transition">
+                    <h2 className="text-lg font-semibold transition">
                       Template & Branding Control
                     </h2>
                     <p className="text-muted-foreground">
