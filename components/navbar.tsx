@@ -83,12 +83,12 @@ export function Navbar() {
 
             {/* Action Buttons */}
             <div className="flex flex-col gap-3">
-              <Button variant="outline" asChild className="w-full">
+              <Button variant="outline" asChild className="w-full" size={"lg"}>
                 <Link href="/login" onClick={() => setIsOpen(false)}>
                   Log in
                 </Link>
               </Button>
-              <Button asChild className="w-full">
+              <Button asChild className="w-full" size={"lg"}>
                 <Link href="/signup" onClick={() => setIsOpen(false)}>
                   Sign up
                 </Link>

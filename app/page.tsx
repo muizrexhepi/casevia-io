@@ -3,35 +3,27 @@ import BentoSection from "@/components/bento";
 import { HeroSection } from "@/components/hero";
 import LogoCloud from "@/components/logo-cloud";
 import SingleTestimonialSection from "@/components/single-testimonial";
-import { Separator } from "@/components/ui/separator";
-import FeaturesSection from "@/components/features";
-import TestimonialsSection from "@/components/testimonials";
 import CtaSection from "@/components/cta";
 import FAQs from "@/components/faqs";
-import FooterSection from "@/components/footer";
+import ProcessSection from "@/components/process";
+import { ProblemSection } from "@/components/problem";
+import { UseCasesSection } from "@/components/use-cases";
+import { ComparisonSection } from "@/components/comparison";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen max-w-6xl mx-auto">
       <HeroSection />
-      <Separator />
       <LogoCloud />
-      <Separator />
+      <ProblemSection /> {/* NEW - Shows pain points */}
       <BentoSection />
-      <Separator />
       <SingleTestimonialSection />
-      <Separator />
+      <UseCasesSection /> {/* NEW - Shows who it's for */}
       <ContentSection />
-      <Separator />
-      {/* <FeaturesSection /> */}
-      {/* <Separator /> */}
-      {/* <TestimonialsSection /> */}
-      {/* <Separator /> */}
+      <ComparisonSection /> {/* NEW - Why Casevia vs others */}
+      <ProcessSection /> {/* The 4-step flow we created earlier */}
       <CtaSection />
-      <Separator />
       <FAQs />
-      <Separator />
-      <FooterSection />
     </main>
   );
 }

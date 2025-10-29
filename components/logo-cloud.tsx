@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function LogoCloud() {
   return (
-    <section className="bg-background py-12 lg:py-20 container border-x border-border">
+    <section className="bg-background py-12 lg:py-20 container">
       <div className="group relative m-auto max-w-5xl px-6">
         <div className="absolute inset-0 z-10 flex scale-95 items-center justify-center opacity-0 duration-500 group-hover:scale-100 group-hover:opacity-100">
           <Link

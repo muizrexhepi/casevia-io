@@ -273,263 +273,283 @@ export default function PricingClient() {
   };
 
   return (
-    <>
-      <section className="">
-        <div className="text-center space-y-5 py-12 md:py-24 border-x container">
-          <h2 className="text-balance text-4xl font-semibold lg:text-5xl">
-            Designed for every <br />{" "}
-            <span className="text-foreground/60">stage of your growth.</span>
-          </h2>
-          <p className="text-center text-muted-foreground max-w-lg mx-auto">
-            Start free, upgrade when you're ready to automate your content
-            engine. No credit card required to start.
-          </p>
+    <section className="max-w-6xl mx-auto container">
+      <div className="text-center space-y-5 py-12 md:py-24">
+        <h2 className="text-balance text-4xl font-semibold lg:text-5xl">
+          Designed for every <br />{" "}
+          <span className="text-primary">stage of your growth.</span>
+        </h2>
+        <p className="text-center text-muted-foreground max-w-lg mx-auto">
+          Start free, upgrade when you're ready to automate your content engine.
+          No credit card required to start.
+        </p>
 
-          <div className="inline-flex items-center space-x-2 p-1 bg-muted shadow rounded-lg">
-            <Button
-              variant={billingCycle === "monthly" ? "secondary" : "ghost"}
-              onClick={() => setBillingCycle("monthly")}
-            >
-              Monthly
-            </Button>
-            <Button
-              variant={billingCycle === "yearly" ? "secondary" : "ghost"}
-              onClick={() => setBillingCycle("yearly")}
-            >
-              Annual
-            </Button>
-          </div>
+        <div className="inline-flex items-center space-x-2 p-1 bg-muted shadow rounded-lg">
+          <Button
+            variant={billingCycle === "monthly" ? "secondary" : "ghost"}
+            onClick={() => setBillingCycle("monthly")}
+          >
+            Monthly
+          </Button>
+          <Button
+            variant={billingCycle === "yearly" ? "secondary" : "ghost"}
+            onClick={() => setBillingCycle("yearly")}
+          >
+            Annual
+          </Button>
         </div>
+      </div>
 
-        <Separator />
-        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4 p-2 bg-muted container border-x">
-          {PLANS.map((plan) => {
-            const isPopular = plan.popular;
-            const price = getPrice(plan);
-            const isContactSales = plan.id === "agency";
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
+        {PLANS.map((plan) => {
+          const isPopular = plan.popular;
+          const price = getPrice(plan);
+          const isContactSales = plan.id === "agency";
 
-            return (
-              <Card
-                key={plan.id}
-                className={`flex flex-col bg-background shadow-sm h-full transition-shadow duration-300 ${
-                  isPopular ? "bg-white" : ""
-                }`}
-              >
-                <CardHeader className="pb-4 relative">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-xl font-medium">{plan.name}</h3>
-                  </div>
+          return (
+            <Card
+              key={plan.id}
+              className={`flex flex-col bg-background shadow-sm h-full transition-shadow duration-300 ${
+                isPopular ? "bg-white" : ""
+              }`}
+            >
+              <CardHeader className="pb-4 relative">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-xl font-medium">{plan.name}</h3>
+                </div>
 
-                  <div className="mt-4 flex items-center gap-2">
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-5xl font-medium tracking-tight">
-                        {isContactSales ? plan.price : `$${Math.round(price)}`}
+                <div className="mt-4 flex items-center gap-2">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-5xl font-medium tracking-tight">
+                      {isContactSales ? plan.price : `$${Math.round(price)}`}
+                    </span>
+                    {!isContactSales && price !== 0 && (
+                      <span className="text-muted-foreground text-sm">
+                        /month
                       </span>
-                      {!isContactSales && price !== 0 && (
-                        <span className="text-muted-foreground text-sm">
-                          /month
-                        </span>
-                      )}
-                    </div>
-                    {billingCycle === "yearly" &&
-                      !isContactSales &&
-                      price !== 0 && (
-                        <Badge
-                          variant={"outline"}
-                          className="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 border-blue-200"
-                        >
-                          Save 17%
-                        </Badge>
-                      )}
+                    )}
                   </div>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {billingCycle === "monthly"
-                      ? "Billed monthly"
-                      : "Billed annually"}
-                  </p>
-                </CardHeader>
-
-                <CardContent className="flex-1 space-y-4">
-                  <p className="font-medium text-sm">{plan.description}</p>
-                  <ul className="space-y-3 text-sm">
-                    {plan.features.slice(0, 4).map((feature, index) => (
-                      <li
-                        key={index}
-                        className="flex items-center text-foreground"
+                  {billingCycle === "yearly" &&
+                    !isContactSales &&
+                    price !== 0 && (
+                      <Badge
+                        variant={"outline"}
+                        className="text-xs px-2 py-0.5 bg-primary/10 text-primary border-primary/30"
                       >
-                        <Check className="h-4 w-4 text-primary mr-2 shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
+                        Save 17%
+                      </Badge>
+                    )}
+                </div>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {billingCycle === "monthly"
+                    ? "Billed monthly"
+                    : "Billed annually"}
+                </p>
+              </CardHeader>
 
-                <CardFooter className="">
-                  <Button
-                    asChild
-                    className="w-full"
-                    variant={isPopular ? "default" : "outline"}
-                  >
-                    <Link href={ctaLinks[plan.id as PlanId]}>
-                      {plan.cta}
-                      <ChevronRight className="h-4 w-4 ml-1" />
-                    </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            );
-          })}
-        </div>
-        <Separator />
-
-        {/* Comparator Table Section */}
-        <div className="pt-12 lg:pt-24 border-x container">
-          <div className="overflow-x-auto">
-            <table className="min-w-full">
-              <thead className="sticky top-0 bg-background z-10">
-                <tr className="border-b border-border">
-                  <th className="py-4 px-6 text-left text-sm font-medium text-muted-foreground w-1/4 bg-background"></th>
-                  {PLANS.map((plan) => (
-                    <th
-                      key={plan.id}
-                      className="py-4 px-6 text-left text-base font-semibold text-foreground bg-background"
+              <CardContent className="flex-1 space-y-4">
+                <p className="font-medium text-sm">{plan.description}</p>
+                <ul className="space-y-3 text-sm">
+                  {plan.features.slice(0, 4).map((feature, index) => (
+                    <li
+                      key={index}
+                      className="flex items-center text-foreground"
                     >
-                      {plan.name}
-                      {plan.popular && (
-                        <Badge
-                          variant="outline"
-                          className="ml-2 text-xs bg-blue-50 text-blue-700 border-blue-200"
-                        >
-                          Popular
-                        </Badge>
-                      )}
-                    </th>
+                      <Check className="h-4 w-4 text-primary mr-2 shrink-0" />
+                      {feature}
+                    </li>
                   ))}
-                </tr>
-                <tr className="border-b border-border">
-                  <td className="py-4 px-6 bg-background"></td>
-                  {PLANS.map((plan) => {
-                    const price = getPrice(plan);
-                    const isContactSales = plan.id === "agency";
-                    return (
-                      <td key={plan.id} className="py-4 px-6 bg-background">
-                        <div className="space-y-1">
-                          <div className="flex items-baseline gap-2">
-                            <span className="text-3xl font-semibold">
-                              {isContactSales
-                                ? plan.price
-                                : `${Math.round(price)}`}
-                            </span>
-                            {!isContactSales && price !== 0 && (
-                              <span className="text-sm text-muted-foreground">
-                                /month
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-sm text-muted-foreground">
-                            {billingCycle === "monthly"
-                              ? "Billed monthly"
-                              : "Billed annually"}
-                          </p>
+                </ul>
+              </CardContent>
+
+              <CardFooter className="">
+                <Button
+                  asChild
+                  className="w-full"
+                  variant={isPopular ? "default" : "outline"}
+                >
+                  <Link href={ctaLinks[plan.id as PlanId]}>
+                    {plan.cta}
+                    <ChevronRight className="h-4 w-4 ml-1" />
+                  </Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          );
+        })}
+      </div>
+
+      {/* Comparator Table Section */}
+      <div className="pt-12 lg:pt-24">
+        <div className="block lg:hidden space-y-6">
+          {COMPARATOR_CATEGORIES.map((category) => (
+            <div key={category.name} className="space-y-3">
+              <h3 className="text-sm font-semibold text-foreground">
+                {category.name}
+              </h3>
+              {category.features.map((feature) => (
+                <div key={feature.key} className="border-y">
+                  <div className="bg-muted/50 py-2.5 text-xs font-medium text-muted-foreground border-b">
+                    {feature.label}
+                  </div>
+                  <div className="divide-y bg-background">
+                    {PLANS.map((plan) => (
+                      <div
+                        key={plan.id}
+                        className="flex items-center justify-between px-2 py-2.5"
+                      >
+                        <span className="text-sm font-medium">{plan.name}</span>
+                        <div className="text-sm">
+                          <PlanValue plan={plan} feature={feature} />
                         </div>
-                      </td>
-                    );
-                  })}
-                </tr>
-                <tr className="border-b border-border">
-                  <td className="py-4 px-6 bg-background"></td>
-                  {PLANS.map((plan) => (
-                    <td key={plan.id} className="py-4 px-6 bg-background">
-                      <Button
-                        asChild
-                        className="w-full"
-                        variant={plan.popular ? "default" : "outline"}
-                      >
-                        <Link href={ctaLinks[plan.id as PlanId]}>
-                          {plan.cta}
-                          <ChevronRight className="h-4 w-4 ml-1" />
-                        </Link>
-                      </Button>
-                    </td>
-                  ))}
-                </tr>
-              </thead>
-
-              <tbody>
-                {COMPARATOR_CATEGORIES.map((category, categoryIndex) => (
-                  <React.Fragment key={category.name}>
-                    <tr>
-                      <td
-                        colSpan={PLANS.length + 1}
-                        className={`py-4 px-6 text-left text-sm font-semibold text-foreground ${
-                          categoryIndex === 0 ? "pt-8" : "pt-12"
-                        }`}
-                      >
-                        {category.name}
-                      </td>
-                    </tr>
-
-                    {category.features.map((feature) => (
-                      <tr
-                        key={feature.key}
-                        className="border-t border-border/50"
-                      >
-                        <td className="py-4 px-6 text-sm text-muted-foreground">
-                          {feature.label}
-                        </td>
-
-                        {PLANS.map((plan) => (
-                          <td
-                            key={plan.id}
-                            className="py-4 px-6 text-left text-sm"
-                          >
-                            <PlanValue plan={plan} feature={feature} />
-                          </td>
-                        ))}
-                      </tr>
+                      </div>
                     ))}
-                  </React.Fragment>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
 
-          {/* Bottom CTA Section */}
+        {/* Desktop Comparator - Table */}
+        <div className="hidden lg:block">
+          <table className="min-w-full">
+            <thead className="sticky top-16 bg-background z-10">
+              <tr className="">
+                <th className="py-4 px-6 text-left text-sm font-medium text-muted-foreground w-1/4 bg-background"></th>
+                {PLANS.map((plan) => (
+                  <th
+                    key={plan.id}
+                    className="py-4 px-6 text-left text-base font-semibold text-foreground bg-background"
+                  >
+                    {plan.name}
+                    {plan.popular && (
+                      <Badge
+                        variant="outline"
+                        className="ml-2 text-xs bg-primary/10 text-primary border-primary/30lue-200"
+                      >
+                        Popular
+                      </Badge>
+                    )}
+                  </th>
+                ))}
+              </tr>
+              <tr className="">
+                <td className="py-4 px-6 bg-background"></td>
+                {PLANS.map((plan) => {
+                  const price = getPrice(plan);
+                  const isContactSales = plan.id === "agency";
+                  return (
+                    <td key={plan.id} className="py-4 px-6 bg-background">
+                      <div className="space-y-1">
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-3xl font-semibold">
+                            {isContactSales
+                              ? plan.price
+                              : `${Math.round(price)}`}
+                          </span>
+                          {!isContactSales && price !== 0 && (
+                            <span className="text-sm text-muted-foreground">
+                              /month
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-sm text-muted-foreground">
+                          {billingCycle === "monthly"
+                            ? "Billed monthly"
+                            : "Billed annually"}
+                        </p>
+                      </div>
+                    </td>
+                  );
+                })}
+              </tr>
+              <tr className="border-b border-border">
+                <td className="py-4 px-6 bg-background"></td>
+                {PLANS.map((plan) => (
+                  <td key={plan.id} className="py-4 px-6 bg-background">
+                    <Button
+                      asChild
+                      className="w-full"
+                      variant={plan.popular ? "default" : "outline"}
+                    >
+                      <Link href={ctaLinks[plan.id as PlanId]}>
+                        {plan.cta}
+                        <ChevronRight className="h-4 w-4 ml-1" />
+                      </Link>
+                    </Button>
+                  </td>
+                ))}
+              </tr>
+            </thead>
+
+            <tbody>
+              {COMPARATOR_CATEGORIES.map((category, categoryIndex) => (
+                <React.Fragment key={category.name}>
+                  <tr>
+                    <td
+                      colSpan={PLANS.length + 1}
+                      className={`py-4 px-6 text-left text-sm font-semibold text-foreground ${
+                        categoryIndex === 0 ? "pt-8" : "pt-12"
+                      }`}
+                    >
+                      {category.name}
+                    </td>
+                  </tr>
+
+                  {category.features.map((feature) => (
+                    <tr key={feature.key} className="border-t border-border/50">
+                      <td className="py-4 px-6 text-sm text-muted-foreground">
+                        {feature.label}
+                      </td>
+
+                      {PLANS.map((plan) => (
+                        <td
+                          key={plan.id}
+                          className="py-4 px-6 text-left text-sm"
+                        >
+                          <PlanValue plan={plan} feature={feature} />
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </React.Fragment>
+              ))}
+            </tbody>
+          </table>
         </div>
-        <Separator />
-        <div className="py-12 lg:py-24 text-center space-y-6 container border-x bg-muted">
-          <div className="max-w-2xl mx-auto space-y-4">
-            <h3 className="text-2xl font-semibold">
-              Need a custom plan for your team?
-            </h3>
-            <p className="text-muted-foreground">
-              Talk to our sales team about custom pricing, enterprise features,
-              and volume discounts for larger organizations.
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button asChild size="lg" className="text-base px-8">
-              <Link href="/contact-sales">
-                Contact Sales
-                <ChevronRight className="h-4 w-4 ml-1" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="text-base px-8"
-            >
-              <Link href="/dashboard">
-                Start for free
-                <ChevronRight className="h-4 w-4 ml-1" />
-              </Link>
-            </Button>
-          </div>
+      </div>
+      <div className="py-12 lg:py-24 text-center space-y-6">
+        <div className="max-w-2xl mx-auto space-y-4">
+          <h3 className="text-2xl font-semibold text-balance">
+            Need a custom plan for your team?
+          </h3>
+          <p className="text-muted-foreground">
+            Talk to our sales team about custom pricing, enterprise features,
+            and volume discounts for larger organizations.
+          </p>
         </div>
-        <Separator />
-      </section>
-      <FooterSection />
-    </>
+        <div className="flex gap-4 justify-center items-center">
+          <Button asChild size="lg" className="text-base px-8">
+            <Link href="/contact">
+              Contact Sales
+              <ChevronRight className="h-4 w-4 ml-1" />
+            </Link>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="text-base px-8"
+          >
+            <Link href="/dashboard">
+              Start for free
+              <ChevronRight className="h-4 w-4 ml-1" />
+            </Link>
+          </Button>
+        </div>
+      </div>
+      <Separator />
+    </section>
   );
 }

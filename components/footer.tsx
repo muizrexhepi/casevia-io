@@ -89,7 +89,7 @@ export default function FooterSection() {
             <Link href="/" className="flex items-center gap-2">
               <img src={"/logo.svg"} className="object-contain w-auto h-10" />
             </Link>
-            <p className="mt-4 text-sm text-muted-foreground max-w-md">
+            <p className="mt-4 text-base font-medium text-muted-foreground max-w-md">
               The AI-powered platform for agencies and marketers to generate,
               manage, and scale social proof effortlessly.
             </p>
@@ -98,12 +98,12 @@ export default function FooterSection() {
           <div className="col-span-3 grid grid-cols-3 gap-6">
             {links.map((link, index) => (
               <div key={index} className="space-y-4">
-                <span className="block font-medium">{link.group}</span>
+                <span className="block font-semibold">{link.group}</span>
                 {link.items.map((item, index) => (
                   <Link
                     key={index}
                     href={item.href}
-                    className="text-muted-foreground text-sm hover:text-primary block duration-150"
+                    className="text-muted-foreground font-medium text-sm hover:text-primary block duration-150"
                   >
                     <span>{item.title}</span>
                   </Link>

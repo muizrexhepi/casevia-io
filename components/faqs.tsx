@@ -12,44 +12,50 @@ export default function FAQs() {
   const faqItems = [
     {
       id: "item-1",
-      question: "How is usage calculated, and what happens if I hit my limit?",
+      question: "Do I need to transcribe my interviews first?",
       answer:
-        "Usage is tracked by <strong>uploaded minutes of audio/video</strong> across your entire organization. If you reach your limit, your team can still view and export existing case studies, but you will need to upgrade your plan to upload more files.",
+        "Nope! Just upload the raw audio or video file. Casevia automatically transcribes it using AssemblyAI, then structures everything into a case study. You don't touch the transcript unless you want to.",
     },
     {
       id: "item-2",
-      question: "What file types do you accept for customer interviews?",
+      question:
+        "Will this actually sound like my brand, or generic AI content?",
       answer:
-        "We support all common audio and video formats, including <strong>MP3, MP4, MOV, WAV, and M4A</strong>. Simply drag and drop your files into the Casevia dashboard, and our AI will handle the transcription and analysis.",
+        "You control the tone. Set your brand voice once (professional, casual, technical, etc.), and Casevia maintains it across all case studies. You can also edit any section before publishing—it's a starting point, not a final draft.",
     },
     {
       id: "item-3",
-      question: "Can I customize the structure of the generated case studies?",
+      question:
+        "What if my client said something confidential in the interview?",
       answer:
-        "Yes! While the default structure is the best-practice <strong>Challenge → Solution → Results</strong> format, you can use our in-app editor to customize, refine, and re-order sections before exporting.",
+        "You can review and edit everything before exporting. Remove sensitive info, adjust quotes, or regenerate specific sections. Your client never sees anything until you send them the final version.",
     },
     {
       id: "item-4",
-      question: "How secure is my data and who manages user authentication?",
-      // FIX APPLIED: Using <strong> tags instead of **
+      question: "How long does it take to get a case study?",
       answer:
-        "Your data is highly secure. Customer data is stored privately via <strong>Supabase</strong>. We use <strong>Better Auth</strong> for enterprise-grade login and organization management, ensuring team data is segmented and protected.",
+        "About 10 minutes for a 30-minute interview. Upload → AI processes (5-8 min) → Review and edit (2-5 min) → Export. Way faster than the days or weeks it takes to write one manually.",
     },
     {
       id: "item-5",
-      question: "Do you offer a plan for a solo professional or freelancer?",
+      question: "Can I try it before paying?",
       answer:
-        "Yes, our <strong>Free tier</strong> is perfect for solo users who need occasional social proof. Our <strong>Starter Plan</strong> is cost-effective and removes the Casevia watermark for professional use.",
+        "Yes! The Free plan gives you 1 case study per month (up to 10 minutes of video). No credit card required. Perfect for testing the workflow before upgrading.",
+    },
+    {
+      id: "item-6",
+      question: "What formats can I export to?",
+      answer:
+        "Markdown (for your CMS/blog), PDF (for client presentations), and HTML with SEO meta tags. Pro users also get automatic LinkedIn and X post snippets generated from each case study.",
     },
   ];
 
   return (
-    <section className="py-16 md:py-24 border-x container ">
+    <section className="py-12 md:py-24 container">
       <div className="mx-auto max-w-2xl">
         <div className="space-y-12">
           <h2 className="text-3xl md:text-4xl font-semibold text-center">
-            Your questions <br />
-            <span className="text-muted-foreground">answered</span>
+            Questions you're probably asking
           </h2>
 
           <Accordion type="single" collapsible className="-mx-2 sm:mx-0">
@@ -59,18 +65,13 @@ export default function FAQs() {
                   value={item.id}
                   className="data-[state=open]:bg-muted peer rounded-xl border-none px-5 py-1 data-[state=open]:border-none md:px-7"
                 >
-                  <AccordionTrigger className="cursor-pointer text-base hover:no-underline">
+                  <AccordionTrigger className="cursor-pointer text-base hover:no-underline text-left">
                     {item.question}
                   </AccordionTrigger>
                   <AccordionContent>
-                    {/* NOTE: You will need to use dangerouslySetInnerHTML here 
-                       to render the <strong> tags from the string.
-                       If you cannot use dangerouslySetInnerHTML, you should 
-                       change the 'answer' property to be a JSX element (ReactNode).
-                       
-                       Assuming you can use dangerouslySetInnerHTML for this common pattern:
-                    */}
-                    <p dangerouslySetInnerHTML={{ __html: item.answer }}></p>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {item.answer}
+                    </p>
                   </AccordionContent>
                 </AccordionItem>
                 <hr className="mx-5 -mb-px group-last:hidden peer-data-[state=open]:opacity-0 md:mx-7" />
@@ -79,12 +80,12 @@ export default function FAQs() {
           </Accordion>
 
           <p className="text-muted-foreground text-center">
-            Can't find what you're looking for? Contact our{" "}
+            Still have questions?{" "}
             <Link
               href="/contact"
               className="text-primary font-medium hover:underline"
             >
-              customer support team
+              Talk to us
             </Link>
           </p>
         </div>

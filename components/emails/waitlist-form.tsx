@@ -31,7 +31,6 @@ export function WaitlistForm() {
           description: "We've got your spot reserved! Stay tuned for updates.",
         });
       } else {
-        // Show the success message for a newly added contact
         toast.success("🎉 You're on the waitlist!");
       }
 
@@ -45,43 +44,47 @@ export function WaitlistForm() {
   };
 
   return (
-    // Waitlist Form
-    <form onSubmit={handleWaitlist} className="mx-auto max-w-sm w-full">
-      <div className="bg-white has-[input:focus]:ring-muted relative grid grid-cols-[1fr_auto] items-center rounded-[calc(var(--radius)+0.5rem)] border pr-2 shadow shadow-zinc-950/5 has-[input:focus]:ring-2">
-        <Mail className="pointer-events-none absolute inset-y-0 left-4 my-auto size-4" />
+    <div className="mx-auto max-w-sm w-full text-center space-y-2">
+      <form onSubmit={handleWaitlist}>
+        <div className="bg-white has-[input:focus]:ring-muted relative grid grid-cols-[1fr_auto] items-center rounded-[calc(var(--radius)+0.5rem)] border pr-2 shadow shadow-zinc-950/5 has-[input:focus]:ring-2">
+          <Mail className="pointer-events-none absolute inset-y-0 left-4 my-auto size-4" />
 
-        <input
-          type="email"
-          placeholder="Your mail address"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="h-12 w-full bg-transparent pl-12 focus:outline-none"
-        />
+          <input
+            type="email"
+            placeholder="Your mail address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="h-12 w-full bg-transparent pl-12 focus:outline-none"
+          />
 
-        <div className="md:pr-1.5 lg:pr-0">
-          <Button
-            aria-label="submit"
-            size="sm"
-            className="rounded-lg"
-            disabled={loading}
-          >
-            <span className="hidden md:block">
-              {loading ? (
-                <div className="flex items-center gap-2">
-                  <Loader2 className="animate-spin size-5" />
-                  Joining...
-                </div>
-              ) : (
-                "Join Waitlist"
-              )}
-            </span>
-            <SendHorizonal
-              className="relative mx-auto size-5 md:hidden"
-              strokeWidth={2}
-            />
-          </Button>
+          <div className="md:pr-1.5 lg:pr-0">
+            <Button
+              aria-label="submit"
+              className="rounded-lg"
+              disabled={loading}
+            >
+              <span className="hidden md:block">
+                {loading ? (
+                  <div className="flex items-center gap-2">
+                    <Loader2 className="animate-spin size-5" />
+                    Joining...
+                  </div>
+                ) : (
+                  "Join Waitlist"
+                )}
+              </span>
+              <SendHorizonal
+                className="relative mx-auto size-5 md:hidden"
+                strokeWidth={2}
+              />
+            </Button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+
+      <p className="text-xs text-muted-foreground font-medium">
+        No spam. Unsubscribe anytime.
+      </p>
+    </div>
   );
 }

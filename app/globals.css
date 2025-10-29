@@ -122,6 +122,10 @@
   h1,
   h2 {
     font-family: var(--font-heading), serif;
+    @apply font-semibold;
+  }
+  p {
+    @apply font-medium;
   }
   body {
     @apply bg-background text-foreground;
