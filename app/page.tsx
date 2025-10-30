@@ -1,6 +1,6 @@
 import ContentSection from "@/components/content";
 import BentoSection from "@/components/bento";
-import { HeroSection } from "@/components/hero";
+import HeroSection from "@/components/hero";
 import LogoCloud from "@/components/logo-cloud";
 import SingleTestimonialSection from "@/components/single-testimonial";
 import CtaSection from "@/components/cta";
@@ -12,9 +12,9 @@ import { ComparisonSection } from "@/components/comparison";
 
 export default function Home() {
   return (
-    <main className="min-h-screen max-w-6xl mx-auto">
+    <main className="min-h-screen">
       <HeroSection />
-      <LogoCloud />
+      {/* <LogoCloud /> */}
       <ProblemSection /> {/* NEW - Shows pain points */}
       <BentoSection />
       <SingleTestimonialSection />

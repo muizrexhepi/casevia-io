@@ -29,39 +29,40 @@ export function ProblemSection() {
   ];
 
   return (
-    <section className="py-12 lg:py-24 relative overflow-hidden">
-      {/* Diagonal line pattern background */}
-      <div className="absolute inset-0 opacity-30 bg-[repeating-linear-gradient(45deg,var(--border),var(--border)_1px,transparent_1px,transparent_12px)]" />
-
-      <div className="container relative z-10">
-        <div className="text-center space-y-4 mb-12">
-          <h2 className="text-3xl md:text-4xl font-semibold">
-            Creating case studies shouldn't be this hard
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            But right now, it takes forever, costs a fortune, and the results
-            are inconsistent.
-          </p>
+    <section className="py-12 md:py-20 bg-muted">
+      <div className="container grid lg:grid-cols-2 gap-12 items-center">
+        {/* Illustration */}
+        <div className="flex justify-center">
+          <img
+            src="/icons/problem.webp"
+            alt="Frustrated marketer illustration"
+            className="w-[85%] max-w-md"
+          />
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {problems.map((problem, idx) => {
-            const Icon = problem.icon;
-            return (
-              <div
-                key={idx}
-                className="relative bg-background border rounded-lg p-6 space-y-3 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-950 flex items-center justify-center">
-                  <Icon className="w-5 h-5 text-red-600 dark:text-red-400" />
+        {/* Text */}
+        <div>
+          <h2 className="text-3xl md:text-4xl mb-4">
+            Creating case studies shouldn’t be this hard
+          </h2>
+          <p className="text-muted-foreground text-lg mb-6">
+            It takes forever, costs a fortune, and results are inconsistent.
+          </p>
+
+          {/* Single Problem Card */}
+          <div className="bg-background border rounded-xl p-6 space-y-4 shadow-sm">
+            {problems.map(({ icon: Icon, title, description }, idx) => (
+              <div key={idx} className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+                  <Icon className="w-4 h-4 text-red-600" />
                 </div>
-                <h3 className="font-semibold">{problem.title}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {problem.description}
-                </p>
+                <div>
+                  <h3 className="font-medium text-sm">{title}</h3>
+                  <p className="text-sm text-muted-foreground">{description}</p>
+                </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </div>
     </section>

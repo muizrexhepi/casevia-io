@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,30 +13,47 @@ const navLinks = [
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Track scroll position to toggle styles
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
-      <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <nav
+        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+          scrolled
+            ? "border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+            : "bg-transparent"
+        }`}
+      >
         <div className="container flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-12">
-            {" "}
             <Link href="/" className="flex items-center gap-2">
               <img src={"/logo.svg"} className="object-contain w-auto h-10" />
             </Link>
+
             {/* Desktop Navigation */}
             <div className="hidden items-center gap-8 md:flex">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="font-medium text-foreground transition-colors hover:text-foreground"
+                  className="font-medium text-foreground transition-colors hover:text-foreground/80"
                 >
                   {link.label}
                 </Link>
               ))}
             </div>
           </div>
+
           {/* Desktop Actions */}
           <div className="hidden items-center gap-3 md:flex">
             <Button variant="outline" asChild>
@@ -47,22 +64,16 @@ export function Navbar() {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          <button className="md:hidden px-0" onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X className="size-6" /> : <Menu className="size-6" />}
             <span className="sr-only">Toggle menu</span>
-          </Button>
+          </button>
         </div>
       </nav>
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="fixed inset-x-0 top-16 z-40 border-b bg-background md:hidden animate-in slide-in-from-top-2">
+        <div className="fixed inset-x-0 top-16 z-40 border-b bg-background/95 backdrop-blur-sm md:hidden animate-in slide-in-from-top-2">
           <div className="container py-6 space-y-6">
             {/* Navigation Links */}
             <div className="flex flex-col space-y-4">
@@ -78,17 +89,16 @@ export function Navbar() {
               ))}
             </div>
 
-            {/* Separator */}
             <div className="border-t" />
 
             {/* Action Buttons */}
             <div className="flex flex-col gap-3">
-              <Button variant="outline" asChild className="w-full" size={"lg"}>
+              <Button variant="outline" asChild className="w-full" size="lg">
                 <Link href="/login" onClick={() => setIsOpen(false)}>
                   Log in
                 </Link>
               </Button>
-              <Button asChild className="w-full" size={"lg"}>
+              <Button asChild className="w-full" size="lg">
                 <Link href="/signup" onClick={() => setIsOpen(false)}>
                   Sign up
                 </Link>
