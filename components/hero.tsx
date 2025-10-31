@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { WaitlistForm } from "./emails/waitlist-form";
 
 export default function HeroSection() {
   return (
-    <section className="relative flex flex-col items-center justify-center text-center py-12 md:py-20 overflow-hidden bg-white max-w-6xl mx-auto px-4">
+    <section className="relative flex flex-col items-center justify-center text-center py-12 md:py-20 overflow-hidden bg-white max-w-6xl mx-auto px-4 s">
       {/* Top Badge */}
       <div className="mb-4">
         <span className="inline-flex items-center rounded-full border border-border/50 bg-muted/50 px-3 py-1 text-sm text-muted-foreground">
@@ -23,22 +24,23 @@ export default function HeroSection() {
       </p>
 
       {/* CTA Buttons */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-4 mb-6 w-full md:w-fit">
+      {/* <div className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-4 mb-6 w-full md:w-fit">
         <Button size="lg" className="w-full md:w-fit">
           Get Started{" "}
         </Button>
         <Button size="lg" variant="outline" className="w-full md:w-fit">
           See Example
         </Button>
-      </div>
+      </div> */}
+      <WaitlistForm />
 
       {/* Optional: small trust text */}
-      <p className="text-sm text-muted-foreground">
+      {/* <p className="text-sm text-muted-foreground">
         No credit card required — join early access.
-      </p>
+      </p> */}
 
       {/* Product Illustration / Screenshot */}
-      <div className="hidden lg:block w-full mt-16 relative rounded-xl overflow-hidden">
+      <div className="hidden lg:block w-full mt-16 relative rounded-xl overflow-hidden bg-muted p-2 rounded-lg">
         <Image
           src="/images/image.png"
           alt="Casevia converts recorded interviews into structured case studies"

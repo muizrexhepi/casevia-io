@@ -1,79 +1,99 @@
-import { Briefcase, User, Users2, Building2 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Upload, Mic, Zap, Share2 } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
-export function UseCasesSection() {
-  const useCases = [
+// Helper Component (Same style as BentoSection)
+function BentoCardHeader({
+  icon,
+  title,
+}: {
+  icon: React.ReactNode;
+  title: string;
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10">
+        {icon}
+      </div>
+      <h3 className="text-lg font-semibold">{title}</h3>
+      {/* Slightly smaller title for the summary section */}
+    </div>
+  );
+}
+
+export function CoreValueSection() {
+  const coreFeatures = [
     {
-      icon: User,
-      title: "Freelancers",
+      icon: Upload,
+      title: "1. Zero-Friction Import",
       description:
-        "Build your portfolio fast. Show potential clients real results from past projects.",
-      stat: "5 case studies/month",
-      plan: "Starter Plan",
+        "Upload any raw audio or video interview file. Our platform instantly transcribes the full recording and prepares the data for analysis.",
+      tag: "Drag & Drop Ready",
     },
     {
-      icon: Briefcase,
-      title: "Agencies",
+      icon: Mic,
+      title: "2. Conversational Intelligence",
       description:
-        "Scale your content engine. Create case studies for every client without hiring writers.",
-      stat: "50+ case studies/month",
-      plan: "Agency Plan",
+        "The AI analyzes content, automatically tagging key customer quotes, pain points, and extracting quantifiable success metrics.",
+      tag: "AI Analysis Engine",
     },
     {
-      icon: Users2,
-      title: "Marketing Teams",
+      icon: Zap,
+      title: "3. Instant Narrative Generation",
       description:
-        "Support sales with proof. Turn customer interviews into assets for your website and decks.",
-      stat: "20 case studies/month",
-      plan: "Pro Plan",
+        "Generate a complete, formatted, and brand-aligned case study draft in seconds. Focus only on high-level review, not drafting.",
+      tag: "Zero Drafting Required",
     },
     {
-      icon: Building2,
-      title: "Enterprises",
+      icon: Share2,
+      title: "4. Multi-Channel Assets",
       description:
-        "Standardize storytelling. Maintain consistent case study quality across all departments.",
-      stat: "Custom volume",
-      plan: "Enterprise",
+        "Instantly generate optimized social posts, quote cards, and internal sales enablement snippets from the finished story.",
+      tag: "Ready-to-Post Content",
     },
   ];
 
   return (
-    <section className="py-12 lg:py-24 relative">
-      {/* Horizontal line pattern */}
-      <div className="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(0deg,var(--border),var(--border)_1px,transparent_1px,transparent_20px)]" />
-
-      <div className="container relative z-10">
-        <div className="text-center space-y-4 mb-12">
-          <h2 className="text-3xl md:text-4xl font-semibold">
-            Built for teams that need case studies
+    <section className="py-12 md:py-20 bg-muted">
+      {/* Container max-w-6xl as requested */}
+      <div className="container max-w-6xl mx-auto">
+        {/* Header - Consistent with BentoSection's clean typography */}
+        <div className="text-center mb-12 space-y-4">
+          <h2 className="text-4xl md:text-5xl tracking-tight leading-[1] text-balance font-bold">
+            The Complete AI Workflow. No External Tools Needed.
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Whether you're solo or enterprise, Casevia scales with your needs.
+          <p className="text-muted-foreground text-lg max-w-lg mx-auto">
+            Casevia is the only app that combines all four essential steps into
+            a single, seamless, and intelligent process.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {useCases.map((useCase, idx) => {
-            const Icon = useCase.icon;
+        {/* --- GRID Layout: lg:grid-cols-4 --- */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {coreFeatures.map((feature, idx) => {
+            const Icon = feature.icon;
             return (
               <Card
                 key={idx}
-                className="relative overflow-hidden group hover:shadow-lg transition-shadow"
+                className="bg-background border rounded-3xl shadow-none transition hover:shadow-lg h-full flex flex-col"
               >
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors">
-                    <Icon className="w-6 h-6 text-primary" />
+                <CardContent className="space-y-5 flex-grow flex flex-col justify-between">
+                  {/* Icon Header (Bento Style) */}
+                  <div>
+                    <BentoCardHeader
+                      icon={<Icon className="w-5 h-5 text-primary" />}
+                      title={feature.title}
+                    />
                   </div>
-                  <CardTitle className="text-xl">{useCase.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground">
-                    {useCase.description}
+
+                  {/* Description */}
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-4">
+                    {feature.description}
                   </p>
-                  <div className="pt-4 border-t space-y-1">
-                    <p className="text-sm font-semibold">{useCase.stat}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {useCase.plan}
+
+                  {/* Tag at the bottom, using the Bento-style subtle border divider */}
+                  <div className="mt-auto pt-4 border-t border-border/70">
+                    <p className="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full w-fit">
+                      {feature.tag}
                     </p>
                   </div>
                 </CardContent>

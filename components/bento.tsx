@@ -1,148 +1,150 @@
+import Image from "next/image";
+import {
+  ArrowRight,
+  Mic,
+  Sparkles,
+  Download,
+  FileText,
+  PenSquare, // <-- Added new icon
+} from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { FileText, Mic, Download, Sparkles } from "lucide-react";
+
+// A helper component for the consistent icon header
+// This makes the code cleaner and easier to maintain
+function BentoCardHeader({
+  icon,
+  title,
+}: {
+  icon: React.ReactNode;
+  title: string;
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10">
+        {icon}
+      </div>
+      <h3 className="text-xl font-semibold">{title}</h3>
+    </div>
+  );
+}
 
 export default function BentoSection() {
   return (
     <section className="bg-muted py-12 md:py-20">
-      <div className="container">
-        <div className="relative z-10 grid items-center gap-4 md:grid-cols-2 md:gap-12">
-          <h2 className="text-3xl md:text-4xl leading-tight">
-            The only tool built specifically for interview-to-case-study
-            workflow
+      <div className="container max-w-6xl">
+        {/* Section Header */}
+        <div className="mb-12 text-left space-y-4">
+          <h2 className="text-4xl md:text-5xl tracking-tight leading-[1] text-balance">
+            Everything you need for interview-to-case-study workflow
           </h2>
         </div>
 
-        {/* Bento Grid */}
-        <div className="pt-12 lg:pt-20">
-          <div className="relative z-10 grid grid-cols-6 gap-4 md:gap-6 lg:gap-8">
-            {/* 1️⃣ Max Video Length */}
-            <Card className="relative col-span-full flex overflow-hidden lg:col-span-2 border bg-background rounded-2xl hover:shadow-sm transition">
-              <CardContent className="relative m-auto size-fit pt-6 pb-8 px-6 text-center">
-                <div className="relative flex h-24 w-56 items-center justify-center mx-auto">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Mic className="w-16 h-16 text-primary/20" />
-                  </div>
-                  <span className="relative text-5xl font-semibold">
-                    60 min
-                  </span>
-                </div>
-                <h3 className="mt-6 text-xl font-semibold">Max Video Length</h3>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Upload hour-long client interviews. Supports .mp4, .mp3,
-                  .wav—even Zoom recordings.
+        {/* Bento Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* === Card 1: Upload === */}
+          <Card className="lg:col-span-5 bg-background border rounded-3xl hover:shadow-sm transition">
+            <CardContent className="flex flex-col justify-between h-full">
+              <div className="space-y-6">
+                <BentoCardHeader
+                  icon={<Mic className="w-5 h-5 text-primary" />}
+                  title="Upload Your Interview"
+                />
+                <p className="text-muted-foreground text-base max-w-sm">
+                  Supports video or audio up to 60 minutes. Works seamlessly
+                  with Zoom, Loom, or Google Meet recordings.
                 </p>
-              </CardContent>
-            </Card>
+              </div>
+              <div className="mt-10 relative aspect-[4/3] overflow-hidden rounded-2xl border bg-muted">
+                <Image
+                  src="/placeholder-upload.png"
+                  alt="Upload interface mockup"
+                  fill
+                  className="object-cover opacity-80"
+                />
+              </div>
+            </CardContent>
+          </Card>
 
-            {/* 2️⃣ AI Analysis */}
-            <Card className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2 border bg-background rounded-2xl hover:shadow-sm transition">
-              <CardContent className="pt-8 px-6 text-center">
-                <div className="relative mx-auto flex aspect-square size-32 rounded-full border items-center justify-center before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:before:border-white/5">
-                  <Sparkles className="w-12 h-12 text-primary" />
-                </div>
-                <div className="mt-6 space-y-2">
-                  <h3 className="text-lg font-semibold">
-                    Extracts Challenge, Solution & Results
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    Our AI identifies the story structure from your
-                    conversation—what problem your client had, how you solved
-                    it, and the measurable outcomes. Plus pull quotes.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+          {/* === Card 2: AI Extracts === */}
+          <Card className="lg:col-span-7 bg-background border rounded-3xl hover:shadow-sm transition">
+            <CardContent className="flex flex-col justify-between h-full">
+              <div className="space-y-4">
+                <BentoCardHeader
+                  icon={<Sparkles className="w-5 h-5 text-primary" />}
+                  title="AI extracts Challenge, Solution, and Results"
+                />
+                <p className="text-muted-foreground text-base max-w-lg">
+                  Our AI identifies key story elements automatically — turning
+                  raw conversations into structured insights.
+                </p>
+              </div>
+              <div className="mt-10 relative aspect-[16/9] overflow-hidden rounded-2xl border bg-muted">
+                <Image
+                  src="/placeholder-ai.png"
+                  alt="AI extraction example"
+                  fill
+                  className="object-cover opacity-80"
+                />
+              </div>
+            </CardContent>
+          </Card>
 
-            {/* 3️⃣ Narrative Generation */}
-            <Card className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2 border bg-background rounded-2xl hover:shadow-sm transition">
-              <CardContent className="pt-8 px-6 text-center">
-                <div className="bg-muted rounded-lg p-4 text-xs space-y-2 border">
-                  <p className="font-semibold">Challenge:</p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    "We were losing 30% profit margin due to..."
-                  </p>
-                  <p className="font-semibold mt-3">Solution:</p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    "Casevia helped us implement..."
-                  </p>
-                </div>
-                <div className="mt-6 space-y-2">
-                  <h3 className="text-lg font-semibold">
-                    Professional Narrative, Instantly
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    Get a complete, publish-ready story formatted with proper
-                    sections, headers, and flow—no editing required.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+          {/* === Card 3: Narrative Gen === */}
+          <Card className="lg:col-span-6 bg-background border rounded-3xl hover:shadow-sm transition">
+            <CardContent className="flex flex-col justify-between h-full">
+              <div className="space-y-4">
+                <BentoCardHeader
+                  icon={<PenSquare className="w-5 h-5 text-primary" />}
+                  title="Instant Narrative Generation"
+                />
+                <p className="text-muted-foreground text-base max-w-md">
+                  Get a clean, readable narrative ready for publishing — no more
+                  staring at blank documents or editing loops.
+                </p>
+              </div>
+              <div className="mt-8 relative aspect-[4/3] overflow-hidden rounded-2xl border bg-muted">
+                <Image
+                  src="/placeholder-story.png"
+                  alt="Generated case study layout preview"
+                  fill
+                  className="object-cover opacity-80"
+                />
+              </div>
+            </CardContent>
+          </Card>
 
-            {/* 4️⃣ Export Options */}
-            <Card className="relative col-span-full overflow-hidden lg:col-span-3 border bg-background rounded-2xl hover:shadow-sm transition">
-              <CardContent className="grid pt-8 sm:grid-cols-2 gap-6">
-                <div className="flex flex-col justify-between">
-                  <div className="flex aspect-square size-12 rounded-full border items-center justify-center mb-4">
-                    <Download className="size-5" strokeWidth={1.5} />
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="text-lg font-semibold">
-                      Export to Your Workflow
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Markdown for your blog, PDF for client presentations, HTML
-                      with SEO meta tags—plus social posts for LinkedIn and X.
-                    </p>
-                  </div>
-                </div>
-                <div className="relative border-l border-t p-6 sm:ml-6 rounded-tl-xl bg-muted/30">
-                  <div className="space-y-2 text-xs">
-                    {[
-                      "case-study.md",
-                      "case-study.pdf",
-                      "linkedin-post.txt",
-                    ].map((f) => (
+          {/* === Card 4: Export === */}
+          <Card className="lg:col-span-6 bg-background border rounded-3xl hover:shadow-sm transition">
+            <CardContent className="flex flex-col justify-between h-full">
+              <div className="space-y-4">
+                <BentoCardHeader
+                  icon={<Download className="w-5 h-5 text-primary" />}
+                  title="Export Anywhere"
+                />
+                <p className="text-muted-foreground text-base max-w-md">
+                  Export your finished story as Markdown, PDF, HTML, or LinkedIn
+                  post — in one click.
+                </p>
+              </div>
+              {/* --- THIS IS THE FIX --- */}
+              {/* We put the list INSIDE a container that matches the other cards */}
+              <div className="mt-8 relative aspect-[4/3] overflow-hidden rounded-2xl border bg-muted p-4">
+                <div className="flex flex-col gap-2 text-xs">
+                  {["case-study.md", "case-study.pdf", "linkedin-post.txt"].map(
+                    (file) => (
                       <div
-                        key={f}
-                        className="flex items-center gap-2 p-2 border rounded bg-background"
+                        key={file}
+                        className="flex items-center gap-2 border rounded-lg p-2 bg-background w-fit"
                       >
-                        <FileText className="w-4 h-4" />
-                        <span>{f}</span>
+                        <FileText className="w-4 h-4 text-muted-foreground" />
+                        <span>{file}</span>
                       </div>
-                    ))}
-                  </div>
+                    )
+                  )}
                 </div>
-              </CardContent>
-            </Card>
-
-            {/* 5️⃣ Templates */}
-            <Card className="relative col-span-full overflow-hidden lg:col-span-3 border bg-background rounded-2xl hover:shadow-sm transition">
-              <CardContent className="grid h-full pt-8 sm:grid-cols-2 gap-6">
-                <div className="flex flex-col justify-between">
-                  <div className="flex aspect-square size-12 rounded-full border items-center justify-center mb-4">
-                    <Sparkles className="size-6" strokeWidth={1.5} />
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="text-lg font-semibold">
-                      Your Brand, Zero Design Work
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Pick a template, customize colors and fonts once, and
-                      every case study matches your brand. No watermarks on paid
-                      plans.
-                    </p>
-                  </div>
-                </div>
-                <div className="relative mt-6 sm:-my-6 sm:-mr-6">
-                  <div className="flex h-full flex-col justify-center space-y-4 py-6 pl-6">
-                    <div className="h-20 border rounded-lg bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900" />
-                    <div className="h-20 border rounded-lg bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950 dark:to-purple-900" />
-                    <div className="h-20 border rounded-lg bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950 dark:to-green-900" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>

@@ -1,122 +1,100 @@
-"use client";
-
-import { Upload, Wand2, FileText, Download } from "lucide-react";
-
-const steps = [
-  {
-    icon: Upload,
-    title: "Upload Your Interview",
-    description:
-      "Drop in your recorded client conversation—audio or video, up to 60 minutes.",
-    detail: "Supports .mp4, .mp3, .wav, .mov, and more",
-  },
-  {
-    icon: Wand2,
-    title: "AI Does the Heavy Lifting",
-    description:
-      "We transcribe, analyze, and extract the story: challenge, solution, results, and quotes.",
-    detail: "Powered by AI",
-  },
-  {
-    icon: FileText,
-    title: "Get Your Case Study",
-    description:
-      "Review a polished, publish-ready case study with proper structure and narrative flow.",
-    detail: "Choose from multiple templates",
-  },
-  {
-    icon: Download,
-    title: "Export & Share",
-    description:
-      "Download as Markdown, HTML or PDF. Generate SEO-friendly posts or social content in one click.",
-    detail: "No watermark on paid plans",
-  },
-];
+import { Upload, Cpu, FileEdit, Download } from "lucide-react";
 
 export default function ProcessSection() {
+  const steps = [
+    {
+      number: "01",
+      icon: Upload,
+      title: "Upload your interview",
+      description:
+        "Drop in your video or audio file. Zoom recordings, phone calls, in-person interviews—whatever you've got.",
+      color: "text-blue-600 dark:text-blue-400",
+      bg: "bg-blue-50 dark:bg-blue-950/30",
+      border: "border-blue-100 dark:border-blue-900/50",
+    },
+    {
+      number: "02",
+      icon: Cpu,
+      title: "AI extracts the story",
+      description:
+        "Our AI transcribes, analyzes, and structures your conversation into Challenge, Solution, and Results sections.",
+      color: "text-purple-600 dark:text-purple-400",
+      bg: "bg-purple-50 dark:bg-purple-950/30",
+      border: "border-purple-100 dark:border-purple-900/50",
+    },
+    {
+      number: "03",
+      icon: FileEdit,
+      title: "Review and refine",
+      description:
+        "Edit the draft if needed, add images, or tweak the tone. Or just approve it as-is if it's already perfect.",
+      color: "text-green-600 dark:text-green-400",
+      bg: "bg-green-50 dark:bg-green-950/30",
+      border: "border-green-100 dark:border-green-900/50",
+    },
+    {
+      number: "04",
+      icon: Download,
+      title: "Export and publish",
+      description:
+        "Download as Markdown, PDF, or HTML. Post to your blog, send to your client, or share on social—done.",
+      color: "text-orange-600 dark:text-orange-400",
+      bg: "bg-orange-50 dark:bg-orange-950/30",
+      border: "border-orange-100 dark:border-orange-900/50",
+    },
+  ];
+
   return (
-    <section className="py-12 lg:py-24 relative overflow-hidden">
-      {/* Background gradient */}{" "}
-      <div className="absolute inset-0 opacity-[0.15] bg-[repeating-linear-gradient(-45deg,var(--border),var(--border)_1px,transparent_1px,transparent_16px)]" />
-      <div className="container relative z-10 max-w-5xl mx-auto px-4">
-        <div className="text-center space-y-4 mb-16 text-balance">
-          <h2 className="text-3xl md:text-4xl font-semibold text-center">
-            From conversation to case study
-            <br />
-            <span className="text-primary">in four simple steps.</span>
+    <section className="py-12 md:py-20 bg-white">
+      <div className="container max-w-6xl">
+        {/* Header */}
+        <div className="text-center mb-16 space-y-4">
+          <h2 className="text-4xl md:text-5xl tracking-tight">
+            From interview to case study in 4 steps
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Stop spending days writing case studies manually. Let Casevia handle
-            the transcription, analysis, and formatting—so you can focus on
-            closing deals.
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            No manual writing. No endless revisions. Just upload and let AI do
+            the heavy lifting.
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:gap-12">
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <div key={index} className="group relative">
-                {/* Connecting line for desktop */}
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-16 left-[calc(100%+1.5rem)] w-12 h-0.5 bg-gradient-to-r from-primary/30 to-transparent" />
+        {/* Steps */}
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+          {steps.map(
+            (
+              { number, icon: Icon, title, description, color, bg, border },
+              idx
+            ) => (
+              <div key={idx} className="relative group">
+                {/* Connector line (hidden on mobile, shown on desktop) */}
+                {idx < steps.length - 1 && idx % 2 === 0 && (
+                  <div className="hidden md:block absolute top-20 left-[calc(100%+1.5rem)] w-12 h-px bg-border" />
                 )}
 
-                <div className="flex gap-4">
-                  {/* Icon container */}
-                  <div className="flex-shrink-0">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110">
-                      <Icon className="h-6 w-6" />
+                <div className="relative space-y-4">
+                  {/* Number + Icon */}
+                  <div className="flex items-center gap-4">
+                    <div
+                      className={`flex items-center justify-center w-16 h-16 rounded-xl ${bg} border ${border}`}
+                    >
+                      <Icon className={`w-7 h-7 ${color}`} strokeWidth={1.5} />
                     </div>
+                    <span className="text-5xl font-bold text-muted-foreground/20">
+                      {number}
+                    </span>
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 space-y-2 pt-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-semibold text-primary">
-                        STEP {index + 1}
-                      </span>
-                    </div>
-                    <h3 className="text-xl font-semibold">{step.title}</h3>
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-semibold">{title}</h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      {step.description}
-                    </p>
-                    <p className="text-sm text-muted-foreground/70 italic">
-                      {step.detail}
+                      {description}
                     </p>
                   </div>
                 </div>
               </div>
-            );
-          })}
-        </div>
-
-        {/* Bottom stats/social proof */}
-        <div className="mt-16 pt-12 border-t border-border">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 text-center">
-            <div>
-              <div className="text-3xl font-bold text-foreground">~10 min</div>
-              <div className="text-sm text-muted-foreground mt-1">
-                Average processing time
-              </div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-foreground">
-                5x faster
-              </div>
-              <div className="text-sm text-muted-foreground mt-1">
-                Than manual creation
-              </div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-foreground">
-                $0 to start
-              </div>
-              <div className="text-sm text-muted-foreground mt-1">
-                Try it free, no credit card
-              </div>
-            </div>
-          </div>
+            )
+          )}
         </div>
       </div>
     </section>

@@ -27,7 +27,7 @@ type Plan = {
   cta: string;
   popular: boolean;
 };
-type PlanId = "free" | "freelancer" | "pro" | "agency";
+type PlanId = "free" | "starter" | "pro" | "agency";
 
 export const PLANS: Plan[] = [
   {
@@ -62,8 +62,8 @@ export const PLANS: Plan[] = [
     popular: false,
   },
   {
-    id: "freelancer",
-    name: "Freelancer",
+    id: "starter",
+    name: "Starter",
     slug: "starter",
     price: "$29",
     priceMonthly: 29,
@@ -89,7 +89,7 @@ export const PLANS: Plan[] = [
       prioritySupport: false,
       dedicatedManager: false,
     },
-    cta: "Upgrade to Freelancer",
+    cta: "Upgrade to Starter",
     popular: false,
   },
   {
@@ -267,7 +267,7 @@ export default function PricingClient() {
 
   const ctaLinks: Record<PlanId, string> = {
     free: "/dashboard",
-    freelancer: "/checkout?plan=freelancer",
+    starter: "/checkout?plan=starter",
     pro: "/checkout?plan=pro",
     agency: "/contact-sales",
   };
@@ -275,9 +275,8 @@ export default function PricingClient() {
   return (
     <section className="max-w-6xl mx-auto container">
       <div className="text-center space-y-5 py-12 md:py-24">
-        <h2 className="text-balance text-4xl font-semibold lg:text-5xl">
-          Designed for every <br />{" "}
-          <span className="text-primary">stage of your growth.</span>
+        <h2 className="text-4xl md:text-5xl tracking-tight leading-[1] text-balance text-center">
+          Designed for every <br /> stage of your growth.
         </h2>
         <p className="text-center text-muted-foreground max-w-lg mx-auto">
           Start free, upgrade when you're ready to automate your content engine.
@@ -300,7 +299,7 @@ export default function PricingClient() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4 bg-muted p-2 rounded-xl">
         {PLANS.map((plan) => {
           const isPopular = plan.popular;
           const price = getPrice(plan);
@@ -310,7 +309,7 @@ export default function PricingClient() {
             <Card
               key={plan.id}
               className={`flex flex-col bg-background shadow-sm h-full transition-shadow duration-300 ${
-                isPopular ? "bg-white" : ""
+                isPopular ? "bg-white border-primary/40 shadow-primary" : ""
               }`}
             >
               <CardHeader className="pb-4 relative">
@@ -542,7 +541,7 @@ export default function PricingClient() {
             size="lg"
             className="text-base px-8"
           >
-            <Link href="/dashboard">
+            <Link href="#">
               Start for free
               <ChevronRight className="h-4 w-4 ml-1" />
             </Link>

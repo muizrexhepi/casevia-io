@@ -54,7 +54,7 @@ export default function FAQs() {
     <section className="py-12 md:py-24 container">
       <div className="mx-auto max-w-2xl">
         <div className="space-y-12">
-          <h2 className="text-3xl md:text-4xl font-semibold text-center">
+          <h2 className="text-4xl md:text-5xl tracking-tight leading-[1] text-balance text-center">
             Questions you're probably asking
           </h2>
 

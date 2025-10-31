@@ -35,22 +35,17 @@ export default function ContentSection() {
   };
 
   return (
-    <section className="relative py-12 lg:py-24">
+    <section className="relative py-12 md:py-20">
       {/* Background Styling */}
       <div className="bg-linear-to-b absolute inset-0 -z-10 sm:inset-6 sm:rounded-b-3xl dark:block dark:to-[color-mix(in_oklab,var(--color-zinc-900)_75%,var(--color-background))]"></div>
 
-      <div className="space-y-12 lg:space-y-24">
-        <div className="container relative z-10 mx-auto space-y-6 text-center text-balance">
-          <h2 className="text-3xl md:text-4xl font-semibold">
+      <div className="space-y-12 lg:space-20 max-w-6xl mx-auto">
+        <div className="container relative z-10 space-y-6 text-center text-balance">
+          <h2 className="text-4xl md:text-5xl tracking-tight leading-[1]">
             Stop manually writing case studies.
             <br className="hidden md:block" />
-            <span className="text-primary">Start recording conversations.</span>
+            Start recording conversations
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            The only tool that transforms unstructured client interviews into
-            polished case studies—complete with challenge-solution-results
-            narrative, pull quotes, and export-ready formatting.
-          </p>
         </div>
 
         <div className="flex flex-col gap-12 md:flex-row lg:gap-20 container">
