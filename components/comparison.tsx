@@ -122,7 +122,7 @@ export function ComparisonSection() {
             <Image
               src={"/icons/comparison.webp"}
               alt="Casevia replaces manual work illustration"
-              className="w-[260px] h-auto"
+              className="w-90 h-auto"
               width={260}
               height={260}
               priority
@@ -131,7 +131,7 @@ export function ComparisonSection() {
         </div>
 
         {/* === Bottom Section: The Savings Calculator === */}
-        <div className="mt-16 border rounded-xl shadow-lg bg-white overflow-hidden">
+        <div className="mt-8 md:mt-12 lg:mt-20 border rounded-xl shadow-lg bg-white overflow-hidden">
           {/* --- Part 1: The "Bill" (Tools you're replacing) --- */}
           <div className="p-8 md:p-10">
             <h3 className="text-2xl font-semibold tracking-tight mb-6">

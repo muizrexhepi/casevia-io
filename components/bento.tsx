@@ -56,7 +56,7 @@ export default function BentoSection() {
               </div>
               <div className="mt-10 relative aspect-[4/3] overflow-hidden rounded-2xl border bg-muted">
                 <Image
-                  src="/placeholder-upload.png"
+                  src="/images/bento-1.png"
                   alt="Upload interface mockup"
                   fill
                   className="object-cover opacity-80"
@@ -80,7 +80,7 @@ export default function BentoSection() {
               </div>
               <div className="mt-10 relative aspect-[16/9] overflow-hidden rounded-2xl border bg-muted">
                 <Image
-                  src="/placeholder-ai.png"
+                  src="/images/bento-2.png"
                   alt="AI extraction example"
                   fill
                   className="object-cover opacity-80"
@@ -104,7 +104,7 @@ export default function BentoSection() {
               </div>
               <div className="mt-8 relative aspect-[4/3] overflow-hidden rounded-2xl border bg-muted">
                 <Image
-                  src="/placeholder-story.png"
+                  src="/images/bento-3.png"
                   alt="Generated case study layout preview"
                   fill
                   className="object-cover opacity-80"
@@ -113,7 +113,6 @@ export default function BentoSection() {
             </CardContent>
           </Card>
 
-          {/* === Card 4: Export === */}
           <Card className="lg:col-span-6 bg-background border rounded-3xl hover:shadow-sm transition">
             <CardContent className="flex flex-col justify-between h-full">
               <div className="space-y-4">
@@ -126,10 +125,15 @@ export default function BentoSection() {
                   post — in one click.
                 </p>
               </div>
-              {/* --- THIS IS THE FIX --- */}
-              {/* We put the list INSIDE a container that matches the other cards */}
               <div className="mt-8 relative aspect-[4/3] overflow-hidden rounded-2xl border bg-muted p-4">
-                <div className="flex flex-col gap-2 text-xs">
+                {" "}
+                <Image
+                  src="/images/bento-4.png"
+                  alt="Generated case study layout preview"
+                  fill
+                  className="object-cover opacity-80"
+                />
+                {/* <div className="flex flex-col gap-2 text-xs">
                   {["case-study.md", "case-study.pdf", "linkedin-post.txt"].map(
                     (file) => (
                       <div
@@ -141,7 +145,7 @@ export default function BentoSection() {
                       </div>
                     )
                   )}
-                </div>
+                </div> */}
               </div>
             </CardContent>
           </Card>
