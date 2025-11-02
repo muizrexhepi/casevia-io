@@ -82,7 +82,9 @@ export function FAQsSection() {
                     {faq.question}
                   </span>
                   <div
-                    className={`flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                    className={`flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center transition-transform duration-300 ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
                   >
                     {isOpen ? (
                       <Minus
@@ -98,15 +100,21 @@ export function FAQsSection() {
                   </div>
                 </button>
 
+                {/* === v v v THE FIX IS HERE v v v === */}
                 <div
-                  className={`transition-all duration-300 ease-in-out ${
-                    isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                  className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+                    isOpen
+                      ? "grid-rows-[1fr] opacity-100"
+                      : "grid-rows-[0fr] opacity-0"
                   }`}
                 >
-                  <div className="px-6 md:px-8 pb-6 text-muted-foreground leading-relaxed">
-                    {faq.answer}
+                  <div className="overflow-hidden">
+                    <div className="px-6 md:px-8 pb-6 text-muted-foreground leading-relaxed">
+                      {faq.answer}
+                    </div>
                   </div>
                 </div>
+                {/* === ^ ^ ^ THE FIX IS HERE ^ ^ ^ === */}
               </div>
             );
           })}
