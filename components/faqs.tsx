@@ -54,7 +54,8 @@ export function FAQsSection() {
           </div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
-            Questions? We've got answers
+            Questions? We've got{" "}
+            <span className="text-gradient-primary">answers</span>
           </h2>
 
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">

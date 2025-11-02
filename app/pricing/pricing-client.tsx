@@ -276,7 +276,8 @@ export default function PricingClient() {
     <section className="max-w-6xl mx-auto container">
       <div className="text-center space-y-5 py-12 md:py-24">
         <h2 className="text-4xl md:text-5xl tracking-tight leading-[1] text-balance text-center">
-          Designed for every <br /> stage of your growth.
+          Designed for every <br /> stage of{" "}
+          <span className="text-gradient-primary">your growth.</span>
         </h2>
         <p className="text-center text-muted-foreground max-w-lg mx-auto">
           Start free, upgrade when you're ready to automate your content engine.

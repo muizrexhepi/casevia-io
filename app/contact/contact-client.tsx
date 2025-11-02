@@ -42,7 +42,7 @@ export default function ContactClient() {
       <div className="text-center space-y-5 py-12 md:py-24 max-w-6xl container">
         <h1 className="text-4xl md:text-5xl tracking-tight leading-[1] text-balance text-center">
           Let's talk about <br />
-          your needs.
+          <span className="text-gradient-primary">your needs.</span>
         </h1>
         <p className="text-center text-muted-foreground max-w-lg mx-auto">
           Whether you need a custom plan, have questions, or want to see a

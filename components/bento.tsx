@@ -53,10 +53,11 @@ export default function BentoSection() {
             How it works
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] max-w-3xl">
-            Everything you need for interview-to-case-study workflow
+            Interview in. Case study out.{" "}
+            <span className="text-gradient-primary">Just like that.</span>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-            Four powerful steps. One seamless experience.
+            4 simple steps. Zero writing. One seamless AI workflow.
           </p>
         </div>
 
