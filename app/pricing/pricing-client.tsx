@@ -285,13 +285,13 @@ export default function PricingClient() {
 
         <div className="inline-flex items-center space-x-2 p-1 bg-muted shadow rounded-lg">
           <Button
-            variant={billingCycle === "monthly" ? "secondary" : "ghost"}
+            variant={billingCycle === "monthly" ? "default" : "ghost"}
             onClick={() => setBillingCycle("monthly")}
           >
             Monthly
           </Button>
           <Button
-            variant={billingCycle === "yearly" ? "secondary" : "ghost"}
+            variant={billingCycle === "yearly" ? "default" : "ghost"}
             onClick={() => setBillingCycle("yearly")}
           >
             Annual

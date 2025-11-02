@@ -1,40 +1,44 @@
-import { WaitlistForm } from "@/components/emails/waitlist-form";
-import Image from "next/image";
+"use client";
 
-export default function CtaSection() {
+import { ArrowRight } from "lucide-react";
+
+export function CtaSection() {
   return (
-    <section className="bg-muted py-24 md:py-32">
-      <div className="container max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left content */}
-          <div className="text-center md:text-left space-y-8">
-            <h2 className="text-4xl md:text-5xl tracking-tight leading-[1] text-balance">
-              Ready to publish your first <br className="hidden md:block" />
-              case study this week?
-            </h2>
+    <section className="py-20 md:py-32 bg-background relative overflow-hidden">
+      {/* Subtle background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-background/50" />
 
-            <p className="text-lg text-muted-foreground max-w-lg">
-              Join 500+ agencies, freelancers, and marketing teams who've
-              replaced manual writing with Casevia. Start free — no credit card,
-              no commitment.
-            </p>
+      {/* Simple organic blob */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-r from-primary/5 via-accent/5 to-secondary/5 rounded-full blur-3xl" />
 
-            <WaitlistForm />
-          </div>
+      <div className="container max-w-4xl mx-auto text-center relative z-10 px-4">
+        {/* Simple headline */}
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
+          Ready to create better case studies?
+        </h2>
 
-          {/* Right illustration */}
-          <div className="flex justify-center md:justify-end">
-            <div className="relative w-[320px] h-[260px] md:w-[400px] md:h-[320px]">
-              <Image
-                src="/icons/cta.webp"
-                alt="Publishing illustration"
-                fill
-                className="object-contain opacity-90"
-                priority
-              />
-            </div>
-          </div>
+        {/* Subheadline */}
+        <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
+          Join teams turning customer interviews into compelling stories — in
+          minutes, not weeks.
+        </p>
+
+        {/* Single CTA */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+          <button className="group px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5">
+            <span className="flex items-center gap-2">
+              Get Started Free
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </button>
+
+          <button className="px-8 py-4 text-foreground font-semibold text-lg transition-all duration-200 hover:text-primary">
+            See an example →
+          </button>
         </div>
+
+        {/* Trust line */}
+        <p className="text-sm text-muted-foreground">No credit card required</p>
       </div>
     </section>
   );

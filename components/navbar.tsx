@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { href: "/pricing", label: "Pricing" },
@@ -15,7 +14,6 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Track scroll position to toggle styles
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -29,24 +27,28 @@ export function Navbar() {
       <nav
         className={`sticky top-0 z-50 w-full transition-all duration-300 ${
           scrolled
-            ? "border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-            : "bg-transparent"
+            ? "border-b border-border/50 bg-background/95 backdrop-blur-md shadow-sm"
+            : "bg-background/80 backdrop-blur-sm"
         }`}
       >
-        <div className="container flex h-16 items-center justify-between">
+        <div className="container max-w-6xl flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-12">
-            <Link href="/" className="flex items-center gap-2">
-              <img src={"/logo.svg"} className="object-contain w-auto h-10" />
+            <Link href="/" className="flex items-center gap-2 group">
+              <img
+                src="/logo.svg"
+                className="object-contain w-auto h-10 transition-transform duration-300"
+                alt="Casevia"
+              />
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden items-center gap-8 md:flex">
+            <div className="hidden items-center gap-1 md:flex">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="font-medium text-foreground transition-colors hover:text-foreground/80"
+                  className="px-4 py-2 font-semibold text-foreground/80 rounded-lg transition-all duration-200 hover:text-foreground hover:bg-muted"
                 >
                   {link.label}
                 </Link>
@@ -56,32 +58,42 @@ export function Navbar() {
 
           {/* Desktop Actions */}
           <div className="hidden items-center gap-3 md:flex">
-            <Button variant="outline" asChild>
-              <Link href="/login">Log in</Link>
-            </Button>
-            <Button asChild>
-              <Link href="/signup">Sign up</Link>
-            </Button>
+            <Link
+              href="/login"
+              className="px-5 py-2 font-semibold text-foreground rounded-lg transition-all duration-200 hover:bg-muted"
+            >
+              Log in
+            </Link>
+            <Link
+              href="/signup"
+              className="px-6 py-2.5 font-semibold bg-primary text-primary-foreground rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5"
+            >
+              Sign up
+            </Link>
           </div>
 
-          <button className="md:hidden px-0" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X className="size-6" /> : <Menu className="size-6" />}
-            <span className="sr-only">Toggle menu</span>
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 rounded-lg transition-colors hover:bg-muted"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </nav>
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="fixed inset-x-0 top-16 z-40 border-b bg-background/95 backdrop-blur-sm md:hidden animate-in slide-in-from-top-2">
+        <div className="fixed inset-x-0 top-16 z-40 border-b-2 border-border/50 bg-background/98 backdrop-blur-md md:hidden animate-in slide-in-from-top-2 shadow-xl">
           <div className="container py-6 space-y-6">
             {/* Navigation Links */}
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-base font-medium transition-colors hover:text-primary"
+                  className="px-4 py-3 text-base font-semibold rounded-lg transition-colors hover:text-primary hover:bg-muted"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
@@ -89,20 +101,24 @@ export function Navbar() {
               ))}
             </div>
 
-            <div className="border-t" />
+            <div className="border-t border-border/50" />
 
             {/* Action Buttons */}
             <div className="flex flex-col gap-3">
-              <Button variant="outline" asChild className="w-full" size="lg">
-                <Link href="/login" onClick={() => setIsOpen(false)}>
-                  Log in
-                </Link>
-              </Button>
-              <Button asChild className="w-full" size="lg">
-                <Link href="/signup" onClick={() => setIsOpen(false)}>
-                  Sign up
-                </Link>
-              </Button>
+              <Link
+                href="/login"
+                onClick={() => setIsOpen(false)}
+                className="w-full px-6 py-3 text-center font-semibold border-2 border-border/50 rounded-xl transition-all duration-200 hover:border-primary/30 hover:bg-muted"
+              >
+                Log in
+              </Link>
+              <Link
+                href="/signup"
+                onClick={() => setIsOpen(false)}
+                className="w-full px-6 py-3 text-center font-semibold bg-primary text-primary-foreground rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-primary/20"
+              >
+                Sign up
+              </Link>
             </div>
           </div>
         </div>
@@ -111,7 +127,7 @@ export function Navbar() {
       {/* Backdrop overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 top-16 z-30 bg-background/80 backdrop-blur-sm md:hidden"
+          className="fixed inset-0 top-16 z-30 bg-background/60 backdrop-blur-sm md:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}

@@ -1,170 +1,115 @@
+import { Mail } from "lucide-react";
 import Link from "next/link";
+import { WaitlistForm } from "./emails/waitlist-form";
 
-const links = [
-  {
-    group: "Product",
-    items: [
-      {
-        title: "Features",
-        href: "/features", // Updated link
-      },
-      {
-        title: "How It Works", // New title
-        href: "/how-it-works", // Updated link
-      },
-      {
-        title: "Pricing", // Moved up for visibility
-        href: "/pricing", // Updated link
-      },
-      {
-        title: "Integrations", // New title
-        href: "/integrations", // Updated link
-      },
-      {
-        title: "Case Study Library", // New title (linking to the generated content)
-        href: "/library", // Updated link
-      },
-      {
-        title: "Demo", // New title
-        href: "/schedule-demo", // Updated link
-      },
+export default function Footer() {
+  const footerLinks = {
+    Product: [
+      { label: "Features", href: "#features" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Examples", href: "/examples" },
+      { label: "Changelog", href: "/changelog" },
     ],
-  },
-  {
-    group: "Company",
-    items: [
-      {
-        title: "About Us", // Updated title
-        href: "/about", // Updated link
-      },
-      {
-        title: "Blog", // Moved up
-        href: "/blog", // Updated link
-      },
-      {
-        title: "Careers",
-        href: "/careers", // Updated link
-      },
-      {
-        title: "Support / FAQ", // Updated title
-        href: "/faq", // Updated link
-      },
-      {
-        title: "Contact Sales", // New title
-        href: "/contact", // Updated link
-      },
-      // Removed generic 'Help' and 'Press'
+    Company: [
+      { label: "About", href: "/about" },
+      { label: "Blog", href: "/blog" },
+      { label: "Careers", href: "/careers" },
+      { label: "Contact", href: "/contact" },
     ],
-  },
-  {
-    group: "Legal",
-    items: [
-      {
-        title: "Terms of Service", // Updated title
-        href: "/terms", // Updated link
-      },
-      {
-        title: "Privacy Policy", // Updated title
-        href: "/privacy-policy", // Updated link
-      },
-      {
-        title: "Cookie Policy", // Updated title
-        href: "/cookies", // Updated link
-      },
-      {
-        title: "Security & Data", // Updated title
-        href: "/security", // Updated link
-      },
-      // Removed 'Licence' as it's less common for end-user SaaS
+    Resources: [
+      { label: "Documentation", href: "/docs" },
+      { label: "Help Center", href: "/help" },
+      { label: "Templates", href: "/templates" },
+      { label: "API", href: "/api" },
     ],
-  },
-];
+    Legal: [
+      { label: "Privacy", href: "/privacy" },
+      { label: "Terms", href: "/terms" },
+      { label: "Security", href: "/security" },
+    ],
+  };
 
-export default function FooterSection() {
   return (
-    <footer className="bg-muted border-b pt-12 lg:pt-24 ">
-      <div className="container">
-        <div className="grid gap-12 md:grid-cols-5">
-          <div className="md:col-span-2">
+    <footer className="bg-muted border-t border-border/50">
+      <div className="container max-w-6xl mx-auto px-4 py-12 md:py-16">
+        {/* Top Section */}
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 md:gap-12 mb-12">
+          {/* Brand Column - Takes 2 columns */}
+          <div className="col-span-2">
             <Link href="/" className="flex items-center gap-2">
               <img src={"/logo.svg"} className="object-contain w-auto h-10" />
             </Link>
-            <p className="mt-4 text-base font-medium text-muted-foreground max-w-md">
-              The AI-powered platform for agencies and marketers to generate,
-              manage, and scale social proof effortlessly.
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mb-6">
+              Turn customer interviews into compelling case studies — in
+              minutes, not weeks.
             </p>
+
+            <WaitlistForm />
           </div>
 
-          <div className="col-span-3 grid grid-cols-3 gap-6">
-            {links.map((link, index) => (
-              <div key={index} className="space-y-4">
-                <span className="block font-semibold">{link.group}</span>
-                {link.items.map((item, index) => (
-                  <Link
-                    key={index}
-                    href={item.href}
-                    className="text-muted-foreground font-medium text-sm hover:text-primary block duration-150"
-                  >
-                    <span>{item.title}</span>
-                  </Link>
+          {/* Link Columns */}
+          {Object.entries(footerLinks).map(([category, links]) => (
+            <div key={category} className="col-span-1">
+              <h3 className="font-semibold text-sm text-foreground mb-4">
+                {category}
+              </h3>
+              <ul className="space-y-3">
+                {links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
                 ))}
-              </div>
-            ))}
-          </div>
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* Social Links and Copyright */}
-        <div className="mt-12 flex flex-wrap items-end justify-between gap-6 border-t py-6">
-          <span className="text-muted-foreground order-last block text-center text-sm md:order-first">
-            © {new Date().getFullYear()} Casevia.io, All rights reserved
-          </span>
-          <div className="order-first flex flex-wrap justify-center gap-6 text-sm md:order-last">
-            {/* X/Twitter - Updated href to a placeholder for your social handle */}
-            <Link
-              href="https://x.com/muiz_rexhepi"
+        {/* Bottom Section */}
+        <div className="pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-muted-foreground">
+            © 2025 Casevia. All rights reserved.
+          </p>
+
+          {/* Social Links */}
+          <div className="flex items-center gap-4">
+            <a
+              href="https://twitter.com/muiz_rexhepi"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="X/Twitter"
-              className="text-muted-foreground hover:text-primary block"
+              className="w-9 h-9 rounded-lg bg-background border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all"
+              aria-label="Twitter"
             >
-              <svg
-                className="size-6"
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="currentColor"
-                  d="M10.488 14.651L15.25 21h7l-7.858-10.478L20.93 3h-2.65l-5.117 5.886L8.75 3h-7l7.51 10.015L2.32 21h2.65zM16.25 19L5.75 5h2l10.5 14z"
-                ></path>
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
               </svg>
-            </Link>
-
-            {/* LinkedIn - Updated href */}
-            <Link
+            </a>
+            <a
               href="https://linkedin.com/in/muiz-rexhepi"
               target="_blank"
               rel="noopener noreferrer"
+              className="w-9 h-9 rounded-lg bg-background border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all"
               aria-label="LinkedIn"
-              className="text-muted-foreground hover:text-primary block"
             >
-              <svg
-                className="size-6"
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="currentColor"
-                  d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"
-                ></path>
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
               </svg>
-            </Link>
-
-            {/* Removed Facebook, Threads, and TikTok as they are less common for B2B SaaS in the footer */}
-            {/* If you add them back, update the hrefs */}
+            </a>
+            <a
+              href="https://github.com/muizrexhepi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-lg bg-background border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all"
+              aria-label="GitHub"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+              </svg>
+            </a>
           </div>
         </div>
       </div>

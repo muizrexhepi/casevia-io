@@ -1,175 +1,274 @@
 "use client";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Zap, Pencil, Share2, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
+import { Users, Building2, TrendingUp, Heart } from "lucide-react";
+
+type UseCase = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  alt: string;
+  position: string;
+  icon: any;
+  color: "primary" | "secondary" | "accent" | "chart-4";
+};
+
+const useCases: UseCase[] = [
+  {
+    id: "marketing",
+    title: "Marketing teams",
+    description:
+      "Scale your content production. Turn every customer conversation into compelling stories for your blog, social media, and campaigns.",
+    image: "/images/casevia-generation.png",
+    alt: "Marketing dashboard",
+    position: "bottom-4 right-4",
+    icon: Users,
+    color: "primary",
+  },
+  {
+    id: "agencies",
+    title: "Agencies",
+    description:
+      "Deliver more value to clients. Create professional case studies faster, showcase results better, and win more business.",
+    image: "/images/casevia-library.png",
+    alt: "Agency workflow",
+    position: "top-4 left-4",
+    icon: Building2,
+    color: "secondary",
+  },
+  {
+    id: "sales",
+    title: "Sales teams",
+    description:
+      "Close deals with proof. Keep your sales collateral fresh with real customer stories that speak to prospects' exact pain points.",
+    image: "/images/casevia-usage.png",
+    alt: "Sales enablement",
+    position: "top-4 right-4",
+    icon: TrendingUp,
+    color: "accent",
+  },
+  {
+    id: "customer-success",
+    title: "Customer success",
+    description:
+      "Celebrate wins efficiently. Document customer outcomes without the back-and-forth. Get approval faster, publish sooner.",
+    image: "/images/casevia-billing.png",
+    alt: "Customer success tools",
+    position: "bottom-4 left-4",
+    icon: Heart,
+    color: "chart-4",
+  },
+];
+
+const colorMap = {
+  primary: {
+    bg: "bg-primary/10",
+    text: "text-primary",
+    border: "border-primary/20",
+    hover: "hover:border-primary/30",
+    gradient: "from-primary/5",
+  },
+  secondary: {
+    bg: "bg-secondary/10",
+    text: "text-secondary",
+    border: "border-secondary/20",
+    hover: "hover:border-secondary/30",
+    gradient: "from-secondary/5",
+  },
+  accent: {
+    bg: "bg-accent/10",
+    text: "text-accent",
+    border: "border-accent/20",
+    hover: "hover:border-accent/30",
+    gradient: "from-accent/5",
+  },
+  "chart-4": {
+    bg: "bg-chart-4/10",
+    text: "text-chart-4",
+    border: "border-chart-4/20",
+    hover: "hover:border-chart-4/30",
+    gradient: "from-chart-4/5",
+  },
+};
 
 export default function ContentSection() {
-  type ImageKey = "item-1" | "item-2" | "item-3" | "item-4";
-  const [activeItem, setActiveItem] = useState<ImageKey>("item-1");
-
-  const images = {
-    "item-1": {
-      image: "/images/casevia-generation.png",
-      alt: "Casevia AI generation dashboard showing transcribed interview and suggested narrative.",
-    },
-    "item-2": {
-      image: "/images/casevia-library.png",
-      alt: "Casevia editor showing layout customization options.",
-    },
-    "item-3": {
-      image: "/images/casevia-usage.png",
-      alt: "Casevia showing different export formats including web page and social post previews.",
-    },
-    "item-4": {
-      image: "/images/casevia-billing.png",
-      alt: "Casevia team management and security settings dashboard.",
-    },
-  };
+  const [hoveredCase, setHoveredCase] = useState<string | null>(null);
 
   return (
-    <section className="relative py-12 md:py-20">
-      {/* Background Styling */}
-      <div className="bg-linear-to-b absolute inset-0 -z-10 sm:inset-6 sm:rounded-b-3xl dark:block dark:to-[color-mix(in_oklab,var(--color-zinc-900)_75%,var(--color-background))]"></div>
+    <section className="py-16 md:py-24 bg-background relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-gradient-to-br from-primary/5 to-transparent rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-gradient-to-tl from-secondary/5 to-transparent rounded-full blur-3xl" />
 
-      <div className="space-y-12 lg:space-20 max-w-6xl mx-auto">
-        <div className="container relative z-10 space-y-6 text-center text-balance">
-          <h2 className="text-4xl md:text-5xl tracking-tight leading-[1]">
-            Stop manually writing case studies.
-            <br className="hidden md:block" />
-            Start recording conversations
+      {/* Subtle pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.015]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, currentColor 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
+
+      <div className="container max-w-6xl mx-auto relative z-10">
+        {/* Header */}
+        <div className="mb-12 md:mb-16 space-y-5 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-sm font-medium text-secondary">
+            <Users className="w-3.5 h-3.5" />
+            Who it's for
+          </div>
+
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] max-w-3xl mx-auto text-balance">
+            Built for teams that{" "}
+            <span className="text-gradient-primary">need to scale</span>
           </h2>
+
+          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+            From solo founders to enterprise teams, Casevia adapts to your
+            workflow.
+          </p>
         </div>
 
-        <div className="flex flex-col gap-12 md:flex-row lg:gap-20 container">
-          {/* Accordion Feature List */}
-          <Accordion
-            type="single"
-            value={activeItem}
-            onValueChange={(value) => setActiveItem(value as ImageKey)}
-            className="w-full"
-          >
-            {/* ITEM 1: AI Narrative Generation */}
-            <AccordionItem value="item-1">
-              <AccordionTrigger>
-                <div className="flex items-center gap-3 text-lg font-semibold">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Zap className="size-5" />
-                  </div>
-                  <div className="text-left">
-                    <div className="flex items-center gap-2">
-                      Interview → Case Study
-                      <Badge variant="secondary" className="text-xs">
-                        AI-Powered
-                      </Badge>
+        {/* Stripe-style asymmetric grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Column 1 - Left side */}
+          <div className="space-y-6">
+            {[useCases[0], useCases[2]].map((useCase) => {
+              const Icon = useCase.icon;
+              const colors = colorMap[useCase.color];
+              const isHovered = hoveredCase === useCase.id;
+
+              return (
+                <div
+                  key={useCase.id}
+                  onMouseEnter={() => setHoveredCase(useCase.id)}
+                  onMouseLeave={() => setHoveredCase(null)}
+                  className={`group relative bg-card border-2 border-border/50 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl ${colors.hover}`}
+                >
+                  {/* Image area with floating screenshot */}
+                  <div className="relative h-64 bg-muted/30 overflow-hidden">
+                    {/* Gradient overlay on hover */}
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${colors.gradient} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                    />
+
+                    {/* Floating screenshot */}
+                    <div
+                      className={`absolute ${useCase.position} w-3/4 transition-all duration-300 ease-out ${
+                        isHovered ? "translate-y-[-4px] scale-[1.02]" : ""
+                      }`}
+                    >
+                      <Image
+                        src={useCase.image}
+                        alt={useCase.alt}
+                        width={600}
+                        height={400}
+                        className="w-full h-auto rounded-xl shadow-2xl border border-border/50"
+                      />
                     </div>
+
+                    {/* Corner accent */}
+                    <div
+                      className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl ${colors.gradient} to-transparent rounded-bl-3xl opacity-50`}
+                    />
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-7">
+                    <div className="flex items-start gap-3 mb-3">
+                      <div
+                        className={`w-10 h-10 rounded-xl ${colors.bg} ${colors.border} border flex items-center justify-center transition-transform duration-300 ${isHovered ? "scale-110 rotate-3" : ""}`}
+                      >
+                        <Icon
+                          className={`w-5 h-5 ${colors.text}`}
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                      <h3 className="text-xl font-bold text-foreground pt-1.5">
+                        {useCase.title}
+                      </h3>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {useCase.description}
+                    </p>
                   </div>
                 </div>
-              </AccordionTrigger>
-              <AccordionContent className="text-base leading-relaxed pl-[52px]">
-                Drop in your recorded client conversation—Casevia's AI
-                transcribes it (via AssemblyAI), extracts key moments, and
-                structures a complete{" "}
-                <span className="font-semibold text-foreground">
-                  Challenge → Solution → Results
-                </span>{" "}
-                narrative with pull quotes. What used to take days now takes{" "}
-                <span className="font-semibold text-foreground">
-                  ~10 minutes
-                </span>
-                .
-              </AccordionContent>
-            </AccordionItem>
-
-            {/* ITEM 2: Full Customization & Editing */}
-            <AccordionItem value="item-2">
-              <AccordionTrigger>
-                <div className="flex items-center gap-3 text-lg font-semibold">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Pencil className="size-5" />
-                  </div>
-                  <div className="text-left">
-                    <div className="flex items-center gap-2">
-                      Your Brand, Your Voice
-                    </div>
-                  </div>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="text-base leading-relaxed pl-[52px]">
-                Choose from multiple design templates, customize tone and style
-                to match your brand guidelines, and edit any section with our
-                smart editor. The AI maintains professional narrative flow while
-                you control the final message—no generic outputs.
-              </AccordionContent>
-            </AccordionItem>
-
-            {/* ITEM 3: Multi-Format Export */}
-            <AccordionItem value="item-3">
-              <AccordionTrigger>
-                <div className="flex items-center gap-3 text-lg font-semibold">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Share2 className="size-5" />
-                  </div>
-                  <div className="text-left">
-                    <div className="flex items-center gap-2">
-                      One Case Study, Every Format
-                    </div>
-                  </div>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="text-base leading-relaxed pl-[52px]">
-                Export as PDF for sales decks, Markdown for your blog, or
-                SEO-optimized HTML for your site. Pro users get automatic social
-                media snippets formatted for LinkedIn, X, and more—all generated
-                from the same source material.
-              </AccordionContent>
-            </AccordionItem>
-
-            {/* ITEM 4: Secure Data & Team Management */}
-            <AccordionItem value="item-4">
-              <AccordionTrigger>
-                <div className="flex items-center gap-3 text-lg font-semibold">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <ShieldCheck className="size-5" />
-                  </div>
-                  <div className="text-left">
-                    <div className="flex items-center gap-2">
-                      Built for Teams & Agencies
-                    </div>
-                  </div>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="text-base leading-relaxed pl-[52px]">
-                Manage unlimited team members (Agency plan), assign
-                organization-level permissions, and keep all client data
-                encrypted and secure. Track usage, manage billing, and scale
-                your case study production without hiring writers.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-
-          {/* Image Display */}
-          <div className="bg-background relative flex overflow-hidden rounded-3xl border p-2 shadow-lg">
-            <div className="w-15 absolute inset-0 right-0 ml-auto border-l bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_8px)]"></div>
-            <div className="aspect-76/59 bg-background relative w-[calc(3/4*100%+3rem)] rounded-2xl">
-              <div className="size-full overflow-hidden rounded-2xl border bg-muted shadow-md">
-                <Image
-                  src={images[activeItem].image}
-                  className="size-full object-cover object-top-left dark:mix-blend-lighten transition-all duration-300"
-                  alt={images[activeItem].alt}
-                  width={1207}
-                  height={929}
-                />
-              </div>
-            </div>
+              );
+            })}
           </div>
+
+          {/* Column 2 - Right side with offset */}
+          <div className="space-y-6 md:mt-32">
+            {[useCases[1], useCases[3]].map((useCase) => {
+              const Icon = useCase.icon;
+              const colors = colorMap[useCase.color];
+              const isHovered = hoveredCase === useCase.id;
+
+              return (
+                <div
+                  key={useCase.id}
+                  onMouseEnter={() => setHoveredCase(useCase.id)}
+                  onMouseLeave={() => setHoveredCase(null)}
+                  className={`group relative bg-card border-2 border-border/50 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl ${colors.hover}`}
+                >
+                  {/* Image area */}
+                  <div className="relative h-64 bg-muted/30 overflow-hidden">
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${colors.gradient} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                    />
+
+                    <div
+                      className={`absolute ${useCase.position} w-3/4 transition-all duration-300 ease-out ${
+                        isHovered ? "translate-y-[-4px] scale-[1.02]" : ""
+                      }`}
+                    >
+                      <Image
+                        src={useCase.image}
+                        alt={useCase.alt}
+                        width={600}
+                        height={400}
+                        className="w-full h-auto rounded-xl shadow-2xl border border-border/50"
+                      />
+                    </div>
+
+                    <div
+                      className={`absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr ${colors.gradient} to-transparent rounded-tr-3xl opacity-50`}
+                    />
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-7">
+                    <div className="flex items-start gap-3 mb-3">
+                      <div
+                        className={`w-10 h-10 rounded-xl ${colors.bg} ${colors.border} border flex items-center justify-center transition-transform duration-300 ${isHovered ? "scale-110 rotate-3" : ""}`}
+                      >
+                        <Icon
+                          className={`w-5 h-5 ${colors.text}`}
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                      <h3 className="text-xl font-bold text-foreground pt-1.5">
+                        {useCase.title}
+                      </h3>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {useCase.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Bottom note */}
+        <div className="mt-16 text-center">
+          <p className="text-muted-foreground">
+            Join <strong className="text-foreground">200+ teams</strong> already
+            scaling their case study production
+          </p>
         </div>
       </div>
     </section>
