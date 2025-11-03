@@ -91,7 +91,7 @@ export default function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
 
               <Image
-                src="/images/image.png"
+                src="/images/dashboard.webp"
                 alt="Casevia converts recorded interviews into structured case studies"
                 width={1600}
                 height={900}
