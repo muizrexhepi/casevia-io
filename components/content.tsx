@@ -21,7 +21,7 @@ const useCases: UseCase[] = [
     title: "Marketing teams",
     description:
       "Scale your content production. Turn every customer conversation into compelling stories for your blog, social media, and campaigns.",
-    image: "/images/casevia-generation.png",
+    image: "/images/marketing-teams.webp",
     alt: "Marketing dashboard",
     position: "bottom-4 right-4",
     icon: Users,
@@ -32,7 +32,7 @@ const useCases: UseCase[] = [
     title: "Agencies",
     description:
       "Deliver more value to clients. Create professional case studies faster, showcase results better, and win more business.",
-    image: "/images/casevia-library.png",
+    image: "/images/agencies.webp",
     alt: "Agency workflow",
     position: "top-4 left-4",
     icon: Building2,
@@ -43,7 +43,7 @@ const useCases: UseCase[] = [
     title: "Sales teams",
     description:
       "Close deals with proof. Keep your sales collateral fresh with real customer stories that speak to prospects' exact pain points.",
-    image: "/images/casevia-usage.png",
+    image: "/images/sales.webp",
     alt: "Sales enablement",
     position: "top-4 right-4",
     icon: TrendingUp,
@@ -54,7 +54,7 @@ const useCases: UseCase[] = [
     title: "Customer success",
     description:
       "Celebrate wins efficiently. Document customer outcomes without the back-and-forth. Get approval faster, publish sooner.",
-    image: "/images/casevia-billing.png",
+    image: "/images/success.webp",
     alt: "Customer success tools",
     position: "bottom-4 left-4",
     icon: Heart,
@@ -145,29 +145,29 @@ export default function ContentSection() {
                   key={useCase.id}
                   onMouseEnter={() => setHoveredCase(useCase.id)}
                   onMouseLeave={() => setHoveredCase(null)}
-                  className={`group relative bg-card border-2 border-border/50 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl ${colors.hover}`}
+                  className={`group relative bg-card border-2 ${colors.border} rounded-2xl overflow-hidden transition-all duration-300 shadow-sm md:border-border/50 md:shadow-none md:hover:shadow-xl md:${colors.hover}`}
                 >
                   {/* Image area with floating screenshot */}
-                  <div className="relative h-64 bg-muted/30 overflow-hidden">
-                    {/* Gradient overlay on hover */}
+                  <div className="relative h-64 md:h-82 bg-muted/30 overflow-hidden">
+                    {/* Gradient overlay */}
                     <div
-                      className={`absolute inset-0 bg-gradient-to-br ${colors.gradient} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                      className={`absolute inset-0 bg-gradient-to-br ${colors.gradient} to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300`}
                     />
 
                     {/* Floating screenshot */}
-                    <div
+                    {/* <div
                       className={`absolute ${useCase.position} w-3/4 transition-all duration-300 ease-out ${
                         isHovered ? "translate-y-[-4px] scale-[1.02]" : ""
                       }`}
-                    >
-                      <Image
-                        src={useCase.image}
-                        alt={useCase.alt}
-                        width={600}
-                        height={400}
-                        className="w-full h-auto rounded-xl shadow-2xl border border-border/50"
-                      />
-                    </div>
+                    > */}
+                    <Image
+                      src={useCase.image}
+                      alt={useCase.alt}
+                      width={600}
+                      height={400}
+                      className="w-full h-auto rounded-xl shadow-2xl border border-border/50"
+                    />
+                    {/* </div> */}
 
                     {/* Corner accent */}
                     <div
@@ -214,24 +214,24 @@ export default function ContentSection() {
                   className={`group relative bg-card border-2 border-border/50 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl ${colors.hover}`}
                 >
                   {/* Image area */}
-                  <div className="relative h-64 bg-muted/30 overflow-hidden">
+                  <div className="relative h-64 md:h-82 bg-muted/30 overflow-hidden">
                     <div
                       className={`absolute inset-0 bg-gradient-to-br ${colors.gradient} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
                     />
 
-                    <div
+                    {/* <div
                       className={`absolute ${useCase.position} w-3/4 transition-all duration-300 ease-out ${
                         isHovered ? "translate-y-[-4px] scale-[1.02]" : ""
                       }`}
-                    >
-                      <Image
-                        src={useCase.image}
-                        alt={useCase.alt}
-                        width={600}
-                        height={400}
-                        className="w-full h-auto rounded-xl shadow-2xl border border-border/50"
-                      />
-                    </div>
+                    > */}
+                    <Image
+                      src={useCase.image}
+                      alt={useCase.alt}
+                      width={600}
+                      height={400}
+                      className="w-full h-auto rounded-xl shadow-2xl border border-border/50"
+                    />
+                    {/* </div> */}
 
                     <div
                       className={`absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr ${colors.gradient} to-transparent rounded-tr-3xl opacity-50`}

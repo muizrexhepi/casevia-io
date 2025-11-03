@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { Plus, Minus, HelpCircle } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 
 const faqs = [
   {
@@ -32,20 +31,14 @@ const faqs = [
   {
     question: "Do you offer a free trial?",
     answer:
-      "Yes! Start with our free plan to test Casevia with your first case study. No credit card required.",
+      "No, we don't offer a free trial — but we do have a free plan you can start with. No credit card required.",
   },
 ];
 
 export function FAQsSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
   return (
-    <section className="py-16 md:py-24 bg-background relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-accent/5 to-transparent rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-primary/5 to-transparent rounded-full blur-3xl" />
-
-      <div className="container max-w-4xl mx-auto relative z-10">
+    <section className="py-16 md:py-24 bg-background">
+      <div className="container max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16 space-y-5">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-sm font-medium text-accent">
@@ -64,64 +57,22 @@ export function FAQsSection() {
           </p>
         </div>
 
-        {/* FAQ Items */}
-        <div className="space-y-4">
-          {faqs.map((faq, idx) => {
-            const isOpen = openIndex === idx;
-
-            return (
-              <div
-                key={idx}
-                className="border-2 border-border/50 rounded-2xl bg-card transition-all duration-300 hover:border-primary/30 hover:shadow-sm overflow-hidden"
-              >
-                <button
-                  onClick={() => setOpenIndex(isOpen ? null : idx)}
-                  className="w-full px-6 md:px-8 py-6 flex items-start justify-between gap-4 text-left transition-colors"
-                >
-                  <span className="font-semibold text-lg text-foreground pr-4">
-                    {faq.question}
-                  </span>
-                  <div
-                    className={`flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center transition-transform duration-300 ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
-                  >
-                    {isOpen ? (
-                      <Minus
-                        className="w-4 h-4 text-primary"
-                        strokeWidth={2.5}
-                      />
-                    ) : (
-                      <Plus
-                        className="w-4 h-4 text-primary"
-                        strokeWidth={2.5}
-                      />
-                    )}
-                  </div>
-                </button>
-
-                {/* === v v v THE FIX IS HERE v v v === */}
-                <div
-                  className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
-                    isOpen
-                      ? "grid-rows-[1fr] opacity-100"
-                      : "grid-rows-[0fr] opacity-0"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div className="px-6 md:px-8 pb-6 text-muted-foreground leading-relaxed">
-                      {faq.answer}
-                    </div>
-                  </div>
-                </div>
-                {/* === ^ ^ ^ THE FIX IS HERE ^ ^ ^ === */}
-              </div>
-            );
-          })}
+        {/* FAQ Grid - Simple, no animations */}
+        <div className="grid gap-8 md:gap-10">
+          {faqs.map((faq, idx) => (
+            <div key={idx} className="space-y-3">
+              <h3 className="font-semibold text-lg md:text-xl text-foreground">
+                {faq.question}
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {faq.answer}
+              </p>
+            </div>
+          ))}
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-12 text-center p-8 rounded-2xl bg-gradient-to-br from-muted/50 to-transparent border border-border/50">
+        <div className="mt-16 text-center p-8 rounded-2xl bg-muted border border-border/50">
           <p className="text-muted-foreground mb-4">Still have questions?</p>
           <a
             href="/contact"

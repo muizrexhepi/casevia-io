@@ -37,10 +37,7 @@ export default function HeroSection() {
 
       <div className="container max-w-6xl mx-auto px-4 relative z-10">
         {/* Top Badge with icon */}
-        <div
-          className="mb-6 animate-fade-in-up"
-          style={{ animationDelay: "0.1s" }}
-        >
+        <div className="mb-6">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
             Transform conversations into stories
@@ -48,10 +45,7 @@ export default function HeroSection() {
         </div>
 
         {/* Headline with gradient accent */}
-        <h1
-          className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[0.95] max-w-5xl mx-auto mb-8 animate-fade-in-up"
-          style={{ animationDelay: "0.2s" }}
-        >
+        <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[0.95] max-w-5xl mx-auto mb-8">
           Your best work,{" "}
           <span className="relative inline-block">
             <span className="text-gradient-primary">told by your clients</span>
@@ -74,34 +68,25 @@ export default function HeroSection() {
         </h1>
 
         {/* Subheadline */}
-        <p
-          className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed animate-fade-in-up"
-          style={{ animationDelay: "0.3s" }}
-        >
+        <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
           Record a conversation. Get a case study. Casevia turns client
           interviews into beautifully structured stories — no writing, no
           waiting.
         </p>
 
         {/* CTA */}
-        <div
-          className="mb-16 animate-fade-in-up"
-          style={{ animationDelay: "0.4s" }}
-        >
+        <div className="mb-16">
           <WaitlistForm />
         </div>
 
         {/* Product Illustration with floating effect */}
-        <div
-          className="w-full max-w-5xl mx-auto animate-fade-in-up"
-          style={{ animationDelay: "0.5s" }}
-        >
+        <div className="w-full max-w-5xl mx-auto">
           <div className="relative group">
             {/* Glow effect behind image */}
             <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
 
             {/* Main image container */}
-            <div className="relative rounded-2xl overflow-hidden border-2 border-border/50 bg-card shadow-2xl animate-float">
+            <div className="relative rounded-2xl overflow-hidden border-2 border-border/50 bg-card ">
               {/* Subtle inner glow */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
 
@@ -123,10 +108,7 @@ export default function HeroSection() {
         </div>
 
         {/* Social proof / trust indicators */}
-        <div
-          className="mt-16 flex flex-col items-center gap-4 animate-fade-in-up"
-          style={{ animationDelay: "0.6s" }}
-        >
+        <div className="mt-16 flex flex-col items-center gap-4">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <div className="flex -space-x-2">
               {[1, 2, 3, 4].map((i) => (

@@ -65,7 +65,7 @@ export default function BentoSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Card 1: Upload - Spans 5 columns */}
           <Card className="lg:col-span-5 bg-card border-2 border-border/50 rounded-3xl hover:shadow-xl hover:border-primary/20 transition-all duration-300 group overflow-hidden">
-            <CardContent className="flex flex-col justify-between h-full p-8">
+            <CardContent className="flex flex-col justify-between h-full">
               {/* Header with number badge */}
               <div className="space-y-6">
                 <div className="flex items-start justify-between">
@@ -101,7 +101,7 @@ export default function BentoSection() {
 
           {/* Card 2: AI Extracts - Spans 7 columns */}
           <Card className="lg:col-span-7 bg-card border-2 border-border/50 rounded-3xl hover:shadow-xl hover:border-secondary/20 transition-all duration-300 group overflow-hidden">
-            <CardContent className="flex flex-col justify-between h-full p-8">
+            <CardContent className="flex flex-col justify-between h-full">
               <div className="space-y-6">
                 <div className="flex items-start justify-between">
                   <BentoCardHeader
@@ -134,7 +134,7 @@ export default function BentoSection() {
 
           {/* Card 3: Narrative Gen - Spans 6 columns */}
           <Card className="lg:col-span-6 bg-card border-2 border-border/50 rounded-3xl hover:shadow-xl hover:border-accent/20 transition-all duration-300 group overflow-hidden">
-            <CardContent className="flex flex-col justify-between h-full p-8">
+            <CardContent className="flex flex-col justify-between h-full">
               <div className="space-y-6">
                 <div className="flex items-start justify-between">
                   <BentoCardHeader
@@ -167,7 +167,7 @@ export default function BentoSection() {
 
           {/* Card 4: Export - Spans 6 columns */}
           <Card className="lg:col-span-6 bg-card border-2 border-border/50 rounded-3xl hover:shadow-xl hover:border-primary/20 transition-all duration-300 group overflow-hidden">
-            <CardContent className="flex flex-col justify-between h-full p-8">
+            <CardContent className="flex flex-col justify-between h-full">
               <div className="space-y-6">
                 <div className="flex items-start justify-between">
                   <BentoCardHeader
