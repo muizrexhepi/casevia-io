@@ -22,10 +22,49 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title:
-    "Casevia: Turn Customer Interviews into Publish-Ready Case Studies, Instantly.",
+  metadataBase: new URL("https://casevia.io"),
+  title: "Casevia — The Only Interview-to-Case Study Engine",
   description:
-    "The Case Study Engine. Upload any video or audio interview and generate structured, high-quality social proof in minutes—not weeks. Built for agencies to scale faster.",
+    "Upload a client interview and instantly generate structured, publish-ready case studies. Privacy-first. No writing. No waiting. Built for agencies & B2B teams.",
+  keywords: [
+    "case study generator",
+    "ai case studies",
+    "client interview to case study",
+    "video to case study",
+    "transcript to case study",
+    "B2B social proof automation",
+    "agency ai tool",
+    "privacy focused ai",
+    "content automation for agencies",
+    "marketing proof generator",
+  ],
+  alternates: {
+    canonical: "https://casevia.io",
+  },
+  openGraph: {
+    title: "Casevia — The Only Interview-to-Case Study Engine",
+    description:
+      "Turn raw customer interviews into real, publish-ready case studies automatically. Privacy-first. Casevia never trains on your content.",
+    url: "https://casevia.io",
+    siteName: "Casevia",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Casevia Preview",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Casevia — The Only Interview-to-Case Study Engine",
+    description:
+      "Upload interviews → get structured case studies instantly. Privacy-focused and built for agencies.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({

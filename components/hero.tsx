@@ -69,9 +69,9 @@ export default function HeroSection() {
 
         {/* Subheadline */}
         <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
-          Record a conversation. Get a case study. Casevia turns client
-          interviews into beautifully structured stories — no writing, no
-          waiting.
+          Upload the interview, we handle the narrative. Casevia turns real
+          client conversations into structured case studies — privacy-first and
+          instantly publishable.
         </p>
 
         {/* CTA */}

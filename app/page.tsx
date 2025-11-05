@@ -3,7 +3,7 @@ import BentoSection from "@/components/bento";
 import HeroSection from "@/components/hero";
 import { ProblemSection } from "@/components/problem";
 import { ComparisonSection } from "@/components/comparison";
-import { CtaSection } from "@/components/cta";
+import CtaSection from "@/components/cta";
 import { FAQsSection } from "@/components/faqs";
 
 export default function Home() {
@@ -15,8 +15,8 @@ export default function Home() {
       <ProblemSection /> {/* bg-muted - Pain */}
       <ContentSection /> {/* bg-muted - How it works */}
       {/* <CtaSection /> */}
+      <CtaSection />
       <FAQsSection /> {/* bg-muted - Objections */}
-      {/* <CtaSection />  */}
     </main>
   );
 }
