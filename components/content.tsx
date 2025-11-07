@@ -86,7 +86,7 @@ const tintMap = {
 
 export default function ContentSection() {
   return (
-    <section className="relative bg-background py-16 md:py-24 overflow-hidden">
+    <section className="relative bg-background py-12 md:py-20 overflow-hidden">
       {/* soft pattern */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.02]"
@@ -103,7 +103,7 @@ export default function ContentSection() {
           <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/10 px-3 py-1 text-sm font-medium text-orange-600">
             Why teams choose Casevia
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05]">
             Not just faster—
             <span className="text-gradient-primary">better</span> case studies.
           </h2>
@@ -114,7 +114,7 @@ export default function ContentSection() {
         </div>
 
         {/* grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-12">
           {CARDS.map((c, i) => {
             const t = tintMap[c.tint];
             const isRightColumn = i % 2 === 1;

@@ -40,7 +40,7 @@ export function ProblemSection() {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-background via-muted/30 to-background relative overflow-hidden">
+    <section className="py-12 md:py-20 bg-background relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-destructive/5 to-transparent rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tl from-primary/5 to-transparent rounded-full blur-3xl" />
@@ -66,7 +66,7 @@ export function ProblemSection() {
                 The Problem
               </div>
 
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05]">
                 Creating case studies{" "}
                 <span className="text-gradient-primary">
                   shouldn't be this hard

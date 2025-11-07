@@ -5,36 +5,7 @@ import { Sparkles, ArrowRight } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] flex flex-col items-center justify-center text-center py-20 md:py-28 overflow-hidden">
-      {/* Organic background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Large organic blob - top right */}
-        <div
-          className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10 blur-3xl animate-pulse-soft"
-          style={{ animationDelay: "0s" }}
-        />
-        {/* Medium organic blob - bottom left */}
-        <div
-          className="absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-gradient-to-tr from-secondary/10 via-primary/5 to-accent/10 blur-3xl animate-pulse-soft"
-          style={{ animationDelay: "1.5s" }}
-        />
-        {/* Small accent blob - center */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-accent/5 blur-2xl animate-pulse-soft"
-          style={{ animationDelay: "3s" }}
-        />
-
-        {/* Subtle dot pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, currentColor 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
-          }}
-        />
-      </div>
-
+    <section className="relative min-h-[90vh] flex flex-col items-center justify-center text-center py-12 md:py-20 overflow-hidden">
       <div className="container max-w-6xl mx-auto px-4 relative z-10">
         {/* Top Badge with icon */}
         <div className="mb-6">
@@ -44,36 +15,20 @@ export default function HeroSection() {
           </span>
         </div>
 
-        {/* Headline with gradient accent */}
+        {/* Headline: Clear, concise function statement */}
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[0.95] max-w-5xl mx-auto mb-8">
-          Your best work,{" "}
+          The Fastest Way to Publish{" "}
           <span className="relative inline-block">
-            <span className="text-gradient-primary">told by your clients</span>
-            {/* Hand-drawn underline effect */}
-            <svg
-              className="absolute -bottom-2 left-0 w-full h-3 text-primary/30"
-              viewBox="0 0 300 12"
-              fill="none"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M2 6C50 3 100 1 150 4C200 7 250 9 298 6"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                className="animate-float"
-              />
-            </svg>
+            <span className="text-gradient-primary">Client Case Studies</span>
           </span>
         </h1>
 
-        {/* Subheadline */}
-        <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
-          Upload the interview, we handle the narrative. Casevia turns real
-          client conversations into structured case studies — privacy-first and
-          instantly publishable.
+        {/* Subheadline: Concise and using <strong> (kept short) */}
+        <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
+          Upload <strong>audio or video</strong> interviews. Our AI instantly
+          converts the raw conversation into a high-impact,{" "}
+          <strong>publish-ready</strong> case study, skipping weeks of writing.
         </p>
-
         {/* CTA */}
         <div className="mb-16">
           <WaitlistForm />

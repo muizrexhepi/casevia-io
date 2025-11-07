@@ -11,7 +11,7 @@ const TRUST_ITEMS = [
 
 export default function CTASection() {
   return (
-    <section className="relative bg-background py-20 md:py-28 overflow-hidden">
+    <section className="relative bg-background py-12 md:py-20 overflow-hidden">
       {/* Subtle background pattern */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.015]"
@@ -32,7 +32,7 @@ export default function CTASection() {
 
           {/* Headline - simple, bold, no gradients */}
           <div className="space-y-4">
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.1]">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05]">
               Ready to ship better
               <br />
               <span className="text-gradient-primary">case studies?</span>
@@ -49,7 +49,7 @@ export default function CTASection() {
           </div>
 
           {/* Trust indicators - minimal */}
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 pt-2">
+          {/* <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 pt-2">
             {TRUST_ITEMS.map((item, i) => (
               <div
                 key={i}
@@ -59,15 +59,15 @@ export default function CTASection() {
                 <span>{item.text}</span>
               </div>
             ))}
-          </div>
+          </div> */}
 
           {/* Social proof - understated */}
-          <p className="text-sm text-muted-foreground/80 pt-6">
+          {/* <p className="text-sm text-muted-foreground/80 pt-6">
             Trusted by teams at{" "}
             <span className="text-foreground">YC startups</span>,{" "}
             <span className="text-foreground">Series A companies</span>, and{" "}
             <span className="text-foreground">agencies</span>
-          </p>
+          </p> */}
         </div>
       </div>
     </section>
