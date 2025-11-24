@@ -39,9 +39,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased`}
       >
         <Toaster />
-        <Navbar />
+        {/* <Navbar /> */}
         {children}
-        <FooterSection />
+        {/* <FooterSection /> */}
       </body>
     </html>
   );
