@@ -38,7 +38,7 @@ const faqs = [
 export function FAQsSection() {
   return (
     <section className="py-16 md:py-24 bg-background">
-      <div className="container max-w-4xl mx-auto">
+      <div className="container max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16 space-y-5">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-sm font-medium text-accent">
@@ -46,15 +46,15 @@ export function FAQsSection() {
             FAQs
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05]">
             Questions? We've got{" "}
             <span className="text-gradient-primary">answers</span>
           </h2>
 
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+          {/* <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
             Everything you need to know about creating case studies with
             Casevia.
-          </p>
+          </p> */}
         </div>
 
         {/* FAQ Grid - Simple, no animations */}

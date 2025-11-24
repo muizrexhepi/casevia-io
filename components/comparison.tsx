@@ -100,7 +100,7 @@ export function ComparisonSection() {
               ROI Calculator
             </div>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05]">
               Stop overspending on{" "}
               <span className="text-gradient-primary">manual work</span>
             </h2>

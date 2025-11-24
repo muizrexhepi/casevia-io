@@ -11,7 +11,6 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import FooterSection from "@/components/footer";
 import { Badge } from "@/components/ui/badge";
 
 type Plan = {
@@ -19,8 +18,8 @@ type Plan = {
   name: string;
   slug: string | null;
   price: string;
-  priceMonthly: number;
-  priceYearly: number;
+  priceMonthly: number; // monthly price (base)
+  priceYearly: number; // monthly-equivalent when billed yearly (discounted)
   description: string;
   features: string[];
   limits: { [key: string]: any };
@@ -28,6 +27,14 @@ type Plan = {
   popular: boolean;
 };
 type PlanId = "free" | "starter" | "pro" | "agency";
+
+/**
+ * Pricing tuned per your request:
+ * - Billing toggle A: show lower monthly-equivalent when yearly selected
+ * - 17% discount for yearly billing (monthly * 0.83 -> rounded)
+ *
+ * Storage units are in MB inside limits; formatStorage converts to human string.
+ */
 
 export const PLANS: Plan[] = [
   {
@@ -39,15 +46,15 @@ export const PLANS: Plan[] = [
     priceYearly: 0,
     description: "Perfect for getting started",
     features: [
-      "1 case study per month",
-      "10 min max video length",
+      "2 case studies / month",
+      "15 min max video length",
       "Basic custom tone",
       "1 team seat",
     ],
     limits: {
-      caseStudies: 1,
-      videoLength: 10,
-      storage: 5,
+      caseStudies: 2,
+      videoLength: 15,
+      storage: 25, // MB
       socialPosts: 0,
       teamSeats: 1,
       designTemplates: 1,
@@ -65,20 +72,20 @@ export const PLANS: Plan[] = [
     id: "starter",
     name: "Starter",
     slug: "starter",
-    price: "$29",
-    priceMonthly: 29,
-    priceYearly: 24, // $288/year ÷ 12 months
+    price: "$39",
+    priceMonthly: 39,
+    priceYearly: 32, // 39 * 0.83 ~= 32.37 -> 32
     description: "For independent professionals",
     features: [
-      "5 case studies per month",
+      "8 case studies / month",
       "30 min max video length",
       "No Casevia branding",
       "3 design templates",
     ],
     limits: {
-      caseStudies: 5,
+      caseStudies: 8,
       videoLength: 30,
-      storage: 50,
+      storage: 500, // MB
       socialPosts: 1,
       teamSeats: 1,
       designTemplates: 3,
@@ -96,21 +103,21 @@ export const PLANS: Plan[] = [
     id: "pro",
     name: "Pro",
     slug: "pro",
-    price: "$79",
-    priceMonthly: 79,
-    priceYearly: 66, // $792/year ÷ 12 months
+    price: "$99",
+    priceMonthly: 99,
+    priceYearly: 82, // 99 * 0.83 ~= 82.17 -> 82
     description: "For growing teams",
     features: [
-      "20 case studies per month",
+      "25 case studies / month",
       "60 min max video length",
       "SEO title/slug generation",
       "5 team seats",
-      "Full analytics",
+      "Full analytics & insights",
     ],
     limits: {
-      caseStudies: 20,
+      caseStudies: 25,
       videoLength: 60,
-      storage: 2048,
+      storage: 2048, // MB -> 2 GB
       socialPosts: 3,
       teamSeats: 5,
       designTemplates: 10,
@@ -128,22 +135,22 @@ export const PLANS: Plan[] = [
     id: "agency",
     name: "Agency",
     slug: "agency",
-    price: "Custom",
-    priceMonthly: 149,
-    priceYearly: 124, // $1,488/year ÷ 12 months
+    price: "$199",
+    priceMonthly: 199,
+    priceYearly: 165, // 199 * 0.83 ~= 165.17 -> 165
     description: "For agencies and larger teams",
     features: [
-      "50 case studies per month",
-      "Unlimited team seats",
+      "60 case studies / month",
+      "120 min max video length",
       "High-priority processing",
       "Dedicated account manager",
     ],
     limits: {
-      caseStudies: 50,
+      caseStudies: 60,
       videoLength: 120,
-      storage: 5120,
-      socialPosts: -1,
-      teamSeats: -1,
+      storage: 5120, // MB -> 5 GB
+      socialPosts: 5,
+      teamSeats: -1, // unlimited
       designTemplates: 10,
       noBranding: true,
       seoOptimization: true,
@@ -159,8 +166,8 @@ export const PLANS: Plan[] = [
 
 const formatStorage = (mb: number): string => {
   if (mb === -1) return "Unlimited";
-  if (mb >= 1024 && mb % 1024 === 0) {
-    const gb = mb / 1024;
+  if (mb >= 1024) {
+    const gb = Math.round((mb / 1024) * 10) / 10;
     return `${gb} GB`;
   }
   return `${mb} MB`;
@@ -245,10 +252,6 @@ const PlanValue = ({
     return (
       <span className="text-foreground">{formatStorage(limit as number)}</span>
     );
-  }
-
-  if (plan.id === "agency" && feature.key === "caseStudies") {
-    return <span className="font-medium text-foreground">50+</span>;
   }
 
   return (
@@ -426,7 +429,7 @@ export default function PricingClient() {
                     {plan.popular && (
                       <Badge
                         variant="outline"
-                        className="ml-2 text-xs bg-primary/10 text-primary border-primary/30lue-200"
+                        className="ml-2 text-xs bg-primary/10 text-primary border-primary/30"
                       >
                         Popular
                       </Badge>
@@ -446,7 +449,7 @@ export default function PricingClient() {
                           <span className="text-3xl font-semibold">
                             {isContactSales
                               ? plan.price
-                              : `${Math.round(price)}`}
+                              : `$${Math.round(price)}`}
                           </span>
                           {!isContactSales && price !== 0 && (
                             <span className="text-sm text-muted-foreground">
@@ -457,7 +460,7 @@ export default function PricingClient() {
                         <p className="text-sm text-muted-foreground">
                           {billingCycle === "monthly"
                             ? "Billed monthly"
-                            : "Billed annually"}
+                            : "Billed annually (monthly price shown)"}
                         </p>
                       </div>
                     </td>
@@ -519,6 +522,7 @@ export default function PricingClient() {
           </table>
         </div>
       </div>
+
       <div className="py-12 lg:py-24 text-center space-y-6">
         <div className="max-w-2xl mx-auto space-y-4">
           <h3 className="text-2xl font-semibold text-balance">
@@ -542,13 +546,14 @@ export default function PricingClient() {
             size="lg"
             className="text-base px-8"
           >
-            <Link href="#">
+            <Link href="/dashboard">
               Start for free
               <ChevronRight className="h-4 w-4 ml-1" />
             </Link>
           </Button>
         </div>
       </div>
+
       <Separator />
     </section>
   );

@@ -52,7 +52,7 @@ export default function BentoSection() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-sm font-medium text-primary mb-4">
             How it works
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] max-w-3xl">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] max-w-2xl">
             Interview in. Case study out.{" "}
             <span className="text-gradient-primary">Just like that.</span>
           </h2>
