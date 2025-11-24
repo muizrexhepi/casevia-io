@@ -59,6 +59,7 @@ import {
   BrainCircuit,
   Shield,
 } from "lucide-react";
+import { toast } from "sonner";
 
 // --- UTILS ---
 
@@ -87,14 +88,12 @@ const useInView = (options = { threshold: 0.1 }) => {
 };
 
 // --- ASSETS ---
-
-const Logo = ({ className = "text-xl" }: { className?: string }) => (
+const Logo = ({ className = "text-xl" }) => (
   <span className={`font-display tracking-tighter ${className}`}>
     <span className="font-extrabold text-zinc-900">case</span>
     <span className="font-medium text-zinc-500">via</span>
   </span>
 );
-
 // --- COMPONENTS ---
 
 // Waitlist Modal
@@ -106,19 +105,49 @@ const WaitlistModal = ({
   onClose: () => void;
 }) => {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    // Simulate API call
-    setTimeout(() => {
-      setSubmitted(false);
+    if (!email) return toast.error("Please enter your email");
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!res.ok) throw new Error("Failed to join waitlist");
+
+      const result = await res.json();
+
+      if (result.exists) {
+        toast("You're already on the waitlist!", {
+          description: "We've got your spot reserved! Stay tuned for updates.",
+        });
+      } else {
+        toast.success("🎉 You're on the waitlist!");
+      }
+
+      setSubmitted(true);
       setEmail("");
-      onClose();
-    }, 2000);
+
+      // Close modal after showing success state
+      setTimeout(() => {
+        setSubmitted(false);
+        onClose();
+      }, 2000);
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong. Try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -165,13 +194,22 @@ const WaitlistModal = ({
                   placeholder="name@company.com"
                   className="w-full bg-zinc-50 border border-zinc-200 text-zinc-900 px-4 py-3 text-sm focus:outline-none focus:border-zinc-900 focus:ring-0 transition-all placeholder:text-zinc-400 rounded-none"
                   required
+                  disabled={loading}
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-zinc-900 text-white py-4 text-sm font-bold hover:bg-zinc-800 transition-all active:translate-y-0.5 rounded-none shadow-lg shadow-zinc-900/20"
+                disabled={loading}
+                className="w-full bg-zinc-900 text-white py-4 text-sm font-bold hover:bg-zinc-800 transition-all active:translate-y-0.5 rounded-none shadow-lg shadow-zinc-900/20 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Get Early Access
+                {loading ? (
+                  <div className="flex items-center justify-center gap-2">
+                    <Loader2 className="animate-spin size-5" />
+                    Joining...
+                  </div>
+                ) : (
+                  "Get Early Access"
+                )}
               </button>
             </form>
             <div className="mt-8 flex items-center justify-center gap-2 text-[10px] text-zinc-400 uppercase tracking-widest font-medium">
@@ -193,7 +231,6 @@ const WaitlistModal = ({
     </div>
   );
 };
-
 // 1. Navigation
 const Navbar = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -324,38 +361,40 @@ const Hero = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
     <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-white">
       <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-50 via-white to-white"></div>
+        {/* Shifting Fog Animation */}
         <div
-          className="absolute -top-[40%] -left-[20%] w-[70%] h-[70%] rounded-full bg-indigo-100/30 blur-[100px] animate-float"
-          style={{ animationDuration: "20s" }}
+          className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] rounded-full bg-indigo-50/40 blur-[120px] animate-float"
+          style={{ animationDuration: "25s" }}
         ></div>
         <div
-          className="absolute top-[10%] -right-[20%] w-[60%] h-[60%] rounded-full bg-blue-100/20 blur-[100px] animate-float"
-          style={{ animationDuration: "25s", animationDelay: "-5s" }}
+          className="absolute top-[10%] -right-[10%] w-[50%] h-[50%] rounded-full bg-blue-50/30 blur-[120px] animate-float"
+          style={{ animationDuration: "30s", animationDelay: "-5s" }}
         ></div>
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(228,228,231,0.3)_1px,transparent_1px),linear-gradient(to_bottom,rgba(228,228,231,0.3)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_70%)]"></div>
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(24,24,27,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_90%)]"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 text-center flex flex-col items-center">
-        <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-white/50 border border-zinc-200/60 backdrop-blur-sm mb-8 animate-fade-up cursor-default hover:border-zinc-300 transition-colors shadow-sm relative group rounded-none">
-          <div className="w-1.5 h-1.5 bg-emerald-500 rounded-none relative z-10 animate-pulse"></div>
-          <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest group-hover:text-zinc-900 transition-colors">
+        <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-white border border-zinc-200/80 shadow-sm mb-8 animate-fade-up cursor-default hover:border-zinc-300 transition-colors relative group rounded-none">
+          <div className="w-1.5 h-1.5 bg-indigo-600 rounded-none relative z-10 animate-pulse"></div>
+          <span className="text-[11px] font-bold text-zinc-600 uppercase tracking-widest group-hover:text-zinc-900 transition-colors">
             v2.0 Public Beta
           </span>
         </div>
 
         <h1
-          className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-zinc-900 tracking-tight mb-6 leading-[1.1] text-balance animate-fade-up w-full"
+          className="text-5xl md:text-7xl font-display font-bold text-zinc-900 tracking-tight mb-6 leading-[1.0] text-balance animate-fade-up w-full"
           style={{ animationDelay: "100ms" }}
         >
           Turn client interviews into <br className="hidden md:block" />
-          <span className="relative inline-block">
-            revenue assets.
-            <div className="absolute bottom-2 left-0 w-full h-3 bg-indigo-100/50 -z-10 -rotate-1"></div>
+          <span className="relative inline-block text-zinc-400">
+            <span className="text-zinc-900 relative z-10">revenue assets.</span>
+            <div className="absolute bottom-1 left-0 w-full h-4 bg-indigo-100/60 -z-10 -rotate-1"></div>
           </span>
         </h1>
 
         <p
-          className="text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up font-light"
+          className="text-lg md:text-xl text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up font-light"
           style={{ animationDelay: "200ms" }}
         >
           Casevia automatically identifies pain points, metrics, and quotes from
@@ -363,7 +402,7 @@ const Hero = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
         </p>
 
         <div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20 animate-fade-up w-full max-w-sm sm:max-w-none"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-24 animate-fade-up w-full max-w-sm sm:max-w-none"
           style={{ animationDelay: "300ms" }}
         >
           <button
@@ -384,16 +423,18 @@ const Hero = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
 
         {/* Dashboard Illustration */}
         <div
-          className="relative w-full max-w-5xl mx-auto animate-fade-up perspective-[2000px] group pb-12 z-20"
+          className="relative w-full max-w-6xl mx-auto animate-fade-up perspective-[2000px] group pb-12 z-20"
           style={{ animationDelay: "500ms" }}
         >
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[60%] bg-indigo-500/10 blur-[100px] -z-10 rounded-full"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[60%] bg-indigo-500/5 blur-[100px] -z-10 rounded-full"></div>
 
           <div className="relative transform-gpu rotate-x-[6deg] group-hover:rotate-x-[2deg] transition-transform duration-1000 ease-out">
             <div className="absolute inset-0 bg-zinc-900/5 translate-y-8 blur-2xl rounded-none -z-10"></div>
 
+            {/* Main Window */}
             <div className="bg-white border border-zinc-200 shadow-2xl rounded-none overflow-hidden h-[550px] md:h-[650px] relative flex font-sans text-left ring-1 ring-black/5">
-              <div className="w-64 border-r border-zinc-100 bg-zinc-50/50 p-6 hidden md:flex flex-col gap-6">
+              {/* Sidebar */}
+              <div className="w-72 border-r border-zinc-100 bg-zinc-50/30 p-8 hidden md:flex flex-col gap-8 backdrop-blur-sm">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-zinc-900 rounded-none flex items-center justify-center text-white font-bold font-display text-lg">
                     M
@@ -418,10 +459,10 @@ const Hero = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
                   ].map((item, i) => (
                     <div
                       key={item}
-                      className={`flex items-center gap-3 px-3 py-2 rounded-none text-sm font-medium transition-colors ${item === "Projects" ? "bg-white shadow-sm text-zinc-900 border border-zinc-200/50" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100/50"}`}
+                      className={`flex items-center gap-3 px-3 py-2 rounded-none text-sm font-medium transition-colors ${item === "Projects" ? "bg-white shadow-sm text-zinc-900 border border-zinc-200" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100/80"}`}
                     >
                       <div
-                        className={`w-2 h-2 rounded-none ${item === "Projects" ? "bg-indigo-500" : "bg-transparent"}`}
+                        className={`w-1.5 h-1.5 rounded-full ${item === "Projects" ? "bg-indigo-600" : "bg-transparent"}`}
                       ></div>
                       {item}
                     </div>
@@ -441,28 +482,29 @@ const Hero = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
                   </div>
                 </div>
               </div>
-              <div className="flex-1 bg-white p-8 md:p-10 flex flex-col relative overflow-hidden">
-                <div className="flex justify-between items-end mb-8 md:mb-10">
+
+              {/* Main Content Area */}
+              <div className="flex-1 bg-white p-8 md:p-12 flex flex-col relative overflow-hidden">
+                <div className="flex justify-between items-end mb-10 md:mb-12">
                   <div>
-                    <h2 className="text-2xl font-bold text-zinc-900 mb-1 font-display tracking-tight">
+                    <h2 className="text-3xl font-bold text-zinc-900 mb-1 font-display tracking-tight">
                       Projects
                     </h2>
                     <p className="text-zinc-500 text-sm">
                       Manage your customer interviews and case studies.
                     </p>
                   </div>
-                  <button className="bg-zinc-900 hover:bg-zinc-800 text-white px-4 py-2 rounded-none text-xs font-bold shadow-lg shadow-zinc-900/10 transition-all flex items-center gap-2 active:scale-95 uppercase tracking-wide">
-                    <Plus size={14} /> New Project
+                  <button className="bg-zinc-900 hover:bg-zinc-800 text-white px-5 py-2.5 rounded-none text-xs font-bold shadow-lg shadow-zinc-900/10 transition-all flex items-center gap-2 active:scale-95">
+                    <Plus size={16} /> New Project
                   </button>
                 </div>
-                <div className="bg-gradient-to-br from-zinc-50 to-white border border-zinc-100 rounded-none p-6 md:p-8 mb-8 md:mb-10 shadow-sm relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 p-4 opacity-[0.03] transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-12 origin-top-right">
-                    <BarChart3 size={180} className="text-zinc-900" />
-                  </div>
+
+                {/* Usage Card */}
+                <div className="bg-zinc-50 border border-zinc-100 rounded-none p-6 md:p-8 mb-8 md:mb-10 relative overflow-hidden group">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 relative z-10 gap-4">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-indigo-600 rounded-none flex items-center justify-center text-white shadow-md shadow-indigo-200">
-                        <Zap size={24} fill="currentColor" />
+                      <div className="w-12 h-12 bg-white border border-zinc-200 rounded-none flex items-center justify-center text-indigo-600 shadow-sm">
+                        <Zap size={24} strokeWidth={2} />
                       </div>
                       <div>
                         <div className="font-bold text-zinc-900 text-lg">
@@ -473,7 +515,7 @@ const Hero = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
                         </div>
                       </div>
                     </div>
-                    <button className="text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-4 py-2 rounded-none text-xs font-bold transition-colors w-fit uppercase tracking-wide">
+                    <button className="text-indigo-600 bg-white border border-indigo-100 hover:border-indigo-300 px-4 py-2 rounded-none text-xs font-bold transition-colors w-fit">
                       Upgrade Plan
                     </button>
                   </div>
@@ -485,14 +527,8 @@ const Hero = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
                       <div className="text-2xl font-bold text-zinc-900 mb-2 font-display">
                         4 <span className="text-zinc-300 text-base">/ 20</span>
                       </div>
-                      <div className="h-1.5 w-full bg-zinc-100 rounded-none overflow-hidden">
-                        <div
-                          className="h-full bg-indigo-500 w-[20%] rounded-none animate-progress"
-                          style={{ animationDuration: "1.5s" }}
-                        ></div>
-                      </div>
-                      <div className="mt-2 text-[10px] text-zinc-400">
-                        20% used
+                      <div className="h-1 w-full bg-zinc-200 rounded-none overflow-hidden">
+                        <div className="h-full bg-indigo-600 w-[20%] rounded-none"></div>
                       </div>
                     </div>
                     <div>
@@ -505,17 +541,8 @@ const Hero = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
                           / 2048 MB
                         </span>
                       </div>
-                      <div className="h-1.5 w-full bg-zinc-100 rounded-none overflow-hidden">
-                        <div
-                          className="h-full bg-purple-500 w-[5%] rounded-none animate-progress"
-                          style={{
-                            animationDuration: "1.5s",
-                            animationDelay: "0.2s",
-                          }}
-                        ></div>
-                      </div>
-                      <div className="mt-2 text-[10px] text-zinc-400">
-                        5% used
+                      <div className="h-1 w-full bg-zinc-200 rounded-none overflow-hidden">
+                        <div className="h-full bg-purple-600 w-[5%] rounded-none"></div>
                       </div>
                     </div>
                     <div>
@@ -525,12 +552,14 @@ const Hero = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
                       <div className="text-2xl font-bold text-zinc-900 mb-2 font-display">
                         5
                       </div>
-                      <div className="text-[10px] text-zinc-400">
+                      <div className="text-xs text-zinc-400">
                         3 active • 0 pending
                       </div>
                     </div>
                   </div>
                 </div>
+
+                {/* Project List */}
                 <div className="space-y-3 relative z-10">
                   {[
                     {
@@ -557,17 +586,17 @@ const Hero = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
                   ].map((file, i) => (
                     <div
                       key={i}
-                      className="flex items-center p-4 bg-white border border-zinc-100 rounded-none hover:border-zinc-300 hover:shadow-md transition-all group/item cursor-pointer"
+                      className="flex items-center p-4 bg-white border border-zinc-100 rounded-none hover:border-zinc-300 hover:shadow-sm transition-all group/item cursor-pointer"
                     >
-                      <div className="w-10 h-10 bg-indigo-50 rounded-none flex items-center justify-center text-indigo-600 mr-4 group-hover/item:scale-110 transition-transform flex-shrink-0">
+                      <div className="w-10 h-10 bg-zinc-50 border border-zinc-100 rounded-none flex items-center justify-center text-zinc-500 mr-4 group-hover/item:text-indigo-600 transition-colors flex-shrink-0">
                         {file.status === "Processing" ? (
-                          <Loader2 size={20} className="animate-spin" />
+                          <Loader2 size={18} className="animate-spin" />
                         ) : (
-                          <Mic size={20} />
+                          <Mic size={18} />
                         )}
                       </div>
                       <div className="flex-1 min-w-0 mr-4">
-                        <div className="font-bold text-zinc-900 text-sm truncate">
+                        <div className="font-bold text-zinc-900 text-sm truncate group-hover/item:text-indigo-600 transition-colors">
                           {file.name}
                         </div>
                         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-zinc-400 mt-1 font-medium">

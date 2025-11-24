@@ -23,7 +23,8 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://casevia.io"),
-  title: "Casevia — The Only Interview-to-Case Study Engine",
+  title:
+    "Casevia | Turn raw client interviews into polished case studies with a simple drag & drop.",
   description:
     "Upload a client interview and instantly generate structured, publish-ready case studies. Privacy-first. No writing. No waiting. Built for agencies & B2B teams.",
   keywords: [
@@ -42,7 +43,8 @@ export const metadata: Metadata = {
     canonical: "https://casevia.io",
   },
   openGraph: {
-    title: "Casevia — The Only Interview-to-Case Study Engine",
+    title:
+      "Casevia | Turn raw client interviews into polished case studies with a simple drag & drop.",
     description:
       "Turn raw customer interviews into real, publish-ready case studies automatically. Privacy-first. Casevia never trains on your content.",
     url: "https://casevia.io",
@@ -60,7 +62,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Casevia — The Only Interview-to-Case Study Engine",
+    title:
+      "Casevia | Turn raw client interviews into polished case studies with a simple drag & drop.",
     description:
       "Upload interviews → get structured case studies instantly. Privacy-focused and built for agencies.",
     images: ["/og-image.png"],
