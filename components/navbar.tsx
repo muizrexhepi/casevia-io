@@ -1,136 +1,126 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Logo } from "./logo";
 import { Menu, X } from "lucide-react";
 
-const navLinks = [
-  { href: "/pricing", label: "Pricing" },
-  { href: "/example", label: "Example" },
-  { href: "/contact", label: "Contact" },
-];
-
-export function Navbar() {
+export const Navbar = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isOpen]);
+
   return (
     <>
       <nav
-        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-          scrolled
-            ? "border-b border-border/50 bg-background/95 backdrop-blur-md shadow-sm"
-            : "bg-background/80 backdrop-blur-sm"
-        }`}
+        className={`fixed w-full z-50 transition-all duration-500 border-b ${scrolled ? "bg-white/95 backdrop-blur-md border-zinc-200 py-4" : "bg-white/0 border-transparent py-6"}`}
       >
-        <div className="container max-w-6xl flex h-16 items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-12">
-            <Link href="/" className="flex items-center gap-2 group">
-              <img
-                src="/logo.svg"
-                className="object-contain w-auto h-10 transition-transform duration-300"
-                alt="Casevia"
-              />
-            </Link>
-
-            {/* Desktop Navigation */}
-            <div className="hidden items-center gap-1 md:flex">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="px-4 py-2 font-semibold text-foreground/80 rounded-lg transition-all duration-200 hover:text-foreground hover:bg-muted"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center gap-2 cursor-pointer group z-50 relative">
+            <Logo className="text-2xl" />
           </div>
 
-          {/* Desktop Actions */}
-          <div className="hidden items-center gap-3 md:flex">
-            <Link
-              href="/login"
-              className="px-5 py-2 font-semibold text-foreground rounded-lg transition-all duration-200 hover:bg-muted"
+          <div className="hidden md:flex items-center gap-8">
+            <a
+              href="#features"
+              className="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
+            >
+              Features
+            </a>
+            <a
+              href="#how-it-works"
+              className="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
+            >
+              How it works
+            </a>
+            <a
+              href="#pricing"
+              className="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
+            >
+              Pricing
+            </a>
+            <div className="h-4 w-px bg-zinc-200"></div>
+            <a
+              href="#"
+              className="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
             >
               Log in
-            </Link>
-            <Link
-              href="/signup"
-              className="px-6 py-2.5 font-semibold bg-primary text-primary-foreground rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5"
+            </a>
+            <button
+              onClick={onOpenWaitlist}
+              className="bg-zinc-900 text-white px-6 py-2.5 text-sm font-bold hover:bg-zinc-800 transition-all shadow-lg shadow-zinc-900/10 active:translate-y-0.5 rounded-none"
             >
               Sign up
-            </Link>
+            </button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-lg transition-colors hover:bg-muted"
+            className="md:hidden p-2 text-zinc-900 z-50 relative"
             onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="fixed inset-x-0 top-16 z-40 border-b-2 border-border/50 bg-background/98 backdrop-blur-md md:hidden animate-in slide-in-from-top-2 shadow-xl">
-          <div className="container py-6 space-y-6">
-            {/* Navigation Links */}
-            <div className="flex flex-col space-y-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="px-4 py-3 text-base font-semibold rounded-lg transition-colors hover:text-primary hover:bg-muted"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
+        <div className="fixed inset-0 z-40 bg-white flex flex-col pt-32 px-6 animate-fade-in md:hidden">
+          <div className="flex flex-col gap-8">
+            <a
+              href="#features"
+              className="text-4xl font-display font-bold text-zinc-900 tracking-tight"
+              onClick={() => setIsOpen(false)}
+            >
+              Features
+            </a>
+            <a
+              href="#how-it-works"
+              className="text-4xl font-display font-bold text-zinc-900 tracking-tight"
+              onClick={() => setIsOpen(false)}
+            >
+              How it works
+            </a>
+            <a
+              href="#pricing"
+              className="text-4xl font-display font-bold text-zinc-900 tracking-tight"
+              onClick={() => setIsOpen(false)}
+            >
+              Pricing
+            </a>
+            <div className="h-px bg-zinc-100 w-full my-4"></div>
+            {/* <a
+              href="#"
+              className="text-xl font-medium text-zinc-600"
+              onClick={() => setIsOpen(false)}
+            >
+              Log in
+            </a> */}
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                onOpenWaitlist();
+              }}
+              className="bg-zinc-900 text-white py-3 text-lg font-bold w-full rounded-none mt-4"
+            >
+              Sign up to Waitlist
+            </button>
+          </div>
 
-            <div className="border-t border-border/50" />
-
-            {/* Action Buttons */}
-            <div className="flex flex-col gap-3">
-              <Link
-                href="/login"
-                onClick={() => setIsOpen(false)}
-                className="w-full px-6 py-3 text-center font-semibold border-2 border-border/50 rounded-xl transition-all duration-200 hover:border-primary/30 hover:bg-muted"
-              >
-                Log in
-              </Link>
-              <Link
-                href="/signup"
-                onClick={() => setIsOpen(false)}
-                className="w-full px-6 py-3 text-center font-semibold bg-primary text-primary-foreground rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-primary/20"
-              >
-                Sign up
-              </Link>
-            </div>
+          <div className="mt-auto mb-12 text-zinc-400 text-sm">
+            © 2025 Casevia Inc.
           </div>
         </div>
       )}
-
-      {/* Backdrop overlay */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 top-16 z-30 bg-background/60 backdrop-blur-sm md:hidden"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
     </>
   );
-}
+};
