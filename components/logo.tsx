@@ -1,5 +1,9 @@
+import { cn } from "@/lib/utils";
+
 export const Logo = ({ className = "text-xl" }) => (
-  <span className={`font-display tracking-tighter ${className}`}>
-    <span className="font-bold text-zinc-900">casevia</span>
+  <span
+    className={cn("font-display tracking-tighter text-zinc-900", className)}
+  >
+    <span className="font-bold ">casevia</span>
   </span>
 );

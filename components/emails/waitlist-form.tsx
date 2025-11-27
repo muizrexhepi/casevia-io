@@ -6,15 +6,21 @@ import { toast } from "sonner";
 import { Loader2, Mail, SendHorizonal } from "lucide-react";
 import { Button } from "../ui/button";
 
-export function WaitlistForm() {
+// inside Footer component, replace your <div className="flex ..."> with this:
+
+export function FooterWaitlistInput() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleWaitlist = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return toast.error("Please enter your email");
+    if (!email.trim()) {
+      toast.error("Please enter your email");
+      return;
+    }
 
     setLoading(true);
+
     try {
       const res = await fetch("/api/waitlist", {
         method: "POST",
@@ -28,63 +34,64 @@ export function WaitlistForm() {
 
       if (result.exists) {
         toast("You're already on the waitlist!", {
-          description: "We've got your spot reserved! Stay tuned for updates.",
+          description: "Thanks for sticking with us — big updates coming soon.",
         });
       } else {
-        toast.success("🎉 You're on the waitlist!");
+        toast.success("🎉 You're officially on the waitlist!");
       }
 
       setEmail("");
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong. Try again later.");
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="mx-auto max-w-sm w-full text-center space-y-2">
-      <form onSubmit={handleWaitlist}>
-        <div className="bg-white has-[input:focus]:ring-muted relative grid grid-cols-[1fr_auto] items-center rounded-[calc(var(--radius)+0.5rem)] border pr-2 shadow shadow-zinc-950/5 has-[input:focus]:ring-2">
-          <Mail className="pointer-events-none absolute inset-y-0 left-4 my-auto size-4" />
+    <form onSubmit={handleSubmit} className="flex w-full max-w-sm">
+      <input
+        type="email"
+        placeholder="Enter your email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="bg-zinc-900 border-y border-l border-r-0 border-zinc-800 text-white px-4 py-3 text-sm flex-1 focus:outline-none focus:border-zinc-700 rounded-none placeholder:text-zinc-700"
+      />
 
-          <input
-            type="email"
-            placeholder="Your mail address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="h-12 w-full bg-transparent pl-12 focus:outline-none"
-          />
-
-          <div className="md:pr-1.5 lg:pr-0">
-            <Button
-              aria-label="submit"
-              className="rounded-lg"
-              disabled={loading}
+      <button
+        type="submit"
+        disabled={loading}
+        className="bg-white text-zinc-950 px-6 py-3 text-sm font-bold uppercase tracking-wide hover:bg-zinc-200 transition-colors rounded-none border-y border-r border-white flex items-center gap-2"
+      >
+        {loading ? (
+          <>
+            <svg
+              className="animate-spin h-4 w-4 text-zinc-900"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
             >
-              <span className="hidden md:block">
-                {loading ? (
-                  <div className="flex items-center gap-2">
-                    <Loader2 className="animate-spin size-5" />
-                    Joining...
-                  </div>
-                ) : (
-                  "Join Waitlist"
-                )}
-              </span>
-              <SendHorizonal
-                className="relative mx-auto size-5 md:hidden"
-                strokeWidth={2}
-              />
-            </Button>
-          </div>
-        </div>
-      </form>
-
-      <p className="text-xs text-muted-foreground font-medium">
-        No spam. Unsubscribe anytime.
-      </p>
-    </div>
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+              ></path>
+            </svg>
+            Joining…
+          </>
+        ) : (
+          "Join"
+        )}
+      </button>
+    </form>
   );
 }

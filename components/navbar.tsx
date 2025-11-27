@@ -1,10 +1,15 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { Logo } from "./logo";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { useWaitlistStore } from "@/lib/store";
 
-export const Navbar = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
+export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const openWaitlist = useWaitlistStore((state) => state.openWaitlist);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -23,44 +28,29 @@ export const Navbar = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
   return (
     <>
       <nav
-        className={`fixed w-full z-50 transition-all duration-500 border-b ${scrolled ? "bg-white/95 backdrop-blur-md border-zinc-200 py-4" : "bg-white/0 border-transparent py-6"}`}
+        className={`fixed w-full z-50 transition-all duration-500 border-b ${scrolled ? "bg-white/60 backdrop-blur-md border-zinc-200 py-4" : "bg-white/0 border-transparent py-6"}`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center gap-2 cursor-pointer group z-50 relative">
+          <Link
+            href="/"
+            className="flex items-center gap-2 cursor-pointer group z-50 relative"
+          >
             <Logo className="text-2xl" />
-          </div>
+          </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            <a
-              href="#features"
+            <Link
+              href="/blogs"
               className="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
             >
-              Features
-            </a>
-            <a
-              href="#how-it-works"
-              className="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
-            >
-              How it works
-            </a>
-            <a
-              href="#pricing"
-              className="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
-            >
-              Pricing
-            </a>
+              Blog
+            </Link>
             <div className="h-4 w-px bg-zinc-200"></div>
-            <a
-              href="#"
-              className="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
-            >
-              Log in
-            </a>
             <button
-              onClick={onOpenWaitlist}
+              onClick={openWaitlist}
               className="bg-zinc-900 text-white px-6 py-2.5 text-sm font-bold hover:bg-zinc-800 transition-all shadow-lg shadow-zinc-900/10 active:translate-y-0.5 rounded-none"
             >
-              Sign up
+              Join waitlist
             </button>
           </div>
 
@@ -76,43 +66,22 @@ export const Navbar = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
       {isOpen && (
         <div className="fixed inset-0 z-40 bg-white flex flex-col pt-32 px-6 animate-fade-in md:hidden">
           <div className="flex flex-col gap-8">
-            <a
-              href="#features"
+            <Link
+              href="/blogs"
               className="text-4xl font-display font-bold text-zinc-900 tracking-tight"
               onClick={() => setIsOpen(false)}
             >
-              Features
-            </a>
-            <a
-              href="#how-it-works"
-              className="text-4xl font-display font-bold text-zinc-900 tracking-tight"
-              onClick={() => setIsOpen(false)}
-            >
-              How it works
-            </a>
-            <a
-              href="#pricing"
-              className="text-4xl font-display font-bold text-zinc-900 tracking-tight"
-              onClick={() => setIsOpen(false)}
-            >
-              Pricing
-            </a>
+              Blogs
+            </Link>
             <div className="h-px bg-zinc-100 w-full my-4"></div>
-            {/* <a
-              href="#"
-              className="text-xl font-medium text-zinc-600"
-              onClick={() => setIsOpen(false)}
-            >
-              Log in
-            </a> */}
             <button
               onClick={() => {
                 setIsOpen(false);
-                onOpenWaitlist();
+                openWaitlist();
               }}
               className="bg-zinc-900 text-white py-3 text-lg font-bold w-full rounded-none mt-4"
             >
-              Sign up to Waitlist
+              Join waitlist
             </button>
           </div>
 
