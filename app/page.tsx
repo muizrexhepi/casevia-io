@@ -815,23 +815,15 @@ const Footer = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
 };
 
 export default function App() {
-  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
-
   return (
     <div className="min-h-screen bg-white font-sans">
-      <Navbar onOpenWaitlist={() => setIsWaitlistOpen(true)} />
-      <WaitlistModal
-        isOpen={isWaitlistOpen}
-        onClose={() => setIsWaitlistOpen(false)}
-      />
-      <Hero onOpenWaitlist={() => setIsWaitlistOpen(true)} />
+      <Hero />
       <BentoGrid />
       <FeatureShowcase />
       <UseCases />
       <FeaturedCaseStudies />
       <Pricing />
       <FAQ />
-      <Footer onOpenWaitlist={() => setIsWaitlistOpen(true)} />
     </div>
   );
 }

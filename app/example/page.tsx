@@ -280,7 +280,7 @@ export default function ExampleCaseStudy() {
 
       {/* 4. Bottom CTA - Full-Width, High Impact */}
       <div className="py-16 md:py-24">
-        <div className="container max-w-6xl mx-auto text-center space-y-8">
+        <div className="container max-w-6xl mx-auto text-center space-y-8 flex flex-col items-center">
           <div className="max-w-3xl mx-auto space-y-4">
             <h2 className="text-4xl md:text-5xl font-extrabold text-foreground">
               Create case studies like this in minutes

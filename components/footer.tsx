@@ -242,20 +242,29 @@ export const Footer = () => {
           <div>© 2025 Casevia Inc. All rights reserved.</div>
 
           <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-zinc-400 transition-colors">
+            <a
+              href="https://x.com/muiz_rexhepi"
+              className="hover:text-zinc-400 transition-colors"
+            >
               Twitter
             </a>
-            <a href="#" className="hover:text-zinc-400 transition-colors">
+            <a
+              href="https://linkedin.com/in/muiz-rexhepi"
+              className="hover:text-zinc-400 transition-colors"
+            >
               LinkedIn
             </a>
-            <a href="#" className="hover:text-zinc-400 transition-colors">
+            <a
+              href="https://github.com/muizrexhepi"
+              className="hover:text-zinc-400 transition-colors"
+            >
               GitHub
             </a>
 
-            <div className="flex items-center gap-2 text-emerald-500">
+            {/* <div className="flex items-center gap-2 text-emerald-500">
               <div className="w-1.5 h-1.5 bg-emerald-500 animate-pulse"></div>
               <span>SYSTEM_OPERATIONAL</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

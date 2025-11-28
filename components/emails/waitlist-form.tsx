@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 
 // inside Footer component, replace your <div className="flex ..."> with this:
 
-export function FooterWaitlistInput() {
+export function WaitlistForm() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -50,24 +50,27 @@ export function FooterWaitlistInput() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full max-w-sm">
+    <form
+      onSubmit={handleSubmit}
+      className="flex w-full max-w-md justify-center items-center mt-4"
+    >
       <input
         type="email"
         placeholder="Enter your email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="bg-zinc-900 border-y border-l border-r-0 border-zinc-800 text-white px-4 py-3 text-sm flex-1 focus:outline-none focus:border-zinc-700 rounded-none placeholder:text-zinc-700"
+        className="bg-white border border-zinc-300 text-zinc-900 px-4 py-3 text-sm flex-1 focus:outline-none focus:ring-2 focus:ring-zinc-300 placeholder:text-zinc-500"
       />
 
       <button
         type="submit"
         disabled={loading}
-        className="bg-white text-zinc-950 px-6 py-3 text-sm font-bold uppercase tracking-wide hover:bg-zinc-200 transition-colors rounded-none border-y border-r border-white flex items-center gap-2"
+        className="bg-zinc-900 text-white px-6 py-3 text-sm font-bold uppercase tracking-wide hover:bg-zinc-800 transition-colors flex items-center gap-2"
       >
         {loading ? (
           <>
             <svg
-              className="animate-spin h-4 w-4 text-zinc-900"
+              className="animate-spin h-4 w-4"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -89,7 +92,7 @@ export function FooterWaitlistInput() {
             Joining…
           </>
         ) : (
-          "Join"
+          "Join Waitlist"
         )}
       </button>
     </form>

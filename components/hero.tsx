@@ -1,4 +1,5 @@
 "use client";
+import { useWaitlistStore } from "@/lib/store";
 import {
   ArrowRight,
   CheckCircle2,
@@ -13,11 +14,13 @@ import {
   Activity,
   BarChart3,
 } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-export const Hero = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
+export const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLElement>(null);
+  const openWaitlist = useWaitlistStore((state) => state.openWaitlist);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -104,7 +107,7 @@ export const Hero = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
           style={{ animationDelay: "200ms" }}
         >
           <button
-            onClick={onOpenWaitlist}
+            onClick={openWaitlist}
             className="h-12 w-full sm:w-auto px-6 bg-zinc-900 text-white font-semibold text-base hover:bg-zinc-800 transition-all shadow-lg shadow-zinc-900/10 flex items-center justify-center gap-2 group border border-zinc-900 active:translate-y-0.5 rounded-none"
           >
             Join the waitlist
@@ -113,10 +116,13 @@ export const Hero = ({ onOpenWaitlist }: { onOpenWaitlist: () => void }) => {
               className="group-hover:translate-x-0.5 transition-transform"
             />
           </button>
-          <button className="h-12 w-full sm:w-auto px-6 bg-white text-zinc-900 border border-zinc-300 font-semibold text-base hover:bg-zinc-50 hover:border-zinc-400 transition-all flex items-center justify-center gap-2 shadow-sm group active:translate-y-0.5 rounded-none">
+          <Link
+            href={"/example"}
+            className="h-12 w-full sm:w-auto px-6 bg-white text-zinc-900 border border-zinc-300 font-semibold text-base hover:bg-zinc-50 hover:border-zinc-400 transition-all flex items-center justify-center gap-2 shadow-sm group active:translate-y-0.5 rounded-none"
+          >
             <Play size={15} className="fill-zinc-900" />
-            View demo
-          </button>
+            View Example
+          </Link>
         </div>
 
         {/* Trusted Logos */}
