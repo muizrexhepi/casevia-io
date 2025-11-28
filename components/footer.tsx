@@ -214,22 +214,31 @@ export const Footer = () => {
             </h4>
             <ul className="space-y-4 text-sm font-light">
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  href="/privacy-policy"
+                  className="hover:text-white transition-colors"
+                >
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="/terms" className="hover:text-white transition-colors">
                   Terms of Service
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  href="/cookies"
+                  className="hover:text-white transition-colors"
+                >
                   Cookie Policy
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  href="/security"
+                  className="hover:text-white transition-colors"
+                >
                   Security
                 </a>
               </li>

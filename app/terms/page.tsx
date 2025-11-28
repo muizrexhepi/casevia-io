@@ -1,9 +1,7 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import FooterSection from "@/components/footer";
 
 export default function TermsOfService() {
   return (
