@@ -1,82 +1,85 @@
 // components/pricing/Pricing.tsx
-import { Check } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
+// Assuming Button component is available from shadcn/ui
+import { Button } from "@/components/ui/button";
+// Assuming PLANS is correctly imported from "@/lib/plans"
 import { PLANS } from "@/lib/plans";
 
 export const Pricing = () => {
   return (
-    <section id="pricing" className="py-24 bg-white border-t border-zinc-200">
-      <div className="max-w-7xl mx-auto px-6">
+    <section
+      id="pricing"
+      className="py-16 md:py-32 bg-background border-t border-border"
+    >
+      <div className="container max-w-7xl mx-auto px-6 md:px-12">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-4xl font-display font-bold text-zinc-900 mb-6">
+          <h2 className="text-5xl font-bold text-foreground mb-4 tracking-tight">
             Simple, transparent pricing.
           </h2>
-          <p className="text-lg text-zinc-600 font-light leading-relaxed">
+          <p className="text-lg text-muted-foreground leading-relaxed font-sans">
             Start for free, upgrade as you grow.
           </p>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-zinc-200 bg-white">
-          {PLANS.map((plan) => (
+        {/* Pricing Cards - Applying rounded-xl and using grid structure */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-border bg-card shadow-lg mx-auto max-w-full lg:max-w-none rounded-xl overflow-hidden">
+          {PLANS.map((plan, i) => (
             <div
               key={plan.id}
-              className={`flex flex-col p-8 border-b md:border-b-0 md:border-r border-zinc-200 last:border-r-0 relative rounded-none ${
-                plan.popular ? "bg-zinc-50" : "bg-white"
+              className={`flex flex-col p-8 border-b md:border-b-0 relative transition-all duration-300 z-0 ${
+                // Set z-10 for the popular plan to ensure clean layering
+                plan.popular ? "z-10" : ""
+              } ${
+                // Right border only on non-last elements
+                i < PLANS.length - 1 ? "md:border-r border-border" : ""
+              } ${
+                // Highlight: Use bg-muted for the popular card background
+                plan.popular ? "bg-muted shadow-xl" : "bg-card"
               }`}
             >
-              {/* Popular Badge */}
-              {plan.popular && (
-                <div className="absolute top-0 right-0">
-                  <span className="bg-zinc-900 text-white px-3 py-1 text-[10px] font-bold uppercase tracking-widest border border-zinc-900 rounded-none">
-                    Most Popular
-                  </span>
-                </div>
-              )}
-
-              {/* Plan Header */}
+              {/* Plan Header & Price */}
               <div className="mb-8 mt-2">
-                <h3 className="text-lg font-bold text-zinc-900 font-display">
+                <h3 className="text-xl font-serif font-bold text-foreground mb-1">
                   {plan.name}
                 </h3>
 
-                <p className="text-xs text-zinc-500 mb-6 h-4">
+                <p className="text-sm text-muted-foreground mb-6 h-4 font-sans">
                   {plan.description}
                 </p>
 
                 <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-display font-bold text-zinc-900 tracking-tight">
+                  <span className="text-5xl font-serif font-bold text-foreground tracking-tight">
                     {plan.price}
                   </span>
                   {plan.price !== "$0" && (
-                    <span className="text-zinc-500 text-sm">/mo</span>
+                    <span className="text-muted-foreground text-base">/mo</span>
                   )}
                 </div>
 
-                <div className="text-[10px] text-zinc-400 mt-2 font-mono uppercase tracking-wide">
+                <div className="text-[10px] text-muted-foreground mt-2 font-mono uppercase tracking-wide">
                   Billed monthly
                 </div>
               </div>
 
-              {/* CTA */}
-              <button
-                className={`w-full py-3.5 font-bold text-[10px] uppercase tracking-wider transition-all mb-8 border rounded-none ${
-                  plan.popular
-                    ? "bg-zinc-900 text-white border-zinc-900 hover:bg-zinc-800"
-                    : "bg-white text-zinc-900 border-zinc-200 hover:bg-zinc-50"
-                }`}
+              {/* CTA Button using shadcn Button component */}
+              <Button
+                variant={plan.popular ? "secondary" : "outline"}
+                size="lg" // Larger size for prominence
+                className="w-full text-sm mb-8 "
               >
                 {plan.cta}
-              </button>
+              </Button>
 
-              {/* Features (Limit to 3–4) */}
-              <ul className="space-y-4 flex-1 text-xs text-zinc-600 leading-relaxed">
+              {/* Features List */}
+              <ul className="space-y-4 flex-1 text-sm text-foreground/80 leading-relaxed font-sans">
+                {/* Limit features to a maximum of 4 for clean comparison */}
                 {plan.features.slice(0, 4).map((feature, index) => (
                   <li key={index} className="flex items-start gap-3 group/item">
                     <Check
-                      size={14}
-                      className="flex-shrink-0 text-zinc-900 mt-0.5"
+                      size={16}
+                      className="flex-shrink-0 text-primary mt-0.5"
                     />
                     <span>{feature}</span>
                   </li>
@@ -87,12 +90,13 @@ export const Pricing = () => {
         </div>
 
         {/* Full Pricing CTA */}
-        <div className="text-center mt-10">
+        <div className="text-center mt-12">
           <Link
             href="/pricing"
-            className="text-sm font-medium text-zinc-700 hover:text-zinc-900 underline underline-offset-4"
+            className="inline-flex items-center text-foreground font-semibold text-base group hover:text-primary transition-colors font-sans"
           >
-            View full pricing →
+            View full detailed plans
+            <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
       </div>

@@ -7,7 +7,7 @@ export default function SingleTestimonialSection() {
       {/* Subtle gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
 
-      <div className="py-16 lg:py-32 container relative z-10">
+      <div className="py-16 lg:py-16 md:py-32 container relative z-10">
         <div className="mx-auto w-full max-w-4xl px-6">
           {/* Optional: Add decorative quote icon */}
           <div className="flex justify-center mb-8">

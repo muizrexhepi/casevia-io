@@ -6,7 +6,7 @@
 :root {
   /* Story-Driven Brand Colors */
   --background: oklch(0.985 0.005 60); /* Warm cream #FAF8F3 */
-  --foreground: oklch(0.25 0.02 60); /* Deep charcoal with warmth */
+  --foreground: oklch(0.1908 0.002 106.59); /* Deep charcoal with warmth */
 
   --card: oklch(1 0 0); /* Pure white for cards */
   --card-foreground: oklch(0.25 0.02 60);
@@ -27,7 +27,7 @@
   --muted-foreground: oklch(0.5 0.015 60); /* Muted warm gray text */
 
   /* Accent: Warm amber for highlights */
-  --accent: oklch(0.75 0.12 80); /* Warm amber */
+  --accent: oklch(92.459% 0.00537 95.188); /* Warm amber */
   --accent-foreground: oklch(0.2 0.02 60);
 
   --destructive: oklch(0.55 0.22 25);

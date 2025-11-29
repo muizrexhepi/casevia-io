@@ -1,13 +1,16 @@
+"use client";
+
 import {
   ArrowRight,
-  Globe,
-  Lock,
-  Globe2,
+  ShieldCheck,
+  Activity,
+  Mic2,
+  FileText,
   Fingerprint,
-  LineChart,
-  BrainCircuit,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+// Assuming you have these components imported via your shadcn setup
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const useInView = (options = { threshold: 0.1 }) => {
   const [isInView, setIsInView] = useState(false);
@@ -32,219 +35,187 @@ const useInView = (options = { threshold: 0.1 }) => {
 
   return { ref, isInView };
 };
+
 export const BentoGrid = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
   return (
-    <section ref={ref} className="py-24 bg-zinc-50 border-t border-zinc-200">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-up">
-          <h2 className="text-4xl font-display font-bold text-zinc-900 mb-4 tracking-tight">
-            Intelligence, baked in.
-          </h2>
-          <p className="text-lg text-zinc-500 font-light leading-relaxed">
-            A complete toolkit designed for marketing teams, agencies, and
-            founders who refuse to compromise on quality.
-          </p>
+    <section ref={ref} className="py-16 md:py-32 bg-muted text-foreground">
+      <div className="container max-w-7xl mx-auto px-6 md:px-12">
+        {/* Section Header: Structured and separated */}
+        <div className="mb-20 grid grid-cols-1 md:grid-cols-12 gap-12 items-end border-b border-border pb-12">
+          <div className="md:col-span-7">
+            <h2 className="text-5xl md:text-6xl text-foreground mb-6 tracking-tight leading-[0.9]">
+              The <span className="italic text-primary font-serif">engine</span>{" "}
+              behind <br /> the narrative.
+            </h2>
+          </div>
+          <div className="md:col-span-5">
+            <p className="text-lg text-muted-foreground font-sans leading-relaxed mb-2">
+              Casevia isn't just a transcriber. It is a reasoning engine trained
+              to structure raw conversation into persuasive B2B assets.
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Card 1: Smart Extraction */}
-          <div
-            className={`md:col-span-2 relative overflow-hidden group bg-white border border-zinc-200 p-8 h-[400px] hover:shadow-xl hover:border-zinc-300 transition-all duration-300 ${isInView ? "animate-fade-up opacity-100" : "opacity-0 translate-y-8"}`}
-            style={{ animationDelay: "100ms" }}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Card 1: Narrative Synth esis (The core AI feature) - Wide Card */}
+          <Card
+            className={`md:col-span-2 relative overflow-hidden group h-[450px] transition-all duration-700 border-border ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
           >
-            <div className="relative z-10 h-full flex flex-col">
-              <div className="mb-6">
-                <div className="w-10 h-10 bg-zinc-900 flex items-center justify-center text-white mb-4 rounded-none">
-                  <BrainCircuit size={20} />
-                </div>
-                <h3 className="text-xl font-bold text-zinc-900 font-display mb-2">
-                  Smart Extraction
-                </h3>
-                <p className="text-zinc-500 text-sm max-w-md leading-relaxed">
-                  Identify core metrics, ROI outcomes, and conflict points
-                  instantly. No manual tagging required.
-                </p>
+            <CardHeader className="p-8 pb-4">
+              <div className="w-12 h-12 bg-muted flex items-center justify-center text-primary mb-6">
+                <Mic2 strokeWidth={1.5} size={24} />
               </div>
-
-              {/* Animation Container */}
-              <div className="flex-1 w-full bg-zinc-900 border border-zinc-800 p-6 font-mono text-xs text-zinc-400 relative overflow-hidden group-hover:shadow-2xl transition-all duration-500">
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:16px_16px]"></div>
-                <div className="absolute top-0 left-0 w-full h-1 bg-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.5)] animate-[scan_3s_ease-in-out_infinite] opacity-50"></div>
-
-                <div className="relative z-10 flex flex-col justify-between h-full">
-                  {/* Visualizing Audio Wave -> Data */}
-                  <div className="flex items-center gap-2 opacity-60">
-                    <div className="flex gap-1 items-end h-8">
-                      {[40, 70, 30, 80, 50, 90, 20, 60].map((h, i) => (
-                        <div
-                          key={i}
-                          className="w-1 bg-zinc-500 animate-wave"
-                          style={{
-                            height: `${h}%`,
-                            animationDelay: `${i * 0.1}s`,
-                          }}
-                        ></div>
-                      ))}
-                    </div>
-                    <ArrowRight size={16} className="text-zinc-600" />
-                    <div className="bg-zinc-800 px-2 py-1 rounded-none border border-zinc-700 text-[10px] text-indigo-400">
-                      Processing...
-                    </div>
-                  </div>
-
-                  <div className="space-y-2 mt-auto">
-                    <div className="flex gap-2 group-hover:translate-x-2 transition-transform duration-300">
-                      <span className="text-green-400">{">"}</span>
-                      <span className="text-zinc-300">
-                        Found: "30% efficiency gain"
-                      </span>
-                    </div>
-                    <div className="flex gap-2 group-hover:translate-x-2 transition-transform duration-300 delay-75">
-                      <span className="text-green-400">{">"}</span>
-                      <span className="text-zinc-300">
-                        Found: "2 weeks to implement"
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2: Global Scale */}
-          <div
-            className={`relative overflow-hidden group bg-white border border-zinc-200 p-8 h-[400px] hover:shadow-xl hover:border-zinc-300 transition-all duration-300 ${isInView ? "animate-fade-up opacity-100" : "opacity-0 translate-y-8"}`}
-            style={{ animationDelay: "200ms" }}
-          >
-            <div className="relative z-10 h-full flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 bg-zinc-100 flex items-center justify-center text-zinc-900 mb-4 rounded-none">
-                  <Globe2 size={20} />
-                </div>
-                <h3 className="text-xl font-bold text-zinc-900 mb-2 font-display">
-                  Global Scale
-                </h3>
-                <p className="text-zinc-500 text-sm leading-relaxed">
-                  Auto-translate to 30+ languages instantly.
-                </p>
-              </div>
-              <div className="relative w-full aspect-square flex items-center justify-center">
-                <div className="w-40 h-40 border border-zinc-200 rounded-full relative animate-[spin_20s_linear_infinite]">
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-2 text-xs font-bold text-zinc-400">
-                    EN
-                  </div>
-                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white px-2 text-xs font-bold text-zinc-400">
-                    ES
-                  </div>
-                  <div className="absolute top-1/2 -left-3 -translate-y-1/2 bg-white px-2 text-xs font-bold text-zinc-400">
-                    JP
-                  </div>
-                  <div className="absolute top-1/2 -right-3 -translate-y-1/2 bg-white px-2 text-xs font-bold text-zinc-400">
-                    DE
-                  </div>
-                  <div className="absolute inset-4 border border-dashed border-zinc-100 rounded-full"></div>
-                </div>
-                <Globe
-                  size={64}
-                  className="absolute text-zinc-200 group-hover:text-indigo-500 transition-colors duration-500"
-                  strokeWidth={1}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3: Enterprise Security */}
-          <div
-            className={`relative overflow-hidden group bg-white border border-zinc-200 p-8 h-[400px] hover:shadow-xl hover:border-zinc-300 transition-all duration-300 ${isInView ? "animate-fade-up opacity-100" : "opacity-0 translate-y-8"}`}
-            style={{ animationDelay: "300ms" }}
-          >
-            <div className="relative z-10 h-full flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 bg-zinc-100 flex items-center justify-center text-zinc-900 mb-4 rounded-none">
-                  <Fingerprint size={20} />
-                </div>
-                <h3 className="text-xl font-bold text-zinc-900 mb-2 font-display">
-                  SOC-2 Security
-                </h3>
-                <p className="text-zinc-500 text-sm leading-relaxed">
-                  End-to-end encryption for all client data.
-                </p>
-              </div>
-              <div className="w-full bg-zinc-50 p-6 border border-zinc-100 mt-6 font-mono text-[10px] text-zinc-400 group-hover:bg-zinc-100 transition-colors overflow-hidden relative">
-                {/* Binary Stream Effect */}
-                <div className="absolute top-0 right-0 bottom-0 w-8 bg-gradient-to-l from-zinc-50 to-transparent z-10"></div>
-                <div className="absolute inset-0 opacity-10 flex flex-col text-[8px] leading-none overflow-hidden pointer-events-none">
-                  {Array.from({ length: 20 }).map((_, i) => (
+              <CardTitle className="text-3xl text-foreground mb-3">
+                Narrative Synthesis
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="px-8 flex flex-col h-[calc(100%-8rem)]">
+              <p className="text-muted-foreground text-base max-w-md leading-relaxed font-sans mb-8">
+                We identify the "Conflict," "Resolution," and "ROI" moments in
+                the audio and map them to a story arc.
+              </p>
+              {/* Visualization: Audio Waveform turning into Text Lines */}
+              <div className="w-full h-32 border-t border-border mt-auto relative flex items-center gap-4 pt-4">
+                {/* Left: The Raw Audio (Chaotic) */}
+                <div className="flex-1 flex items-center gap-1 h-full opacity-40">
+                  {[40, 90, 30, 80, 20, 95, 40, 60, 30, 70, 40].map((h, i) => (
                     <div
                       key={i}
-                      className="whitespace-nowrap animate-marquee"
-                      style={{ animationDuration: `${Math.random() * 5 + 5}s` }}
-                    >
-                      01010101010101010101010101010101010101010101010101
-                    </div>
+                      className="w-1.5 bg-foreground animate-pulse"
+                      style={{ height: `${h}%`, animationDelay: `${i * 0.1}s` }}
+                    />
                   ))}
                 </div>
 
-                <div className="flex justify-between border-b border-zinc-200 pb-2 mb-2 relative z-20">
-                  <span>STATUS</span>
-                  <span className="text-emerald-600 font-bold animate-pulse">
-                    LOCKED
+                {/* Center: The Processor */}
+                <div className="flex items-center justify-center">
+                  <ArrowRight className="text-primary" />
+                </div>
+
+                {/* Right: The Structured Story (Clean) */}
+                <div className="flex-1 space-y-3 opacity-80">
+                  <div className="h-2 w-full bg-primary/20 rounded-full" />
+                  <div className="h-2 w-5/6 bg-primary/20 rounded-full" />
+                  <div className="h-2 w-full bg-primary/20 rounded-full" />
+                  <div className="flex gap-2 mt-2">
+                    <span className="text-[10px] font-mono text-primary border border-primary/30 px-2 py-0.5 rounded-sm">
+                      ROI DETECTED
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Card 2: Voice Calibration (Brand consistency) - Single Card */}
+          <Card
+            className={`relative overflow-hidden group h-[450px] transition-all duration-700 delay-100 border-border ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+          >
+            {/* Abstract Background Decoration */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full pointer-events-none" />
+
+            <CardHeader className="p-8 pb-4">
+              <div className="w-12 h-12 bg-primary flex items-center justify-center text-primary-foreground mb-6">
+                <Fingerprint strokeWidth={1.5} size={24} />
+              </div>
+              <CardTitle className="text-2xl text-foreground mb-3">
+                Voice Calibration
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="px-8 flex flex-col justify-between h-[calc(100%-8rem)]">
+              <p className="text-muted-foreground text-sm leading-relaxed font-sans">
+                Upload previous whitepapers. Casevia analyzes sentence structure
+                and vocabulary to mimic your brand voice perfectly.
+              </p>
+
+              {/* Visualization: Matching Rings */}
+              <div className="relative w-full aspect-square max-h-[160px] flex items-center justify-center border border-border bg-card shadow-sm mt-4">
+                {/* Ring 1 (Target) */}
+                <div className="absolute w-24 h-24 border-2 border-foreground/20 rounded-full opacity-20" />
+                {/* Ring 2 (AI Matching) - Pulsing */}
+                <div
+                  className="absolute w-24 h-24 border border-primary rounded-full animate-ping opacity-20"
+                  style={{ animationDuration: "3s" }}
+                />
+                <div className="absolute w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <span className="font-mono text-xs font-bold text-primary">
+                    98%
                   </span>
                 </div>
-                <div className="mt-4 flex justify-center relative z-20">
-                  <Lock
-                    size={32}
-                    className="text-zinc-300 group-hover:text-emerald-500 transition-colors duration-500"
-                  />
-                  {/* Scanning Laser */}
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-emerald-500/20 to-transparent -translate-y-full group-hover:animate-[shimmer_2s_linear_infinite]"></div>
-                </div>
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
-          {/* Card 4: Analytics */}
-          <div
-            className={`md:col-span-2 relative overflow-hidden group bg-white border border-zinc-200 p-8 h-[400px] hover:shadow-xl hover:border-zinc-300 transition-all duration-300 ${isInView ? "animate-fade-up opacity-100" : "opacity-0 translate-y-8"}`}
-            style={{ animationDelay: "400ms" }}
+          {/* Card 3: Data Sovereignty (Security) - Dark Card using Secondary/Foreground */}
+          <Card
+            className={`relative overflow-hidden group bg-foreground text-secondary-foreground p-8 h-[400px] transition-all duration-700 delay-200 border-secondary-foreground/10 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
           >
-            <div className="relative z-10 h-full flex flex-col">
-              <div className="flex items-center justify-between mb-8">
-                <div>
-                  <div className="w-10 h-10 bg-zinc-900 flex items-center justify-center text-white mb-4 rounded-none">
-                    <LineChart size={20} />
-                  </div>
-                  <h3 className="text-xl font-bold text-zinc-900 font-display">
-                    Performance Analytics
-                  </h3>
-                </div>
-                <div className="hidden sm:flex gap-2">
-                  <div className="px-3 py-1 bg-zinc-100 text-zinc-600 text-xs font-mono font-medium border border-zinc-200">
-                    Views: +24%
-                  </div>
-                  <div className="px-3 py-1 bg-zinc-100 text-zinc-600 text-xs font-mono font-medium border border-zinc-200">
-                    Conv: 4.2%
-                  </div>
+            <CardHeader className="p-0 pb-4">
+              <div className="w-12 h-12 bg-secondary-foreground/10 flex items-center justify-center text-secondary-foreground mb-6 border border-secondary-foreground/10">
+                <ShieldCheck strokeWidth={1.5} size={24} />
+              </div>
+              <CardTitle className="text-2xl text-secondary-foreground mb-3">
+                Data Sovereignty
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-0 flex flex-col justify-between h-[calc(100%-8rem)]">
+              <p className="text-secondary-foreground/60 text-sm leading-relaxed font-sans">
+                SOC-2 Type II compliant. Your interviews are processed in
+                isolated containers and never used to train global models.
+              </p>
+
+              {/* Visualization: Static, solid lock visualization */}
+              <div className="w-full bg-secondary-foreground/5 border border-secondary-foreground/10 h-24 mt-6 relative overflow-hidden flex items-center px-4 font-mono text-xs text-primary">
+                <div className="flex gap-3 items-center">
+                  <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                  <span>ENCRYPTION_ACTIVE</span>
                 </div>
               </div>
-              <div className="flex-1 w-full flex items-end justify-between gap-2 px-4 pb-4 border-b border-zinc-200 relative">
-                <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_90%,rgba(0,0,0,0.02)_100%)]"></div>
-                {[40, 65, 45, 80, 55, 90, 70, 85, 60, 95].map((h, i) => (
+            </CardContent>
+          </Card>
+
+          {/* Card 4: Impact Metrics - Wide Card */}
+          <Card
+            className={`md:col-span-2 relative overflow-hidden group h-[400px] transition-all duration-700 delay-300 border-border ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+          >
+            <CardHeader className="p-8 pb-4 flex flex-row justify-between items-start">
+              <div>
+                <div className="w-12 h-12 bg-muted flex items-center justify-center text-foreground mb-6">
+                  <Activity strokeWidth={1.5} size={24} />
+                </div>
+                <CardTitle className="text-3xl text-foreground mb-3">
+                  Content ROI
+                </CardTitle>
+              </div>
+              {/* Metric Badge */}
+              <div className="bg-card border border-border px-4 py-2 shadow-sm text-right">
+                <span className="block text-xs font-mono text-muted-foreground uppercase">
+                  Avg. Lift
+                </span>
+                <span className="text-2xl text-primary">+24%</span>
+              </div>
+            </CardHeader>
+            <CardContent className="px-8 flex flex-col h-[calc(100%-8rem)]">
+              <p className="text-muted-foreground text-base max-w-sm font-sans mb-auto">
+                Track how your case studies influence deal velocity and win
+                rates via CRM integration.
+              </p>
+              {/* Visualization: Clean Bar Chart */}
+              <div className="flex-1 w-full flex items-end justify-between gap-2 border-b border-border relative pt-4 px-2">
+                <div className="absolute inset-0 border-t border-dashed border-border top-1/2" />
+
+                {[30, 45, 40, 60, 55, 75, 65, 90].map((h, i) => (
                   <div
                     key={i}
-                    className="flex-1 bg-zinc-200 group-hover:bg-indigo-600 transition-all duration-700 ease-out relative group/bar"
-                    style={{ height: `${h}%`, transitionDelay: `${i * 50}ms` }}
-                  >
-                    <div className="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover/bar:opacity-100 transition-opacity text-[10px] font-bold text-zinc-900 font-mono">
-                      {h}
-                    </div>
-                  </div>
+                    className="flex-1 bg-foreground/20 hover:bg-primary transition-colors duration-300 relative group/bar"
+                    style={{ height: `${h}%` }}
+                  />
                 ))}
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>

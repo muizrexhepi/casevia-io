@@ -77,7 +77,7 @@ export const Footer = () => {
   return (
     <footer
       ref={footerRef}
-      className="w-full bg-zinc-950 text-zinc-400 pt-24 pb-12 border-t border-zinc-900 overflow-hidden relative group/footer"
+      className="w-full bg-foreground text-zinc-400 pt-24 pb-12 border-t border-zinc-900 overflow-hidden relative group/footer"
     >
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-5 gap-12 mb-24">
@@ -87,7 +87,7 @@ export const Footer = () => {
               <Logo className="text-white text-2xl" />
             </div>
 
-            <p className="text-sm leading-relaxed mb-8 max-w-xs text-zinc-500 font-light">
+            <p className="text-sm leading-relaxed mb-8 max-w-xs text-background/70">
               The enterprise standard for automated case study generation.
               Trusted by high-growth startups and agencies worldwide.
             </p>
@@ -149,7 +149,7 @@ export const Footer = () => {
             <h4 className="text-white font-bold mb-6 text-xs uppercase tracking-widest font-mono">
               Product
             </h4>
-            <ul className="space-y-4 text-sm font-light">
+            <ul className="space-y-4 text-sm">
               <li>
                 <a href="#" className="hover:text-white transition-colors">
                   Features
@@ -183,7 +183,7 @@ export const Footer = () => {
             <h4 className="text-white font-bold mb-6 text-xs uppercase tracking-widest font-mono">
               Company
             </h4>
-            <ul className="space-y-4 text-sm font-light">
+            <ul className="space-y-4 text-sm">
               <li>
                 <a href="#" className="hover:text-white transition-colors">
                   About
@@ -212,7 +212,7 @@ export const Footer = () => {
             <h4 className="text-white font-bold mb-6 text-xs uppercase tracking-widest font-mono">
               Legal
             </h4>
-            <ul className="space-y-4 text-sm font-light">
+            <ul className="space-y-4 text-sm">
               <li>
                 <a
                   href="/privacy-policy"

@@ -1,100 +1,97 @@
 "use client";
 
-import { HelpCircle } from "lucide-react";
+import React, { useState } from "react";
+// Using the default shadcn icons for contrast with neutral tones
+import { ChevronDown, ChevronUp } from "lucide-react";
 
-const faqs = [
-  {
-    question: "How long does it take to create a case study?",
-    answer:
-      "Most case studies are ready in 5-10 minutes. Just upload your interview recording, and our AI handles transcription, analysis, and drafting automatically.",
-  },
-  {
-    question: "What file formats do you support?",
-    answer:
-      "We support all major audio and video formats including MP3, WAV, MP4, MOV, and more. You can upload recordings from Zoom, Google Meet, Loom, or any other recording tool.",
-  },
-  {
-    question: "Can I customize the output to match my brand?",
-    answer:
-      "Yes! You can set your brand voice, tone, and style preferences. Every case study will be formatted consistently with your brand guidelines.",
-  },
-  {
-    question: "How accurate is the AI transcription?",
-    answer:
-      "Our transcription is 95%+ accurate for clear audio. The AI also identifies speakers, extracts key quotes, and highlights important metrics automatically.",
-  },
-  {
-    question: "What if I need to make edits?",
-    answer:
-      "You have full editing control. Review and refine the generated draft before publishing. Most users only need minor tweaks, saving hours compared to writing from scratch.",
-  },
-  {
-    question: "Do you offer a free trial?",
-    answer:
-      "No, we don't offer a free trial — but we do have a free plan you can start with. No credit card required.",
-  },
-];
+export const FAQ = () => {
+  // Initialize with the first item open
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-export function FAQsSection() {
+  const faqs = [
+    {
+      q: "What file formats do you support?",
+      a: "We support all major audio and video formats including MP3, WAV, M4A, MP4, and MOV.",
+    },
+    {
+      q: "Can I customize the output structure?",
+      a: "Yes. Pro and Agency plans allow you to define custom headers and sections.",
+    },
+    {
+      q: "How accurate is the transcription?",
+      a: "We use top-tier speech-to-text models that typically achieve 98-99% accuracy.",
+    },
+    {
+      q: "Is my data secure?",
+      a: "Absolutely. All uploads are encrypted at rest and in transit.",
+    },
+    {
+      q: "Do you offer a free trial?",
+      a: "Yes! You can generate your first case study for free.",
+    },
+  ];
+
+  const toggleAccordion = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
-    <section className="py-16 md:py-24 bg-background">
-      <div className="container max-w-3xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12 md:mb-16 space-y-5">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-sm font-medium text-accent">
-            <HelpCircle className="w-3.5 h-3.5" />
-            FAQs
-          </div>
+    <section className="py-16 md:py-32 bg-muted border-t border-border font-sans">
+      <div className="max-w-3xl mx-auto px-6 md:px-12">
+        {/* Heading: Using standard sans-serif font, bold, and foreground color */}
+        <h2 className="text-4xl font-sans font-bold text-foreground mb-16 text-center tracking-tight">
+          Frequently asked questions
+        </h2>
 
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05]">
-            Questions? We've got{" "}
-            <span className="text-gradient-primary">answers</span>
-          </h2>
+        {/* Accordion Container: Minimalist border and background */}
+        <div className="space-y-0 border border-border bg-card rounded-xl overflow-hidden shadow-lg">
+          {faqs.map((faq, i) => (
+            <div
+              key={i}
+              // Border below the active item is just a subtle darker border
+              className={`border-b border-border transition-colors duration-300 ${
+                openIndex === i ? "bg-muted/30" : "last:border-b-0"
+              }`}
+            >
+              <button
+                className="w-full flex items-center justify-between p-6 text-left hover:bg-muted/50 transition-colors"
+                onClick={() => toggleAccordion(i)}
+              >
+                <span
+                  // Active question text is bold and uses main foreground color
+                  className={`font-semibold text-base pr-8 transition-colors ${
+                    openIndex === i ? "text-foreground" : "text-foreground/90"
+                  }`}
+                >
+                  {faq.q}
+                </span>
 
-          {/* <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Everything you need to know about creating case studies with
-            Casevia.
-          </p> */}
-        </div>
+                {/* Icons: Use foreground color for high contrast */}
+                {openIndex === i ? (
+                  <ChevronUp
+                    size={20}
+                    className="flex-shrink-0 text-foreground"
+                  />
+                ) : (
+                  <ChevronDown
+                    size={20}
+                    className="flex-shrink-0 text-muted-foreground"
+                  />
+                )}
+              </button>
 
-        {/* FAQ Grid - Simple, no animations */}
-        <div className="grid gap-8 md:gap-10">
-          {faqs.map((faq, idx) => (
-            <div key={idx} className="space-y-3">
-              <h3 className="font-semibold text-lg md:text-xl text-foreground">
-                {faq.question}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {faq.answer}
-              </p>
+              {openIndex === i && (
+                <div
+                  // Answer Content: Subtle background color, lighter border top
+                  className="px-6 pb-6 text-muted-foreground text-base leading-relaxed border-t border-border pt-4 bg-muted/50"
+                >
+                  {faq.a}
+                </div>
+              )}
             </div>
           ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="mt-16 text-center p-8 rounded-2xl bg-muted border border-border/50">
-          <p className="text-muted-foreground mb-4">Still have questions?</p>
-          <a
-            href="/contact"
-            className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
-          >
-            Get in touch
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </a>
         </div>
       </div>
     </section>
   );
-}
+};

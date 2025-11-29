@@ -16,7 +16,7 @@ export default function BlogsPage() {
   const blogPosts = getAllPosts();
 
   return (
-    <div className="min-h-screen bg-zinc-50">
+    <div className="min-h-screen">
       {/* Blog Hero Section */}
       <section className="relative pt-40 pb-20 bg-[url('/grid.svg')] bg-top bg-repeat">
         <div className="text-center max-w-3xl mx-auto px-6">

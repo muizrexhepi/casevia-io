@@ -1,3 +1,4 @@
+// components/WaitlistModal.tsx
 "use client";
 
 import { useWaitlistStore } from "@/lib/store";
@@ -60,46 +61,51 @@ export const WaitlistModal = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in">
-      {/* Dark overlay */}
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in font-sans">
+      {/* Dark overlay with higher opacity */}
       <div
-        className="absolute inset-0 bg-zinc-900/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-foreground/70 backdrop-blur-sm"
         onClick={closeWaitlist}
       />
 
-      {/* Modal */}
-      <div className="relative bg-white border border-zinc-200 shadow-2xl max-w-md w-full p-8 animate-scale-in">
+      {/* Modal - Updated border, background, and rounded-xl */}
+      <div className="relative bg-card border border-border shadow-2xl max-w-md w-full p-8 rounded-xl animate-scale-in">
         {/* Close button */}
         <button
           onClick={closeWaitlist}
-          className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-900 transition-colors"
+          // Neutral colors for close button
+          className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+          aria-label="Close modal"
         >
           <X size={20} />
         </button>
 
-        {/* Title */}
-        <h2 className="text-2xl font-display font-bold text-zinc-900 mb-2">
+        {/* Title - Using serif font */}
+        <h2 className="text-3xl font-serif font-bold text-foreground mb-2">
           Join the waitlist
         </h2>
 
-        <p className="text-zinc-600 text-sm mb-6">
+        {/* Description */}
+        <p className="text-muted-foreground text-base mb-6">
           Be the first to know when Casevia launches.
         </p>
 
         {/* Waitlist form */}
-        <form onSubmit={handleSubmit} className="space-y-2.5">
+        <form onSubmit={handleSubmit} className="space-y-3">
           <input
             type="email"
             placeholder="Email address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 h-12 bg-white border border-zinc-200 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-400 transition-colors"
+            // Input styling updated for brand
+            className="w-full px-4 h-12 bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-colors rounded-lg"
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-zinc-900 text-white h-12 text-sm font-bold hover:bg-zinc-800 transition-all shadow-lg shadow-zinc-900/10 flex items-center justify-center gap-2"
+            // Button styling updated to use Primary (Terracotta) color
+            className="w-full bg-primary text-primary-foreground h-12 text-sm font-bold hover:bg-primary/90 transition-all shadow-md shadow-primary/20 flex items-center justify-center gap-2 rounded-lg disabled:opacity-70"
           >
             {loading ? (
               <>
