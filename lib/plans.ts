@@ -24,7 +24,7 @@ export const PLANS = [
       teamSeats: 1,
       designTemplates: 1,
     },
-    cta: "Current Plan",
+    cta: "Get Started",
     popular: false,
   },
   {

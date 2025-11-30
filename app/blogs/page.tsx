@@ -20,10 +20,10 @@ export default function BlogsPage() {
       {/* Blog Hero Section */}
       <section className="relative pt-40 pb-20 bg-[url('/grid.svg')] bg-top bg-repeat">
         <div className="text-center max-w-3xl mx-auto px-6">
-          <h1 className="text-5xl md:text-6xl font-display font-semibold text-zinc-900 tracking-tight mb-6">
+          <h1 className="text-5xl md:text-6xl font-serif leading-[0.9] tracking-tight text-charcoal mb-6">
             Insights & Resources
           </h1>
-          <p className="text-lg md:text-xl text-zinc-600 font-light">
+          <p className="font-sans text-lg md:text-xl text-charcoal/70 leading-relaxed font-light">
             Learn about case studies, storytelling, client interviews, and AI
             workflows.
           </p>
