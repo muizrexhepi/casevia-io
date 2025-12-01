@@ -74,7 +74,7 @@ export function BlogHeader({
         {tags.map((tag) => (
           <span
             key={tag}
-            className="text-xs font-bold bg-zinc-100 text-zinc-700 px-3 py-1.5 uppercase tracking-wide"
+            className="text-xs font-bold bg-card-bg text-zinc-700 px-3 py-1.5 uppercase tracking-wide"
           >
             {tag}
           </span>

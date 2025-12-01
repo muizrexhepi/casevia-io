@@ -1,21 +1,20 @@
 import React from "react";
-import { Twitter, Linkedin, Github, Heart } from "lucide-react";
+import { Twitter, Linkedin, Github } from "lucide-react";
 import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="w-full bg-charcoal border-t border-white/5 pt-20 pb-10 px-6 md:px-12 text-cream">
-      <div className="max-w-7xl mx-auto flex flex-col gap-16">
+    <footer className="w-full bg-charcoal border-t border-white/5 pt-16 md:pt-20 pb-8 md:pb-10 px-6 md:px-12 text-cream">
+      <div className="max-w-6xl mx-auto flex flex-col gap-12 md:gap-16">
         {/* Top Section: Grid */}
         <div className="grid grid-cols-2 md:grid-cols-12 gap-10 md:gap-8">
           {/* Brand Column (Span 4) */}
-          <div className="col-span-2 md:col-span-4 flex flex-col gap-6 pr-8">
-            {" "}
+          <div className="col-span-2 md:col-span-4 flex flex-col gap-5 pr-4 md:pr-8">
             <Link
               href={"/"}
-              className="flex items-baseline gap-0.5 group cursor-pointer select-none"
+              className="flex items-baseline gap-0.5 group cursor-pointer select-none w-fit"
             >
-              <span className="font-serif text-2xl font-semibold tracking-tight text-white transition-colors">
+              <span className="font-serif text-2xl font-semibold tracking-tight text-white group-hover:text-white/80 transition-colors">
                 Casevia
               </span>
               <span className="text-3xl text-terracotta leading-none">.</span>
@@ -28,7 +27,7 @@ const Footer: React.FC = () => {
 
           {/* Links Column 1: Product */}
           <div className="col-span-1 md:col-span-2 md:col-start-7 flex flex-col gap-4">
-            <h4 className="font-sans text-sm font-semibold text-white tracking-wide uppercase">
+            <h4 className="font-sans text-xs font-bold text-white/40 tracking-[0.12em] uppercase mb-1">
               Product
             </h4>
             <ul className="flex flex-col gap-3">
@@ -42,7 +41,7 @@ const Footer: React.FC = () => {
 
           {/* Links Column 2: Company */}
           <div className="col-span-1 md:col-span-2 flex flex-col gap-4">
-            <h4 className="font-sans text-sm font-semibold text-white tracking-wide uppercase">
+            <h4 className="font-sans text-xs font-bold text-white/40 tracking-[0.12em] uppercase mb-1">
               Company
             </h4>
             <ul className="flex flex-col gap-3">
@@ -55,24 +54,24 @@ const Footer: React.FC = () => {
 
           {/* Links Column 3: Legal */}
           <div className="col-span-1 md:col-span-2 flex flex-col gap-4">
-            <h4 className="font-sans text-sm font-semibold text-white tracking-wide uppercase">
+            <h4 className="font-sans text-xs font-bold text-white/40 tracking-[0.12em] uppercase mb-1">
               Legal
             </h4>
             <ul className="flex flex-col gap-3">
-              <FooterLink href="/privacy-policy">Privacy Policy</FooterLink>
-              <FooterLink href="/terms">Terms of Service</FooterLink>
-              <FooterLink href="/cookies">Cookie Policy</FooterLink>
+              <FooterLink href="/privacy-policy">Privacy</FooterLink>
+              <FooterLink href="/terms">Terms</FooterLink>
+              <FooterLink href="/cookies">Cookies</FooterLink>
               <FooterLink href="/security">Security</FooterLink>
             </ul>
           </div>
         </div>
 
         {/* Bottom Section: Copyright */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-white/5">
-          <p className="font-sans text-xs text-white/30">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-5 pt-6 md:pt-8 border-t border-white/5">
+          <p className="font-sans text-xs text-white/30 order-2 md:order-1">
             © 2025 Casevia Inc. All rights reserved.
           </p>
-          <div className="flex items-center gap-4 pt-2">
+          <div className="flex items-center gap-3 order-1 md:order-2">
             <SocialLink icon={Twitter} href="https://x.com/muiz_rexhepi" />
             <SocialLink
               icon={Linkedin}
@@ -93,7 +92,7 @@ const FooterLink: React.FC<{ href: string; children: React.ReactNode }> = ({
   <li>
     <a
       href={href}
-      className="font-sans text-sm text-white/50 hover:text-terracotta transition-colors duration-200"
+      className="font-sans text-[15px] text-white/50 hover:text-white transition-colors duration-200"
     >
       {children}
     </a>
@@ -107,7 +106,8 @@ const SocialLink: React.FC<{ icon: any; href: string }> = ({
   <a
     href={href}
     target="_blank"
-    className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/50 hover:bg-white/10 hover:text-white transition-all"
+    rel="noopener noreferrer"
+    className="w-9 h-9 rounded-full bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-white/40 hover:bg-white/[0.08] hover:border-white/10 hover:text-white transition-all duration-200"
   >
     <Icon className="w-4 h-4" />
   </a>

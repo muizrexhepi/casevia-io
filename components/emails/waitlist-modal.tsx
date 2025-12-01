@@ -2,12 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { X, Sparkles, ShieldCheck, Loader2, Check } from "lucide-react";
-// Ensure you have these imports correctly set up in your project
 import { useWaitlistStore } from "@/lib/store";
 import { toast } from "sonner";
 
 export const WaitlistModal: React.FC = () => {
-  // Use your zustand store state
   const { isOpen, closeWaitlist } = useWaitlistStore();
 
   const [email, setEmail] = useState("");
@@ -15,7 +13,6 @@ export const WaitlistModal: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  // Lock body scroll when open and reset state on re-open
   useEffect(() => {
     if (isOpen) {
       setSubmitted(false);
@@ -58,7 +55,6 @@ export const WaitlistModal: React.FC = () => {
         toast("You're already on the waitlist!", {
           description: "We'll keep you posted with updates!",
         });
-        // Still show success state even if existing
         setSubmitted(true);
       } else {
         toast.success("🎉 You're on the waitlist!");
@@ -77,33 +73,33 @@ export const WaitlistModal: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center px-4 font-sans">
-      {/* Backdrop - Uses charcoal with opacity and blur */}
+      {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-charcoal/60 backdrop-blur-sm transition-opacity duration-300"
+        className="absolute inset-0 bg-charcoal/70 backdrop-blur-md transition-opacity duration-300"
         onClick={closeWaitlist}
       />
 
-      {/* Modal Content - Uses cream background and rounded-lg corners */}
-      <div className="bg-cream w-full max-w-md p-8 md:p-10 relative z-10 animate-fade-up border border-charcoal/10 shadow-2xl shadow-charcoal/20 rounded-lg">
+      {/* Modal Content */}
+      <div className="bg-cream w-full max-w-md p-8 md:p-10 relative z-10 animate-fade-up border border-charcoal/[0.08] shadow-2xl shadow-charcoal/20 rounded-2xl">
         <button
           onClick={closeWaitlist}
-          className="absolute top-4 right-4 text-charcoal/40 hover:text-terracotta transition-colors"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-charcoal/5 flex items-center justify-center text-charcoal/40 hover:bg-charcoal/10 hover:text-charcoal transition-all"
           aria-label="Close modal"
         >
-          <X size={20} />
+          <X size={18} strokeWidth={2} />
         </button>
 
         {!submitted ? (
           <>
             <div className="mb-8 text-center">
-              {/* Icon Container - Using rounded-sm to match brand aesthetic */}
-              <div className="w-12 h-12 bg-charcoal flex items-center justify-center mx-auto mb-5 text-cream rounded-sm shadow-lg shadow-charcoal/10">
-                <Sparkles size={20} />
+              {/* Icon Container */}
+              <div className="w-14 h-14 bg-terracotta/10 flex items-center justify-center mx-auto mb-5 text-terracotta rounded-xl border border-terracotta/20">
+                <Sparkles size={24} strokeWidth={1.5} />
               </div>
-              <h3 className="text-3xl font-serif text-charcoal mb-3 tracking-tight">
+              <h3 className="font-serif text-[2rem] md:text-[2.25rem] text-charcoal mb-3 tracking-tight leading-tight">
                 Join the waitlist
               </h3>
-              <p className="text-charcoal/60 text-sm leading-relaxed font-sans">
+              <p className="text-charcoal/60 text-[15px] leading-relaxed font-sans font-light">
                 Be the first to experience Casevia. We're onboarding new
                 marketing teams every week.
               </p>
@@ -113,7 +109,7 @@ export const WaitlistModal: React.FC = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-xs font-bold text-charcoal/80 uppercase tracking-widest mb-2 font-sans"
+                  className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-[0.12em] mb-2.5 font-sans"
                 >
                   Work Email
                 </label>
@@ -123,7 +119,7 @@ export const WaitlistModal: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@company.com"
-                  className="w-full bg-white/50 border border-charcoal/10 text-charcoal px-4 h-12 text-sm font-sans focus:outline-none focus:border-terracotta focus:ring-1 focus:ring-terracotta transition-all placeholder:text-charcoal/30 rounded-lg"
+                  className="w-full bg-white border border-charcoal/10 text-charcoal px-5 h-12 text-[15px] font-sans focus:outline-none focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/20 transition-all placeholder:text-charcoal/30 rounded-xl"
                   required
                 />
                 {error && (
@@ -136,7 +132,7 @@ export const WaitlistModal: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-charcoal text-cream h-12 text-sm font-medium font-sans hover:bg-terracotta transition-all duration-300 active:translate-y-0.5 rounded-full shadow-xl shadow-charcoal/10 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed group"
+                className="w-full bg-charcoal text-cream h-12 text-[15px] font-semibold font-sans hover:bg-terracotta transition-all duration-300 active:scale-[0.98] rounded-full shadow-lg shadow-charcoal/10 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <>
@@ -149,24 +145,24 @@ export const WaitlistModal: React.FC = () => {
               </button>
             </form>
 
-            <div className="mt-8 flex items-center justify-center gap-2 text-[10px] text-charcoal/40 uppercase tracking-widest font-medium font-sans">
-              <ShieldCheck size={12} /> Secure & Spam-free
+            <div className="mt-7 flex items-center justify-center gap-2 text-[11px] text-charcoal/40 uppercase tracking-[0.12em] font-bold font-sans">
+              <ShieldCheck size={14} strokeWidth={2} /> Secure & Spam-free
             </div>
           </>
         ) : (
-          <div className="text-center py-10 animate-in fade-in zoom-in duration-300">
-            <div className="w-16 h-16 bg-terracotta/10 text-terracotta border border-terracotta/20 flex items-center justify-center mx-auto mb-6 rounded-full">
-              <Check size={32} />
+          <div className="text-center py-8 animate-in fade-in zoom-in duration-300">
+            <div className="w-16 h-16 bg-terracotta/10 text-terracotta border-2 border-terracotta/30 flex items-center justify-center mx-auto mb-6 rounded-full">
+              <Check size={32} strokeWidth={2.5} />
             </div>
-            <h3 className="text-2xl font-serif text-charcoal mb-2">
+            <h3 className="font-serif text-[2rem] text-charcoal mb-3 tracking-tight">
               You're on the list!
             </h3>
-            <p className="text-charcoal/60 text-sm font-sans mb-8">
+            <p className="text-charcoal/60 text-[15px] font-sans font-light mb-8 leading-relaxed">
               Thanks for your interest. We'll be in touch shortly.
             </p>
             <button
               onClick={closeWaitlist}
-              className="text-xs font-bold uppercase tracking-widest border-b border-charcoal/20 hover:border-terracotta hover:text-terracotta transition-colors pb-0.5 font-sans"
+              className="text-[13px] font-bold uppercase tracking-[0.08em] text-charcoal/60 hover:text-terracotta transition-colors font-sans inline-flex items-center gap-1.5 border-b-2 border-charcoal/10 hover:border-terracotta pb-1"
             >
               Close Window
             </button>

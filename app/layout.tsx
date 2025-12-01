@@ -25,29 +25,30 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://casevia.io"),
   title:
-    "Casevia | Turn raw client interviews into polished case studies with a simple drag & drop.",
+    "Casevia | Turn client interviews into polished case studies automatically.",
   description:
-    "Upload a client interview and instantly generate structured, publish-ready case studies. Privacy-first. No writing. No waiting. Built for agencies & B2B teams.",
+    "Casevia transforms raw client interviews into structured, publish-ready case studies automatically. Upload → extract insights → generate marketing-ready assets with zero drafting. Privacy-first and built for agencies & B2B teams.",
   keywords: [
     "case study generator",
-    "ai case studies",
-    "client interview to case study",
-    "video to case study",
+    "ai case study tool",
+    "turn interviews into case studies",
+    "client interview automation",
+    "upload video to case study",
+    "B2B social proof generator",
+    "marketing case study automation",
+    "agency AI tools",
     "transcript to case study",
-    "B2B social proof automation",
-    "agency ai tool",
-    "privacy focused ai",
-    "content automation for agencies",
-    "marketing proof generator",
+    "video transcription to marketing asset",
+    "customer story generator",
   ],
   alternates: {
     canonical: "https://casevia.io",
   },
   openGraph: {
     title:
-      "Casevia | Turn raw client interviews into polished case studies with a simple drag & drop.",
+      "Casevia | Turn client interviews into polished case studies automatically.",
     description:
-      "Turn raw customer interviews into real, publish-ready case studies automatically. Privacy-first. Casevia never trains on your content.",
+      "Casevia transforms raw client interviews into structured, publish-ready case studies automatically. Upload → extract insights → generate marketing-ready assets with zero drafting. Privacy-first and built for agencies & B2B teams.",
     url: "https://casevia.io",
     siteName: "Casevia",
     images: [
@@ -64,9 +65,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Casevia | Turn raw client interviews into polished case studies with a simple drag & drop.",
+      "Casevia | Turn client interviews into polished case studies automatically.",
     description:
-      "Upload interviews → get structured case studies instantly. Privacy-focused and built for agencies.",
+      "Casevia transforms raw client interviews into structured, publish-ready case studies automatically. Upload → extract insights → generate marketing-ready assets with zero drafting. Privacy-first and built for agencies & B2B teams.",
     images: ["/og-image.png"],
   },
 };
@@ -81,6 +82,27 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${dmSans.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              name: "Casevia",
+              description:
+                "AI-powered case study generator that converts raw client interviews into structured marketing assets.",
+              applicationCategory: "MarketingAutomation",
+              operatingSystem: "Web",
+              url: "https://casevia.io",
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD",
+              },
+            }),
+          }}
+        />
+
         <Toaster />
         <Navbar />
         {children}

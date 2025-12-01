@@ -1,19 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Mail,
-  MessageSquare,
-  Calendar,
-  ArrowRight,
-  CheckCircle2,
-} from "lucide-react";
+import { Mail, MessageSquare, Calendar, ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Card } from "@/components/ui/card";
 
 export default function ContactClient() {
   const [formData, setFormData] = useState({
@@ -21,14 +10,20 @@ export default function ContactClient() {
     lastName: "",
     email: "",
     company: "",
-    teamSize: "",
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     // Handle form submission
     console.log("Form submitted:", formData);
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false);
+    }, 1000);
   };
 
   const handleChange = (field: string, value: string) => {
@@ -36,245 +31,259 @@ export default function ContactClient() {
   };
 
   return (
-    <section>
-      {/* Header */}
-      <div className="text-center space-y-5 py-12 md:py-24 max-w-6xl container">
-        <h2 className="text-4xl md:text-5xl tracking-tight leading-[1] text-balance text-center">
-          Let's talk about <br />
-          <span className="text-gradient-primary">your needs.</span>
-        </h2>
-        <p className="text-center text-muted-foreground max-w-lg mx-auto">
-          Whether you need a custom plan, have questions, or want to see a
-          demo—we're here to help you succeed.
-        </p>
-      </div>
+    <section className="w-full bg-cream px-6 md:px-12">
+      <div className="max-w-6xl mx-auto py-16 md:py-20 lg:py-24 pt-32 md:pt-40">
+        {/* Header */}
+        <div className="mb-12 md:mb-16 lg:mb-20 flex flex-col gap-6 md:gap-7 text-center max-w-2xl mx-auto">
+          <h1 className="font-serif text-[2.75rem] md:text-5xl lg:text-6xl text-charcoal leading-[0.92] tracking-tight">
+            Let's talk about <br />
+            <span className="italic text-charcoal font-normal text-[3rem] md:text-[3.3rem] lg:text-[3.9rem]">
+              your needs.
+            </span>
+          </h1>
+          <p className="font-sans text-lg md:text-xl text-charcoal/70 leading-relaxed font-light">
+            Whether you need a custom plan, have questions, or want to see a
+            demo—we're here to help you succeed.
+          </p>
+        </div>
 
-      {/* Main Content */}
-      <div className="bg-muted container max-w-6xl">
-        <div className="grid lg:grid-cols-5 gap-4 px-0 sm:px-4 p-4 bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_8px)]">
+        {/* Main Content Grid */}
+        <div className="grid lg:grid-cols-5 gap-5 mb-16 md:mb-20 lg:mb-24">
           {/* Left Column - Contact Cards */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-5">
             {/* Email Card */}
-            <Card className="p-4 bg-background">
+            <div className="p-6 bg-white rounded-2xl border border-charcoal/[0.06]">
               <div className="flex items-start gap-4">
-                <div className="p-2.5 rounded-lg bg-primary/10">
-                  <Mail className="h-5 w-5 text-primary" />
+                <div className="w-11 h-11 rounded-xl bg-terracotta/10 flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5 text-terracotta" strokeWidth={1.5} />
                 </div>
-                <div className="flex-1 space-y-1">
-                  <h3 className="font-semibold">Email us</h3>
+                <div className="flex-1 space-y-2">
+                  <h3 className="font-sans font-semibold text-charcoal text-[15px]">
+                    Email us
+                  </h3>
                   <a
                     href="mailto:contact@casevia.io"
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors block"
+                    className="block text-sm text-charcoal/60 hover:text-terracotta transition-colors font-medium"
                   >
                     contact@casevia.io
                   </a>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-charcoal/50 leading-relaxed">
                     For general inquiries and sales
                   </p>
                 </div>
               </div>
-            </Card>
+            </div>
 
             {/* Support Card */}
-            <Card className="p-6 bg-background">
+            <div className="p-6 bg-white rounded-2xl border border-charcoal/[0.06]">
               <div className="flex items-start gap-4">
-                <div className="p-2.5 rounded-lg bg-primary/10">
-                  <MessageSquare className="h-5 w-5 text-primary" />
+                <div className="w-11 h-11 rounded-xl bg-terracotta/10 flex items-center justify-center flex-shrink-0">
+                  <MessageSquare
+                    className="w-5 h-5 text-terracotta"
+                    strokeWidth={1.5}
+                  />
                 </div>
-                <div className="flex-1 space-y-1">
-                  <h3 className="font-semibold">Support</h3>
+                <div className="flex-1 space-y-2">
+                  <h3 className="font-sans font-semibold text-charcoal text-[15px]">
+                    Support
+                  </h3>
                   <a
                     href="mailto:support@casevia.io"
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors block"
+                    className="block text-sm text-charcoal/60 hover:text-terracotta transition-colors font-medium"
                   >
                     support@casevia.io
                   </a>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-charcoal/50 leading-relaxed">
                     For technical support and help
                   </p>
                 </div>
               </div>
-            </Card>
+            </div>
 
             {/* Demo Card */}
-            <Card className="p-6 bg-background">
+            <div className="p-6 bg-white rounded-2xl border border-charcoal/[0.06]">
               <div className="flex items-start gap-4">
-                <div className="p-2.5 rounded-lg bg-primary/10">
-                  <Calendar className="h-5 w-5 text-primary" />
+                <div className="w-11 h-11 rounded-xl bg-terracotta/10 flex items-center justify-center flex-shrink-0">
+                  <Calendar
+                    className="w-5 h-5 text-terracotta"
+                    strokeWidth={1.5}
+                  />
                 </div>
                 <div className="flex-1 space-y-3">
                   <div>
-                    <h3 className="font-semibold">Book a demo</h3>
-                    <p className="text-sm text-muted-foreground mt-1">
+                    <h3 className="font-sans font-semibold text-charcoal text-[15px]">
+                      Book a demo
+                    </h3>
+                    <p className="text-sm text-charcoal/50 mt-1 leading-relaxed">
                       Schedule a personalized walkthrough
                     </p>
                   </div>
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="w-full"
+                  <Link
+                    href="/demo"
+                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-charcoal/5 text-charcoal hover:bg-charcoal/10 border border-charcoal/10 hover:border-charcoal/20 transition-all text-sm font-semibold"
                   >
-                    <Link href="/demo">
-                      Schedule demo
-                      <ArrowRight className="h-4 w-4 ml-2" />
-                    </Link>
-                  </Button>
+                    Schedule demo
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
               </div>
-            </Card>
+            </div>
 
             {/* What to Expect Card */}
-            <Card className="p-6 bg-background">
-              <h3 className="font-semibold mb-4">What to expect</h3>
+            <div className="p-6 bg-card-bg rounded-2xl border border-charcoal/[0.06]">
+              <h3 className="font-sans font-semibold text-charcoal text-[15px] mb-4">
+                What to expect
+              </h3>
               <ul className="space-y-3">
-                <li className="flex items-start gap-3 text-sm">
-                  <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                  <span className="text-muted-foreground">
-                    Response within 24 hours
-                  </span>
-                </li>
-                <li className="flex items-start gap-3 text-sm">
-                  <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                  <span className="text-muted-foreground">
-                    Personalized consultation
-                  </span>
-                </li>
-                <li className="flex items-start gap-3 text-sm">
-                  <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                  <span className="text-muted-foreground">
-                    Custom pricing and solutions
-                  </span>
-                </li>
-                <li className="flex items-start gap-3 text-sm">
-                  <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                  <span className="text-muted-foreground">
-                    No pressure, just answers
-                  </span>
-                </li>
+                {[
+                  "Response within 24 hours",
+                  "Personalized consultation",
+                  "Custom pricing and solutions",
+                  "No pressure, just answers",
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <div className="w-4 h-4 rounded-full bg-terracotta/10 border border-terracotta/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check
+                        className="w-2.5 h-2.5 text-terracotta"
+                        strokeWidth={3}
+                      />
+                    </div>
+                    <span className="text-sm text-charcoal/60 leading-relaxed">
+                      {item}
+                    </span>
+                  </li>
+                ))}
               </ul>
-            </Card>
+            </div>
           </div>
 
           {/* Right Column - Form */}
           <div className="lg:col-span-3">
-            <Card className="p-8 bg-background h-full">
-              <h2 className="text-2xl font-semibold mb-6">Send us a message</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="p-8 md:p-10 bg-white rounded-2xl border border-charcoal/[0.06] h-full">
+              <h2 className="font-serif text-2xl md:text-3xl text-charcoal mb-6 tracking-tight">
+                Send us a message
+              </h2>
+              <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Name Fields */}
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="firstName" className="text-sm font-medium">
+                    <label
+                      htmlFor="firstName"
+                      className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-[0.12em] font-sans"
+                    >
                       First name
-                    </Label>
-                    <Input
+                    </label>
+                    <input
                       id="firstName"
+                      type="text"
                       placeholder="John"
                       value={formData.firstName}
                       onChange={(e) =>
                         handleChange("firstName", e.target.value)
                       }
                       required
-                      className="h-11"
+                      className="w-full h-12 px-4 bg-cream border border-charcoal/10 rounded-xl text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/20 transition-all font-sans"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="lastName" className="text-sm font-medium">
+                    <label
+                      htmlFor="lastName"
+                      className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-[0.12em] font-sans"
+                    >
                       Last name
-                    </Label>
-                    <Input
+                    </label>
+                    <input
                       id="lastName"
+                      type="text"
                       placeholder="Doe"
                       value={formData.lastName}
                       onChange={(e) => handleChange("lastName", e.target.value)}
                       required
-                      className="h-11"
+                      className="w-full h-12 px-4 bg-cream border border-charcoal/10 rounded-xl text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/20 transition-all font-sans"
                     />
                   </div>
                 </div>
 
                 {/* Email */}
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm font-medium">
+                  <label
+                    htmlFor="email"
+                    className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-[0.12em] font-sans"
+                  >
                     Work email
-                  </Label>
-                  <Input
+                  </label>
+                  <input
                     id="email"
                     type="email"
                     placeholder="john@company.com"
                     value={formData.email}
                     onChange={(e) => handleChange("email", e.target.value)}
                     required
-                    className="h-11"
+                    className="w-full h-12 px-4 bg-cream border border-charcoal/10 rounded-xl text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/20 transition-all font-sans"
                   />
                 </div>
 
                 {/* Company */}
                 <div className="space-y-2">
-                  <Label htmlFor="company" className="text-sm font-medium">
+                  <label
+                    htmlFor="company"
+                    className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-[0.12em] font-sans"
+                  >
                     Company name
-                  </Label>
-                  <Input
+                  </label>
+                  <input
                     id="company"
+                    type="text"
                     placeholder="Acme Inc."
                     value={formData.company}
                     onChange={(e) => handleChange("company", e.target.value)}
                     required
-                    className="h-11"
+                    className="w-full h-12 px-4 bg-cream border border-charcoal/10 rounded-xl text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/20 transition-all font-sans"
                   />
                 </div>
 
-                {/* Team Size */}
-                {/* <div className="space-y-2">
-                    <Label htmlFor="teamSize" className="text-sm font-medium">
-                      Team size
-                    </Label>
-                    <Select
-                      value={formData.teamSize}
-                      onValueChange={(value) => handleChange("teamSize", value)}
-                    >
-                      <SelectTrigger id="teamSize" className="h-11">
-                        <SelectValue placeholder="Select team size" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="1-5">1-5 people</SelectItem>
-                        <SelectItem value="6-20">6-20 people</SelectItem>
-                        <SelectItem value="21-50">21-50 people</SelectItem>
-                        <SelectItem value="51-200">51-200 people</SelectItem>
-                        <SelectItem value="200+">200+ people</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div> */}
-
                 {/* Message */}
                 <div className="space-y-2">
-                  <Label htmlFor="message" className="text-sm font-medium">
+                  <label
+                    htmlFor="message"
+                    className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-[0.12em] font-sans"
+                  >
                     How can we help?
-                  </Label>
-                  <Textarea
+                  </label>
+                  <textarea
                     id="message"
                     placeholder="Tell us about your needs, questions, or what you'd like to discuss..."
                     rows={6}
                     value={formData.message}
                     onChange={(e) => handleChange("message", e.target.value)}
                     required
-                    className="resize-none"
+                    className="w-full px-4 py-3 bg-cream border border-charcoal/10 rounded-xl text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/20 transition-all resize-none font-sans leading-relaxed"
                   />
                 </div>
 
                 {/* Submit Button */}
-                <div className="space-y-4">
-                  <Button type="submit" size="lg" className="w-full">
-                    Send message
-                    <ArrowRight className="h-4 w-4 ml-2" />
-                  </Button>
+                <div className="space-y-4 pt-2">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full h-12 bg-charcoal text-cream rounded-full font-sans font-semibold text-[15px] hover:bg-terracotta transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? (
+                      "Sending..."
+                    ) : (
+                      <>
+                        Send message
+                        <ArrowRight className="w-4 h-4" />
+                      </>
+                    )}
+                  </button>
 
                   {/* Privacy Note */}
-                  <p className="text-xs text-center text-muted-foreground">
+                  <p className="text-xs text-center text-charcoal/40 leading-relaxed font-sans">
                     By submitting this form, you agree to our{" "}
                     <Link
                       href="/privacy-policy"
-                      className="text-foreground underline hover:no-underline"
+                      className="text-charcoal/60 hover:text-terracotta transition-colors font-medium"
                     >
                       privacy policy
                     </Link>
@@ -282,26 +291,27 @@ export default function ContactClient() {
                   </p>
                 </div>
               </form>
-            </Card>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom CTA */}
-      <div className="py-12 md:py-24 container text-center space-y-5 max-w-6xl">
-        <h2 className="text-balance text-3xl font-semibold md:text-4xl">
-          Ready to get started?
-        </h2>
-        <p className="text-muted-foreground max-w-xl mx-auto">
-          Start using Casevia today — it’s free forever, no credit card
-          required.
-        </p>
-        <Button asChild size="lg">
-          <Link href="/dashboard">
+        {/* Bottom CTA */}
+        <div className="text-center space-y-6 py-12 md:py-16 px-6 md:px-12 bg-charcoal rounded-2xl md:rounded-3xl">
+          <h2 className="font-serif text-[2rem] md:text-4xl text-cream leading-[0.95] tracking-tight">
+            Ready to get started?
+          </h2>
+          <p className="text-white/60 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
+            Start using Casevia today — it's free forever, no credit card
+            required.
+          </p>
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center justify-center gap-2 h-12 px-8 bg-terracotta text-white rounded-full font-sans font-semibold text-[15px] hover:bg-terracotta/90 transition-all shadow-lg shadow-terracotta/20"
+          >
             Start for free
-            <ArrowRight className="h-4 w-4 ml-2" />
+            <ArrowRight className="w-4 h-4" />
           </Link>
-        </Button>
+        </div>
       </div>
     </section>
   );

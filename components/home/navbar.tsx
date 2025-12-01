@@ -20,40 +20,43 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 transition-all duration-500 ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         scrolled
-          ? "py-4 bg-cream/90 backdrop-blur-md border-b border-charcoal/10"
-          : "py-6 bg-transparent border-charcoal/5"
+          ? "py-3 bg-cream/90 backdrop-blur-md border-b border-charcoal/10"
+          : "py-5 bg-transparent border-charcoal/5"
       }`}
     >
-      {/* Logo Area */}
-      <div className="flex items-center gap-2 group cursor-pointer">
-        <Link
-          href={"/"}
-          className="flex items-baseline gap-0.5 group cursor-pointer select-none"
-        >
-          <span className="font-serif text-2xl font-semibold tracking-tight text-charcoal transition-colors">
-            Casevia
-          </span>
-          <span className="text-3xl text-terracotta leading-none">.</span>
-        </Link>
-      </div>
+      {/* Container (matches Hero) */}
+      <div className="container max-w-7xl mx-auto px-6 md:px-12 xl:px-0 flex justify-between items-center">
+        {/* Logo Area */}
+        <div className="flex items-center gap-2 group cursor-pointer">
+          <Link
+            href={"/"}
+            className="flex items-baseline gap-0.5 group cursor-pointer select-none"
+          >
+            <span className="font-serif text-3xl font-semibold tracking-tight text-charcoal transition-colors">
+              Casevia
+            </span>
+            <span className="text-3xl text-terracotta leading-none">.</span>
+          </Link>
+        </div>
 
-      {/* Desktop Links */}
-      <div className="hidden md:flex items-center gap-10">
-        <NavLink href="/blogs">Blogs</NavLink>
-        <NavLink href="/pricing">Pricing</NavLink>
-      </div>
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-10">
+          <NavLink href="/blogs">Blogs</NavLink>
+          <NavLink href="/pricing">Pricing</NavLink>
+        </div>
 
-      {/* Actions */}
-      <div className="flex items-center gap-4">
-        <button
-          onClick={openWaitlist}
-          className="bg-charcoal text-cream px-5 py-2.5 rounded-full font-sans text-sm font-medium hover:bg-terracotta transition-all duration-300 flex items-center gap-2 group shadow-lg shadow-charcoal/5 hover:shadow-terracotta/20"
-        >
-          Get Started
-          <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-        </button>
+        {/* Actions */}
+        <div className="flex items-center gap-4">
+          <button
+            onClick={openWaitlist}
+            className="bg-charcoal text-cream px-5 py-2.5 rounded-full font-sans text-sm font-medium hover:bg-terracotta transition-all duration-300 flex items-center gap-2 group shadow-lg shadow-charcoal/5 hover:shadow-terracotta/20"
+          >
+            Get Started
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+          </button>
+        </div>
       </div>
     </nav>
   );
@@ -65,7 +68,7 @@ const NavLink: React.FC<{ href: string; children: React.ReactNode }> = ({
 }) => (
   <Link
     href={href}
-    className="relative font-sans text-sm font-medium text-charcoal/60 hover:text-charcoal transition-colors group"
+    className="relative font-sans text-base text-charcoal/70 hover:text-charcoal transition-colors group"
   >
     {children}
     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-terracotta transition-all duration-300 group-hover:w-full"></span>

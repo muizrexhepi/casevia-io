@@ -135,14 +135,12 @@ export default function PricingClient() {
         <div className="flex flex-col items-center text-center gap-8 mb-20">
           <h1 className="font-serif text-5xl md:text-7xl text-charcoal leading-[0.9] tracking-tight max-w-4xl">
             Simple pricing that <br />
-            <span className="italic text-charcoal/50 font-light">
-              scales with you.
-            </span>
+            <span className="italic">scales with you.</span>
           </h1>
-          <p className="font-sans text-lg md:text-xl text-charcoal/60 font-light max-w-2xl leading-relaxed">
+          {/* <p className="font-sans text-lg md:text-xl text-charcoal/60 font-light max-w-2xl leading-relaxed">
             Start for free, upgrade when you're ready to automate your content
             engine. Pause or cancel anytime.
-          </p>
+          </p> */}
 
           {/* Billing Toggle */}
           <div className="flex items-center gap-1 bg-white p-1.5 rounded-full border border-charcoal/10 shadow-lg shadow-charcoal/5 mt-4">
@@ -304,7 +302,7 @@ export default function PricingClient() {
           {/* Desktop View (Table) */}
           <div className="hidden lg:block relative">
             <table className="w-full">
-              <thead className="sticky top-18 z-20 bg-cream">
+              <thead className="sticky top-16 z-20 bg-cream">
                 <tr className="">
                   <th className="py-6 px-6 text-left text-sm font-medium text-charcoal/40 w-1/4">
                     {/* Empty top-left cell */}
