@@ -1,16 +1,33 @@
 "use client";
-import React from "react";
+
+import React, { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
-import { useWaitlistStore } from "@/lib/store";
+import { useWaitlistStore } from "@/lib/store"; // Assuming this path is correct
 import Link from "next/link";
 
 const Navbar: React.FC = () => {
   const openWaitlist = useWaitlistStore((state) => state.openWaitlist);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="w-full px-6 py-6 flex justify-between items-center bg-cream sticky top-0 z-50 bg-opacity-90 backdrop-blur-sm border-b border-charcoal/5">
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 transition-all duration-500 ${
+        scrolled
+          ? "py-4 bg-cream/90 backdrop-blur-md border-b border-charcoal/10"
+          : "py-6 bg-transparent border-charcoal/5"
+      }`}
+    >
+      {/* Logo Area */}
       <div className="flex items-center gap-2 group cursor-pointer">
-        {/* Logo Mark */}
         <Link
           href={"/"}
           className="flex items-baseline gap-0.5 group cursor-pointer select-none"
@@ -22,19 +39,17 @@ const Navbar: React.FC = () => {
         </Link>
       </div>
 
-      <div className="hidden md:flex items-center gap-8">
-        {/* <NavLink href="#">Product</NavLink> */}
+      {/* Desktop Links */}
+      <div className="hidden md:flex items-center gap-10">
         <NavLink href="/blogs">Blogs</NavLink>
         <NavLink href="/pricing">Pricing</NavLink>
       </div>
 
+      {/* Actions */}
       <div className="flex items-center gap-4">
-        {/* <button className="hidden md:block font-sans text-sm font-medium text-charcoal hover:text-terracotta transition-colors">
-          Sign in
-        </button> */}
         <button
           onClick={openWaitlist}
-          className="bg-charcoal text-cream px-4 py-2 rounded-full font-sans text-sm font-medium hover:bg-terracotta transition-colors duration-300 flex items-center gap-2 group"
+          className="bg-charcoal text-cream px-5 py-2.5 rounded-full font-sans text-sm font-medium hover:bg-terracotta transition-all duration-300 flex items-center gap-2 group shadow-lg shadow-charcoal/5 hover:shadow-terracotta/20"
         >
           Get Started
           <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
@@ -48,12 +63,13 @@ const NavLink: React.FC<{ href: string; children: React.ReactNode }> = ({
   href,
   children,
 }) => (
-  <a
+  <Link
     href={href}
-    className="font-sans text-sm font-medium text-charcoal/70 hover:text-charcoal transition-colors"
+    className="relative font-sans text-sm font-medium text-charcoal/60 hover:text-charcoal transition-colors group"
   >
     {children}
-  </a>
+    <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-terracotta transition-all duration-300 group-hover:w-full"></span>
+  </Link>
 );
 
 export default Navbar;

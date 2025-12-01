@@ -24,11 +24,6 @@ const Footer: React.FC = () => {
               The AI-powered narrative engine for B2B marketing teams. Turn raw
               customer calls into high-converting case studies in minutes.
             </p>
-            <div className="flex items-center gap-4 pt-2">
-              <SocialLink icon={Twitter} href="#" />
-              <SocialLink icon={Linkedin} href="#" />
-              <SocialLink icon={Github} href="#" />
-            </div>
           </div>
 
           {/* Links Column 1: Product */}
@@ -38,7 +33,7 @@ const Footer: React.FC = () => {
             </h4>
             <ul className="flex flex-col gap-3">
               <FooterLink href="#">Features</FooterLink>
-              <FooterLink href="#">Pricing</FooterLink>
+              <FooterLink href="/pricing">Pricing</FooterLink>
               <FooterLink href="#">Integrations</FooterLink>
               <FooterLink href="#">Changelog</FooterLink>
               <FooterLink href="#">Docs</FooterLink>
@@ -52,9 +47,9 @@ const Footer: React.FC = () => {
             </h4>
             <ul className="flex flex-col gap-3">
               <FooterLink href="#">About</FooterLink>
-              <FooterLink href="#">Blog</FooterLink>
+              <FooterLink href="/blogs">Blogs</FooterLink>
               <FooterLink href="#">Careers</FooterLink>
-              <FooterLink href="#">Contact</FooterLink>
+              <FooterLink href="/contact">Contact</FooterLink>
             </ul>
           </div>
 
@@ -64,10 +59,10 @@ const Footer: React.FC = () => {
               Legal
             </h4>
             <ul className="flex flex-col gap-3">
-              <FooterLink href="#">Privacy Policy</FooterLink>
-              <FooterLink href="#">Terms of Service</FooterLink>
-              <FooterLink href="#">Cookie Policy</FooterLink>
-              <FooterLink href="#">Security</FooterLink>
+              <FooterLink href="/privacy-policy">Privacy Policy</FooterLink>
+              <FooterLink href="/terms">Terms of Service</FooterLink>
+              <FooterLink href="/cookies">Cookie Policy</FooterLink>
+              <FooterLink href="/security">Security</FooterLink>
             </ul>
           </div>
         </div>
@@ -75,12 +70,15 @@ const Footer: React.FC = () => {
         {/* Bottom Section: Copyright */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-white/5">
           <p className="font-sans text-xs text-white/30">
-            © 2024 Casevia Inc. All rights reserved.
+            © 2025 Casevia Inc. All rights reserved.
           </p>
-          <div className="flex items-center gap-2 text-xs text-white/30">
-            <span>Designed with</span>
-            <Heart className="w-3 h-3 text-terracotta fill-current" />
-            <span>in San Francisco</span>
+          <div className="flex items-center gap-4 pt-2">
+            <SocialLink icon={Twitter} href="https://x.com/muiz_rexhepi" />
+            <SocialLink
+              icon={Linkedin}
+              href="https://linkedin.com/in/muiz-rexhepi"
+            />
+            <SocialLink icon={Github} href="https://github.com/muizrexhepi" />
           </div>
         </div>
       </div>
@@ -108,6 +106,7 @@ const SocialLink: React.FC<{ icon: any; href: string }> = ({
 }) => (
   <a
     href={href}
+    target="_blank"
     className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/50 hover:bg-white/10 hover:text-white transition-all"
   >
     <Icon className="w-4 h-4" />

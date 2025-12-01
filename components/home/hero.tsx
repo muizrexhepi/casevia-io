@@ -45,7 +45,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative w-full pt-20 md:pt-32 pb-24 px-6 md:px-12 bg-cream overflow-hidden">
+    <section className="relative w-full pt-32 pb-24 px-6 md:px-12 bg-cream overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-charcoal/5 to-transparent"></div>
 
@@ -56,69 +56,42 @@ const Hero: React.FC = () => {
           <div className="lg:col-span-7 flex flex-col gap-8 md:gap-10 relative z-10">
             {/* Badge & Social Proof */}
             <div className="flex flex-wrap items-center gap-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-charcoal/10 bg-white/50 backdrop-blur-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-terracotta opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-terracotta"></span>
-                </span>
-                <span className="font-sans text-[11px] font-semibold tracking-widest uppercase text-charcoal/70">
-                  Early Access Program
-                </span>
-              </div>
-
-              <div className="hidden sm:flex items-center gap-1.5 px-3 py-1">
-                <div className="flex -space-x-1.5">
-                  {[1, 2, 3].map((i) => (
-                    <div
-                      key={i}
-                      className="w-5 h-5 rounded-full bg-charcoal/10 border border-cream overflow-hidden"
-                    >
-                      <img
-                        src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i * 13}`}
-                        alt="User"
-                        className="w-full h-full"
-                      />
-                    </div>
-                  ))}
-                </div>
-                {/* <div className="flex items-center gap-1 ml-1.5">
-                  <Star className="w-3 h-3 fill-terracotta text-terracotta" />
-                  <Star className="w-3 h-3 fill-terracotta text-terracotta" />
-                  <Star className="w-3 h-3 fill-terracotta text-terracotta" />
-                  <Star className="w-3 h-3 fill-terracotta text-terracotta" />
-                  <Star className="w-3 h-3 fill-terracotta text-terracotta" />
-                </div> */}
-                <span className="text-[10px] font-sans font-medium text-charcoal/50">
-                  Built for marketers, agencies & founders
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-terracotta"></span>
+                <span className="font-sans text-xs font-semibold tracking-widest uppercase text-charcoal/60">
+                  Accepting Early Access
                 </span>
               </div>
             </div>
 
             {/* Heading */}
-            <h1 className="font-serif text-[4rem] md:text-[5.5rem] lg:text-[7rem] leading-[0.9] tracking-tight text-charcoal">
-              Turn calls into{" "}
-              <span className="font-light italic text-charcoal/80 relative inline-block">
-                stories
+            <h1 className="font-serif text-[4rem] md:text-[5.5rem] lg:text-[6.5rem] leading-[0.9] tracking-tight text-charcoal drop-shadow-sm">
+              Stop writing <br />
+              <span className="italic text-charcoal/80 font-light relative inline-block">
+                case studies
+                {/* Underline accent */}
                 <svg
-                  className="absolute -bottom-2 left-0 w-full h-3 text-terracotta/30"
+                  className="absolute w-full h-3 -bottom-1 left-0 text-terracotta/30 -z-10"
                   viewBox="0 0 100 10"
                   preserveAspectRatio="none"
                 >
                   <path
                     d="M0 5 Q 50 10 100 5"
                     stroke="currentColor"
-                    strokeWidth="2"
+                    strokeWidth="4"
                     fill="none"
                   />
                 </svg>
-              </span>{" "}
-              that sell.
+              </span>
             </h1>
 
             {/* Subhead */}
-            <p className="font-sans text-lg md:text-xl text-charcoal/70 leading-relaxed max-w-xl font-light">
-              The first AI pipeline that transforms raw Zoom recordings into
-              marketing-ready case studies. Zero drafting required.
+            <p className="font-sans text-xl text-charcoal/70 leading-relaxed max-w-xl font-light">
+              Casevia turns your raw client calls into high-converting marketing
+              assets automatically.{" "}
+              <strong className="font-medium text-charcoal">
+                Zero drafting required.
+              </strong>
             </p>
 
             {/* Waitlist Form */}
@@ -174,9 +147,32 @@ const Hero: React.FC = () => {
               </form>
             </div>
 
-            <p className="text-xs font-sans text-charcoal/40 pl-2">
-              No credit card required · SOC-2 Compliant
-            </p>
+            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1">
+              <div className="flex -space-x-1.5">
+                {[1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="w-5 h-5 rounded-full bg-charcoal/10 border border-cream overflow-hidden"
+                  >
+                    <img
+                      src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i * 13}`}
+                      alt="User"
+                      className="w-full h-full"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="flex items-center gap-1 ml-1.5">
+                <Star className="w-3 h-3 fill-terracotta text-terracotta" />
+                <Star className="w-3 h-3 fill-terracotta text-terracotta" />
+                <Star className="w-3 h-3 fill-terracotta text-terracotta" />
+                <Star className="w-3 h-3 fill-terracotta text-terracotta" />
+                <Star className="w-3 h-3 fill-terracotta text-terracotta" />
+              </div>
+              <span className="text-[10px] font-sans font-medium text-charcoal/50">
+                Built for marketers, agencies & founders
+              </span>
+            </div>
           </div>
 
           {/* Right Column: Visual Anchor */}
@@ -226,7 +222,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Bottom Section: Metrics Artifact */}
-        <div className="border-t border-charcoal/10 pt-16">
+        <div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0 md:divide-x divide-charcoal/10">
             <MetricCard
               value="10x"

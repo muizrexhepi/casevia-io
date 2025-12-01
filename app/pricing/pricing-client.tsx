@@ -111,7 +111,6 @@ export default function PricingClient() {
 
   // Fixed pricing logic
   const getPrice = (plan: Plan) => {
-    if (plan.id === "agency") return 0; // Prevent math on custom plans
     if (plan.id === "free") return 0;
 
     if (billingCycle === "monthly") {
@@ -131,50 +130,42 @@ export default function PricingClient() {
 
   return (
     <section className="w-full bg-cream text-charcoal selection:bg-terracotta selection:text-white px-4 md:px-8 lg:px-12">
-      <div className="max-w-7xl mx-auto py-16 md:py-24 border-t border-charcoal/5">
+      <div className="max-w-7xl mx-auto py-16 pt-32 md:py-32 border-t border-charcoal/5">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-16">
-          <div className="flex flex-col gap-6 max-w-2xl">
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-terracotta"></span>
-              <span className="font-sans text-xs font-semibold tracking-widest uppercase text-charcoal/60">
-                Plans & Pricing
-              </span>
-            </div>
-            <h2 className="font-serif text-5xl md:text-6xl text-charcoal leading-[0.9] tracking-tight">
-              Predictable costs, <br />
-              <span className="italic text-charcoal/70 font-light">
-                uncapped ROI.
-              </span>
-            </h2>
-            <p className="font-sans text-lg text-charcoal/70 font-light max-w-lg">
-              Start free, upgrade when you're ready to automate your content
-              engine. Pause or cancel anytime.
-            </p>
-          </div>
+        <div className="flex flex-col items-center text-center gap-8 mb-20">
+          <h1 className="font-serif text-5xl md:text-7xl text-charcoal leading-[0.9] tracking-tight max-w-4xl">
+            Simple pricing that <br />
+            <span className="italic text-charcoal/50 font-light">
+              scales with you.
+            </span>
+          </h1>
+          <p className="font-sans text-lg md:text-xl text-charcoal/60 font-light max-w-2xl leading-relaxed">
+            Start for free, upgrade when you're ready to automate your content
+            engine. Pause or cancel anytime.
+          </p>
 
           {/* Billing Toggle */}
-          <div className="flex items-center gap-1 bg-card-bg p-1 rounded-full border border-charcoal/5 self-start md:self-end">
+          <div className="flex items-center gap-1 bg-white p-1.5 rounded-full border border-charcoal/10 shadow-lg shadow-charcoal/5 mt-4">
             <button
               onClick={() => setBillingCycle("monthly")}
-              className={`px-6 py-2.5 rounded-full text-sm font-sans font-medium transition-all duration-300 ${
+              className={`px-8 py-3 rounded-full text-sm font-sans font-medium transition-all duration-300 ${
                 billingCycle === "monthly"
-                  ? "bg-white text-charcoal shadow-sm"
-                  : "text-charcoal/40 hover:text-charcoal"
+                  ? "bg-charcoal text-white shadow-md"
+                  : "text-charcoal/50 hover:text-charcoal"
               }`}
             >
               Monthly
             </button>
             <button
               onClick={() => setBillingCycle("yearly")}
-              className={`px-6 py-2.5 rounded-full text-sm font-sans font-medium transition-all duration-300 flex items-center gap-2 ${
+              className={`px-8 py-3 rounded-full text-sm font-sans font-medium transition-all duration-300 flex items-center gap-2 ${
                 billingCycle === "yearly"
-                  ? "bg-terracotta text-white shadow-sm"
-                  : "text-charcoal/40 hover:text-charcoal"
+                  ? "bg-terracotta text-white shadow-md"
+                  : "text-charcoal/50 hover:text-charcoal"
               }`}
             >
               Yearly
-              <span className="hidden sm:inline-block text-[10px] bg-charcoal/10 px-1.5 py-0.5 rounded uppercase tracking-wide">
+              <span className="hidden sm:inline-block text-[10px] bg-white/20 text-white px-1.5 py-0.5 rounded uppercase tracking-wide font-bold">
                 -17%
               </span>
             </button>
@@ -217,9 +208,9 @@ export default function PricingClient() {
                 <div className="mb-8">
                   <div className="flex items-baseline gap-1">
                     <span className="font-serif text-5xl text-charcoal tracking-tight">
-                      {isContactSales ? plan.price : `$${price}`}
+                      {`$${price}`}
                     </span>
-                    {!isContactSales && !isFree && (
+                    {!isFree && (
                       <span className="font-sans text-charcoal/50 text-sm">
                         /mo
                       </span>
@@ -313,7 +304,7 @@ export default function PricingClient() {
           {/* Desktop View (Table) */}
           <div className="hidden lg:block relative">
             <table className="w-full">
-              <thead className="sticky top-20 z-20 bg-cream">
+              <thead className="sticky top-18 z-20 bg-cream">
                 <tr className="">
                   <th className="py-6 px-6 text-left text-sm font-medium text-charcoal/40 w-1/4">
                     {/* Empty top-left cell */}
