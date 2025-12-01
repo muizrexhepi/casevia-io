@@ -1,168 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { Check, X, ChevronRight } from "lucide-react";
+import { Check, X, ArrowRight, Sparkles, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardFooter,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
-
-type Plan = {
-  id: string;
-  name: string;
-  slug: string | null;
-  price: string;
-  priceMonthly: number; // monthly price (base)
-  priceYearly: number; // monthly-equivalent when billed yearly (discounted)
-  description: string;
-  features: string[];
-  limits: { [key: string]: any };
-  cta: string;
-  popular: boolean;
-};
-type PlanId = "free" | "starter" | "pro" | "agency";
-
-/**
- * Pricing tuned per your request:
- * - Billing toggle A: show lower monthly-equivalent when yearly selected
- * - 17% discount for yearly billing (monthly * 0.83 -> rounded)
- *
- * Storage units are in MB inside limits; formatStorage converts to human string.
- */
-
-export const PLANS: Plan[] = [
-  {
-    id: "free",
-    name: "Free",
-    slug: null,
-    price: "$0",
-    priceMonthly: 0,
-    priceYearly: 0,
-    description: "Perfect for getting started",
-    features: [
-      "2 case studies / month",
-      "15 min max video length",
-      "Basic custom tone",
-      "1 team seat",
-    ],
-    limits: {
-      caseStudies: 2,
-      videoLength: 15,
-      storage: 25, // MB
-      socialPosts: 0,
-      teamSeats: 1,
-      designTemplates: 1,
-      noBranding: false,
-      seoOptimization: false,
-      fullCustomTone: false,
-      fullAnalytics: false,
-      prioritySupport: false,
-      dedicatedManager: false,
-    },
-    cta: "Get Started",
-    popular: false,
-  },
-  {
-    id: "starter",
-    name: "Starter",
-    slug: "starter",
-    price: "$39",
-    priceMonthly: 39,
-    priceYearly: 32, // 39 * 0.83 ~= 32.37 -> 32
-    description: "For independent professionals",
-    features: [
-      "8 case studies / month",
-      "30 min max video length",
-      "No Casevia branding",
-      "3 design templates",
-    ],
-    limits: {
-      caseStudies: 8,
-      videoLength: 30,
-      storage: 500, // MB
-      socialPosts: 1,
-      teamSeats: 1,
-      designTemplates: 3,
-      noBranding: true,
-      seoOptimization: false,
-      fullCustomTone: false,
-      fullAnalytics: false,
-      prioritySupport: false,
-      dedicatedManager: false,
-    },
-    cta: "Upgrade to Starter",
-    popular: false,
-  },
-  {
-    id: "pro",
-    name: "Pro",
-    slug: "pro",
-    price: "$99",
-    priceMonthly: 99,
-    priceYearly: 82, // 99 * 0.83 ~= 82.17 -> 82
-    description: "For growing teams",
-    features: [
-      "25 case studies / month",
-      "60 min max video length",
-      "SEO title/slug generation",
-      "5 team seats",
-      "Full analytics & insights",
-    ],
-    limits: {
-      caseStudies: 25,
-      videoLength: 60,
-      storage: 2048, // MB -> 2 GB
-      socialPosts: 3,
-      teamSeats: 5,
-      designTemplates: 10,
-      noBranding: true,
-      seoOptimization: true,
-      fullCustomTone: true,
-      fullAnalytics: true,
-      prioritySupport: true,
-      dedicatedManager: false,
-    },
-    cta: "Upgrade to Pro",
-    popular: true,
-  },
-  {
-    id: "agency",
-    name: "Agency",
-    slug: "agency",
-    price: "$199",
-    priceMonthly: 199,
-    priceYearly: 165, // 199 * 0.83 ~= 165.17 -> 165
-    description: "For agencies and larger teams",
-    features: [
-      "60 case studies / month",
-      "120 min max video length",
-      "High-priority processing",
-      "Dedicated account manager",
-    ],
-    limits: {
-      caseStudies: 60,
-      videoLength: 120,
-      storage: 5120, // MB -> 5 GB
-      socialPosts: 5,
-      teamSeats: -1, // unlimited
-      designTemplates: 10,
-      noBranding: true,
-      seoOptimization: true,
-      fullCustomTone: true,
-      fullAnalytics: true,
-      prioritySupport: true,
-      dedicatedManager: true,
-    },
-    cta: "Contact Sales",
-    popular: false,
-  },
-] as const;
+import { Plan, PlanId, PLANS } from "@/lib/plans";
 
 const formatStorage = (mb: number): string => {
   if (mb === -1) return "Unlimited";
@@ -240,321 +82,346 @@ const PlanValue = ({
 
   if (feature.boolean) {
     return limit ? (
-      <Check className="h-5 w-5 text-primary" />
+      <Check className="h-5 w-5 text-terracotta mx-auto md:mx-0" />
     ) : (
-      <X className="h-5 w-5 text-muted-foreground/30" />
+      <X className="h-5 w-5 text-charcoal/20 mx-auto md:mx-0" />
     );
   }
 
-  if (limit === -1) return <span className="text-foreground">Unlimited</span>;
+  if (limit === -1)
+    return <span className="text-charcoal font-medium">Unlimited</span>;
 
   if (feature.key === "storage") {
     return (
-      <span className="text-foreground">{formatStorage(limit as number)}</span>
+      <span className="text-charcoal font-medium">
+        {formatStorage(limit as number)}
+      </span>
     );
   }
 
   return (
-    <span className="text-foreground">
+    <span className="text-charcoal font-medium">
       {limit} {feature.unit}
     </span>
   );
 };
 
 export default function PricingClient() {
-  const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
 
+  // Fixed pricing logic
   const getPrice = (plan: Plan) => {
-    return billingCycle === "monthly" ? plan.priceMonthly : plan.priceYearly;
+    if (plan.id === "agency") return 0; // Prevent math on custom plans
+    if (plan.id === "free") return 0;
+
+    if (billingCycle === "monthly") {
+      return plan.priceMonthly;
+    } else {
+      // Return monthly equivalent for yearly billing (Yearly / 12)
+      return Math.round(plan.priceYearly / 12);
+    }
   };
 
   const ctaLinks: Record<PlanId, string> = {
     free: "/dashboard",
-    starter: "/checkout?plan=starter",
+    freelancer: "/checkout?plan=starter",
     pro: "/checkout?plan=pro",
     agency: "/contact-sales",
   };
 
   return (
-    <section className="max-w-6xl mx-auto container">
-      <div className="text-center space-y-5 py-12 md:py-24">
-        <h2 className="text-4xl md:text-5xl tracking-tight leading-[1] text-balance text-center">
-          Designed for every <br /> stage of{" "}
-          <span className="text-gradient-primary">your growth.</span>
-        </h2>
-        <p className="text-center text-muted-foreground max-w-lg mx-auto">
-          Start free, upgrade when you're ready to automate your content engine.
-          No credit card required to start.
-        </p>
+    <section className="w-full bg-cream text-charcoal selection:bg-terracotta selection:text-white px-4 md:px-8 lg:px-12">
+      <div className="max-w-7xl mx-auto py-16 md:py-24 border-t border-charcoal/5">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-16">
+          <div className="flex flex-col gap-6 max-w-2xl">
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-terracotta"></span>
+              <span className="font-sans text-xs font-semibold tracking-widest uppercase text-charcoal/60">
+                Plans & Pricing
+              </span>
+            </div>
+            <h2 className="font-serif text-5xl md:text-6xl text-charcoal leading-[0.9] tracking-tight">
+              Predictable costs, <br />
+              <span className="italic text-charcoal/70 font-light">
+                uncapped ROI.
+              </span>
+            </h2>
+            <p className="font-sans text-lg text-charcoal/70 font-light max-w-lg">
+              Start free, upgrade when you're ready to automate your content
+              engine. Pause or cancel anytime.
+            </p>
+          </div>
 
-        <div className="inline-flex items-center space-x-2 p-1 bg-muted shadow rounded-lg">
-          <Button
-            variant={billingCycle === "monthly" ? "default" : "ghost"}
-            onClick={() => setBillingCycle("monthly")}
-          >
-            Monthly
-          </Button>
-          <Button
-            variant={billingCycle === "yearly" ? "default" : "ghost"}
-            onClick={() => setBillingCycle("yearly")}
-          >
-            Annual
-          </Button>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4 bg-muted p-2 rounded-xl">
-        {PLANS.map((plan) => {
-          const isPopular = plan.popular;
-          const price = getPrice(plan);
-          const isContactSales = plan.id === "agency";
-
-          return (
-            <Card
-              key={plan.id}
-              className={`flex flex-col bg-background shadow-sm h-full transition-shadow duration-300 ${
-                isPopular ? "bg-white border-primary/40 shadow-primary" : ""
+          {/* Billing Toggle */}
+          <div className="flex items-center gap-1 bg-card-bg p-1 rounded-full border border-charcoal/5 self-start md:self-end">
+            <button
+              onClick={() => setBillingCycle("monthly")}
+              className={`px-6 py-2.5 rounded-full text-sm font-sans font-medium transition-all duration-300 ${
+                billingCycle === "monthly"
+                  ? "bg-white text-charcoal shadow-sm"
+                  : "text-charcoal/40 hover:text-charcoal"
               }`}
             >
-              <CardHeader className="pb-4 relative">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xl font-medium">{plan.name}</h3>
+              Monthly
+            </button>
+            <button
+              onClick={() => setBillingCycle("yearly")}
+              className={`px-6 py-2.5 rounded-full text-sm font-sans font-medium transition-all duration-300 flex items-center gap-2 ${
+                billingCycle === "yearly"
+                  ? "bg-terracotta text-white shadow-sm"
+                  : "text-charcoal/40 hover:text-charcoal"
+              }`}
+            >
+              Yearly
+              <span className="hidden sm:inline-block text-[10px] bg-charcoal/10 px-1.5 py-0.5 rounded uppercase tracking-wide">
+                -17%
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Pricing Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-24">
+          {PLANS.map((plan) => {
+            const isPopular = plan.popular;
+            const price = getPrice(plan); // Now returns monthly equivalent
+            const isContactSales = plan.id === "agency";
+            const isFree = plan.id === "free";
+
+            return (
+              <div
+                key={plan.id}
+                className={`relative flex flex-col p-6 rounded-2xl border transition-all duration-300 group ${
+                  isPopular
+                    ? "bg-white shadow-lg shadow-terracotta/10 border-terracotta/20 ring-1 ring-terracotta/10"
+                    : "bg-card-bg border-charcoal/5 hover:border-charcoal/10"
+                }`}
+              >
+                {isPopular && (
+                  <div className="absolute top-4 right-4 flex items-center gap-1.5 text-terracotta text-[10px] font-bold uppercase tracking-widest bg-terracotta/10 px-2 py-1 rounded">
+                    <Sparkles className="w-3 h-3 fill-current" />
+                    Popular
+                  </div>
+                )}
+
+                <div className="mb-6">
+                  <h3 className="font-serif text-2xl text-charcoal mb-2">
+                    {plan.name}
+                  </h3>
+                  <p className="font-sans text-sm text-charcoal/60 leading-relaxed min-h-[40px]">
+                    {plan.description}
+                  </p>
                 </div>
 
-                <div className="mt-4 flex items-center gap-2">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-5xl font-medium tracking-tight">
-                      {isContactSales ? plan.price : `$${Math.round(price)}`}
+                <div className="mb-8">
+                  <div className="flex items-baseline gap-1">
+                    <span className="font-serif text-5xl text-charcoal tracking-tight">
+                      {isContactSales ? plan.price : `$${price}`}
                     </span>
-                    {!isContactSales && price !== 0 && (
-                      <span className="text-muted-foreground text-sm">
-                        /month
+                    {!isContactSales && !isFree && (
+                      <span className="font-sans text-charcoal/50 text-sm">
+                        /mo
                       </span>
                     )}
                   </div>
-                  {billingCycle === "yearly" &&
-                    !isContactSales &&
-                    price !== 0 && (
-                      <Badge
-                        variant={"outline"}
-                        className="text-xs px-2 py-0.5 bg-primary/10 text-primary border-primary/30"
-                      >
-                        Save 17%
-                      </Badge>
-                    )}
+                  <p className="text-xs text-charcoal/50 mt-1 font-sans h-5 flex items-center">
+                    {billingCycle === "yearly" && !isFree
+                      ? `Billed $${plan.priceYearly} yearly`
+                      : !isFree
+                        ? "Billed monthly"
+                        : "\u00A0"}
+                  </p>
                 </div>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {billingCycle === "monthly"
-                    ? "Billed monthly"
-                    : "Billed annually"}
-                </p>
-              </CardHeader>
 
-              <CardContent className="flex-1 space-y-4">
-                <p className="font-medium text-sm">{plan.description}</p>
-                <ul className="space-y-3 text-sm">
-                  {plan.features.slice(0, 4).map((feature, index) => (
-                    <li
-                      key={index}
-                      className="flex items-center text-foreground"
-                    >
-                      <Check className="h-4 w-4 text-primary mr-2 shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-
-              <CardFooter className="">
-                <Button
-                  asChild
-                  className="w-full"
-                  variant={isPopular ? "default" : "outline"}
+                <Link
+                  href={ctaLinks[plan.id as PlanId]}
+                  className={`w-full py-3.5 rounded-lg font-sans text-sm font-medium flex items-center justify-center gap-2 transition-all duration-300 mb-8 ${
+                    isPopular
+                      ? "bg-terracotta text-white hover:bg-terracotta/90 shadow-md shadow-terracotta/20"
+                      : "bg-white text-charcoal hover:bg-charcoal/5 border border-charcoal/10"
+                  }`}
                 >
-                  <Link href={ctaLinks[plan.id as PlanId]}>
-                    {plan.cta}
-                    <ChevronRight className="h-4 w-4 ml-1" />
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          );
-        })}
-      </div>
+                  {plan.cta}
+                  {!isContactSales && <ArrowRight className="w-4 h-4" />}
+                </Link>
 
-      {/* Comparator Table Section */}
-      <div className="pt-12 lg:pt-24">
-        <div className="block lg:hidden space-y-6">
-          {COMPARATOR_CATEGORIES.map((category) => (
-            <div key={category.name} className="space-y-3">
-              <h3 className="text-sm font-semibold text-foreground">
-                {category.name}
-              </h3>
-              {category.features.map((feature) => (
-                <div key={feature.key} className="border-y">
-                  <div className="bg-muted/50 py-2.5 text-xs font-medium text-muted-foreground border-b">
-                    {feature.label}
-                  </div>
-                  <div className="divide-y bg-background">
-                    {PLANS.map((plan) => (
+                <div className="flex-grow space-y-3.5">
+                  <p className="text-xs font-semibold text-charcoal/40 uppercase tracking-widest mb-4">
+                    Includes
+                  </p>
+                  {plan.features.slice(0, 4).map((feature, idx) => (
+                    <div key={idx} className="flex items-start gap-3">
                       <div
-                        key={plan.id}
-                        className="flex items-center justify-between px-2 py-2.5"
+                        className={`mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center border ${
+                          isPopular
+                            ? "border-terracotta/50 bg-terracotta/10 text-terracotta"
+                            : "border-charcoal/10 text-charcoal/40 group-hover:text-terracotta group-hover:border-terracotta/30"
+                        }`}
                       >
-                        <span className="text-sm font-medium">{plan.name}</span>
-                        <div className="text-sm">
-                          <PlanValue plan={plan} feature={feature} />
-                        </div>
+                        <Check className="w-2.5 h-2.5" />
                       </div>
-                    ))}
-                  </div>
+                      <span className="text-sm text-charcoal/70 font-sans leading-tight">
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </div>
 
-        {/* Desktop Comparator - Table */}
-        <div className="hidden lg:block">
-          <table className="min-w-full">
-            <thead className="sticky top-16 bg-background z-10">
-              <tr className="">
-                <th className="py-4 px-6 text-left text-sm font-medium text-muted-foreground w-1/4 bg-background"></th>
-                {PLANS.map((plan) => (
-                  <th
-                    key={plan.id}
-                    className="py-4 px-6 text-left text-base font-semibold text-foreground bg-background"
+        {/* Detailed Comparison Table */}
+        <div className="py-12">
+          {/* Mobile View (Stacked) */}
+          <div className="block lg:hidden space-y-8">
+            {COMPARATOR_CATEGORIES.map((category) => (
+              <div key={category.name} className="space-y-4">
+                <h3 className="text-xs font-semibold text-charcoal/50 uppercase tracking-widest pl-1">
+                  {category.name}
+                </h3>
+                {category.features.map((feature) => (
+                  <div
+                    key={feature.key}
+                    className="bg-card-bg rounded-xl border border-charcoal/5 overflow-hidden"
                   >
-                    {plan.name}
-                    {plan.popular && (
-                      <Badge
-                        variant="outline"
-                        className="ml-2 text-xs bg-primary/10 text-primary border-primary/30"
-                      >
-                        Popular
-                      </Badge>
-                    )}
-                  </th>
-                ))}
-              </tr>
-              <tr className="">
-                <td className="py-4 px-6 bg-background"></td>
-                {PLANS.map((plan) => {
-                  const price = getPrice(plan);
-                  const isContactSales = plan.id === "agency";
-                  return (
-                    <td key={plan.id} className="py-4 px-6 bg-background">
-                      <div className="space-y-1">
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-3xl font-semibold">
-                            {isContactSales
-                              ? plan.price
-                              : `$${Math.round(price)}`}
+                    <div className="bg-charcoal/5 py-3 px-4 text-xs font-medium text-charcoal/70 border-b border-charcoal/5">
+                      {feature.label}
+                    </div>
+                    <div className="divide-y divide-charcoal/5">
+                      {PLANS.map((plan) => (
+                        <div
+                          key={plan.id}
+                          className="flex items-center justify-between px-4 py-3"
+                        >
+                          <span className="text-sm font-medium text-charcoal">
+                            {plan.name}
                           </span>
-                          {!isContactSales && price !== 0 && (
-                            <span className="text-sm text-muted-foreground">
-                              /month
+                          <div className="text-sm">
+                            <PlanValue plan={plan} feature={feature} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop View (Table) */}
+          <div className="hidden lg:block relative">
+            <table className="w-full">
+              <thead className="sticky top-20 z-20 bg-cream">
+                <tr className="">
+                  <th className="py-6 px-6 text-left text-sm font-medium text-charcoal/40 w-1/4">
+                    {/* Empty top-left cell */}
+                  </th>
+                  {PLANS.map((plan) => (
+                    <th
+                      key={plan.id}
+                      className="py-6 px-6 text-left align-bottom"
+                    >
+                      <div className="flex flex-col gap-2">
+                        <div className="flex items-center gap-2">
+                          <span className="font-serif text-xl text-charcoal">
+                            {plan.name}
+                          </span>
+                          {plan.popular && (
+                            <span className="text-[10px] bg-terracotta/10 text-terracotta px-1.5 py-0.5 rounded border border-terracotta/20">
+                              Popular
                             </span>
                           )}
                         </div>
-                        <p className="text-sm text-muted-foreground">
-                          {billingCycle === "monthly"
-                            ? "Billed monthly"
-                            : "Billed annually (monthly price shown)"}
-                        </p>
-                      </div>
-                    </td>
-                  );
-                })}
-              </tr>
-              <tr className="border-b border-border">
-                <td className="py-4 px-6 bg-background"></td>
-                {PLANS.map((plan) => (
-                  <td key={plan.id} className="py-4 px-6 bg-background">
-                    <Button
-                      asChild
-                      className="w-full"
-                      variant={plan.popular ? "default" : "outline"}
-                    >
-                      <Link href={ctaLinks[plan.id as PlanId]}>
-                        {plan.cta}
-                        <ChevronRight className="h-4 w-4 ml-1" />
-                      </Link>
-                    </Button>
-                  </td>
-                ))}
-              </tr>
-            </thead>
-
-            <tbody>
-              {COMPARATOR_CATEGORIES.map((category, categoryIndex) => (
-                <React.Fragment key={category.name}>
-                  <tr>
-                    <td
-                      colSpan={PLANS.length + 1}
-                      className={`py-4 px-6 text-left text-sm font-semibold text-foreground ${
-                        categoryIndex === 0 ? "pt-8" : "pt-12"
-                      }`}
-                    >
-                      {category.name}
-                    </td>
-                  </tr>
-
-                  {category.features.map((feature) => (
-                    <tr key={feature.key} className="border-t border-border/50">
-                      <td className="py-4 px-6 text-sm text-muted-foreground">
-                        {feature.label}
-                      </td>
-
-                      {PLANS.map((plan) => (
-                        <td
-                          key={plan.id}
-                          className="py-4 px-6 text-left text-sm"
+                        <div className="flex items-baseline gap-1">
+                          <span className="font-sans text-2xl text-charcoal font-semibold">
+                            {plan.id === "agency"
+                              ? plan.price
+                              : `$${getPrice(plan)}`}
+                          </span>
+                          {plan.id !== "agency" && plan.id !== "free" && (
+                            <span className="text-xs text-charcoal/50">
+                              /mo
+                            </span>
+                          )}
+                        </div>
+                        <Button
+                          asChild
+                          variant={plan.popular ? "default" : "outline"}
+                          className={`w-full mt-2 h-9 text-xs font-medium ${
+                            plan.popular
+                              ? "bg-terracotta text-white hover:bg-terracotta/90"
+                              : "bg-white text-charcoal hover:bg-charcoal/5 border-charcoal/10"
+                          }`}
                         >
-                          <PlanValue plan={plan} feature={feature} />
-                        </td>
-                      ))}
-                    </tr>
+                          <Link href={ctaLinks[plan.id as PlanId]}>
+                            {plan.cta}
+                          </Link>
+                        </Button>
+                      </div>
+                    </th>
                   ))}
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+                </tr>
+              </thead>
 
-      <div className="py-12 lg:py-24 text-center space-y-6">
-        <div className="max-w-2xl mx-auto space-y-4">
-          <h3 className="text-2xl font-semibold text-balance">
-            Need a custom plan for your team?
+              <tbody className="divide-y divide-charcoal/5">
+                {COMPARATOR_CATEGORIES.map((category) => (
+                  <React.Fragment key={category.name}>
+                    {/* Category Header Row */}
+                    <tr className="bg-charcoal/[0.02]">
+                      <td
+                        colSpan={PLANS.length + 1}
+                        className="py-4 px-6 text-xs font-bold uppercase tracking-widest text-charcoal/50 pt-8"
+                      >
+                        {category.name}
+                      </td>
+                    </tr>
+                    {/* Feature Rows */}
+                    {category.features.map((feature) => (
+                      <tr
+                        key={feature.key}
+                        className="hover:bg-charcoal/[0.02] transition-colors group"
+                      >
+                        <td className="py-4 px-6 text-sm text-charcoal/70 font-medium group-hover:text-charcoal transition-colors">
+                          {feature.label}
+                        </td>
+                        {PLANS.map((plan) => (
+                          <td
+                            key={plan.id}
+                            className="py-4 px-6 text-sm text-charcoal/80"
+                          >
+                            <PlanValue plan={plan} feature={feature} />
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Footer CTA */}
+        <div className="py-12 text-center">
+          <h3 className="text-2xl font-serif text-charcoal mb-4">
+            Still have questions?
           </h3>
-          <p className="text-muted-foreground">
-            Talk to our sales team about custom pricing, enterprise features,
-            and volume discounts for larger organizations.
-          </p>
-        </div>
-        <div className="flex gap-4 justify-center items-center">
-          <Button asChild size="lg" className="text-base px-8">
-            <Link href="/contact">
-              Contact Sales
-              <ChevronRight className="h-4 w-4 ml-1" />
-            </Link>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="text-base px-8"
-          >
-            <Link href="/dashboard">
-              Start for free
-              <ChevronRight className="h-4 w-4 ml-1" />
-            </Link>
-          </Button>
+          <div className="flex justify-center gap-4">
+            <Button
+              asChild
+              size="lg"
+              className="bg-charcoal text-white hover:bg-charcoal/90 rounded-full px-8"
+            >
+              <Link href="/contact" className="flex items-center gap-2">
+                Talk to Sales
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
-
-      <Separator />
     </section>
   );
 }

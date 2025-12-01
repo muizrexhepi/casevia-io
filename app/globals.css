@@ -68,6 +68,7 @@
     color: var(--color-charcoal);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
   }
 
   /* Custom selection color */
