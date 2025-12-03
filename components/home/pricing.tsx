@@ -43,11 +43,9 @@ const Pricing: React.FC = () => {
                 }`}
               >
                 Yearly
-                {billingCycle === "yearly" && (
-                  <span className="hidden sm:inline-block text-[10px] bg-black/20 px-1.5 py-0.5 rounded uppercase tracking-wide font-bold">
-                    Save 17%
-                  </span>
-                )}
+                <span className="hidden sm:inline-block text-[10px] bg-black/20 px-1.5 py-0.5 rounded uppercase tracking-wide font-bold">
+                  Save 17%
+                </span>
               </button>
             </div>
           </div>

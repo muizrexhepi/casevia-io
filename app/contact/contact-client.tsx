@@ -14,16 +14,55 @@ export default function ContactClient() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Handle form submission
-    console.log("Form submitted:", formData);
-    // Simulate API call
-    setTimeout(() => {
+    setSubmitStatus({ type: null, message: "" });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitStatus({
+          type: "success",
+          message:
+            "Thank you! We've received your message and will respond within 24 hours.",
+        });
+        // Reset form
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          company: "",
+          message: "",
+        });
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: data.error || "Something went wrong. Please try again.",
+        });
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: "error",
+        message: "Failed to send message. Please try again later.",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const handleChange = (field: string, value: string) => {
@@ -163,6 +202,20 @@ export default function ContactClient() {
               <h2 className="font-serif text-2xl md:text-3xl text-charcoal mb-6 tracking-tight">
                 Send us a message
               </h2>
+
+              {/* Success/Error Message */}
+              {submitStatus.type && (
+                <div
+                  className={`p-4 rounded-xl mb-6 ${
+                    submitStatus.type === "success"
+                      ? "bg-green-50 border border-green-200 text-green-800"
+                      : "bg-red-50 border border-red-200 text-red-800"
+                  }`}
+                >
+                  <p className="text-sm font-medium">{submitStatus.message}</p>
+                </div>
+              )}
+
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Name Fields */}
                 <div className="grid md:grid-cols-2 gap-4">

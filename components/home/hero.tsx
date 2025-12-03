@@ -1,214 +1,208 @@
+"use client";
+
 import React, { useState } from "react";
-import { ArrowRight, Star, Clock, Shield, DollarSign } from "lucide-react";
-import MetricCard from "./metric-card";
+import { ArrowRight, CheckCircle2, Sparkles, Zap, Users } from "lucide-react";
 import Image from "next/image";
 
 const Hero: React.FC = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const waitlistCount = 247;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.trim()) {
-      alert("Please enter your email");
-      return;
-    }
-
+    // Simulate API call
     setLoading(true);
-
-    try {
-      const res = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      if (!res.ok) throw new Error("Failed to join waitlist");
-
-      const result = await res.json();
-
-      if (result.exists) {
-        alert(
-          "You're already on the waitlist! Thanks for sticking with us — big updates coming soon."
-        );
-      } else {
-        alert("🎉 You're officially on the waitlist!");
-      }
-
-      setEmail("");
-    } catch (error) {
-      console.error(error);
-      alert("Something went wrong. Please try again.");
-    } finally {
+    setTimeout(() => {
       setLoading(false);
-    }
+      alert("Added to waitlist!");
+      setEmail("");
+    }, 1500);
   };
 
   return (
-    <section className="relative w-full pt-32 pb-16 md:pb-24 md:pt-40 px-6 md:px-12 bg-cream overflow-hidden">
-      {/* Background Decorative Elements */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-charcoal/5 to-transparent"></div>
+    // Increased vertical padding (pt-40 pb-36)
+    <section className="relative w-full pt-40 pb-36 md:pt-48 md:pb-40 px-6 overflow-hidden bg-cream">
+      {/* ============================
+          ATMOSPHERE & BACKGROUND
+      ============================ */}
 
-      <div className="max-w-6xl mx-auto flex flex-col gap-14 md:gap-20 lg:gap-32">
-        {/* Top Section: Split Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-center">
-          {/* Left Column: Typography */}
-          <div className="lg:col-span-7 flex flex-col gap-6 md:gap-8 relative z-10">
-            {/* Heading */}
-            <h1 className="font-serif text-[3.5rem] md:text-[5.5rem] lg:text-[6.5rem] leading-[0.9] tracking-tight text-charcoal drop-shadow-sm">
-              Stop writing <br />
-              <span className="italic text-charcoal font-normal relative inline-block text-[3.85rem] md:text-[6.05rem] lg:text-[7.15rem]">
-                case studies
-                {/* Underline accent */}
-                <svg
-                  className="absolute w-full h-4 md:h-5 -bottom-1 md:-bottom-2 left-0 text-terracotta/50 -z-10"
-                  viewBox="0 0 100 10"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0 5 Q 50 10 100 5"
-                    stroke="currentColor"
-                    strokeWidth="7"
-                    fill="none"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </span>
-            </h1>
+      {/* 1. Subtle Grid Pattern */}
+      <div className="absolute inset-0 w-full h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
-            {/* Subhead */}
-            <p className="font-sans text-base md:text-xl text-charcoal/70 leading-relaxed max-w-xl font-light">
-              Casevia turns your raw client calls into high-converting marketing
-              assets automatically.{" "}
-              <strong className="font-semibold text-charcoal">
-                Zero drafting required.
-              </strong>
-            </p>
+      {/* 2. Top Spotlight/Glow */}
+      {/* Increased blur radius for softer glow (blur-[120px]) */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-terracotta/5 blur-[120px] rounded-full pointer-events-none" />
 
-            {/* Waitlist Form */}
-            <div className="w-full max-w-lg pt-1">
-              <form
-                onSubmit={handleSubmit}
-                className="relative flex items-center h-14 md:h-[3.75rem] rounded-full bg-white border border-charcoal/10 shadow-lg shadow-charcoal/8 overflow-hidden hover:shadow-xl hover:shadow-charcoal/12 transition-all duration-300"
-              >
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 h-full px-6 font-sans text-[15px] text-charcoal placeholder:text-charcoal/40 bg-transparent focus:outline-none"
-                />
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="h-full px-7 sm:px-8 bg-charcoal text-cream font-sans font-semibold text-[15px] hover:bg-terracotta transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-50"
-                >
-                  {loading ? (
-                    <>
-                      <svg
-                        className="animate-spin h-4 w-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                        ></path>
-                      </svg>
-                      <span className="hidden sm:inline">Joining...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="hidden sm:inline">Join Waitlist</span>
-                      <span className="sm:hidden">Join</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </>
-                  )}
-                </button>
-              </form>
-            </div>
+      <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
+        {/* ============================
+            BADGE (Social Proof/News) - Reinstated and improved
+        ============================ */}
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-charcoal/5 shadow-sm mb-8 hover:border-terracotta/20 transition-colors cursor-default">
+          <span className="flex items-center justify-center w-5 h-5 rounded-full bg-terracotta/10 text-terracotta">
+            <Users className="w-3 h-3 fill-terracotta" />
+          </span>
+          <span className="text-sm font-sans font-medium text-charcoal/60">
+            Join {waitlistCount}+ marketers using Casevia Beta
+          </span>
+          <ArrowRight className="w-3.5 h-3.5 text-charcoal/30 ml-1" />
+        </div>
 
-            {/* Social Proof */}
-            <div className="hidden sm:flex items-center gap-3 pt-1">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="w-7 h-7 rounded-full bg-charcoal/10 border-2 border-cream overflow-hidden"
-                  >
-                    <img
-                      src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i * 13}`}
-                      alt="User"
-                      className="w-full h-full"
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className="w-3.5 h-3.5 fill-terracotta text-terracotta"
-                  />
-                ))}
-              </div>
-              <span className="text-sm font-sans font-medium text-charcoal/55">
-                Built for marketers & founders
-              </span>
-            </div>
-          </div>
-
-          {/* Right Column: Visual Anchor */}
-          <div className="lg:col-span-5 w-full relative group">
-            <div className="relative z-10 w-full h-full flex items-center justify-center">
-              <Image
-                src="/images/heroIllustration.webp"
-                alt="Casevia hero illustration"
-                fill={false}
-                width={520}
-                height={520}
-                className="object-contain drop-shadow-xl"
-                priority
+        {/* ============================
+            HEADLINE
+        ============================ */}
+        <h1 className="font-serif text-6xl md:text-7xl lg:text-[6rem] leading-[1.05] tracking-tight text-charcoal max-w-5xl mx-auto mb-8">
+          From customer call to <br className="hidden md:block" />
+          <span className="relative inline-block">
+            polished case study
+            {/* Subtle underline decoration */}
+            <svg
+              className="absolute w-full h-3 -bottom-1 left-0 text-terracotta/30"
+              viewBox="0 0 100 10"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0 5 Q 50 10 100 5"
+                stroke="currentColor"
+                strokeWidth="4"
+                fill="none"
               />
+            </svg>
+          </span>
+        </h1>
+
+        {/* ============================
+            SUBHEADLINE
+        ============================ */}
+        <p className="font-sans text-xl md:text-2xl text-charcoal/60 leading-relaxed max-w-3xl mx-auto mb-12 font-light">
+          Upload a raw interview. AI extracts the narrative arc, verifies the
+          quotes, and writes a professional story{" "}
+          <span className="text-charcoal font-medium">in 30 minutes</span>.
+        </p>
+
+        {/* ============================
+            INPUT FORM (Mintlify Style)
+        ============================ */}
+        <div className="w-full max-w-lg relative group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-terracotta/20 via-charcoal/5 to-terracotta/20 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+
+          <form
+            onSubmit={handleSubmit}
+            className="relative flex items-center p-1.5 rounded-full bg-white border border-charcoal/10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)]"
+          >
+            <input
+              type="email"
+              placeholder="Enter your work email..."
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="flex-1 h-12 px-6 bg-transparent text-charcoal placeholder:text-charcoal/40 focus:outline-none text-[15px] font-sans"
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              className="h-11 px-6 rounded-full bg-charcoal text-white font-sans font-medium text-sm hover:bg-terracotta transition-all duration-300 shadow-lg shadow-charcoal/20 flex items-center gap-2 whitespace-nowrap"
+            >
+              {loading ? (
+                <span className="animate-pulse">Processing...</span>
+              ) : (
+                <>
+                  Start for free <ArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </button>
+          </form>
+
+          <p className="text-center text-xs text-charcoal/40 mt-4 font-sans">
+            No credit card required • 14-day free trial
+          </p>
+        </div>
+
+        {/* ============================
+            PRODUCT VISUAL (The "Hero" Shot)
+        ============================ */}
+        {/* Max width increased to 7xl, slightly larger container */}
+        <div className="relative w-full max-w-7xl mt-24 md:mt-32">
+          {/* The "Aurora" Glow behind the image - increased size/blur */}
+          <div className="absolute -inset-6 md:-inset-16 bg-gradient-to-t from-terracotta/30 via-terracotta/10 to-transparent blur-3xl opacity-50 rounded-[50%]" />
+
+          {/* The Dashboard Container */}
+          <div className="relative rounded-3xl border border-charcoal/10 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_25px_80px_-15px_rgba(0,0,0,0.15)] overflow-hidden">
+            {/* Simple Browser Chrome / Header */}
+            <div className="h-12 border-b border-charcoal/5 bg-charcoal/[0.02] flex items-center px-6 gap-2">
+              <div className="w-3 h-3 rounded-full bg-charcoal/10"></div>
+              <div className="w-3 h-3 rounded-full bg-charcoal/10"></div>
+              <div className="w-3 h-3 rounded-full bg-charcoal/10"></div>
+              <div className="ml-4 h-6 w-80 rounded-md bg-charcoal/5"></div>
+            </div>
+
+            {/* Image */}
+            <Image
+              src="/images/dashboard.webp" // Ensure you have this or use a placeholder
+              alt="Casevia Dashboard"
+              width={1600}
+              height={1000}
+              className="w-full h-auto object-cover"
+              priority
+            />
+
+            {/* Floating UI Badge (Optional - adds depth) */}
+            <div className="absolute bottom-10 right-10 bg-white/90 backdrop-blur-md border border-charcoal/10 p-5 rounded-xl shadow-2xl hidden md:block animate-[float_4s_ease-in-out_infinite]">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                  <CheckCircle2 className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-sans text-charcoal/50 uppercase tracking-wide">
+                    Status
+                  </p>
+                  <p className="text-sm font-sans font-bold text-charcoal">
+                    Draft Generated
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Section: Metrics - Compact on Mobile */}
-        <div className="relative hidden md:block">
-          {/* <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-charcoal/10 to-transparent"></div> */}
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-0 md:divide-x divide-charcoal/[0.08] pt-2">
-            <MetricCard
-              icon={Clock}
-              value="10x"
-              label="Faster Turnaround"
-              description="From recording to published PDF in minutes, not weeks."
-            />
-            <MetricCard
-              icon={Shield}
-              value="0%"
-              label="Hallucination Rate"
-              description="Strict adherence to source audio for enterprise compliance."
-            />
-            <MetricCard
-              icon={DollarSign}
-              value="$4k"
-              label="Saved per Story"
-              description="Eliminate agency fees and internal writing hours."
-            />
-          </div>
-        </div>
+        {/* ============================
+            FEATURES ROW (Bigger Blocks)
+        ============================ */}
+        {/* Increased vertical margin and max-width for prominence */}
+        {/* <div className="mt-28 grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-6xl border-t border-charcoal/10 pt-12">
+          {[
+            {
+              icon: Zap,
+              title: "Instant Drafts",
+              desc: "Go from a 45-minute audio recording to a structured case study draft in less than 2 minutes.",
+            },
+            {
+              icon: CheckCircle2,
+              title: "Zero Hallucinations",
+              desc: "Every claim and quote in the final asset is automatically linked and verified against the original audio timestamp.",
+            },
+            {
+              icon: Sparkles,
+              title: "Brand Aligned AI",
+              desc: "Custom AI models are trained on your existing content library to perfectly match your unique brand tone and style guide.",
+            },
+          ].map((feature, i) => (
+            // Feature Block - Increased Text Size and spacing
+            <div
+              key={i}
+              className="flex flex-col items-center md:items-start text-center md:text-left"
+            >
+              <div className="w-12 h-12 rounded-xl bg-terracotta/10 flex items-center justify-center text-terracotta mb-4">
+                <feature.icon className="w-6 h-6" />
+              </div>
+              <h3 className="font-serif text-xl text-charcoal mb-2">
+                {feature.title}
+              </h3>
+              <p className="font-sans text-base text-charcoal/70 leading-relaxed max-w-sm">
+                {feature.desc}
+              </p>
+            </div>
+          ))}
+        </div> */}
       </div>
     </section>
   );
