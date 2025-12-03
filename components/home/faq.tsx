@@ -46,7 +46,7 @@ const FAQ: React.FC = () => {
                 questions.
               </span>
             </h2>
-            <p className="font-sans text-lg md:text-xl text-charcoal/70 leading-relaxed font-light max-w-xl">
+            <p className="font-sans text-lg md:text-xl text-charcoal/80 leading-relaxed font-light max-w-xl">
               Everything you need to know about the product and billing.
             </p>
             <a

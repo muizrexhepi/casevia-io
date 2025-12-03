@@ -10,8 +10,8 @@ export default function App() {
   return (
     <div className="min-h-screen font-sans">
       <Hero />
-      <SeeItInAction />
-      <BentoGrid />
+      {/* <SeeItInAction /> */}
+      {/* <BentoGrid /> */}
       <AppShowcase />
       <Pricing />
       <FAQ />

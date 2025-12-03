@@ -53,7 +53,7 @@ const Navbar: React.FC = () => {
             onClick={openWaitlist}
             className="bg-charcoal text-cream px-5 py-2.5 rounded-full font-sans text-sm font-medium hover:bg-terracotta transition-all duration-300 flex items-center gap-2 group shadow-lg shadow-charcoal/5 hover:shadow-terracotta/20"
           >
-            Get Started
+            Get started free
             <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
           </button>
         </div>

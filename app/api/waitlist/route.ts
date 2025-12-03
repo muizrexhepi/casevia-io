@@ -1,66 +1,61 @@
-import WaitlistConfirmation from "@/components/emails/waitlist-confirmation";
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { supabase } from "@/lib/supabase/client";
+import WaitlistConfirmation from "@/components/emails/waitlist-confirmation";
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
 const AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID!;
 
-export async function POST(request: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    const { email } = await request.json();
+    const { email, fullName, company, role, useCase } = await req.json();
+
     if (!email || !email.includes("@")) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
-    try {
-      const { data: existingContact } = await resend.contacts.get({
-        email,
-        audienceId: AUDIENCE_ID,
-      });
+    // Check Supabase for duplication
+    const { data: existing } = await supabase
+      .from("waitlist")
+      .select("id")
+      .eq("email", email)
+      .single();
 
-      if (existingContact) {
-        console.log(`Contact ${email} already on waitlist. Returning success.`);
-        return NextResponse.json({ success: true, exists: true });
-      }
-    } catch (error: any) {
-      // 404 error means contact does not exist, proceed.
+    let exists = !!existing;
+
+    if (!exists) {
+      // Insert into Supabase
+      await supabase.from("waitlist").insert({
+        email,
+        full_name: fullName,
+        company,
+        role,
+        use_case: useCase,
+      });
     }
 
-    const { data: createData, error: createError } =
+    // Add to Resend audience
+    try {
       await resend.contacts.create({
         email,
         audienceId: AUDIENCE_ID,
         unsubscribed: false,
       });
+    } catch {}
 
-    if (createError) {
-      console.error("Resend create contact error:", createError);
-      return NextResponse.json(
-        { error: "Failed to add to waitlist" },
-        { status: 500 }
-      );
-    }
-
-    try {
-      const { data: sendData, error: sendError } = await resend.emails.send({
+    // Send confirmation email only first time
+    if (!exists) {
+      await resend.emails.send({
         from: "Casevia <hello@muizrexhepi.com>",
         to: email,
         subject: "🎉 You're on the Casevia Waitlist!",
         react: WaitlistConfirmation({ userEmail: email }),
       });
-
-      if (sendError) {
-        console.error("Failed to send confirmation email:", sendError);
-      } else {
-        console.log("Confirmation email sent successfully:", sendData);
-      }
-    } catch (emailErr) {
-      console.error("Error in sending email block:", emailErr);
     }
 
-    return NextResponse.json({ success: true, exists: false });
+    return NextResponse.json({ success: true, exists });
   } catch (err) {
-    console.error("Waitlist error:", err);
+    console.error(err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

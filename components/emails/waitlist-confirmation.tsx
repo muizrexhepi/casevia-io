@@ -8,16 +8,16 @@ import {
   Text,
   Section,
   Button,
-  Hr, // Added Horizontal Rule for separation
+  Hr,
 } from "@react-email/components";
 
 interface WaitlistConfirmationProps {
   userEmail: string;
+  queuePosition?: number;
 }
 
-// --- Styles for a clean, modern look ---
 const main = {
-  backgroundColor: "#f9fafb", // Light gray background for the body
+  backgroundColor: "#f8f8f8",
   fontFamily: "Helvetica, Arial, sans-serif",
   padding: "40px 0",
 };
@@ -26,96 +26,138 @@ const container = {
   margin: "0 auto",
   width: "580px",
   backgroundColor: "#ffffff",
-  border: "1px solid #e5e7eb", // Light border
-  borderRadius: "12px", // Slightly more rounded corners
-  boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)", // Subtle shadow
+  border: "1px solid #e5e7eb",
+  borderRadius: "14px",
+  boxShadow: "0 4px 8px rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.06)",
   overflow: "hidden" as const,
 };
 
 const contentBox = {
-  padding: "30px 40px",
+  padding: "36px 42px",
 };
 
 const paragraph = {
   fontSize: "16px",
-  lineHeight: "26px", // Increased line height for readability
-  color: "#374151", // Darker gray for better contrast
+  lineHeight: "26px",
+  color: "#374151",
 };
 
 const heading = {
-  fontSize: "28px",
-  fontWeight: "700",
+  fontSize: "30px",
+  fontWeight: 700,
   color: "#111827",
-  marginBottom: "20px",
+  marginBottom: "22px",
+};
+
+const badge = {
+  display: "inline-block",
+  padding: "6px 12px",
+  fontSize: "12px",
+  fontWeight: 600,
+  backgroundColor: "#fef3c7",
+  color: "#92400e",
+  borderRadius: "8px",
+  marginBottom: "18px",
 };
 
 const button = {
-  backgroundColor: "#111827", // A very dark gray/near black for premium feel
+  backgroundColor: "#111827",
   borderRadius: "8px",
   color: "#ffffff",
   fontSize: "16px",
   textDecoration: "none",
   textAlign: "center" as const,
   display: "block",
-  padding: "14px 28px", // Slightly larger padding
-  fontWeight: "600",
-  width: "250px", // A bit wider for better clickability
-  margin: "30px auto",
+  padding: "14px 28px",
+  fontWeight: 600,
+  width: "260px",
+  margin: "32px auto",
 };
 
 const logoStyle = {
   textAlign: "center" as const,
-  fontSize: "32px", // Larger logo text
-  fontWeight: "extrabold" as const,
+  fontSize: "34px",
+  fontWeight: 800 as const,
   color: "#111827",
-  padding: "15px 0 25px 0",
+  paddingBottom: "20px",
 };
 
 export const WaitlistConfirmation = ({
   userEmail,
+  queuePosition = 248,
 }: WaitlistConfirmationProps) => (
   <Html>
     <Head />
-    <Preview>🎉 Welcome to the Casevia Waitlist!</Preview>
+    <Preview>Your Casevia early access is reserved</Preview>
+
     <Body style={main}>
       <Container style={container}>
         <Section style={contentBox}>
           <div style={logoStyle}>Casevia</div>
 
+          {/* Priority Queue Badge */}
+          <div style={badge}>You are #{queuePosition} in the queue</div>
+
           <Heading as="h1" style={heading}>
-            You're on the list!
+            Welcome — your early access is reserved 🎉
           </Heading>
 
           <Text style={paragraph}>
-            Thanks for joining the waitlist for <strong>Casevia</strong>—the
-            <strong>
-              AI-powered solution to automate your case study pipeline
-            </strong>
-            . Your spot is reserved!
+            Thanks for joining the <strong>Casevia Early Access</strong> list.
+            You're now officially in line to try the tool that turns recorded
+            customer interviews into{" "}
+            <strong>polished, structured case studies</strong>— in under 30
+            minutes.
           </Text>
 
           <Text style={paragraph}>
-            We'll be sure to notify you when we launch. In the meantime, we'll
-            be posting <strong>product updates and sneak peeks</strong> on our X
-            (formerly Twitter) handle.
+            Over the next few days, I’ll share product previews, a real
+            case-study transformation, and your early-access invite.
           </Text>
 
-          <Text style={{ ...paragraph, fontWeight: "bold", marginTop: "25px" }}>
-            Your registered email: {userEmail}
+          <Text
+            style={{
+              ...paragraph,
+              marginTop: "24px",
+              fontWeight: 600,
+              color: "#111827",
+            }}
+          >
+            Your early-access perks:
+          </Text>
+
+          <Text style={paragraph}>
+            • 🎁 <strong>Lifetime 50% discount</strong> (locked in) <br />
+            • ⚡ Priority onboarding <br />• 🔒 Access before the public launch
+          </Text>
+
+          <Text
+            style={{
+              ...paragraph,
+              marginTop: "28px",
+              fontWeight: 600,
+            }}
+          >
+            Registered email: {userEmail}
           </Text>
 
           <Section style={{ textAlign: "center" }}>
             <Button style={button} href="https://x.com/muiz_rexhepi">
-              Follow for Updates on X
+              Follow updates on X
             </Button>
           </Section>
 
-          <Hr style={{ borderTop: "1px solid #e5e7eb", margin: "20px 0" }} />
+          <Hr
+            style={{
+              borderTop: "1px solid #e5e7eb",
+              margin: "24px 0",
+            }}
+          />
 
           <Text style={paragraph}>
-            Best regards,
-            <br />
-            The Casevia Team
+            Talk soon, <br />
+            <strong>Muiz</strong> <br />
+            Founder, Casevia
           </Text>
         </Section>
       </Container>

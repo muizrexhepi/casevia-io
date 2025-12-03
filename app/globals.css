@@ -2,10 +2,11 @@
 
 @theme {
   /* Custom Colors */
-  --color-cream: #f3f1e7;
+  --color-cream: #f7f5ef;
   --color-charcoal: #1a1a1a;
-  --color-terracotta: #d97757;
-  --color-card-bg: #eae8de;
+  --color-terracotta: #d77a50;
+  --color-bone: #faf9f6;
+  --color-gray: #6f6f6f;
 
   /* Custom Fonts */
   /* Note: Ensure these fonts are loaded in your layout.tsx via next/font/google or @font-face */

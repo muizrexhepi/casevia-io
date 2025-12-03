@@ -8,16 +8,33 @@ import { toast } from "sonner";
 export const WaitlistModal: React.FC = () => {
   const { isOpen, closeWaitlist } = useWaitlistStore();
 
-  const [email, setEmail] = useState("");
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    company: "",
+    role: "",
+    intention: "",
+  });
+
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
+  // Handle field change
+  const update = (key: string, value: string) =>
+    setForm((prev) => ({ ...prev, [key]: value }));
+
   useEffect(() => {
     if (isOpen) {
       setSubmitted(false);
-      setEmail("");
       setError("");
+      setForm({
+        fullName: "",
+        email: "",
+        company: "",
+        role: "",
+        intention: "",
+      });
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
@@ -32,8 +49,8 @@ export const WaitlistModal: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!email.trim()) {
-      setError("Please enter your email address.");
+    if (!form.email.includes("@")) {
+      setError("Please enter a valid email address.");
       return;
     }
 
@@ -44,28 +61,23 @@ export const WaitlistModal: React.FC = () => {
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify(form),
       });
-
-      if (!res.ok) throw new Error("Failed to join waitlist");
 
       const result = await res.json();
 
       if (result.exists) {
         toast("You're already on the waitlist!", {
-          description: "We'll keep you posted with updates!",
+          description: "We'll keep you updated.",
         });
-        setSubmitted(true);
       } else {
         toast.success("🎉 You're on the waitlist!");
-        setSubmitted(true);
       }
 
-      setEmail("");
-    } catch (err) {
-      console.error(err);
+      setSubmitted(true);
+    } catch (err: any) {
       setError("Something went wrong. Please try again.");
-      toast.error("Something went wrong. Please try again.");
+      toast.error("Something went wrong.");
     } finally {
       setLoading(false);
     }
@@ -75,94 +87,152 @@ export const WaitlistModal: React.FC = () => {
     <div className="fixed inset-0 z-[100] flex items-center justify-center px-4 font-sans">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-charcoal/70 backdrop-blur-md transition-opacity duration-300"
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
         onClick={closeWaitlist}
       />
 
-      {/* Modal Content */}
-      <div className="bg-cream w-full max-w-md p-8 md:p-10 relative z-10 animate-fade-up border border-charcoal/[0.08] shadow-2xl shadow-charcoal/20 rounded-2xl">
+      {/* Panel */}
+      <div className="bg-cream w-full max-w-2xl p-10 relative z-10 animate-fade-up rounded-2xl border border-charcoal/10 shadow-2xl shadow-black/20">
+        {/* Close button */}
         <button
           onClick={closeWaitlist}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-charcoal/5 flex items-center justify-center text-charcoal/40 hover:bg-charcoal/10 hover:text-charcoal transition-all"
-          aria-label="Close modal"
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-charcoal/5 flex items-center justify-center text-charcoal/40 hover:bg-charcoal/10 hover:text-charcoal transition-all"
         >
-          <X size={18} strokeWidth={2} />
+          <X size={18} />
         </button>
 
         {!submitted ? (
           <>
-            <div className="mb-8 text-center">
-              {/* Icon Container */}
-              <div className="w-14 h-14 bg-terracotta/10 flex items-center justify-center mx-auto mb-5 text-terracotta rounded-xl border border-terracotta/20">
+            {/* Header */}
+            <div className="text-center mb-10">
+              <div className="w-14 h-14 bg-terracotta/10 rounded-xl border border-terracotta/20 flex items-center justify-center mx-auto mb-4 text-terracotta">
                 <Sparkles size={24} strokeWidth={1.5} />
               </div>
-              <h3 className="font-serif text-[2rem] md:text-[2.25rem] text-charcoal mb-3 tracking-tight leading-tight">
+              <h3 className="font-serif text-[2rem] text-charcoal tracking-tight leading-tight">
                 Join the waitlist
               </h3>
-              <p className="text-charcoal/60 text-[15px] leading-relaxed font-sans font-light">
-                Be the first to experience Casevia. We're onboarding new
-                marketing teams every week.
+              <p className="text-charcoal/60 text-[15px] font-light leading-relaxed mt-2">
+                Tell us a bit about you — we onboard based on fit.
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-[0.12em] mb-2.5 font-sans"
-                >
-                  Work Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@company.com"
-                  className="w-full bg-white border border-charcoal/10 text-charcoal px-5 h-12 text-[15px] font-sans focus:outline-none focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/20 transition-all placeholder:text-charcoal/30 rounded-xl"
-                  required
-                />
-                {error && (
-                  <p className="text-red-600 text-xs mt-2 font-medium animate-pulse">
-                    {error}
-                  </p>
-                )}
+            {/* Form */}
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* GRID: 2×2 */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {/* Full Name */}
+                <div>
+                  <label className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-wide mb-2">
+                    Full Name
+                  </label>
+                  <input
+                    className="w-full bg-white border border-charcoal/10 text-charcoal px-4 h-11 text-[15px] rounded-xl placeholder:text-charcoal/30 focus:outline-none focus:ring-2 focus:ring-terracotta/20"
+                    value={form.fullName}
+                    onChange={(e) => update("fullName", e.target.value)}
+                    placeholder="John Carter"
+                    required
+                  />
+                </div>
+
+                {/* Work Email */}
+                <div>
+                  <label className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-wide mb-2">
+                    Work Email
+                  </label>
+                  <input
+                    className="w-full bg-white border border-charcoal/10 text-charcoal px-4 h-11 text-[15px] rounded-xl placeholder:text-charcoal/30 focus:outline-none focus:ring-2 focus:ring-terracotta/20"
+                    value={form.email}
+                    onChange={(e) => update("email", e.target.value)}
+                    placeholder="name@company.com"
+                    required
+                  />
+                </div>
+
+                {/* Company */}
+                <div>
+                  <label className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-wide mb-2">
+                    Company
+                  </label>
+                  <input
+                    className="w-full bg-white border border-charcoal/10 text-charcoal px-4 h-11 text-[15px] rounded-xl placeholder:text-charcoal/30 focus:outline-none focus:ring-2 focus:ring-terracotta/20"
+                    value={form.company}
+                    onChange={(e) => update("company", e.target.value)}
+                    placeholder="Acme Inc."
+                  />
+                </div>
+
+                {/* Role */}
+                <div>
+                  <label className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-wide mb-2">
+                    Role
+                  </label>
+                  <input
+                    className="w-full bg-white border border-charcoal/10 text-charcoal px-4 h-11 text-[15px] rounded-xl placeholder:text-charcoal/30 focus:outline-none focus:ring-2 focus:ring-terracotta/20"
+                    value={form.role}
+                    onChange={(e) => update("role", e.target.value)}
+                    placeholder="Marketing Lead"
+                  />
+                </div>
               </div>
 
+              {/* Full-width field */}
+              <div>
+                <label className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-wide mb-2">
+                  What do you want to use Casevia for?
+                </label>
+                <textarea
+                  rows={3}
+                  className="w-full bg-white border border-charcoal/10 text-charcoal px-4 py-3 text-[15px] rounded-xl placeholder:text-charcoal/30 focus:outline-none focus:ring-2 focus:ring-terracotta/20"
+                  value={form.intention}
+                  onChange={(e) => update("intention", e.target.value)}
+                  placeholder="Case studies, social content, sales enablement…"
+                />
+              </div>
+
+              {error && (
+                <p className="text-red-600 text-xs mt-1 font-medium">{error}</p>
+              )}
+
+              {/* Submit button */}
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-charcoal text-cream h-12 text-[15px] font-semibold font-sans hover:bg-terracotta transition-all duration-300 active:scale-[0.98] rounded-full shadow-lg shadow-charcoal/10 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full bg-charcoal text-cream h-12 font-semibold rounded-full hover:bg-terracotta transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60"
               >
                 {loading ? (
                   <>
-                    <Loader2 size={16} className="animate-spin" />
-                    <span>Securing spot...</span>
+                    <Loader2 className="animate-spin" size={18} />
+                    Joining...
                   </>
                 ) : (
-                  "Get early access"
+                  "Join Waitlist"
                 )}
               </button>
             </form>
 
-            <div className="mt-7 flex items-center justify-center gap-2 text-[11px] text-charcoal/40 uppercase tracking-[0.12em] font-bold font-sans">
-              <ShieldCheck size={14} strokeWidth={2} /> Secure & Spam-free
+            {/* Footer */}
+            <div className="mt-5 flex items-center justify-center text-[11px] text-charcoal/40 uppercase tracking-wider font-bold">
+              <ShieldCheck size={14} className="mr-1" />
+              100% secure — no spam
             </div>
           </>
         ) : (
-          <div className="text-center py-8 animate-in fade-in zoom-in duration-300">
-            <div className="w-16 h-16 bg-terracotta/10 text-terracotta border-2 border-terracotta/30 flex items-center justify-center mx-auto mb-6 rounded-full">
-              <Check size={32} strokeWidth={2.5} />
+          /** SUCCESS SCREEN */
+          <div className="text-center py-10 animate-in fade-in duration-300">
+            <div className="w-16 h-16 bg-terracotta/10 border border-terracotta/20 rounded-full mx-auto flex items-center justify-center mb-6 text-terracotta">
+              <Check size={32} />
             </div>
-            <h3 className="font-serif text-[2rem] text-charcoal mb-3 tracking-tight">
+            <h3 className="font-serif text-[2rem] text-charcoal">
               You're on the list!
             </h3>
-            <p className="text-charcoal/60 text-[15px] font-sans font-light mb-8 leading-relaxed">
-              Thanks for your interest. We'll be in touch shortly.
+            <p className="text-charcoal/60 text-[15px] leading-relaxed font-light mt-2 max-w-sm mx-auto">
+              Thanks for applying — we’ll review your submission and reach out
+              soon.
             </p>
+
             <button
               onClick={closeWaitlist}
-              className="text-[13px] font-bold uppercase tracking-[0.08em] text-charcoal/60 hover:text-terracotta transition-colors font-sans inline-flex items-center gap-1.5 border-b-2 border-charcoal/10 hover:border-terracotta pb-1"
+              className="mt-7 text-sm text-charcoal/60 hover:text-terracotta border-b border-charcoal/20 pb-1 transition-colors"
             >
               Close Window
             </button>
