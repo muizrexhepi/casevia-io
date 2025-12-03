@@ -14,10 +14,6 @@ import {
   Command,
 } from "lucide-react";
 
-/* -------------------------------------------------------------------------- */
-/*                               SCROLL REVEAL                                */
-/* -------------------------------------------------------------------------- */
-
 const useInView = (threshold = 0.15) => {
   const [isInView, setIsInView] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -35,14 +31,11 @@ const useInView = (threshold = 0.15) => {
   return { ref, isInView };
 };
 
-/* -------------------------------------------------------------------------- */
-/*                                  VISUALS                                   */
-/* -------------------------------------------------------------------------- */
-
 const IngestVisual = () => (
   <div className="relative w-full h-full bg-gradient-to-br from-cream/40 to-white flex items-center justify-center overflow-hidden">
     <div className="relative w-[85%] h-[80%] bg-white border border-charcoal/[0.08] rounded-2xl flex flex-col items-center justify-center gap-8 shadow-[0_8px_30px_rgb(0,0,0,0.06)] p-10">
-      <div className="w-24 h-24 bg-gradient-to-br from-terracotta to-terracotta/80 rounded-3xl shadow-xl shadow-terracotta/20 flex items-center justify-center text-white animate-[float_6s_ease-in-out_infinite]">
+      {/* Removed animation class: animate-[float_6s_ease-in-out_infinite] */}
+      <div className="w-24 h-24 bg-gradient-to-br from-terracotta to-terracotta/80 rounded-3xl shadow-xl shadow-terracotta/20 flex items-center justify-center text-white">
         <FileAudio className="w-12 h-12 stroke-[1.5]" />
       </div>
       <div className="text-center space-y-1.5">
@@ -56,8 +49,6 @@ const IngestVisual = () => (
     </div>
   </div>
 );
-
-/* -------------------------------------------------------------------------- */
 
 const AnalyzeVisual = () => (
   <div className="relative w-full h-full bg-gradient-to-br from-white to-cream/25 flex items-center justify-center p-10">
@@ -83,9 +74,11 @@ const AnalyzeVisual = () => (
           ))}
         </div>
 
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-terracotta/20 via-terracotta/10 to-transparent animate-[scan_3s_ease-in-out_infinite] border-b border-terracotta/30" />
+        {/* Removed animation class: animate-[scan_3s_ease-in-out_infinite] */}
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-terracotta/20 via-terracotta/10 to-transparent border-b border-terracotta/30" />
 
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-terracotta text-white px-5 py-4 rounded-xl shadow-2xl border border-white/20 animate-[float_5s_ease-in-out_infinite] w-[85%]">
+        {/* Removed animation class: animate-[float_5s_ease-in-out_infinite] */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-terracotta text-white px-5 py-4 rounded-xl shadow-2xl border border-white/20 w-[85%]">
           <div className="text-[9px] font-semibold uppercase tracking-widest text-white/70 mb-1.5 flex items-center gap-2">
             <TrendingUp className="w-3 h-3" />
             Extracted Insight
@@ -99,8 +92,6 @@ const AnalyzeVisual = () => (
     </div>
   </div>
 );
-
-/* -------------------------------------------------------------------------- */
 
 const DraftVisual = () => (
   <div className="relative w-full h-full bg-gradient-to-br from-cream/40 to-white flex items-center justify-center p-6">
@@ -141,7 +132,8 @@ const DraftVisual = () => (
               </span>
 
               <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-charcoal text-white text-[10px] px-3 py-1.5 rounded shadow-xl flex items-center gap-2 opacity-0 group-hover/quote:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-                <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                {/* Removed animation class: animate-pulse */}
+                <div className="w-1.5 h-1.5 rounded-full bg-red-500" />
                 <span className="font-mono">Source: 04:12</span>
               </div>
             </span>
@@ -151,7 +143,8 @@ const DraftVisual = () => (
           </div>
         </div>
 
-        <div className="absolute bottom-8 right-8 animate-[float_4s_ease-in-out_infinite] flex items-center gap-2">
+        {/* Removed animation class: animate-[float_4s_ease-in-out_infinite] */}
+        <div className="absolute bottom-8 right-8 flex items-center gap-2">
           <MousePointer2 className="w-5 h-5 fill-terracotta text-white drop-shadow" />
           <div className="bg-terracotta text-white text-[10px] px-2 py-1 rounded shadow font-sans font-medium">
             Edit
@@ -162,8 +155,6 @@ const DraftVisual = () => (
   </div>
 );
 
-/* -------------------------------------------------------------------------- */
-
 const ExportVisual = () => (
   <div className="relative w-full h-full bg-gradient-to-br from-white to-cream/30 flex items-center justify-center overflow-hidden p-6">
     <div className="relative w-80 h-80 flex items-center justify-center">
@@ -173,7 +164,8 @@ const ExportVisual = () => (
       </div>
 
       {/* Orbiting Formats */}
-      <div className="absolute w-full h-full animate-[spin_25s_linear_infinite]">
+      {/* Removed animation class: animate-[spin_25s_linear_infinite] */}
+      <div className="absolute w-full h-full">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white border border-charcoal/[0.08] rounded-2xl shadow flex items-center justify-center rotate-[-10deg] text-red-500">
           <FileText className="w-7 h-7" />
         </div>
@@ -193,10 +185,6 @@ const ExportVisual = () => (
     </div>
   </div>
 );
-
-/* -------------------------------------------------------------------------- */
-/*                              CONTENT STRUCTURE                              */
-/* -------------------------------------------------------------------------- */
 
 const steps = [
   {
@@ -237,8 +225,6 @@ const steps = [
   },
 ];
 
-/* -------------------------------------------------------------------------- */
-
 const AppShowcase: React.FC = () => {
   return (
     <section className="w-full bg-cream px-6 md:px-12">
@@ -273,14 +259,8 @@ const AppShowcase: React.FC = () => {
                 }`}
               >
                 {/* Text */}
-                <div
-                  className={`flex-1 flex flex-col gap-5 transition-all duration-1000 ease-out ${
-                    isInView
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-8"
-                  }`}
-                >
-                  <div className="inline-flex items-center gap-3 text-terracotta/70">
+                <div className={`flex-1 flex flex-col gap-5`}>
+                  {/* <div className="inline-flex items-center gap-3 text-terracotta/70">
                     <span className="font-mono text-sm font-bold tracking-widest">
                       {step.number}
                     </span>
@@ -288,7 +268,7 @@ const AppShowcase: React.FC = () => {
                     <span className="text-xs font-sans font-semibold uppercase tracking-[0.15em]">
                       {step.tagline}
                     </span>
-                  </div>
+                  </div> */}
 
                   <h3 className="font-serif text-2xl md:text-[2.5rem] text-charcoal leading-[1.1] tracking-tight">
                     {step.title}
@@ -301,9 +281,8 @@ const AppShowcase: React.FC = () => {
 
                 {/* Visual */}
                 <div
-                  className={`flex-1 w-full transition-all duration-1000 ease-out delay-200 ${
-                    isInView ? "opacity-100 scale-100" : "opacity-0 scale-95"
-                  }`}
+                  // Removed transition-all duration-1000 ease-out delay-200 from the visual element for simplicity, as it wasn't a standard CSS animation but a scroll-based entry effect.
+                  className={`flex-1 w-full`}
                 >
                   <div className="aspect-[16/13] md:aspect-[16/11] bg-white rounded-3xl border border-charcoal/[0.06] shadow-[0_4px_30px_-8px_rgba(0,0,0,0.08)] overflow-hidden hover:shadow-[0_8px_40px_-8px_rgba(0,0,0,0.12)] hover:border-charcoal/[0.1] transition-all duration-500">
                     <step.visual />

@@ -62,7 +62,7 @@ const Hero: React.FC = () => {
 
           <form
             onSubmit={handleSubmit}
-            className="relative flex items-center p-1 rounded-full bg-white/50 border border-charcoal/10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)]"
+            className="relative flex items-center p-1 md:p-1.5 rounded-full bg-white/50 border border-charcoal/10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)]"
           >
             <input
               type="email"
@@ -74,7 +74,7 @@ const Hero: React.FC = () => {
             <button
               type="submit"
               disabled={loading}
-              className="h-10 px-6 rounded-full bg-charcoal text-white font-sans font-medium text-sm hover:bg-terracotta transition-all duration-300 shadow-lg shadow-charcoal/20 flex items-center gap-2 whitespace-nowrap"
+              className="h-10 px-3 md:px-6 rounded-full bg-charcoal text-white font-sans font-medium text-sm hover:bg-terracotta transition-all duration-300 shadow-lg shadow-charcoal/20 flex items-center gap-2 whitespace-nowrap"
             >
               {loading ? (
                 <span className="animate-pulse">Processing...</span>
