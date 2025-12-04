@@ -16,7 +16,7 @@ const Pricing: React.FC = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8">
             <h2 className="font-serif text-[2.75rem] md:text-5xl lg:text-6xl text-white leading-[0.92] tracking-tight max-w-2xl">
               Predictable costs, <br />
-              <span className="italic text-white font-normal text-[3rem] md:text-[3.3rem] lg:text-[3.9rem]">
+              <span className="italic text-white/50 font-normal text-[3rem] md:text-[3.3rem] lg:text-[3.9rem]">
                 uncapped ROI
               </span>
             </h2>
