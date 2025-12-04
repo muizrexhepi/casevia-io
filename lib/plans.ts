@@ -24,6 +24,13 @@ export const PLANS = [
       socialPosts: 0,
       teamSeats: 1,
       designTemplates: 1,
+      // Boolean features default to 'X' if omitted or false
+      noBranding: false,
+      seoOptimization: false,
+      fullCustomTone: false,
+      fullAnalytics: false,
+      prioritySupport: false,
+      dedicatedManager: false,
     },
     cta: "Get started free",
     popular: false,
@@ -43,7 +50,7 @@ export const PLANS = [
       "AI narrative extraction",
       "2 social posts per case study",
       "Tone customization",
-      "No Casevia branding",
+      "No Casevia branding", // Feature mentioned here
       "5 design templates",
       "2 team seats",
       "Email support (24h)",
@@ -55,6 +62,13 @@ export const PLANS = [
       socialPosts: 2,
       teamSeats: 2,
       designTemplates: 5,
+      // === Freelancer Fix ===
+      noBranding: true, // This enables the checkmark for 'No Casevia Branding/Watermark'
+      seoOptimization: false,
+      fullCustomTone: false,
+      fullAnalytics: false,
+      prioritySupport: false,
+      dedicatedManager: false,
     },
     cta: "Upgrade to Freelancer",
     popular: false,
@@ -88,6 +102,13 @@ export const PLANS = [
       socialPosts: 5,
       teamSeats: 5,
       designTemplates: 20,
+      // === Pro Advanced Features ===
+      noBranding: true,
+      seoOptimization: true,
+      fullCustomTone: true,
+      fullAnalytics: true,
+      prioritySupport: true,
+      dedicatedManager: false, // Remains 'X'
     },
     cta: "Upgrade to Pro",
     popular: true, // highlight this as the main plan
@@ -122,6 +143,13 @@ export const PLANS = [
       socialPosts: -1, // unlimited
       teamSeats: -1, // unlimited
       designTemplates: 30,
+      // === Agency Advanced Features ===
+      noBranding: true,
+      seoOptimization: true,
+      fullCustomTone: true,
+      fullAnalytics: true,
+      prioritySupport: true,
+      dedicatedManager: true, // Becomes '✓'
     },
     cta: "Talk to sales",
     popular: false,

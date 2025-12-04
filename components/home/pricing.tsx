@@ -134,7 +134,7 @@ const Pricing: React.FC = () => {
                     Includes
                   </p>
 
-                  {plan.features.slice(0, 4).map((feature, idx) => (
+                  {plan.features.slice(0, 3).map((feature, idx) => (
                     <div key={idx} className="flex items-start gap-3">
                       <div
                         className={`mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center border transition-colors duration-300 ${

@@ -22,7 +22,7 @@ export function RelatedArticles({ posts }: RelatedArticlesProps) {
           <Link
             key={post.slug}
             href={`/blogs/${post.slug}`}
-            className="bg-white border border-zinc-200 hover:border-zinc-400 hover:shadow-lg transition-all group"
+            className="bg-card-bg border-charcoal/5 hover:border-charcoal/10 relative flex flex-col rounded-2xl border transition-all duration-300 group "
           >
             <div className="aspect-[2/1] overflow-hidden bg-zinc-100">
               <img
@@ -32,13 +32,13 @@ export function RelatedArticles({ posts }: RelatedArticlesProps) {
               />
             </div>
             <div className="p-5">
-              <div className="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-1 inline-block uppercase tracking-wide mb-3">
+              <div className="text-xs font-bold text-charcoal bg-terracotta/10 px-2 py-1 inline-block uppercase tracking-wide mb-3">
                 {post.category}
               </div>
-              <h4 className="text-base font-bold text-zinc-900 mb-2 group-hover:text-indigo-600 transition-colors">
+              <h4 className="text-base font-bold text-charcoal/80 mb-2 group-hover:text-charcoal transition-colors">
                 {post.title}
               </h4>
-              <div className="flex items-center gap-1 text-indigo-600 text-sm font-semibold mt-4">
+              <div className="flex items-center gap-1 text-terracotta text-sm font-semibold mt-4">
                 Read more
                 <ChevronRight size={14} />
               </div>

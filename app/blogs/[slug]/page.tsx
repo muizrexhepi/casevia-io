@@ -1,7 +1,3 @@
-// ============================================
-// app/blogs/[slug]/page.tsx
-// ============================================
-
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogHeader } from "@/components/blogs/blog-header";

@@ -135,7 +135,7 @@ export default function PricingClient() {
         <div className="flex flex-col items-center text-center gap-8 mb-20">
           <h1 className="font-serif text-5xl md:text-7xl text-charcoal leading-[0.9] tracking-tight max-w-4xl">
             Simple pricing that <br />
-            <span className="italic">scales with you.</span>
+            <span className="">scales with you.</span>
           </h1>
           {/* <p className="font-sans text-lg md:text-xl text-charcoal/60 font-light max-w-2xl leading-relaxed">
             Start for free, upgrade when you're ready to automate your content
