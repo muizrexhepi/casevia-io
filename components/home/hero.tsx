@@ -114,7 +114,7 @@ const Hero = () => {
                     className="w-full h-auto hidden sm:block"
                     poster="/images/dashboard.webp"
                   >
-                    <source src="/demo/demo-auto.mp4" type="video/mp4" />
+                    <source src="/demo/short-demo.mp4" type="video/mp4" />
                     {/* Fallback */}
                     <img
                       src="/images/dashboard.webp"
