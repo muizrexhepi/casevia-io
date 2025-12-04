@@ -1,24 +1,58 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowRight, Users, CheckCircle2, Play, X } from "lucide-react";
+
+const FALLBACK_COUNT = 247;
 
 const Hero = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [showFullDemo, setShowFullDemo] = useState(false);
-  const waitlistCount = 247;
+  const [waitlistCount, setWaitlistCount] = useState<number>(FALLBACK_COUNT);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Fetch dynamic count on mount
+  useEffect(() => {
+    const fetchCount = async () => {
+      try {
+        const res = await fetch("/api/waitlist/count");
+        const data = await res.json();
+        if (data?.count) {
+          setWaitlistCount(data.count);
+        }
+      } catch (err) {
+        console.warn("Failed to load waitlist count → using fallback");
+      }
+    };
+    fetchCount();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
 
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      alert("Added to waitlist!");
+
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed");
+      }
+
+      // Optimistic UI update: +1 instantly when someone signs up
+      setWaitlistCount((prev) => prev + 1);
+
       setEmail("");
-    }, 1500);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
