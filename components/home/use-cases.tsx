@@ -11,18 +11,35 @@ const UseCases = () => {
   return (
     <section className="w-full bg-charcoal text-white selection:bg-terracotta selection:text-white px-4 sm:px-6 md:px-12">
       <div className="max-w-6xl mx-auto section-spacing border-t border-white/5">
-        {/* Header - h2 and p automatically styled by globals.css */}
-        <div className="section-header-gap flex flex-col gap-5 sm:gap-6 items-center text-center">
-          <h2 className="text-white max-w-3xl">
-            One tool, <br />
-            <span className="italic font-normal text-white/50">
-              four workflows
-            </span>
-          </h2>
+        {/* --- HEADER CHANGE: Left Aligned with Button on Right --- */}
+        <div className="section-header-gap flex flex-col gap-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-8">
+            {/* Left Side: Text */}
+            <div className="max-w-2xl">
+              <h2 className="text-white mb-6">
+                One tool, <br />
+                <span className=" font-normal text-white/50">
+                  four workflows
+                </span>
+              </h2>
+              <p className="text-white/60">
+                From agencies to sales teams, Casevia adapts to how you work.
+              </p>
+            </div>
 
-          <p className="text-white/60 max-w-2xl">
-            From agencies to sales teams, Casevia adapts to how you work.
-          </p>
+            {/* Right Side: CTA Button (Moved from bottom) */}
+            <div className="self-start md:self-center mb-1">
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300"
+              >
+                <span className="text-white/70 group-hover:text-white font-medium text-sm transition-colors">
+                  Talk to our team
+                </span>
+                <ArrowRight className="w-4 h-4 text-terracotta group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </div>
+          </div>
         </div>
 
         {/* Bento Grid */}
@@ -158,19 +175,6 @@ const UseCases = () => {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="mt-12 sm:mt-16 text-center">
-          <Link
-            href="/contact"
-            className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300"
-          >
-            <small className="text-white/70 group-hover:text-white font-medium transition-colors">
-              Talk to our team
-            </small>
-            <ArrowRight className="w-4 h-4 text-terracotta group-hover:translate-x-0.5 transition-transform" />
-          </Link>
         </div>
       </div>
     </section>

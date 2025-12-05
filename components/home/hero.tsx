@@ -62,14 +62,14 @@ const Hero = () => {
         <div className="max-w-6xl mx-auto relative z-10 py-16 pt-32 md:py-20 lg:py-32">
           <div className="flex flex-col items-center text-center">
             {/* Social Proof Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-charcoal/8 shadow-sm mb-10 sm:mb-12 hover:border-terracotta/25 hover:shadow-md transition-all duration-300 cursor-default">
+            {/* <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-charcoal/8 shadow-sm mb-10 sm:mb-12 hover:border-terracotta/25 hover:shadow-md transition-all duration-300 cursor-default">
               <span className="flex items-center justify-center w-5 h-5 rounded-full bg-terracotta/12">
                 <Users className="w-3 h-3 text-terracotta" />
               </span>
               <small className="font-medium text-charcoal/70">
                 Join {waitlistCount}+ marketers in beta
               </small>
-            </div>
+            </div> */}
 
             {/* Main Headline - h1 styled by .hero-section in globals.css */}
             <h1 className="text-charcoal max-w-5xl mb-6 sm:mb-7">
@@ -143,7 +143,7 @@ const Hero = () => {
                     className="w-full h-auto hidden sm:block"
                     poster="/images/dashboard.webp"
                   >
-                    <source src="/demo/auto.mp4" type="video/mp4" />
+                    {/* <source src="/demo/auto.mp4" type="video/mp4" /> */}
                     <img
                       src="/images/dashboard.webp"
                       alt="Casevia Dashboard"

@@ -1,22 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  /* Custom Colors */
   --color-cream: #f7f5ef;
   --color-charcoal: #1a1a1a;
   --color-terracotta: #d77a50;
   --color-bone: #faf9f6;
   --color-gray: #6f6f6f;
 
-  /* Custom Fonts */
   --font-serif: "Instrument Serif", serif;
   --font-sans: "Inter", sans-serif;
 
-  /* Custom Typography */
   --tracking-super-tight: -0.04em;
   --leading-display: 0.85;
 
-  /* Custom Animations */
   @keyframes float {
     0%,
     100% {
@@ -73,11 +69,6 @@
     color: var(--color-cream);
   }
 
-  /* ========================================================================
-     TYPOGRAPHY SYSTEM - Consistent across all breakpoints
-     ======================================================================== */
-
-  /* Section Headers (h2) - Used in UseCases, Pricing, FAQ, Features, etc. */
   h2 {
     font-family: var(--font-serif);
     font-weight: 400;
@@ -90,26 +81,22 @@
 
   @media (min-width: 640px) {
     h2 {
-      /* sm: 48px */
       font-size: 3rem;
     }
   }
 
   @media (min-width: 768px) {
     h2 {
-      /* md: 60px */
       font-size: 3.75rem;
     }
   }
 
   @media (min-width: 1024px) {
     h2 {
-      /* lg: 72px */
       font-size: 4.5rem;
     }
   }
 
-  /* Section Descriptions (h2 + p) */
   h2 + p {
     font-family: var(--font-sans);
     font-weight: 300;
@@ -121,51 +108,43 @@
 
   @media (min-width: 640px) {
     h2 + p {
-      /* sm: 16px */
       font-size: 1rem;
     }
   }
 
   @media (min-width: 768px) {
     h2 + p {
-      /* md: 18px */
       font-size: 1.125rem;
     }
   }
 
   @media (min-width: 1024px) {
     h2 + p {
-      /* lg: 20px */
       font-size: 1.25rem;
     }
   }
 
-  /* Card Headers (h3) */
   h3 {
     font-family: var(--font-serif);
     font-weight: 400;
     line-height: 1.2;
     letter-spacing: -0.015em;
 
-    /* Mobile: 20px */
     font-size: 1.25rem;
   }
 
   @media (min-width: 640px) {
     h3 {
-      /* sm: 24px */
       font-size: 1.5rem;
     }
   }
 
   @media (min-width: 768px) {
     h3 {
-      /* md: 28px */
       font-size: 1.75rem;
     }
   }
 
-  /* Card Descriptions (h3 + p) */
   h3 + p {
     font-family: var(--font-sans);
     font-weight: 300;
@@ -250,21 +229,21 @@
   @media (min-width: 640px) {
     .hero-section h1 {
       /* sm: 72px */
-      font-size: 4.5rem;
+      font-size: 3.5rem;
     }
   }
 
   @media (min-width: 768px) {
     .hero-section h1 {
       /* md: 88px */
-      font-size: 5.5rem;
+      font-size: 4.5rem;
     }
   }
 
   @media (min-width: 1024px) {
     .hero-section h1 {
       /* lg: 104px */
-      font-size: 6.5rem;
+      font-size: 5.5rem;
     }
   }
 

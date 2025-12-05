@@ -16,9 +16,7 @@ const Pricing: React.FC = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8">
             <h2 className="text-white max-w-2xl">
               Predictable costs,{" "}
-              <span className="italic text-white/50 font-normal">
-                uncapped ROI
-              </span>
+              <span className="text-white/50 font-normal">uncapped ROI</span>
             </h2>
 
             {/* Billing Toggle */}

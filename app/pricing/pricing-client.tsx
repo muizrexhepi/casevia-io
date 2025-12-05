@@ -137,11 +137,6 @@ export default function PricingClient() {
             Simple pricing that <br />
             <span className="">scales with you.</span>
           </h1>
-          {/* <p className="font-sans text-lg md:text-xl text-charcoal/60 font-light max-w-2xl leading-relaxed">
-            Start for free, upgrade when you're ready to automate your content
-            engine. Pause or cancel anytime.
-          </p> */}
-
           {/* Billing Toggle */}
           <div className="flex items-center gap-1 bg-white p-1.5 rounded-full border border-charcoal/10 shadow-lg shadow-charcoal/5 mt-4">
             <button
@@ -183,8 +178,8 @@ export default function PricingClient() {
                 key={plan.id}
                 className={`relative flex flex-col p-6 rounded-2xl border transition-all duration-300 group ${
                   isPopular
-                    ? "bg-white shadow-lg shadow-terracotta/10 border-terracotta/20 ring-1 ring-terracotta/10"
-                    : "bg-card-bg border-charcoal/5 hover:border-charcoal/10"
+                    ? "bg-white shadow-xl shadow-terracotta/10 border-terracotta/20 ring-1 ring-terracotta/10" // Maintained high contrast for popular
+                    : "bg-white border-charcoal/10 hover:border-charcoal/20 shadow-md shadow-charcoal/5" // <-- CHANGED: Used bg-white and stronger shadow/border for standard cards
                 }`}
               >
                 {isPopular && (
@@ -228,7 +223,7 @@ export default function PricingClient() {
                   className={`w-full py-3.5 rounded-lg font-sans text-sm font-medium flex items-center justify-center gap-2 transition-all duration-300 mb-8 ${
                     isPopular
                       ? "bg-terracotta text-white hover:bg-terracotta/90 shadow-md shadow-terracotta/20"
-                      : "bg-white text-charcoal hover:bg-charcoal/5 border border-charcoal/10"
+                      : "bg-charcoal text-white hover:bg-charcoal/90 border border-charcoal/10" // <-- CHANGED: CTA for non-popular changed to black for better contrast against the new white card background
                   }`}
                 >
                   {plan.cta}
@@ -273,7 +268,7 @@ export default function PricingClient() {
                 {category.features.map((feature) => (
                   <div
                     key={feature.key}
-                    className="bg-card-bg rounded-xl border border-charcoal/5 overflow-hidden"
+                    className="bg-white rounded-xl border border-charcoal/5 overflow-hidden" // <-- CHANGED: Used bg-white for mobile table sections
                   >
                     <div className="bg-charcoal/5 py-3 px-4 text-xs font-medium text-charcoal/70 border-b border-charcoal/5">
                       {feature.label}
@@ -302,7 +297,7 @@ export default function PricingClient() {
           {/* Desktop View (Table) */}
           <div className="hidden lg:block relative">
             <table className="w-full">
-              <thead className="sticky top-16 z-20 bg-cream">
+              <thead className="sticky top-0 z-20 bg-cream">
                 <tr className="">
                   <th className="py-6 px-6 text-left text-sm font-medium text-charcoal/40 w-1/4">
                     {/* Empty top-left cell */}
@@ -341,7 +336,7 @@ export default function PricingClient() {
                           className={`w-full mt-2 h-9 text-xs font-medium ${
                             plan.popular
                               ? "bg-terracotta text-white hover:bg-terracotta/90"
-                              : "bg-white text-charcoal hover:bg-charcoal/5 border-charcoal/10"
+                              : "bg-charcoal text-white hover:bg-charcoal/90" // <-- CHANGED: CTA background to black
                           }`}
                         >
                           <Link href={ctaLinks[plan.id as PlanId]}>
