@@ -7,25 +7,69 @@ import Link from "next/link";
 
 const Navbar: React.FC = () => {
   const openWaitlist = useWaitlistStore((state) => state.openWaitlist);
+
+  // State to change background/border when scrolled past the top
   const [scrolled, setScrolled] = useState(false);
 
+  // New state to control visibility based on scroll direction
+  const [isVisible, setIsVisible] = useState(true);
+
+  // State to store the previous scroll position
+  const [lastScrollY, setLastScrollY] = useState(0);
+
   useEffect(() => {
-    const handleScroll = () => {
+    // Determine if the navbar should have the scrolled background and border
+    const handleScrollStyling = () => {
       setScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    // Determine if the navbar should be visible based on scroll direction
+    const handleScrollVisibility = () => {
+      const currentScrollY = window.scrollY;
+
+      // Only check direction if we are past the initial 100px threshold to avoid jitter
+      if (currentScrollY > 100) {
+        // Scrolling Down: Hide the navbar
+        if (currentScrollY > lastScrollY) {
+          setIsVisible(false);
+        }
+        // Scrolling Up: Show the navbar
+        else {
+          setIsVisible(true);
+        }
+      }
+      // Always show navbar at the very top of the page
+      else {
+        setIsVisible(true);
+      }
+
+      // Update the previous scroll position
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScrollStyling);
+    window.addEventListener("scroll", handleScrollVisibility);
+
+    return () => {
+      window.removeEventListener("scroll", handleScrollStyling);
+      window.removeEventListener("scroll", handleScrollVisibility);
+    };
+  }, [lastScrollY]); // Depend on lastScrollY to track scroll position change
+
+  // Determine classes for styling (background/border) and visibility (translate-y)
+  const navClasses = `
+    fixed top-0 left-0 w-full z-50 
+    transition-all duration-500 ease-in-out
+    ${
+      scrolled
+        ? "py-3 bg-cream/90 backdrop-blur-md border-b border-charcoal/10"
+        : "py-5 bg-transparent border-charcoal/5"
+    }
+    ${isVisible ? "translate-y-0" : "-translate-y-full"}
+  `;
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        scrolled
-          ? "py-3 bg-cream/90 backdrop-blur-md border-b border-charcoal/10"
-          : "py-5 bg-transparent border-charcoal/5"
-      }`}
-    >
+    <nav className={navClasses}>
       {/* Container (matches Hero) */}
       <div className="container max-w-7xl mx-auto px-6 md:px-12 xl:px-0 flex justify-between items-center">
         {/* Logo Area */}
