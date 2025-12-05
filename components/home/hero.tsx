@@ -1,34 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { ArrowRight, Users, CheckCircle2, Play, X } from "lucide-react";
-
-const FALLBACK_COUNT = 247;
+import React, { useState } from "react";
+import { ArrowRight, CheckCircle2, Play, X } from "lucide-react";
+import { toast } from "sonner";
 
 const Hero = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [showFullDemo, setShowFullDemo] = useState(false);
-  const [waitlistCount, setWaitlistCount] = useState<number>(FALLBACK_COUNT);
-
-  useEffect(() => {
-    const fetchCount = async () => {
-      try {
-        const res = await fetch("/api/waitlist/count");
-        const data = await res.json();
-        if (data?.count) {
-          setWaitlistCount(data.count);
-        }
-      } catch (err) {
-        console.warn("Failed to load waitlist count → using fallback");
-      }
-    };
-    fetchCount();
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!email || !email.includes("@")) {
+      toast.error("Enter a valid email");
+      return;
+    }
 
     setLoading(true);
 
@@ -39,14 +25,23 @@ const Hero = () => {
         body: JSON.stringify({ email }),
       });
 
-      if (!res.ok) {
-        throw new Error("Failed");
-      }
+      if (!res.ok) throw new Error("Failed");
 
-      setWaitlistCount((prev) => prev + 1);
+      const result = await res.json();
       setEmail("");
+
+      if (result.exists) {
+        toast("you're already on the waitlist ✨", {
+          description: "we’ll keep you posted with updates",
+        });
+      } else {
+        toast.success(`🎉 you’re #${result.queuePosition} in line`, {
+          description: "first 100 get lifetime 50% off",
+        });
+      }
     } catch (err) {
       console.error(err);
+      toast.error("something went wrong. try again?");
     } finally {
       setLoading(false);
     }

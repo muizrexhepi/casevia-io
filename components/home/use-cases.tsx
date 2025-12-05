@@ -18,9 +18,7 @@ const UseCases = () => {
             <div className="max-w-2xl">
               <h2 className="text-white mb-6">
                 One tool, <br />
-                <span className=" font-normal text-white/50">
-                  four workflows
-                </span>
+                <span className=" font-normal">four workflows</span>
               </h2>
               <p className="text-white/60">
                 From agencies to sales teams, Casevia adapts to how you work.

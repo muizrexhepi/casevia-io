@@ -1,33 +1,48 @@
 import React, { useState } from "react";
-import { Plus, Minus, ArrowRight, Mail } from "lucide-react";
+import { Plus, Minus, ArrowRight, Mail, CheckCircle2 } from "lucide-react";
 // Assuming useWaitlistStore is defined in "@/lib/store"
 // import { useWaitlistStore } from "@/lib/store";
 
 const faqs = [
   {
-    question: "How does Casevia ensure data privacy?",
+    question: "How does Casevia handle my interview recordings?",
     answer:
-      "Security is our primary directive. We are SOC-2 Type II compliant. All audio is processed in ephemeral containers—meaning your raw recordings are deleted immediately after transcription and analysis. We do not use your data to train our base models.",
+      "Your audio and video are stored securely and processed only to generate your transcript and case study. As soon as processing is complete, you can choose to delete the file. We do not use your data to train our models.",
   },
   {
     question: "Can I edit the generated case study?",
     answer:
-      "Absolutely. Casevia provides a 'Verifiable Editor' where the generated text is side-by-side with the source audio. If you change a quote or a claim, the citation links update automatically to preserve truth. You have full editorial control.",
+      "Yes — every draft opens in our Verifiable Editor. You can rewrite any sentence and the source citation stays linked to the correct timestamp. You always have full editorial control.",
   },
   {
-    question: "What file formats do you accept?",
+    question: "What recording formats do you support?",
     answer:
-      "We accept all major audio and video formats (MP3, WAV, M4A, MP4, MOV). Additionally, you can paste a shared link from Zoom, Gong, or Google Meet, and we'll ingest the recording directly without you needing to download it first.",
+      "All major audio and video formats: MP3, WAV, M4A, MP4, and MOV. You can also paste links from Zoom, Google Meet, or other call platforms — no downloading required.",
   },
   {
-    question: "Is there a limit on recording length?",
+    question: "How long can my recordings be?",
     answer:
-      "The Starter plan supports recordings up to 60 minutes. Growth and Enterprise plans support recordings up to 4 hours. For longer sessions, our system effectively identifies the 'meat' of the conversation to keep the narrative focused.",
+      "It depends on your plan:\n\n• Free — up to 10 minutes per interview\n• Freelancer — up to 30 minutes\n• Pro — up to 45 minutes\n• Agency — up to 45 minutes (plus priority processing)\n\nLonger support is coming soon based on demand.",
   },
   {
-    question: "Do you offer custom templates?",
+    question: "How many case studies can I create?",
     answer:
-      "Yes. On the Growth plan, you can upload previous PDFs or markdown files to train our engine on your specific brand voice, structure, and formatting preferences. We don't just match your tone; we match your structural DNA.",
+      "Every plan includes a monthly limit:\n\n• Free — 1 case study per month\n• Freelancer — 8 per month\n• Pro — 25 per month\n• Agency — 40 per month\n\nYou can upgrade at any time as your content output grows.",
+  },
+  {
+    question: "Can I use my own brand voice?",
+    answer:
+      "Yes — you can choose tone presets like formal, bold, or product-focused today. Custom voice training based on your own case studies will be available for Pro & Agency plans soon.",
+  },
+  {
+    question: "Is there a free trial?",
+    answer:
+      "Yes — you can start on the Free plan with 1 full case study included. No credit card required.",
+  },
+  {
+    question: "Do you support teams or agencies?",
+    answer:
+      "Yes — Pro and Agency plans include multi-member teams, shared projects, and admin controls. Real-time collaboration and teammate roles are coming soon.",
   },
 ];
 
@@ -121,42 +136,66 @@ const FAQ: React.FC = () => {
         </div>
 
         {/* Final CTA Card */}
-        <div className="mt-14 md:mt-20 lg:mt-32 relative w-full bg-charcoal rounded-2xl md:rounded-3xl overflow-hidden px-6 py-12 md:px-12 md:py-16 lg:px-20 lg:py-20 text-center flex flex-col items-center">
+        <div className="mt-14 md:mt-20 lg:mt-32 relative w-full bg-charcoal rounded-2xl md:rounded-3xl overflow-hidden px-6 py-14 sm:py-16 lg:py-20 text-center flex flex-col items-center">
           {/* Background pattern */}
           <div
-            className="absolute inset-0 opacity-[0.04]"
+            className="absolute inset-0 opacity-[0.05]"
             style={{
               backgroundImage: "radial-gradient(#ffffff 1px, transparent 1px)",
-              backgroundSize: "32px 32px",
+              backgroundSize: "28px 28px",
             }}
-          ></div>
+          />
 
-          <div className="relative z-10 flex flex-col items-center gap-5 md:gap-6 max-w-2xl">
-            {/* 1. Used h2 to maintain semantic consistency.
-              2. Removed hardcoded text-sizes to rely on the global h2 sizing.
-              3. Added text-cream for visibility on the charcoal background.
-            */}
-            <h2 className="text-cream">Start telling better stories.</h2>
-            {/* 1. Used p tag to pick up default sizing (15px mobile, 16px sm+).
-              2. Removed hardcoded text-base/text-lg.
-            */}
-            <p className="text-white/60 font-light max-w-lg">
-              Join 500+ B2B marketing teams turning their customer calls into
-              revenue-generating assets.
+          <div className="relative z-10 flex flex-col items-center gap-6 max-w-2xl animate-in fade-in-50 duration-700">
+            {/* Section badge */}
+            <span
+              className="inline-flex items-center px-3 py-1 text-[11px] font-semibold tracking-wide uppercase rounded-full 
+     bg-terracotta/20 text-terracotta"
+            >
+              Early Access Live
+            </span>
+
+            <h2 className="text-cream max-w-xl">
+              Start telling better stories.
+            </h2>
+
+            <p className="text-white/80 max-w-md">
+              Join <span className="font-semibold text-white">marketers</span>{" "}
+              already turning interviews into revenue assets.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto pt-2 md:pt-4">
+
+            {/* CTA */}
+            <div className="flex flex-col sm:flex-row gap-3 pt-1 sm:pt-3">
               <button
                 onClick={openWaitlist}
-                // Kept CTA styles as is, as they are part of a specific component design
-                className="bg-terracotta text-white px-8 py-4 rounded-full font-sans font-semibold text-[15px] hover:bg-white hover:text-charcoal transition-all duration-300 flex items-center justify-center gap-2.5 shadow-xl shadow-terracotta/20 hover:shadow-2xl hover:shadow-terracotta/30 hover:scale-[1.02]"
+                className="bg-terracotta text-white px-8 py-4 rounded-full font-semibold text-[15px]
+        hover:bg-white hover:text-charcoal transition-all duration-300
+        flex items-center justify-center gap-2.5
+        shadow-xl shadow-terracotta/20 hover:shadow-2xl hover:shadow-terracotta/30 hover:scale-[1.02]"
               >
                 Get Started Now
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-            {/* Used small tag to pick up small sizing (12px mobile, 13px sm+) */}
-            <small className="text-white/30 mt-2">
-              No credit card required for the first 2 stories.
+
+            {/* Micro benefits */}
+            <div className="flex flex-wrap gap-4 text-white/60 text-xs sm:text-sm mt-3">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-terracotta" />
+                Verified quotes
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-terracotta" />
+                Brand-aligned AI
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-terracotta" />
+                Zero hallucinations
+              </span>
+            </div>
+
+            <small className="text-white/30 mt-4">
+              First 100 unlock lifetime 50% off + no card required.
             </small>
           </div>
         </div>
