@@ -122,7 +122,7 @@ export default function PricingClient() {
   };
 
   const ctaLinks: Record<PlanId, string> = {
-    free: "/dashboard",
+    starter: "/dashboard",
     freelancer: "/checkout?plan=starter",
     pro: "/checkout?plan=pro",
     agency: "/contact-sales",
@@ -171,7 +171,7 @@ export default function PricingClient() {
             const isPopular = plan.popular;
             const price = getPrice(plan); // Now returns monthly equivalent
             const isContactSales = plan.id === "agency";
-            const isFree = plan.id === "free";
+            const isFree = plan.id === "starter";
 
             return (
               <div
@@ -324,7 +324,7 @@ export default function PricingClient() {
                               ? plan.price
                               : `$${getPrice(plan)}`}
                           </span>
-                          {plan.id !== "agency" && plan.id !== "free" && (
+                          {plan.id !== "agency" && plan.id !== "starter" && (
                             <span className="text-xs text-charcoal/50">
                               /mo
                             </span>
