@@ -130,7 +130,7 @@ export default function PricingClient() {
 
   return (
     <section className="w-full bg-cream text-charcoal selection:bg-terracotta selection:text-white px-4 md:px-8 lg:px-12">
-      <div className="max-w-7xl mx-auto py-16 pt-32 md:py-32 border-t border-charcoal/5">
+      <div className="max-w-6xl mx-auto py-16 pt-32 md:py-32 border-t border-charcoal/5">
         {/* Header Section */}
         <div className="flex flex-col items-center text-center gap-8 mb-20">
           <h1 className="font-serif text-5xl md:text-7xl text-charcoal leading-[0.9] tracking-tight max-w-4xl">

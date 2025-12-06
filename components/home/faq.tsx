@@ -68,9 +68,7 @@ const FAQ: React.FC = () => {
             <div className="flex flex-col gap-5 md:gap-7">
               <h2>
                 Common <br />
-                <span className="italic text-charcoal/80 font-normal">
-                  questions.
-                </span>
+                <span className="font-normal">questions.</span>
               </h2>
               {/* This p will pick up h2 + p styling */}
               <p className="max-w-xl text-charcoal/80">
