@@ -111,7 +111,7 @@ export default function PricingClient() {
 
   // Fixed pricing logic
   const getPrice = (plan: Plan) => {
-    if (plan.id === "startee") return 0;
+    if (plan.id === "starter") return 0;
 
     if (billingCycle === "monthly") {
       return plan.priceMonthly;
