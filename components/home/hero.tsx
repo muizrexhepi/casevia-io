@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { ArrowRight, CheckCircle2, Play, X } from "lucide-react";
 import { toast } from "sonner";
+import LogoCloudTwo from "./logo-cloud";
 
 const Hero = () => {
   const [email, setEmail] = useState("");
@@ -50,140 +51,106 @@ const Hero = () => {
   return (
     <>
       <section className="hero-section relative w-full min-h-screen flex items-center justify-center px-4 sm:px-6 overflow-hidden bg-cream">
-        {/* Background Elements */}
-        <div className="absolute inset-0 w-full h-full bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_20%,#000_70%,transparent_100%)]" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-terracotta/5 blur-[140px] rounded-full" />
+        {/* Grid + Glow Background */}
+        <div className="absolute inset-0 w-full h-full bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_75%_50%_at_50%_25%,#000_75%,transparent_100%)]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-terracotta/10 blur-[140px] rounded-full" />
 
-        <div className="max-w-6xl mx-auto relative z-10 py-16 pt-32 md:py-20 lg:py-32">
+        <div className="max-w-6xl mx-auto relative z-10 py-24 md:py-32">
           <div className="flex flex-col items-center text-center">
             {/* Social Proof Badge */}
-            {/* <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-charcoal/8 shadow-sm mb-10 sm:mb-12 hover:border-terracotta/25 hover:shadow-md transition-all duration-300 cursor-default">
-              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-terracotta/12">
-                <Users className="w-3 h-3 text-terracotta" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/70 backdrop-blur-sm border border-charcoal/10 shadow-sm mb-8">
+              <span className="text-sm font-medium text-charcoal/70">
+                For B2B Marketing & Sales
               </span>
-              <small className="font-medium text-charcoal/70">
-                Join {waitlistCount}+ marketers in beta
-              </small>
-            </div> */}
+            </div>
 
-            {/* Main Headline - h1 styled by .hero-section in globals.css */}
-            <h1 className="text-charcoal max-w-5xl mb-6 sm:mb-7">
-              From customer call to
-              <br />
-              <span className="inline-block mt-1 sm:mt-2">
-                polished case study
-              </span>
+            {/* Headline */}
+            <h1 className="text-charcoal font-serif max-w-4xl mb-6 sm:mb-7">
+              Generate sales-ready case studies fast.
             </h1>
 
-            {/* Subheadline - p styled by .hero-section in globals.css */}
+            {/* Subheadline */}
             <p className="text-charcoal/70 max-w-2xl mb-10 sm:mb-12 px-4">
-              Upload raw audio or video interviews. AI extracts the narrative,
-              verifies quotes, and writes a professional story{" "}
-              <span className="text-charcoal/90 font-semibold">
-                in 15 minutes
-              </span>
-              .
+              Upload client interviews. AI writes the case study. No agencies,
+              no waiting.
             </p>
 
-            {/* CTA Form */}
-            <div className="w-full max-w-[540px] mb-12 sm:mb-16 px-4 sm:px-0">
+            {/* CTA */}
+            <div className="w-full max-w-[520px] mb-12 sm:mb-16 px-4 sm:px-0">
               <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-terracotta/20 via-terracotta/10 to-terracotta/20 rounded-full blur-md opacity-30 group-hover:opacity-50 transition duration-500" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-terracotta/20 via-terracotta/10 to-terracotta/20 rounded-full blur-lg opacity-30 group-hover:opacity-50 transition duration-500" />
 
-                <div className="relative flex items-stretch gap-2 p-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-charcoal/10 shadow-lg shadow-black/5">
+                <div className="relative flex items-stretch gap-2 p-1.5 rounded-full bg-white/95 backdrop-blur-md border border-charcoal/10 shadow-lg shadow-black/5">
                   <input
                     type="email"
-                    placeholder="Enter your email..."
+                    placeholder="Work email..."
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="flex-1 h-11 sm:h-12 px-4 sm:px-5 bg-transparent text-charcoal text-[15px] placeholder:text-charcoal/40 focus:outline-none rounded-full sm:rounded-none"
+                    className="flex-1 h-10 px-4 bg-transparent text-charcoal placeholder:text-charcoal/40 focus:outline-none text-[15px]"
                     onKeyDown={(e) => e.key === "Enter" && handleSubmit(e)}
                   />
                   <button
                     onClick={handleSubmit}
                     disabled={loading}
-                    className="h-11 sm:h-12 px-6 sm:px-7 rounded-full bg-charcoal text-white font-medium text-[14px] hover:bg-terracotta disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg shadow-charcoal/15 flex items-center justify-center gap-2 whitespace-nowrap"
+                    className="h-10 px-7 rounded-full bg-charcoal text-white font-medium text-[14px] hover:bg-terracotta transition-all duration-300 shadow-md disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     {loading ? (
-                      <span className="flex items-center gap-2">
+                      <div className="flex items-center gap-2">
                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        <span className="hidden sm:inline">Processing...</span>
-                      </span>
+                        Processing…
+                      </div>
                     ) : (
                       <>
-                        Start free
+                        Join Beta
                         <ArrowRight className="w-4 h-4" />
                       </>
                     )}
                   </button>
                 </div>
-              </div>
 
-              <small className="block text-center text-charcoal/40 mt-3.5">
-                No credit card required
-              </small>
-            </div>
-
-            {/* Product Video/Visual */}
-            <div className="relative w-full max-w-6xl group/video">
-              <div className="relative rounded-2xl sm:rounded-3xl border border-charcoal/10 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.02),0_20px_70px_-12px_rgba(0,0,0,0.15)] overflow-hidden">
-                {/* Video Container */}
-                <div className="relative w-full bg-gradient-to-br from-cream/30 via-white to-cream/20">
-                  {/* Desktop: Auto-play video loop */}
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-auto hidden sm:block"
-                    poster="/images/dashboard.webp"
-                  >
-                    {/* <source src="/demo/auto.mp4" type="video/mp4" /> */}
-                    <img
-                      src="/images/dashboard.webp"
-                      alt="Casevia Dashboard"
-                      className="w-full h-auto"
-                    />
-                  </video>
-
-                  {/* Mobile: Static image */}
-                  <img
-                    src="/images/dashboard.webp"
-                    alt="Casevia Dashboard"
-                    className="w-full h-auto sm:hidden"
-                  />
-
-                  {/* "Watch full demo" overlay button */}
-                  <button
-                    onClick={() => setShowFullDemo(true)}
-                    className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-white/95 backdrop-blur-sm border border-charcoal/10 rounded-full shadow-lg hover:shadow-xl hover:bg-white hover:scale-105 transition-all duration-300 group/btn z-10"
-                  >
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-terracotta flex items-center justify-center group-hover/btn:bg-terracotta/90 transition-colors">
-                      <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white fill-white ml-0.5" />
-                    </div>
-                    <small className="font-medium text-charcoal pr-1">
-                      Watch full demo
-                    </small>
-                  </button>
-                </div>
+                <small className="block text-center text-charcoal/40 mt-3.5">
+                  First 100 get 50% off for life · No credit card
+                </small>
               </div>
             </div>
 
-            {/* Trust Indicators */}
-            <div className="mt-14 sm:mt-20 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-charcoal/50 text-sm">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-terracotta" />
-                <span>Zero hallucinations</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-terracotta" />
-                <span>Verified quotes</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-terracotta" />
-                <span>Brand-aligned</span>
+            {/* Product Visual / Demo */}
+            <div className="relative w-full max-w-6xl group/video mb-12 sm:mb-16">
+              <div className="relative rounded-2xl sm:rounded-3xl border border-charcoal/10 bg-white shadow-xl overflow-hidden">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-auto hidden sm:block"
+                  poster="/images/dashboard.webp"
+                >
+                  <img src="/images/dashboard.webp" alt="Casevia dashboard" />
+                </video>
+
+                <img
+                  src="/images/dashboard.webp"
+                  alt="Casevia dashboard"
+                  className="w-full h-auto sm:hidden"
+                />
+
+                {/* Watch Demo Button */}
+                <button
+                  onClick={() => setShowFullDemo(true)}
+                  className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 flex items-center gap-2 px-4 py-2.5 bg-white/95 backdrop-blur-sm border border-charcoal/10 rounded-full shadow-md hover:shadow-xl hover:bg-white hover:scale-105 transition-all duration-300"
+                >
+                  <div className="w-8 h-8 rounded-full bg-terracotta flex items-center justify-center transition-colors">
+                    <Play className="w-4 h-4 text-white fill-white ml-0.5" />
+                  </div>
+                  <small className="font-medium text-charcoal pr-1">
+                    Watch 60-second demo
+                  </small>
+                </button>
               </div>
             </div>
+
+            {/* Logo Cloud */}
+            <LogoCloudTwo />
           </div>
         </div>
       </section>
