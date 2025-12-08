@@ -3,11 +3,7 @@ import React, { useState } from "react";
 import { Check } from "lucide-react";
 import FinalCTA from "@/components/cta";
 
-interface PricingPageProps {
-  onNavigate: (page: "home" | "contact" | "pricing") => void;
-}
-
-const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
+const PricingPage: React.FC = () => {
   const [isAnnual, setIsAnnual] = useState(true);
 
   const plans = [
