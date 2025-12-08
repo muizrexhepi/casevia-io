@@ -1,18 +1,20 @@
 "use client";
-import Hero from "@/components/home/hero";
-import AppShowcase from "@/components/home/app-showcase";
-import FAQ from "@/components/home/faq";
-import Pricing from "@/components/home/pricing";
-import UseCases from "@/components/home/use-cases";
+import FinalCTA from "@/components/cta";
+import DashboardPreview from "@/components/dashboard-preview";
+import FeaturesZigZag from "@/components/features";
+import Hero from "@/components/hero";
+import Pricing from "@/components/pricing";
+import QualityShowcase from "@/components/quality-showcase";
 
 export default function App() {
   return (
     <div className="min-h-screen font-sans">
       <Hero />
-      <UseCases />
-      <AppShowcase />
+      <DashboardPreview />
+      <FeaturesZigZag />
+      <QualityShowcase />
       <Pricing />
-      <FAQ />
+      <FinalCTA />
     </div>
   );
 }

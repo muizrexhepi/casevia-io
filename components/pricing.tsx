@@ -1,13 +1,7 @@
-"use client";
 import React, { useState } from "react";
 import { Check } from "lucide-react";
-import FinalCTA from "@/components/cta";
 
-interface PricingPageProps {
-  onNavigate: (page: "home" | "contact" | "pricing") => void;
-}
-
-const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
+const Pricing: React.FC = () => {
   const [isAnnual, setIsAnnual] = useState(true);
 
   const plans = [
@@ -88,28 +82,32 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col pt-24">
-      {/* Background Elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-100/60 blur-[120px] rounded-full mix-blend-multiply opacity-50"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-100/60 blur-[100px] rounded-full mix-blend-multiply opacity-50"></div>
+    <section
+      id="pricing"
+      className="py-16 md:py-24 bg-slate-50 relative overflow-hidden"
+    >
+      {/* Background Elements (Added to match theme "behind" the section) */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-transparent to-slate-50"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-100/40 blur-[120px] rounded-full mix-blend-multiply"></div>
       </div>
 
-      <section className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pt-12 md:pt-20">
-        {/* Page Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24 fade-in">
-          <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-slate-900 leading-[0.95] tracking-tight mb-6">
-            Simple pricing,
-            <br />
-            <span className="text-blue-600 italic">infinite ROI.</span>
-          </h1>
-          <p className="font-sans text-lg md:text-xl text-slate-600 leading-relaxed font-light max-w-2xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-20 md:mb-24">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-medium uppercase tracking-wide mb-6">
+            Pricing
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal text-slate-900 mb-6 font-serif leading-[1.2em] sm:leading-none text-balance">
+            Simple pricing, infinite ROI.
+          </h2>
+          <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
             Choose the plan that fits your growth stage. Scale your proof engine
             without scaling your headcount.
           </p>
-
           {/* Toggle Switch */}
-          <div className="relative flex items-center justify-center gap-4 mt-12">
+          <div className="relative flex items-center justify-center gap-4 mt-8">
             <span
               className={`text-sm font-medium transition-colors ${!isAnnual ? "text-slate-900" : "text-slate-400"}`}
             >
@@ -134,7 +132,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
 
               {/* Hand-drawn Arrow & Note */}
               <div className="relative hidden sm:block">
-                <div className="absolute -top-10 left-6 flex flex-col items-start transform -rotate-6">
+                <div className="absolute -top-10 left-2 flex flex-col items-start transform -rotate-6">
                   <span className="text-sm font-medium text-blue-600 font-serif italic whitespace-nowrap">
                     Save 20%
                   </span>
@@ -170,18 +168,15 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Pricing Cards */}
-        <div
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch w-full mb-24 fade-in"
-          style={{ animationDelay: "0.1s" }}
-        >
+        {/* Pricing Cards (4 Cols) */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch w-full">
           {plans.map((plan) => (
             <div
               key={plan.name}
               className={`relative rounded-2xl p-6 lg:p-8 h-full flex flex-col transition-all duration-300 ${
                 plan.highlighted
-                  ? "bg-blue-50/50 ring-1 ring-blue-100 z-10 shadow-lg shadow-blue-500/5"
-                  : "bg-white border border-slate-200 hover:border-slate-300 shadow-sm"
+                  ? "bg-blue-50/50 ring-1 ring-blue-300/50 z-10 shadow-lg shadow-blue-500/5"
+                  : "bg-white border border-slate-200 hover:border-slate-300"
               }`}
             >
               {plan.badge && (
@@ -217,6 +212,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                     </span>
                   )}
                 </div>
+                {/* Persistent Billed Text */}
                 <p
                   className={`text-xs text-slate-400 font-normal mt-1 transition-opacity h-4 ${isAnnual && typeof plan.annualPrice === "number" && plan.annualPrice > 0 ? "opacity-100" : "opacity-0"}`}
                 >
@@ -253,12 +249,9 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* Reusing FAQ Section for SEO and conversion */}
-      <FinalCTA />
-    </div>
+      </div>
+    </section>
   );
 };
 
-export default PricingPage;
+export default Pricing;
