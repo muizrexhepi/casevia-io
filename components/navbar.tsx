@@ -123,10 +123,10 @@ const Navbar: React.FC = () => {
               className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity"
               onClick={() => setIsMobileMenuOpen(false)}
             />
-            <div className="fixed inset-y-0 right-0 z-[100] w-full overflow-y-auto bg-slate-50 px-6 py-6 sm:max-w-sm shadow-xl border-l border-slate-100 transform transition-transform">
+            <div className="fixed inset-y-0 right-0 z-[100] w-full overflow-y-auto bg-slate-50 px-5 py-4 sm:max-w-sm shadow-xl border-l border-slate-100 transform transition-transform">
               <div className="flex items-center justify-between">
                 <a href="#" className="-m-1.5 p-1.5">
-                  <span className="text-3xl font-bold font-serif text-slate-900 lowercase">
+                  <span className="text-2xl font-medium font-serif text-slate-900 lowercase">
                     {APP_NAME}
                   </span>
                 </a>

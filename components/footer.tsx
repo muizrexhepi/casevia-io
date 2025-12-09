@@ -109,12 +109,10 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <hr className="border-t border-slate-100 mb-8" />
-
-        <div className="flex justify-between items-center">
+        <div className="flex flex-wrap gap-2 justify-between items-center">
           <a
             href="/"
-            className="text-5xl font-normal font-serif tracking-tight text-slate-900 lowercase"
+            className="text-5xl font-normal font-serif tracking-tighter text-slate-900 lowercase"
           >
             casevia
           </a>

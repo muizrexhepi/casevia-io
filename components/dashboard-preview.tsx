@@ -17,9 +17,6 @@ const DashboardPreview: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-          {/* <div className="text-blue-600 text-xs font-semibold uppercase tracking-wider mb-4">
-            System of Record
-          </div> */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl tracking-tight font-medium text-slate-900 mb-4 font-serif leading-[1.2em] sm:leading-[1em] text-balance">
             The operating system for customer proof
           </h2>
@@ -30,7 +27,7 @@ const DashboardPreview: React.FC = () => {
         </div>
 
         {/* Dashboard Mockup Container */}
-        <div className="relative rounded-2xl bg-white border border-slate-200/80 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] overflow-hidden max-w-6xl mx-auto ring-1 ring-slate-900/5">
+        <div className="relative rounded-2xl bg-white border border-slate-200/80 overflow-hidden max-w-6xl mx-auto ring-1 ring-slate-900/5">
           {/* Window Controls / Header */}
           <div className="border-b border-slate-100 px-6 py-4 flex items-center justify-between bg-white sticky top-0 z-20">
             <div className="flex items-center gap-5">
