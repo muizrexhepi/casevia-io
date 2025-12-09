@@ -16,15 +16,14 @@ const DashboardPreview: React.FC = () => {
     <section className="py-16 md:py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-medium uppercase tracking-wide mb-6">
-            <LayoutGrid size={12} />
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+          {/* <div className="text-blue-600 text-xs font-semibold uppercase tracking-wider mb-4">
             System of Record
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal text-slate-900 mb-6 font-serif leading-[1.2em] sm:leading-none text-balance">
+          </div> */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl tracking-tight font-medium text-slate-900 mb-4 font-serif leading-[1.2em] sm:leading-[1em] text-balance">
             The operating system for customer proof
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-slate-700 leading-[1.4em] mb-8 max-w-2xl mx-auto">
             Manage your entire library of wins in one place. Track pipeline
             influence, usage by sales, and asset freshness from a single view.
           </p>

@@ -1,20 +1,31 @@
 import React from "react";
-import { APP_NAME } from "../constants";
+// Assuming APP_NAME is defined elsewhere, but for the footer text
+// we'll use 'torch' as seen in the image's design style,
+// and the copyright will use 'Casevia' as requested.
+
+// Note: I will use 'Casevia' for the bottom left logo text and copyright text,
+// but the *structure and category names* in the link grid will follow the image.
 
 const Footer: React.FC = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-slate-50 text-slate-900 pt-24 pb-16 relative overflow-hidden">
+    // Update: Simpler background and less padding on the bottom
+    <footer className="bg-slate-50 text-slate-900 pt-24 pb-8 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-20">
-        {/* Top Grid: Links */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-24">
+        {/* Top Grid: Links - Simplified structure to match the image */}
+        {/* The image shows a four-column layout with very specific, brief links */}
+        <div className="flex justify-start space-x-20 mb-24">
+          {/* COMPANY */}
           <div>
-            <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-6">
-              Company
+            <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">
+              COMPANY
             </h4>
-            <ul className="space-y-3 text-sm font-normal text-slate-500">
+            <ul className="space-y-1 text-sm font-normal text-slate-900">
+              {/* Updated text to match image: Careers & Contact */}
               <li>
                 <a href="#" className="hover:text-blue-600 transition-colors">
-                  Blog
+                  Careers
                 </a>
               </li>
               <li>
@@ -28,27 +39,31 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
+          {/* PRODUCT */}
           <div>
-            <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-6">
-              Product
+            <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">
+              PRODUCT
             </h4>
-            <ul className="space-y-3 text-sm font-normal text-slate-500">
+            <ul className="space-y-1 text-sm font-normal text-slate-900">
+              {/* Updated text to match image: App */}
               <li>
                 <a
-                  href="#pricing"
+                  href="#app-link"
                   className="hover:text-blue-600 transition-colors"
                 >
-                  Pricing
+                  App
                 </a>
               </li>
             </ul>
           </div>
 
+          {/* SOCIAL */}
           <div>
-            <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-6">
-              Social
+            <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">
+              SOCIAL
             </h4>
-            <ul className="space-y-3 text-sm font-normal text-slate-500">
+            <ul className="space-y-1 text-sm font-normal text-slate-900">
+              {/* Updated text to match image: X.com & Discord (replacing LinkedIn) */}
               <li>
                 <a
                   href="https://x.com/muiz_rexhepi"
@@ -60,23 +75,26 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
+                {/* Assuming this is a link to your Discord */}
                 <a
-                  href="https://www.linkedin.com/feed/"
+                  href="#discord-link"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-600 transition-colors"
                 >
-                  LinkedIn
+                  Discord
                 </a>
               </li>
             </ul>
           </div>
 
+          {/* LEGAL */}
           <div>
-            <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-6">
-              Legal
+            <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">
+              LEGAL
             </h4>
-            <ul className="space-y-3 text-sm font-normal text-slate-500">
+            <ul className="space-y-1 text-sm font-normal text-slate-900">
+              {/* Text matches your original, just updated styling */}
               <li>
                 <a href="#" className="hover:text-blue-600 transition-colors">
                   Privacy Policy
@@ -91,17 +109,17 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Bar: Brand & Copyright */}
-        <div className="flex flex-col md:flex-row justify-between items-end md:items-center gap-8 pt-8 border-t border-slate-100">
+        <hr className="border-t border-slate-100 mb-8" />
+
+        <div className="flex justify-between items-center">
           <a
             href="/"
-            className="text-4xl font-bold font-serif tracking-tight text-slate-900 lowercase opacity-90 hover:opacity-100 transition-opacity"
+            className="text-5xl font-normal font-serif tracking-tight text-slate-900 lowercase"
           >
-            {APP_NAME}
+            casevia
           </a>
           <p className="text-xs text-slate-400 font-normal">
-            &copy; {new Date().getFullYear()} {APP_NAME}, Inc. All rights
-            reserved.
+            &copy; {currentYear} Casevia.io, All rights reserved.
           </p>
         </div>
       </div>

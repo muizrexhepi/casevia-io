@@ -15,7 +15,7 @@ const FeaturesZigZag: React.FC = () => {
     <section className="py-16 md:py-24 bg-slate-50 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 md:space-y-32 relative z-10">
         {/* Feature 1: Verification Engine */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-0 lg:gap-20 items-center">
           <div className="order-2 lg:order-1 relative h-[450px] flex items-center justify-center w-full">
             {/* Cloud Blob 1 (Static) */}
             <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
@@ -130,13 +130,15 @@ const FeaturesZigZag: React.FC = () => {
           </div>
 
           <div className="order-1 lg:order-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-medium uppercase tracking-wide mb-6">
+            {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold uppercase tracking-wide mb-6">
               Zero Hallucinations
-            </div>
-            <h2 className="text-3xl md:text-4xl font-normal text-slate-900 mb-6 font-serif leading-[1.2em] sm:leading-none">
-              AI that cites its sources.
+            </div> */}
+            <h2 className="text-3xl md:text-4xl font-medium text-slate-900 mb-4 font-serif leading-[1.2em] sm:leading-[1em]">
+              Capture & Extract.
+              <br />
+              No hallucinations.
             </h2>
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed mb-8">
+            <p className="text-base md:text-lg text-slate-700 leading-[1.3em] mb-8">
               Your buyers don't trust generic marketing copy. Casevia scans your
               raw interviews, extracts key ROI claims, and ties every quote back
               to the original audio timestamp.
@@ -162,16 +164,13 @@ const FeaturesZigZag: React.FC = () => {
         </div>
 
         {/* Feature 2: Multi-Format Velocity */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-0 lg:gap-20 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-medium uppercase tracking-wide mb-6">
-              Outputs
-            </div>
-            <h2 className="text-3xl md:text-4xl font-normal text-slate-900 mb-6 font-serif leading-[1.2em] sm:leading-none">
+            <h2 className="text-3xl md:text-4xl font-medium text-slate-900 mb-4 font-serif leading-[1.2em] sm:leading-[1em]">
               One interview. <br />
               Endless assets.
             </h2>
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed mb-8">
+            <p className="text-base md:text-lg text-slate-700 leading-[1.3em] mb-8">
               Stop bottling up your best stories in a single PDF. Casevia
               instantly remixes your verified narrative into every format your
               sales team needs.
@@ -277,7 +276,7 @@ const FeaturesZigZag: React.FC = () => {
         </div>
 
         {/* Feature 3: Pipeline Integration */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-0 lg:gap-20 items-center">
           <div className="order-2 lg:order-1 relative h-[450px] flex items-center justify-center w-full">
             {/* Cloud Blob 3 (Static) */}
             <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
@@ -379,22 +378,21 @@ const FeaturesZigZag: React.FC = () => {
           </div>
 
           <div className="order-1 lg:order-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-medium uppercase tracking-wide mb-6">
-              Integrations
-            </div>
-            <h2 className="text-3xl md:text-4xl font-normal text-slate-900 mb-6 font-serif  leading-[1.2em] sm:leading-none">
-              Push proof where <br />
-              the deal happens.
+            <h2 className="text-3xl md:text-4xl font-medium text-slate-900 mb-4 font-serif leading-[1.2em] sm:leading-[1em]">
+              Deliver & Measure.
+              <br />
+              Close the loop.
             </h2>
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed mb-8">
-              Don't let your case studies gather dust. Casevia pushes relevant
-              stories directly into HubSpot and Pipedrive deal records.
+            <p className="text-base md:text-lg text-slate-700 leading-[1.3em] mb-8">
+              Proof only works if sales uses it. Embed assets directly into
+              deals, export to your CRM, and track which stories are actually
+              driving revenue with our Proof Intelligence dashboard.
             </p>
             <ul className="space-y-4 mb-8">
               {[
-                "Auto-suggest stories based on industry",
-                "Track open rates & engagement",
-                "Ungated options for friction-free sharing",
+                "CRM Export (HubSpot / Salesforce)",
+                "Identify proof coverage gaps",
+                "Track asset usage by rep",
               ].map((item, i) => (
                 <li
                   key={i}

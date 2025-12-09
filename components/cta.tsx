@@ -12,13 +12,13 @@ const FinalCTA: React.FC = () => {
   return (
     <section className="py-16 md:py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid md:grid-cols-12 gap-12">
+        <div className="grid md:grid-cols-12 gap-16">
           {/* Left Column: Ask us anything */}
           <div className="md:col-span-5 lg:col-span-4">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal text-slate-900 mb-6 font-serif leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-slate-900 mb-4 font-serif leading-[1.2em] sm:leading-[1em] text-balance">
               Ask us anything
             </h2>
-            <p className="text-base sm:text-lg text-slate-600 mb-8 leading-relaxed font-normal">
+            <p className="text-base md:text-lg text-slate-700 leading-[1.4em] mb-8">
               Have more questions or need support? Shoot us a message and
               someone from our team will be happy to help.
             </p>

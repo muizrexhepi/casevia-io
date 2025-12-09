@@ -6,8 +6,17 @@
   --color-brand-blue: #2563eb;
 
   /* --- Typography --- */
-  --font-serif: "Instrument Serif", serif;
-  --font-sans: "Inter", sans-serif;
+  /*
+    * IMPORTANT CHANGE:
+    * These variable names must match the CSS variables set in RootLayout.tsx
+    * If you use DM Sans (Heading) and Inter (Body), the variables are different
+    * from the ones defined below in @layer base (Inter is often --font-sans).
+    * We will stick to the default Tailwind convention of --font-serif/sans below
+    * but ensure the Base layer uses the **correct Next.js font variables**
+    * (i.e., var(--font-heading) and var(--font-body)).
+    */
+  --font-serif: "DM Sans", sans-serif; /* Simplified for base theme settings */
+  --font-sans: "Inter", sans-serif; /* Simplified for base theme settings */
 
   /* --- Keyframes --- */
   @keyframes float {
@@ -68,7 +77,8 @@
 @layer base {
   /* --- Base Resets & Font Setup --- */
   body {
-    font-family: var(--font-sans);
+    /* Use the Inter font variable set up in RootLayout.tsx */
+    font-family: var(--font-body);
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -80,8 +90,8 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-serif);
-    font-weight: 400; /* Standardize serif weight */
+    font-family: var(--font-heading);
+    @apply tracking-tight font-medium;
   }
 
   /* Smooth Scrolling */

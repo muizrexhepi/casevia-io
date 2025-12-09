@@ -1,25 +1,23 @@
 import type { Metadata } from "next";
-import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
+// Re-importing DM_Sans to use it for headings
+import { DM_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { WaitlistModal } from "@/components/emails/waitlist-modal";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
+// Heading font: DM Sans (supports multiple weights)
 const dmSans = DM_Sans({
-  variable: "--font-heading",
+  variable: "--font-heading", // Set as the heading variable
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "900"], // Explicitly list desired weights
+});
+
+// Body font: Inter
+const inter = Inter({
+  variable: "--font-body", // Set as the body variable
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -80,7 +78,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${dmSans.variable} antialiased`}
+        // Updated font classes to use dmSans and inter variables
+        className={`${dmSans.variable} ${inter.variable} antialiased`}
       >
         {/* Structured Data */}
         <script

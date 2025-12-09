@@ -1,101 +1,105 @@
-import { Clock, FileText, BarChart3, Shield, Zap, Lock } from "lucide-react";
+import {
+  Clock,
+  CheckCircle,
+  Zap,
+  Shield,
+  FileText,
+  Share2,
+  BarChart3,
+  Lock,
+  Target,
+} from "lucide-react";
 import { Benefit, Step, Testimonial } from "./types";
 
-// Brand basics
-export const APP_NAME = "Casevia";
+export const APP_NAME = "casevia"; // Lowercase as requested
 
 export const NAV_LINKS = [
   { label: "Pricing", href: "/pricing" },
+  { label: "Blog", href: "/blogs" },
   { label: "Contact", href: "/contact" },
-  // { label: "Blog", href: "/blogs" },
 ];
 
 export const MAIN_CTA_TEXT = "Get early access";
 
-// Hero Section
 export const HERO_COPY = {
-  headline: "Turn customer wins into revenue assets. Instantly.",
+  headline: "Real customer evidence where it wins deals. Automatically.",
   subhead:
-    "For B2B SaaS teams who can’t wait 6 weeks for a writer. Turn one Zoom call into a verified library of proof — SEO pages, PDFs, and sales battlecards — in 15 minutes.",
-  kpi: "6 weeks → 15 minutes per story",
+    "Interviews become sales-ready proof your team actually uses. Capture, extract, and deliver verified case studies, battlecards, and one-pagers in minutes.",
+  kpi: "Timestamp-Verified • Sales-Ready",
 };
 
-// Problem Section
 export const PROBLEM_COPY = {
-  headline: "The “Proof Gap” is where deals die.",
+  headline: "Deals fail because reps lack the right story.",
   subhead:
-    "You have happy customers — but your case studies are trapped in production hell.",
+    "Your happy customers are your best asset, but their voice is trapped in recordings or generic marketing pages.",
   points: [
     {
-      title: "The 6-Week Slog",
+      title: "The Content Gap",
       description:
-        "Scheduling writers, chasing approvals, and endless revisions kill momentum.",
+        "Marketing can’t ship assets fast enough. Reps need relevant proof for specific objections, not generic PDFs.",
       icon: Clock,
     },
     {
-      title: "Pipeline Stalls",
+      title: "Trapped Data",
       description:
-        "Sales needs relevant proof to close, but marketing can't ship stories fast enough.",
-      icon: BarChart3,
+        "Gold-standard objection handlers are buried in Zoom recordings, completely inaccessible to the sales team.",
+      icon: Lock,
     },
     {
-      title: "Generic Fluff",
+      title: "Trust Deficit",
       description:
-        "Outsourced writers miss the technical nuance your B2B buyers actually care about.",
-      icon: FileText,
+        "Buyers don't trust marketing copy. They want verified evidence, ROI data, and peer validation.",
+      icon: Shield,
     },
   ],
 };
 
-// Solution Steps
 export const SOLUTION_STEPS: Step[] = [
   {
     number: "01",
-    title: "Upload Customer Call",
+    title: "Capture & Extract",
     description:
-      "Drag in your Gong, Zoom, or Meet recording. Casevia analyzes transcripts instantly.",
+      "Upload Zoom, Gong, or Google Meet recordings. AI extracts problem-solution-result arcs and verifies every quote with a timestamp.",
   },
   {
     number: "02",
-    title: "Extract & Verify",
+    title: "Publish Assets",
     description:
-      "AI pulls the commercial narrative (Challenge → Solution → Result) and cites every quote.",
+      "Instantly generate sales one-pagers, SEO case studies, competitive battlecards, and LinkedIn carousels.",
   },
   {
     number: "03",
-    title: "Publish Multi-Format",
+    title: "Deliver to Sales",
     description:
-      "Generate a branded PDF, web page, and LinkedIn carousel in one click.",
+      "Embed assets in deals, export to CRM, and track usage. Reps get the right proof for the right objection.",
   },
 ];
 
-// Benefits
 export const BENEFITS: Benefit[] = [
   {
     title: "Zero Hallucinations",
     description:
-      "Every claim is citation-backed. If it wasn’t said, it won’t be written.",
+      "Every claim is citation-backed. Quotes are linked to video timestamps for instant verification.",
     icon: Shield,
   },
   {
-    title: "Sales-Ready Assets",
+    title: "Sales Enablement",
     description:
-      "Auto-generates 1-pagers and slide decks specifically designed for sales workflows.",
-    icon: Zap,
+      "Auto-generates battlecards and objection handlers specifically formatted for your CRM and sales outreach.",
+    icon: Target,
   },
   {
-    title: "Enterprise-Grade Privacy",
+    title: "Proof Intelligence",
     description:
-      "SOC2 compliant. Your customer data never trains public models.",
-    icon: Lock,
+      "Track asset usage and identify coverage gaps. Know exactly which stories influence revenue.",
+    icon: BarChart3,
   },
 ];
 
-// Testimonials (Seed–A ICP aligned)
 export const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "We went from shipping one case study a quarter to one every week. Sales has proof for every objection now.",
+      "Sales has stopped asking 'do we have a case study for this?'. They just pull the exact slide they need from Casevia.",
     author: "Elena R.",
     role: "Head of Marketing",
     company: "SaaSflow",
@@ -103,47 +107,115 @@ export const TESTIMONIALS: Testimonial[] = [
   },
   {
     quote:
-      "No agency budget. Casevia gives me agency-quality narratives without the $2k price tag or the 6-week wait.",
+      "We closed a $50k deal because I could instantly send a verified clip of a similar customer handling the exact same objection.",
     author: "Marcus J.",
-    role: "Founder & CEO",
+    role: "VP of Sales",
     company: "Datastack",
     avatar: "https://picsum.photos/100/100?random=2",
   },
 ];
 
-// FAQs
 export const FAQS = [
   {
-    question: "Why not hire a freelancer?",
+    question: "How is this different from AI writing tools?",
     answer:
-      "Freelancers take weeks and cost $1k–$3k per story. Casevia delivers in minutes with zero risk of inaccuracies.",
+      "Writing is only 10% of the problem. Casevia is a proof engine. We focus on extraction (finding the ROI), verification (timestamping quotes), and delivery (getting assets into the hands of sales via CRM/Chrome). We don't just write text; we build verified assets.",
   },
   {
-    question: "What call sources are supported?",
+    question: "Does it integrate with my CRM?",
     answer:
-      "Upload MP3/MP4/WAV or auto-import from Zoom, Google Meet, Gong, and Chorus.",
+      "Yes. The Sales Enablement plan and above support direct exports to HubSpot and Salesforce, allowing you to track which assets are influencing pipeline.",
   },
   {
-    question: "Is my data secure?",
+    question: "What recording formats do you support?",
     answer:
-      "Yes. SOC2 Type II ready. Encrypted at rest + in transit. Interviews never train public AI models.",
+      "We support direct uploads (mp3, mp4, wav) and integrate with Gong, Chorus, Zoom, and Google Meet for automatic imports.",
   },
   {
-    question: "Can I edit the output?",
+    question: "Is my customer data secure?",
     answer:
-      "Yes. You get a 95% complete draft — refine tone, swap quotes, update layout before publishing.",
+      "Yes. We are SOC2 Type II compliant. Your data is encrypted at rest and in transit, and we never use your customer interviews to train our public AI models.",
   },
   {
-    question: "What if I cancel?",
+    question: "Can I generate competitive battlecards?",
     answer:
-      "You own all exports forever. Download as PDFs or Markdown anytime.",
+      "Yes. Casevia automatically detects mentions of competitors in your interviews and formats that data into battlecards for your sales team.",
   },
 ];
 
-// In-product demo example
-export const DEMO_PROMPT = `
-Generate a high-impact case study summary for a B2B SaaS tool called “DevScale”
-that helped “Acme Corp” reduce deployment time by 50%.
-Focus on business results and verified proof.
-Use confident revenue-focused language.
-`;
+export const DEMO_PROMPT = `Generate a high-impact case study summary for a B2B SaaS tool called "DevScale" that helped "Acme Corp" reduce deployment time by 50%. Focus on the "Result" section. Use confident, revenue-focused language.`;
+
+export const PLANS = [
+  {
+    name: "Starter",
+    description: "For founders testing Casevia for the first time.",
+    price: 0,
+    annualPrice: 0,
+    features: [
+      "1 case study / month",
+      "Up to 10 min interview audio",
+      "Basic AI narrative writing",
+      "Casevia branding",
+      "1 seat",
+      "Email support (48h)",
+    ],
+    cta: "Get started free",
+    highlighted: false,
+    badge: null,
+  },
+  {
+    name: "Growth",
+    description: "For lean B2B marketing teams producing stories consistently.",
+    price: 39,
+    annualPrice: 31,
+    features: [
+      "3 case studies / month",
+      "Up to 30 min interview audio",
+      "Tone refinement",
+      "No watermark",
+      "5 templates",
+      "2 seats",
+      "Export to PDF + web",
+      "Email support (24h)",
+    ],
+    cta: "Upgrade to Growth",
+    highlighted: false,
+    badge: null,
+  },
+  {
+    name: "Scale",
+    description: "For teams who rely on case studies to drive pipeline.",
+    price: 99,
+    annualPrice: 79,
+    features: [
+      "8 case studies / month",
+      "Up to 60 min interviews",
+      "SEO metadata",
+      "Brand-aligned writing",
+      "Unlimited templates",
+      "5 seats",
+      "CRM export",
+      "Priority support",
+    ],
+    cta: "Scale your proof engine",
+    highlighted: true,
+    badge: "Most Popular",
+  },
+  {
+    name: "Enterprise",
+    description: "For large organizations requiring custom volume & security.",
+    price: "Custom",
+    annualPrice: "Custom",
+    features: [
+      "Unlimited case studies",
+      "SSO & SAML",
+      "Dedicated Success Manager",
+      "Custom API Access",
+      "SLA Guarantees",
+      "White-label Portal",
+    ],
+    cta: "Contact Sales",
+    highlighted: false,
+    badge: null,
+  },
+];

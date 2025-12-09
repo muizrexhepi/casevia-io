@@ -1,85 +1,9 @@
 import React, { useState } from "react";
 import { Check } from "lucide-react";
+import { PLANS } from "@/constants";
 
 const Pricing: React.FC = () => {
   const [isAnnual, setIsAnnual] = useState(true);
-
-  const plans = [
-    {
-      name: "Starter",
-      description: "For founders testing Casevia for the first time.",
-      price: 0,
-      annualPrice: 0,
-      features: [
-        "1 case study / month",
-        "Up to 10 min interview audio",
-        "Basic AI narrative writing",
-        "Casevia branding",
-        "1 seat",
-        "Email support (48h)",
-      ],
-      cta: "Get started free",
-      highlighted: false,
-      badge: null,
-    },
-    {
-      name: "Growth",
-      description:
-        "For lean B2B marketing teams producing stories consistently.",
-      price: 39,
-      annualPrice: 31,
-      features: [
-        "3 case studies / month",
-        "Up to 30 min interview audio",
-        "Tone refinement",
-        "No watermark",
-        "5 templates",
-        "2 seats",
-        "Export to PDF + web",
-        "Email support (24h)",
-      ],
-      cta: "Upgrade to Growth",
-      highlighted: false,
-      badge: null,
-    },
-    {
-      name: "Scale",
-      description: "For teams who rely on case studies to drive pipeline.",
-      price: 99,
-      annualPrice: 79,
-      features: [
-        "8 case studies / month",
-        "Up to 60 min interviews",
-        "SEO metadata",
-        "Brand-aligned writing",
-        "Unlimited templates",
-        "5 seats",
-        "CRM export",
-        "Priority support",
-      ],
-      cta: "Scale your proof engine",
-      highlighted: true,
-      badge: "Most Popular",
-    },
-    {
-      name: "Enterprise",
-      description:
-        "For large organizations requiring custom volume & security.",
-      price: "Custom",
-      annualPrice: "Custom",
-      features: [
-        "Unlimited case studies",
-        "SSO & SAML",
-        "Dedicated Success Manager",
-        "Custom API Access",
-        "SLA Guarantees",
-        "White-label Portal",
-      ],
-      cta: "Contact Sales",
-      highlighted: false,
-      badge: null,
-    },
-  ];
 
   return (
     <section
@@ -87,7 +11,7 @@ const Pricing: React.FC = () => {
       className="py-16 md:py-24 bg-slate-50 relative overflow-hidden"
     >
       {/* Background Elements (Added to match theme "behind" the section) */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none -z-10">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px]"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-transparent to-slate-50"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-100/40 blur-[120px] rounded-full mix-blend-multiply"></div>
@@ -96,13 +20,13 @@ const Pricing: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20 md:mb-24">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-medium uppercase tracking-wide mb-6">
+          {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-medium uppercase tracking-wide mb-6">
             Pricing
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal text-slate-900 mb-6 font-serif leading-[1.2em] sm:leading-none text-balance">
+          </div> */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-slate-900 mb-4 font-serif leading-[1.2em] sm:leading-[1em] text-balance">
             Simple pricing, infinite ROI.
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-slate-700 leading-[1.4em] mb-8 max-w-2xl mx-auto">
             Choose the plan that fits your growth stage. Scale your proof engine
             without scaling your headcount.
           </p>
@@ -170,7 +94,7 @@ const Pricing: React.FC = () => {
 
         {/* Pricing Cards (4 Cols) */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch w-full">
-          {plans.map((plan) => (
+          {PLANS.map((plan) => (
             <div
               key={plan.name}
               className={`relative rounded-2xl p-6 lg:p-8 h-full flex flex-col transition-all duration-300 ${
@@ -188,7 +112,7 @@ const Pricing: React.FC = () => {
               )}
 
               <div className="mb-6">
-                <h3 className="text-xl lg:text-2xl font-normal text-slate-900 font-serif">
+                <h3 className="text-xl lg:text-2xl font-medium text-slate-900 font-serif">
                   {plan.name}
                 </h3>
                 <p className="text-sm text-slate-500 mt-2 min-h-[40px] leading-relaxed font-normal">

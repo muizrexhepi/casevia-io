@@ -31,17 +31,19 @@ const Hero: React.FC = () => {
         <div className="mx-auto max-w-4xl text-center">
           {/* KPI Badge */}
           <div className="mb-6 md:mb-8 flex justify-center fade-in">
-            <div className="relative rounded-xl px-4 py-1.5 text-xs sm:text-sm leading-6 text-blue-100 ring-1 ring-white/20 hover:ring-white/40 bg-white/5 backdrop-blur-sm transition-all cursor-default">
-              {/* <span className="font-medium text-white">{HERO_COPY.kpi}</span>
-              <span className="mx-2 text-blue-300">|</span> */}
-              <span className="text-blue-200 font-normal">
-                Benchmarked against industry avg
-              </span>
+            <div className="relative inline-flex overflow-hidden rounded-full p-[1px]">
+              {/* Rotating Gradient Border */}
+              <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#1e3266_0%,#93c5fd_50%,#1e3266_100%)]" />
+
+              {/* Content Mask */}
+              <div className="inline-flex h-full w-full items-center justify-center rounded-full bg-[#1e3266]/90 px-4 py-1.5 text-xs sm:text-sm leading-6 text-blue-100 backdrop-blur-md cursor-default ring-1 ring-white/10">
+                <span className="font-medium text-white">{HERO_COPY.kpi}</span>
+              </div>
             </div>
           </div>
 
           <h1
-            className="text-4xl sm:text-5xl md:text-7xl font-normal tracking-tight text-white mb-6 md:mb-8 drop-shadow-sm leading-[1.2em] sm:leading-none font-serif fade-in"
+            className="text-4xl sm:text-5xl md:text-7xl font-normal tracking-tight text-white mb-6 md:mb-8 drop-shadow-sm leading-[1.2em] sm:leading-[1em] font-serif fade-in"
             style={{ animationDelay: "0.1s" }}
           >
             Proof your pipeline with real customer stories.{" "}
@@ -65,7 +67,7 @@ const Hero: React.FC = () => {
           </h1>
 
           <p
-            className="mt-4 md:mt-6 text-base sm:text-xl leading-relaxed text-blue-100 max-w-2xl mx-auto mb-8 md:mb-10 text-pretty fade-in font-normal"
+            className="mt-4 md:mt-6 text-base sm:text-xl leading-[1.4em] text-blue-100 max-w-2xl mx-auto mb-8 md:mb-10 text-pretty fade-in font-normal"
             style={{ animationDelay: "0.2s" }}
           >
             One interview becomes proof your reps can actually use. Case

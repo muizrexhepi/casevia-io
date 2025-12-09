@@ -72,7 +72,7 @@ const Navbar: React.FC = () => {
             {/* The existing Logo/App Name link */}
             <a href="/" className="-m-1.5 p-1.5 flex items-center gap-2 group">
               <span
-                className={`text-3xl font-bold font-serif transition-colors lowercase ${textClass}`}
+                className={`text-2xl font-medium tracking-tight font-serif transition-colors lowercase ${textClass}`}
               >
                 {APP_NAME}
               </span>
