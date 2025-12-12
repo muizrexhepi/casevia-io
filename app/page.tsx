@@ -1,18 +1,23 @@
 "use client";
-import Hero from "@/components/home/hero";
-import AppShowcase from "@/components/home/app-showcase";
-import FAQ from "@/components/home/faq";
-import Pricing from "@/components/home/pricing";
-import UseCases from "@/components/home/use-cases";
+
+import { Growth } from "@/components/growth";
+import { Hero } from "@/components/hero";
+import { Portfolio } from "@/components/portfolio";
+import { Pricing } from "@/components/pricing";
+import { Process } from "@/components/process";
+import { Services } from "@/components/services";
+import { Stats } from "@/components/stats";
 
 export default function App() {
   return (
     <div className="min-h-screen font-sans">
       <Hero />
-      <UseCases />
-      <AppShowcase />
+      <Stats />
+      <Portfolio />
+      <Growth />
+      <Services />
+      <Process />
       <Pricing />
-      <FAQ />
     </div>
   );
 }

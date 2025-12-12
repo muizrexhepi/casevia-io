@@ -7,7 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY!);
 export async function POST(request: NextRequest) {
   try {
     const { firstName, lastName, email, company, message } =
-      await request.json();
+      await request.json(); // These fields are now sent by the client
 
     // Validation
     if (!email || !email.includes("@")) {

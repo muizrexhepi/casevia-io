@@ -1,37 +1,38 @@
 "use client";
+
 import { Reveal } from "@/components/ui/Reveal";
 import React, { useEffect } from "react";
 
-const TermsPage: React.FC = () => {
+const PrivacyPage: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const sections = [
     {
-      title: "01. Introduction",
+      title: "01. Data Collection",
       content:
-        "These Terms of Service govern your use of the website located at Casevia.io and any related services provided by Casevia. By accessing Casevia.io, you agree to abide by these Terms of Service and to comply with all applicable laws and regulations.",
+        "We collect information you provide directly to us. For example, we collect information when you create an account, subscribe, participate in any interactive features of our services, fill out a form, request customer support, or otherwise communicate with us.",
     },
     {
-      title: "02. Intellectual Property",
+      title: "02. Usage of Information",
       content:
-        "All materials on Casevia.io, including text, graphics, logos, icons, and images, are the property of Casevia or its content suppliers and are protected by international copyright laws. The compilation of all content on this site is the exclusive property of Casevia.",
+        "We use the information we collect to provide, maintain, and improve our services, such as administering your account, processing transactions, and sending you related information, including confirmations and invoices.",
     },
     {
-      title: "03. Use License",
+      title: "03. Data Sharing",
       content:
-        "Permission is granted to temporarily download one copy of the materials on Casevia's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license, you may not modify or copy the materials.",
+        "We may share personal information with vendors, consultants, and other service providers who need access to such information to carry out work on our behalf. We do not sell your personal data to third parties.",
     },
     {
-      title: "04. Limitations",
+      title: "04. Security",
       content:
-        "In no event shall Casevia or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Casevia's website.",
+        "Casevia takes reasonable measures to help protect information about you from loss, theft, misuse and unauthorized access, disclosure, alteration and destruction. However, no internet transmission is completely secure.",
     },
     {
-      title: "05. Accuracy of Materials",
+      title: "05. Cookies",
       content:
-        "The materials appearing on Casevia's website could include technical, typographical, or photographic errors. Casevia does not warrant that any of the materials on its website are accurate, complete, or current. Casevia may make changes to the materials contained on its website at any time without notice.",
+        "We use cookies and similar tracking technologies to track the activity on our Service and hold certain information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.",
     },
   ];
 
@@ -47,7 +48,7 @@ const TermsPage: React.FC = () => {
           </Reveal>
           <Reveal width="100%">
             <h1 className="font-display text-[11vw] md:text-[8vw] leading-[0.8] font-black uppercase tracking-tighter text-left mb-12">
-              Terms of <br /> Service
+              Privacy <br /> Policy
             </h1>
           </Reveal>
           <Reveal delay={0.1} width="100%">
@@ -92,4 +93,4 @@ const TermsPage: React.FC = () => {
   );
 };
 
-export default TermsPage;
+export default PrivacyPage;

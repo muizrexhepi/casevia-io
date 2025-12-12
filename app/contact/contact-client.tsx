@@ -1,28 +1,63 @@
 "use client";
+import React, { useEffect, useState } from "react";
+import { ArrowRight, Mail, MapPin } from "lucide-react";
+import { Reveal } from "@/components/ui/Reveal";
 
-import React, { useState } from "react";
-import { Mail, MessageSquare, Calendar, ArrowRight, Check } from "lucide-react";
-import Link from "next/link";
+// Define the shape of the form data
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  interest: string;
+  company: string; // Added to satisfy API validation
+  message: string;
+}
 
-export default function ContactClient() {
-  const [formData, setFormData] = useState({
+const ContactClient: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
     email: "",
+    interest: "",
     company: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<
+    "idle" | "success" | "error" | "sending"
+  >("idle");
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{
-    type: "success" | "error" | null;
-    message: string;
-  }>({ type: null, message: "" });
+  // Scrolls to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    // Reset status on input change
+    if (status !== "idle") setStatus("idle");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus({ type: null, message: "" });
+    setLoading(true);
+    setStatus("sending");
+
+    // The API route expects: firstName, lastName, email, company, message
+    const payload = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      company: formData.company || "N/A", // Using a simple placeholder for company if not explicitly asked on form
+      message: `Interest: ${formData.interest}\n\nDetails:\n${formData.message}`,
+    };
 
     try {
       const response = await fetch("/api/contact", {
@@ -30,342 +65,297 @@ export default function ContactClient() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
 
       if (response.ok && data.success) {
-        setSubmitStatus({
-          type: "success",
-          message:
-            "Thank you! We've received your message and will respond within 24 hours.",
-        });
-        // Reset form
+        setStatus("success");
         setFormData({
           firstName: "",
           lastName: "",
           email: "",
+          interest: "",
           company: "",
           message: "",
         });
       } else {
-        setSubmitStatus({
-          type: "error",
-          message: data.error || "Something went wrong. Please try again.",
-        });
+        setStatus("error");
+        console.error("Submission error:", data.error || "Unknown error");
       }
     } catch (error) {
-      setSubmitStatus({
-        type: "error",
-        message: "Failed to send message. Please try again later.",
-      });
+      setStatus("error");
+      console.error("Network or fetch error:", error);
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
   };
 
-  const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
+  const submitButtonText =
+    status === "sending"
+      ? "Sending..."
+      : status === "success"
+        ? "Sent Successfully!"
+        : status === "error"
+          ? "Failed, Try Again"
+          : "Submit Request";
 
   return (
-    <section className="w-full bg-cream px-6 md:px-12">
-      <div className="max-w-6xl mx-auto py-16 md:py-20 lg:py-24 pt-32 md:pt-40">
+    <div className="bg-white min-h-screen pt-32 md:pt-40 pb-24 text-black">
+      <div className="container mx-auto px-6 md:px-12">
         {/* Header */}
-        <div className="mb-12 md:mb-16 lg:mb-20 flex flex-col gap-6 md:gap-7 text-center max-w-2xl mx-auto">
-          <h1 className="font-serif text-[2.75rem] md:text-5xl lg:text-6xl text-charcoal leading-[0.92] tracking-tight">
-            Let's talk about <br />
-            <span className="italic text-charcoal font-normal text-[3rem] md:text-[3.3rem] lg:text-[3.9rem]">
-              your needs.
-            </span>
-          </h1>
-          <p className="font-sans text-lg md:text-xl text-charcoal/70 leading-relaxed font-light">
-            Whether you need a custom plan, have questions, or want to see a
-            demo—we're here to help you succeed.
-          </p>
+        <div className="flex flex-col items-start mb-24 md:mb-32">
+          <Reveal>
+            <h1 className="font-display text-[12vw] leading-[0.8] font-black uppercase tracking-tighter text-black mb-12">
+              Let's Talk
+            </h1>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="text-xl md:text-2xl font-display font-medium max-w-2xl leading-relaxed">
+              Ready to transform your digital presence? We take on a limited
+              number of clients per quarter to ensure exceptional quality.
+            </p>
+          </Reveal>
         </div>
 
-        {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-5 gap-5 mb-16 md:mb-20 lg:mb-24">
-          {/* Left Column - Contact Cards */}
-          <div className="lg:col-span-2 space-y-5">
-            {/* Email Card */}
-            <div className="p-6 bg-white rounded-2xl border border-charcoal/[0.06]">
-              <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-xl bg-terracotta/10 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-5 h-5 text-terracotta" strokeWidth={1.5} />
-                </div>
-                <div className="flex-1 space-y-2">
-                  <h3 className="font-sans font-semibold text-charcoal text-[15px]">
-                    Email us
-                  </h3>
-                  <a
-                    href="mailto:contact@casevia.io"
-                    className="block text-sm text-charcoal/60 hover:text-terracotta transition-colors font-medium"
-                  >
-                    contact@casevia.io
-                  </a>
-                  <p className="text-sm text-charcoal/50 leading-relaxed">
-                    For general inquiries and sales
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Support Card */}
-            <div className="p-6 bg-white rounded-2xl border border-charcoal/[0.06]">
-              <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-xl bg-terracotta/10 flex items-center justify-center flex-shrink-0">
-                  <MessageSquare
-                    className="w-5 h-5 text-terracotta"
-                    strokeWidth={1.5}
-                  />
-                </div>
-                <div className="flex-1 space-y-2">
-                  <h3 className="font-sans font-semibold text-charcoal text-[15px]">
-                    Support
-                  </h3>
-                  <a
-                    href="mailto:support@casevia.io"
-                    className="block text-sm text-charcoal/60 hover:text-terracotta transition-colors font-medium"
-                  >
-                    support@casevia.io
-                  </a>
-                  <p className="text-sm text-charcoal/50 leading-relaxed">
-                    For technical support and help
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Demo Card */}
-            <div className="p-6 bg-white rounded-2xl border border-charcoal/[0.06]">
-              <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-xl bg-terracotta/10 flex items-center justify-center flex-shrink-0">
-                  <Calendar
-                    className="w-5 h-5 text-terracotta"
-                    strokeWidth={1.5}
-                  />
-                </div>
-                <div className="flex-1 space-y-3">
-                  <div>
-                    <h3 className="font-sans font-semibold text-charcoal text-[15px]">
-                      Book a demo
-                    </h3>
-                    <p className="text-sm text-charcoal/50 mt-1 leading-relaxed">
-                      Schedule a personalized walkthrough
-                    </p>
-                  </div>
-                  <Link
-                    href="/demo"
-                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-charcoal/5 text-charcoal hover:bg-charcoal/10 border border-charcoal/10 hover:border-charcoal/20 transition-all text-sm font-semibold"
-                  >
-                    Schedule demo
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* What to Expect Card */}
-            <div className="p-6 bg-card-bg rounded-2xl border border-charcoal/[0.06]">
-              <h3 className="font-sans font-semibold text-charcoal text-[15px] mb-4">
-                What to expect
-              </h3>
-              <ul className="space-y-3">
-                {[
-                  "Response within 24 hours",
-                  "Personalized consultation",
-                  "Custom pricing and solutions",
-                  "No pressure, just answers",
-                ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <div className="w-4 h-4 rounded-full bg-terracotta/10 border border-terracotta/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check
-                        className="w-2.5 h-2.5 text-terracotta"
-                        strokeWidth={3}
-                      />
-                    </div>
-                    <span className="text-sm text-charcoal/60 leading-relaxed">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Right Column - Form */}
-          <div className="lg:col-span-3">
-            <div className="p-8 md:p-10 bg-white rounded-2xl border border-charcoal/[0.06] h-full">
-              <h2 className="font-serif text-2xl md:text-3xl text-charcoal mb-6 tracking-tight">
-                Send us a message
-              </h2>
-
-              {/* Success/Error Message */}
-              {submitStatus.type && (
-                <div
-                  className={`p-4 rounded-xl mb-6 ${
-                    submitStatus.type === "success"
-                      ? "bg-green-50 border border-green-200 text-green-800"
-                      : "bg-red-50 border border-red-200 text-red-800"
-                  }`}
-                >
-                  <p className="text-sm font-medium">{submitStatus.message}</p>
-                </div>
-              )}
-
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Name Fields */}
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+          {/* Left Column: Form */}
+          <div className="lg:col-span-7">
+            <form onSubmit={handleSubmit} className="space-y-12">
+              {/* Name Fields (Split to satisfy API) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <Reveal delay={0.2}>
+                  <div className="relative group">
                     <label
                       htmlFor="firstName"
-                      className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-[0.12em] font-sans"
+                      className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-4"
                     >
-                      First name
+                      First Name
                     </label>
                     <input
                       id="firstName"
+                      name="firstName"
                       type="text"
-                      placeholder="John"
                       value={formData.firstName}
-                      onChange={(e) =>
-                        handleChange("firstName", e.target.value)
-                      }
+                      onChange={handleChange}
                       required
-                      className="w-full h-12 px-4 bg-cream border border-charcoal/10 rounded-xl text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/20 transition-all font-sans"
+                      placeholder="John"
+                      className="w-full bg-transparent border-b border-black/20 py-4 text-xl md:text-3xl font-display focus:border-black focus:outline-none transition-colors placeholder:text-gray-300 text-black"
                     />
                   </div>
-                  <div className="space-y-2">
+                </Reveal>
+                <Reveal delay={0.25}>
+                  <div className="relative group">
                     <label
                       htmlFor="lastName"
-                      className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-[0.12em] font-sans"
+                      className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-4"
                     >
-                      Last name
+                      Last Name
                     </label>
                     <input
                       id="lastName"
+                      name="lastName"
                       type="text"
-                      placeholder="Doe"
                       value={formData.lastName}
-                      onChange={(e) => handleChange("lastName", e.target.value)}
+                      onChange={handleChange}
                       required
-                      className="w-full h-12 px-4 bg-cream border border-charcoal/10 rounded-xl text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/20 transition-all font-sans"
+                      placeholder="Doe"
+                      className="w-full bg-transparent border-b border-black/20 py-4 text-xl md:text-3xl font-display focus:border-black focus:outline-none transition-colors placeholder:text-gray-300 text-black"
                     />
                   </div>
-                </div>
+                </Reveal>
+              </div>
 
-                {/* Email */}
-                <div className="space-y-2">
+              <Reveal delay={0.3}>
+                <div className="relative group">
                   <label
                     htmlFor="email"
-                    className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-[0.12em] font-sans"
+                    className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-4"
                   >
-                    Work email
+                    Email
                   </label>
                   <input
                     id="email"
+                    name="email"
                     type="email"
-                    placeholder="john@company.com"
                     value={formData.email}
-                    onChange={(e) => handleChange("email", e.target.value)}
+                    onChange={handleChange}
                     required
-                    className="w-full h-12 px-4 bg-cream border border-charcoal/10 rounded-xl text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/20 transition-all font-sans"
+                    placeholder="john@company.com"
+                    className="w-full bg-transparent border-b border-black/20 py-4 text-xl md:text-3xl font-display focus:border-black focus:outline-none transition-colors placeholder:text-gray-300 text-black"
                   />
                 </div>
+              </Reveal>
 
-                {/* Company */}
-                <div className="space-y-2">
+              {/* Added Company Field to match API requirements */}
+              <Reveal delay={0.35}>
+                <div className="relative group">
                   <label
                     htmlFor="company"
-                    className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-[0.12em] font-sans"
+                    className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-4"
                   >
-                    Company name
+                    Company Name
                   </label>
                   <input
                     id="company"
+                    name="company"
                     type="text"
-                    placeholder="Acme Inc."
                     value={formData.company}
-                    onChange={(e) => handleChange("company", e.target.value)}
+                    onChange={handleChange}
                     required
-                    className="w-full h-12 px-4 bg-cream border border-charcoal/10 rounded-xl text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/20 transition-all font-sans"
+                    placeholder="Acme Corp"
+                    className="w-full bg-transparent border-b border-black/20 py-4 text-xl md:text-3xl font-display focus:border-black focus:outline-none transition-colors placeholder:text-gray-300 text-black"
                   />
                 </div>
+              </Reveal>
 
-                {/* Message */}
-                <div className="space-y-2">
+              <Reveal delay={0.4}>
+                <div className="relative group">
+                  <label
+                    htmlFor="interest"
+                    className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-4"
+                  >
+                    Interest
+                  </label>
+                  <select
+                    id="interest"
+                    name="interest"
+                    value={formData.interest}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-transparent border-b border-black/20 py-4 text-xl md:text-3xl font-display focus:border-black focus:outline-none transition-colors text-black appearance-none rounded-none cursor-pointer"
+                  >
+                    <option value="" disabled>
+                      Select a service...
+                    </option>
+                    <option value="New Website">New Website</option>
+                    <option value="Branding & Identity">
+                      Branding & Identity
+                    </option>
+                    <option value="Growth Marketing">Growth Marketing</option>
+                    <option value="Other Inquiry">Other Inquiry</option>
+                  </select>
+                  <div className="absolute right-0 bottom-6 pointer-events-none">
+                    <ArrowRight className="w-6 h-6 text-black" />
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.5}>
+                <div className="relative group">
                   <label
                     htmlFor="message"
-                    className="block text-[11px] font-bold text-charcoal/70 uppercase tracking-[0.12em] font-sans"
+                    className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-4"
                   >
-                    How can we help?
+                    Details
                   </label>
                   <textarea
                     id="message"
-                    placeholder="Tell us about your needs, questions, or what you'd like to discuss..."
-                    rows={6}
+                    name="message"
+                    rows={4}
                     value={formData.message}
-                    onChange={(e) => handleChange("message", e.target.value)}
+                    onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-cream border border-charcoal/10 rounded-xl text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/20 transition-all resize-none font-sans leading-relaxed"
+                    placeholder="Tell us about your project..."
+                    className="w-full bg-transparent border-b border-black/20 py-4 text-xl md:text-2xl font-display focus:border-black focus:outline-none transition-colors placeholder:text-gray-300 text-black resize-none"
                   />
                 </div>
+              </Reveal>
 
-                {/* Submit Button */}
-                <div className="space-y-4 pt-2">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full h-12 bg-charcoal text-cream rounded-full font-sans font-semibold text-[15px] hover:bg-terracotta transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              <Reveal delay={0.6}>
+                <button
+                  type="submit"
+                  disabled={loading || status === "success"}
+                  className={`mt-8 px-12 py-6 rounded-none text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center gap-4 w-full md:w-auto justify-center 
+                    ${
+                      status === "success"
+                        ? "bg-green-600 text-white cursor-not-allowed"
+                        : status === "error"
+                          ? "bg-red-600 text-white"
+                          : loading
+                            ? "bg-gray-500 text-white cursor-wait"
+                            : "bg-black text-white hover:bg-gray-900"
+                    }`}
+                >
+                  {submitButtonText}
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </Reveal>
+
+              {/* Optional User Feedback */}
+              {status === "success" && (
+                <p className="text-sm text-green-600 font-bold uppercase tracking-widest mt-4">
+                  Thank you! We have received your request and will be in touch
+                  shortly.
+                </p>
+              )}
+              {status === "error" && (
+                <p className="text-sm text-red-600 font-bold uppercase tracking-widest mt-4">
+                  An error occurred. Please check your network or try again
+                  later.
+                </p>
+              )}
+            </form>
+          </div>
+
+          {/* Right Column: Info (No Changes) */}
+          <div className="lg:col-span-5 lg:pl-12 lg:border-l border-black/10 flex flex-col justify-between h-full pt-12 lg:pt-0">
+            <div>
+              <Reveal delay={0.2}>
+                <div className="mb-12">
+                  <span className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">
+                    <Mail className="w-4 h-4" /> Email
+                  </span>
+                  <a
+                    href="mailto:hello@casevia.io"
+                    className="text-2xl font-display font-medium hover:text-gray-600 transition-colors"
                   >
-                    {isSubmitting ? (
-                      "Sending..."
-                    ) : (
-                      <>
-                        Send message
-                        <ArrowRight className="w-4 h-4" />
-                      </>
-                    )}
-                  </button>
+                    hello@casevia.io
+                  </a>
+                </div>
+              </Reveal>
 
-                  {/* Privacy Note */}
-                  <p className="text-xs text-center text-charcoal/40 leading-relaxed font-sans">
-                    By submitting this form, you agree to our{" "}
-                    <Link
-                      href="/privacy-policy"
-                      className="text-charcoal/60 hover:text-terracotta transition-colors font-medium"
-                    >
-                      privacy policy
-                    </Link>
-                    . We'll never share your information.
+              <Reveal delay={0.3}>
+                <div className="mb-12">
+                  <span className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">
+                    <MapPin className="w-4 h-4" /> Office
+                  </span>
+                  <p className="text-2xl font-display font-medium leading-relaxed">
+                    Torstraße 12
+                    <br />
+                    10119 Berlin
+                    <br />
+                    Germany
                   </p>
                 </div>
-              </form>
+              </Reveal>
             </div>
+
+            <Reveal delay={0.4}>
+              <div className="bg-gray-50 p-8 border border-black/5">
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">
+                  Availability
+                </p>
+                <p className="font-display text-lg font-medium mb-4">
+                  Currently accepting new projects for Q4 2024.
+                </p>
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                  </span>
+                  <span className="text-xs font-bold uppercase tracking-widest">
+                    Online Now
+                  </span>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center space-y-6 py-12 md:py-16 px-6 md:px-12 bg-charcoal rounded-2xl md:rounded-3xl">
-          <h2 className="font-serif text-[2rem] md:text-4xl text-cream leading-[0.95] tracking-tight">
-            Ready to get started?
-          </h2>
-          <p className="text-white/60 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
-            Start using Casevia today — it's free forever, no credit card
-            required.
-          </p>
-          <Link
-            href="/dashboard"
-            className="inline-flex items-center justify-center gap-2 h-12 px-8 bg-terracotta text-white rounded-full font-sans font-semibold text-[15px] hover:bg-terracotta/90 transition-all shadow-lg shadow-terracotta/20"
-          >
-            Start for free
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default ContactClient;
