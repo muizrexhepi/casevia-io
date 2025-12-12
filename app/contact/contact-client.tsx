@@ -60,6 +60,7 @@ const ContactClient: React.FC = () => {
     };
 
     try {
+      // Logic preserved as requested
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {

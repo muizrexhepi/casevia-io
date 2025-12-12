@@ -10,7 +10,7 @@ export default function NotFound() {
         We calculate a min-height to fill the screen minus the header/footer.
         You can adjust '200px' to be your combined header/footer height.
       */}
-      <div className="flex flex-col items-center justify-center text-center py-20 md:py-16 md:py-32 min-h-[calc(100vh-200px)]">
+      <div className="flex flex-col items-center justify-center text-center py-20 md:py-16 md:py-24 min-h-[calc(100vh-200px)]">
         <div className="max-w-md mx-auto space-y-6">
           <p className="text-6xl md:text-7xl font-bold tracking-tighter text-foreground/80">
             404
