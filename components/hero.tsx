@@ -1,16 +1,26 @@
-import React, { useEffect, useState } from "react";
+"use client";
+import React, { useEffect, useState, useRef } from "react";
 import { Reveal } from "./ui/Reveal";
+import { Star, TrendingUp, ArrowDown } from "lucide-react";
+import Link from "next/link";
 
 export const Hero: React.FC = () => {
-  const [offset, setOffset] = useState(0);
   const [time, setTime] = useState("");
+  const parallaxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let animationFrameId: number;
     const handleScroll = () => {
-      setOffset(window.scrollY);
+      if (parallaxRef.current) {
+        const scrolled = window.scrollY;
+        parallaxRef.current.style.transform = `translateY(${scrolled * 0.1}px)`;
+      }
     };
+    const onScroll = () => {
+      animationFrameId = requestAnimationFrame(handleScroll);
+    };
+    window.addEventListener("scroll", onScroll);
 
-    // Time updater
     const updateTime = () => {
       const now = new Date();
       setTime(
@@ -24,103 +34,130 @@ export const Hero: React.FC = () => {
     updateTime();
     const timer = setInterval(updateTime, 1000);
 
-    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(animationFrameId);
       clearInterval(timer);
     };
   }, []);
 
   return (
-    <section className="relative pt-32 md:pt-40 pb-24 md:pb-32 bg-white text-black overflow-hidden flex flex-col justify-between min-h-screen">
-      <div className="container mx-auto px-6 md:px-12 flex flex-col relative z-20 h-full justify-between">
-        {/* Typography Block */}
-        <div className="flex-1 flex flex-col items-center justify-center mb-12 relative z-10 w-full mt-12 md:mt-24 select-none">
-          <Reveal width="100%">
-            <h1 className="font-display text-[13vw] leading-[0.8] font-medium uppercase tracking-tighter text-center text-black">
-              Digital
-            </h1>
-          </Reveal>
-          <Reveal width="100%" delay={0.15}>
-            <h1 className="font-display text-[13vw] leading-[0.8] font-medium uppercase tracking-tighter text-center text-black">
-              Solutions
-            </h1>
-          </Reveal>
-        </div>
-
-        {/* Data Row */}
-        <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end py-6 relative z-20 gap-4 md:gap-0">
-          <Reveal delay={0.3}>
-            <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] leading-relaxed text-left text-gray-400">
-              {time}
+    <section className="relative pt-32 md:pt-40 pb-0 bg-[#050505] text-white min-h-screen flex flex-col justify-between">
+      <div className="container mx-auto px-6 md:px-12 flex-1 flex flex-col">
+        {/* Top Meta Line */}
+        <div className="flex justify-between items-end border-b border-white/10 pb-6 mb-12 md:mb-20">
+          <Reveal>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-purple-500 animate-pulse"></div>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+                Berlin, DE &bull; {time}
+              </span>
             </div>
           </Reveal>
-
-          <Reveal delay={0.4}>
-            <div className="text-center text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] leading-relaxed hidden md:block text-gray-400">
-              hello@casevia.io
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.5}>
-            <div className="text-left md:text-right text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] leading-relaxed text-gray-400">
-              Berlin, DE
+          <Reveal delay={0.1}>
+            <div className="hidden md:flex items-center gap-4">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">
+                Scrolldown
+              </span>
+              <ArrowDown className="w-3 h-3 text-white animate-bounce" />
             </div>
           </Reveal>
         </div>
 
-        {/* Image - Full Width Parallax - Interactive Hover */}
-        <div className="relative w-full aspect-[16/9] md:aspect-[2.2/1] overflow-hidden bg-gray-100 rounded-sm group">
-          <div
-            className="w-full h-full will-change-transform transition-transform duration-[1.5s] ease-expo"
-            style={{ transform: `scale(1.1) translateY(${offset * 0.05}px)` }}
-          >
-            <div className="absolute inset-0 bg-black/5 z-10 group-hover:bg-transparent transition-colors duration-700"></div>
-            <img
-              src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2600&auto=format&fit=crop"
-              alt="Agency Team"
-              className="w-full h-full object-cover grayscale transition-all duration-1000 ease-out"
-            />
-          </div>
-        </div>
+        {/* Main Grid Content */}
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+          {/* Left: Typography */}
+          <div className="lg:col-span-7 flex flex-col justify-center z-10">
+            <Reveal width="100%">
+              <h1 className="font-display text-[14vw] lg:text-[10vw] leading-[0.8] font-black uppercase tracking-tighter text-white mix-blend-screen">
+                Shaping <br />
+                <span className="text-gray-600">Digital</span> <br />
+                Reality
+              </h1>
+            </Reveal>
 
-        {/* Mobile Only Data Row Below Image */}
-        <div className="md:hidden w-full flex justify-between items-start pt-6 relative z-20">
-          <Reveal delay={0.7}>
-            <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-400">
-              hello@casevia.io
-            </div>
-          </Reveal>
-          <Reveal delay={0.8}>
-            <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-400">
-              Scroll
-            </div>
-          </Reveal>
-        </div>
-
-        {/* Stats Grid - Cleaner, No Border Top */}
-        <div className="w-full mt-12 md:mt-24 pt-12 md:pt-16">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-0">
-            {[
-              { val: "50+", label: "Regular Clients" },
-              { val: "6.2%", label: "Yearly Growth" },
-              { val: "4.5", label: "Client Rating" },
-              { val: "21+", label: "Team Members" },
-            ].map((stat, i) => (
-              <Reveal key={i} delay={0.1 * (i + 1)}>
-                <div
-                  className={`flex flex-col items-start md:items-center justify-start md:justify-center ${i !== 0 ? "md:border-l md:border-black/5" : ""}`}
+            <div className="mt-12 flex flex-col md:flex-row gap-8 md:items-center">
+              <Reveal delay={0.2}>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center h-14 px-8 border border-white text-xs font-bold uppercase tracking-[0.25em] hover:bg-white hover:text-black transition-all duration-300"
                 >
-                  <span className="font-display text-4xl md:text-5xl font-medium uppercase tracking-tighter mb-2 md:mb-4">
-                    {stat.val}
-                  </span>
-                  <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-gray-400 text-left md:text-center px-0 md:px-4">
-                    {stat.label}
-                  </span>
-                </div>
+                  Start Project
+                </Link>
               </Reveal>
-            ))}
+              <Reveal delay={0.3}>
+                <p className="text-gray-500 text-xs font-medium uppercase tracking-widest max-w-xs leading-relaxed">
+                  We build systems that scale. No fluff. No friction. Just pure
+                  performance.
+                </p>
+              </Reveal>
+            </div>
           </div>
+
+          {/* Right: Sharp Visual */}
+          <div className="lg:col-span-5 relative h-[40vh] lg:h-[60vh] w-full">
+            <Reveal width="100%" className="h-full">
+              <div className="w-full h-full border border-white/20 relative overflow-hidden group">
+                {/* Overlay Grid */}
+                <div className="absolute inset-0 z-20 pointer-events-none bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+
+                <div
+                  ref={parallaxRef}
+                  className="absolute inset-0 w-full h-[120%] -top-[10%] will-change-transform"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2574&auto=format&fit=crop"
+                    alt="Abstract Digital Art"
+                    className="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-100 transition-opacity duration-700"
+                  />
+                </div>
+
+                {/* Tech Data Overlay */}
+                <div className="absolute bottom-0 left-0 w-full p-6 border-t border-white/10 bg-black/50 backdrop-blur-sm flex justify-between items-center z-30">
+                  <div>
+                    <span className="block text-[10px] uppercase tracking-widest text-gray-500 mb-1">
+                      Status
+                    </span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-green-400">
+                      Operational
+                    </span>
+                  </div>
+                  <TrendingUp className="w-4 h-4 text-white" />
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="w-full py-6 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6">
+          <Reveal delay={0.4}>
+            <div className="flex items-center gap-3">
+              <div className="flex">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star key={i} className="w-3 h-3 fill-white text-white" />
+                ))}
+              </div>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                Clutch Rated
+              </span>
+            </div>
+          </Reveal>
+          <Reveal delay={0.5}>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
+              Trusted Global Partner
+            </span>
+          </Reveal>
+          <Reveal delay={0.6}>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500 hidden md:block">
+              Since 2024
+            </span>
+          </Reveal>
+          <Reveal delay={0.7}>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500 hidden md:block text-right">
+              Scroll for more
+            </span>
+          </Reveal>
         </div>
       </div>
     </section>

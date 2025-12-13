@@ -1,207 +1,226 @@
 import React from "react";
 import { Reveal } from "./ui/Reveal";
-import { Check, ArrowRight } from "lucide-react";
+import { Check } from "lucide-react";
 import Link from "next/link";
 
 export const Pricing: React.FC = () => {
   return (
-    <section
-      id="pricing"
-      className="py-32 bg-white text-black border-t border-black/5"
-    >
+    <section id="pricing" className="py-16 md:py-32 bg-[#050505] text-white">
       <div className="container mx-auto px-6 md:px-12">
-        {/* Header */}
-        <div className="flex flex-col items-center text-center mb-24">
-          <Reveal>
-            <span className="block mb-6 text-xs font-bold uppercase tracking-[0.25em] text-gray-400">
-              Plans
-            </span>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="font-display text-5xl md:text-7xl font-medium uppercase tracking-tighter leading-[0.9] mb-8">
-              Investment
-            </h2>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <p className="text-gray-500 text-sm font-medium uppercase tracking-wide leading-loose max-w-lg mx-auto">
-              Transparent pricing. No hidden fees. <br /> Just clear, flat-rate
-              packages.
-            </p>
-          </Reveal>
-        </div>
-
-        {/* Pricing Grid - Consistent Heights */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-          {/* Card 1: The Sprint */}
-          <Reveal delay={0.1} className="h-full">
-            <div className="flex flex-col h-full p-10 border border-gray-200 hover:border-black transition-colors duration-500 bg-white group">
-              <div className="mb-8">
-                <span className="inline-block px-3 py-1 bg-gray-100 text-[10px] font-bold uppercase tracking-[0.25em] mb-6 text-gray-500">
-                  Audit
-                </span>
-                <h3 className="font-display text-3xl font-medium uppercase tracking-tight mb-2">
-                  The Sprint
-                </h3>
-                <p className="text-gray-500 text-xs font-bold uppercase tracking-[0.25em] mb-8">
-                  Strategy & Roadmap
-                </p>
-                <div className="flex items-baseline gap-1">
-                  <span className="font-display text-5xl font-medium tracking-tighter">
-                    €2.5k
-                  </span>
-                  <span className="text-xs text-gray-400 uppercase tracking-wide">
-                    / flat
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex-1 border-t border-gray-100 pt-8 mb-12">
-                <ul className="space-y-4">
-                  {[
-                    "UX/UI Heuristic Audit",
-                    "Competitor Analysis",
-                    "Growth Roadmap",
-                    "1-Week Turnaround",
-                  ].map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-3 text-xs font-bold uppercase tracking-widest text-gray-500"
-                    >
-                      <Check className="w-4 h-4 text-black shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <Link
-                href="/contact"
-                className="w-full flex justify-center items-center py-4 bg-gray-50 text-black border border-transparent group-hover:border-black text-xs font-bold uppercase tracking-[0.25em] hover:bg-black hover:text-white transition-all duration-300"
-              >
-                Book Sprint
-              </Link>
-            </div>
-          </Reveal>
-
-          {/* Card 2: The Build (Featured) */}
-          <Reveal delay={0.2} className="h-full">
-            <div className="flex flex-col h-full p-10 border border-black bg-black text-white relative shadow-xl">
-              <div className="absolute top-0 right-0 bg-white text-black text-[10px] font-bold uppercase tracking-[0.25em] px-4 py-2 translate-y-[-50%] translate-x-[-10%] border border-black">
-                Recommended
-              </div>
-
-              <div className="mb-8">
-                <span className="inline-block px-3 py-1 bg-white/10 text-[10px] font-bold uppercase tracking-[0.25em] mb-6 text-white">
-                  Project
-                </span>
-                <h3 className="font-display text-3xl font-medium uppercase tracking-tight mb-2">
-                  The Build
-                </h3>
-                <p className="text-gray-400 text-xs font-bold uppercase tracking-[0.25em] mb-8">
-                  Complete Transformation
-                </p>
-                <div className="flex items-baseline gap-1">
-                  <span className="font-display text-5xl font-medium tracking-tighter">
-                    €9.5k
-                  </span>
-                  <span className="text-xs text-gray-400 uppercase tracking-wide">
-                    / project
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex-1 border-t border-white/20 pt-8 mb-12">
-                <ul className="space-y-4">
-                  {[
-                    "Full Brand Identity",
-                    "High-End Website (5-7 Pages)",
-                    "CMS Implementation",
-                    "Interactive Motion",
-                    "SEO Foundation",
-                  ].map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-3 text-xs font-bold uppercase tracking-widest text-gray-300"
-                    >
-                      <Check className="w-4 h-4 text-white shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <Link
-                href="/contact"
-                className="w-full flex justify-center items-center py-4 bg-white text-black text-xs font-bold uppercase tracking-[0.25em] hover:bg-gray-200 transition-all duration-300"
-              >
-                Start Project
-              </Link>
-            </div>
-          </Reveal>
-
-          {/* Card 3: The Partner */}
-          <Reveal delay={0.3} className="h-full">
-            <div className="flex flex-col h-full p-10 border border-gray-200 hover:border-black transition-colors duration-500 bg-white group">
-              <div className="mb-8">
-                <span className="inline-block px-3 py-1 bg-gray-100 text-[10px] font-bold uppercase tracking-[0.25em] mb-6 text-gray-500">
-                  Retainer
-                </span>
-                <h3 className="font-display text-3xl font-medium uppercase tracking-tight mb-2">
-                  The Partner
-                </h3>
-                <p className="text-gray-500 text-xs font-bold uppercase tracking-[0.25em] mb-8">
-                  Growth & Scale
-                </p>
-                <div className="flex items-baseline gap-1">
-                  <span className="font-display text-5xl font-medium tracking-tighter">
-                    €3k
-                  </span>
-                  <span className="text-xs text-gray-400 uppercase tracking-wide">
-                    / month
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex-1 border-t border-gray-100 pt-8 mb-12">
-                <ul className="space-y-4">
-                  {[
-                    "Weekly A/B Testing",
-                    "New Landing Pages",
-                    "Analytics Reporting",
-                    "Dedicated Design Team",
-                  ].map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-3 text-xs font-bold uppercase tracking-widest text-gray-500"
-                    >
-                      <Check className="w-4 h-4 text-black shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <Link
-                href="/contact"
-                className="w-full flex justify-center items-center py-4 bg-gray-50 text-black border border-transparent group-hover:border-black text-xs font-bold uppercase tracking-[0.25em] hover:bg-black hover:text-white transition-all duration-300"
-              >
-                Become Partner
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* Contact Link */}
-        <Reveal delay={0.4}>
-          <div className="mt-20 text-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] border-b border-black pb-1 hover:text-gray-600 hover:border-gray-600 transition-all"
-            >
-              Need a Custom Quote? <ArrowRight className="w-4 h-4" />
-            </Link>
+        {/* Header - Left Aligned Global */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 gap-12 text-left">
+          <div className="md:w-2/3">
+            <Reveal>
+              <span className="block mb-6 text-xs font-bold uppercase tracking-[0.25em] text-purple-500 text-left">
+                Investment
+              </span>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="font-display text-4xl md:text-7xl font-medium uppercase tracking-tighter leading-[0.9] text-left text-white">
+                Transparent <br /> Value
+              </h2>
+            </Reveal>
           </div>
-        </Reveal>
+          <div className="md:w-1/3 text-left">
+            <Reveal delay={0.2}>
+              <p className="text-gray-400 text-sm font-medium uppercase tracking-wide leading-loose text-left">
+                Flat rates. No hidden fees. We work with a 50% deposit structure
+                to ensure mutual commitment.
+              </p>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* 3-Column Pricing Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          {/* Plan 1: Launch */}
+          <Reveal delay={0.1} className="h-full">
+            <div className="flex flex-col h-full p-8 md:p-10 bg-[#0a0a0a] border border-white/10 hover:border-white/30 transition-all duration-500 group relative overflow-hidden text-left">
+              <div className="mb-8 relative z-10">
+                <span className="inline-block px-3 py-1 mb-6 bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-[0.25em] text-gray-300">
+                  Starter
+                </span>
+                <h3 className="font-display text-3xl font-medium uppercase tracking-tight mb-2 text-white">
+                  The Launch
+                </h3>
+                <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-6">
+                  Essential Brand Presence
+                </p>
+
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span className="font-display text-5xl font-medium tracking-tighter text-white">
+                    $1,500
+                  </span>
+                </div>
+                <p className="text-gray-500 text-[10px] uppercase tracking-widest mb-6">
+                  + $150/mo maintenance
+                </p>
+                <p className="text-gray-400 text-sm leading-relaxed border-t border-white/10 pt-6">
+                  Perfect for startups needing a high-impact landing page to
+                  validate their market.
+                </p>
+              </div>
+
+              <div className="flex-1 mb-8 relative z-10">
+                <ul className="space-y-4">
+                  {[
+                    "Single Page Application",
+                    "Mobile Responsive",
+                    "Contact Form Integration",
+                    "Basic SEO",
+                    "1 Week Turnaround",
+                  ].map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gray-400"
+                    >
+                      <Check className="w-3 h-3 text-purple-500" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="relative z-10 mt-auto">
+                <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-4">
+                  50% Deposit • 50% Launch
+                </p>
+                <Link
+                  href="/contact"
+                  className="block w-full text-center py-4 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-[0.25em] hover:bg-white hover:text-black transition-all duration-300"
+                >
+                  Start Project
+                </Link>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Plan 2: Scale (Subtle Purple) */}
+          <Reveal delay={0.2} className="h-full">
+            <div className="flex flex-col h-full p-8 md:p-10 bg-[#0a0a0a] border border-purple-900/30 hover:border-purple-500/50 transition-all duration-500 group relative overflow-hidden text-left">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-purple-900/5 blur-[80px] rounded-full pointer-events-none"></div>
+
+              <div className="mb-8 relative z-10">
+                <span className="inline-block px-3 py-1 mb-6 bg-purple-900/20 border border-purple-500/20 text-[10px] font-bold uppercase tracking-[0.25em] text-purple-300">
+                  Growth
+                </span>
+                <h3 className="font-display text-3xl font-medium uppercase tracking-tight mb-2 text-white">
+                  The Scale
+                </h3>
+                <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-6">
+                  Conversion System
+                </p>
+
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span className="font-display text-5xl font-medium tracking-tighter text-white">
+                    $5,000
+                  </span>
+                </div>
+                <p className="text-gray-500 text-[10px] uppercase tracking-widest mb-6">
+                  + $300/mo maintenance
+                </p>
+                <p className="text-gray-300 text-sm leading-relaxed border-t border-white/10 pt-6">
+                  Comprehensive digital platform designed to convert traffic
+                  into revenue.
+                </p>
+              </div>
+
+              <div className="flex-1 mb-8 relative z-10">
+                <ul className="space-y-4">
+                  {[
+                    "Multi-Page Architecture",
+                    "Easy Content Management",
+                    "Advanced Animations",
+                    "Analytics Setup",
+                    "Conversion Optimization",
+                  ].map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gray-300"
+                    >
+                      <Check className="w-3 h-3 text-purple-400" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="relative z-10 mt-auto">
+                <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-4">
+                  50% Deposit • 50% Launch
+                </p>
+                <Link
+                  href="/contact"
+                  className="block w-full text-center py-4 bg-purple-900/20 border border-purple-500/30 text-white text-xs font-bold uppercase tracking-[0.25em] hover:bg-purple-900/40 hover:border-purple-500/50 transition-all duration-300"
+                >
+                  Select Plan
+                </Link>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Plan 3: Enterprise */}
+          <Reveal delay={0.3} className="h-full">
+            <div className="flex flex-col h-full p-8 md:p-10 bg-[#0a0a0a] border border-white/10 hover:border-white/30 transition-all duration-500 group relative overflow-hidden text-left">
+              <div className="mb-8 relative z-10">
+                <span className="inline-block px-3 py-1 mb-6 bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-[0.25em] text-gray-300">
+                  Enterprise
+                </span>
+                <h3 className="font-display text-3xl font-medium uppercase tracking-tight mb-2 text-white">
+                  Custom
+                </h3>
+                <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-6">
+                  Market Leadership
+                </p>
+
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span className="font-display text-5xl font-medium tracking-tighter text-white">
+                    Book Call
+                  </span>
+                </div>
+                <p className="text-gray-500 text-[10px] uppercase tracking-widest mb-6">
+                  Custom Support SLA
+                </p>
+                <p className="text-gray-400 text-sm leading-relaxed border-t border-white/10 pt-6">
+                  Complex infrastructure, SaaS platforms, and large-scale
+                  ecommerce systems.
+                </p>
+              </div>
+
+              <div className="flex-1 mb-8 relative z-10">
+                <ul className="space-y-4">
+                  {[
+                    "Custom Functionality",
+                    "3rd Party Integrations",
+                    "User Accounts / Portals",
+                    "Dedicated Success Manager",
+                    "Priority Support",
+                  ].map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gray-400"
+                    >
+                      <Check className="w-3 h-3 text-purple-500" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="relative z-10 mt-auto">
+                <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-4">
+                  Custom Terms
+                </p>
+                <Link
+                  href="/contact"
+                  className="block w-full text-center py-4 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-[0.25em] hover:bg-white hover:text-black transition-all duration-300"
+                >
+                  Contact Sales
+                </Link>
+              </div>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

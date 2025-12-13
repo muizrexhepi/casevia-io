@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { ArrowRight, Mail, MapPin } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
@@ -9,7 +10,7 @@ interface FormData {
   lastName: string;
   email: string;
   interest: string;
-  company: string; // Added to satisfy API validation
+  company: string;
   message: string;
 }
 
@@ -55,12 +56,11 @@ const ContactClient: React.FC = () => {
       firstName: formData.firstName,
       lastName: formData.lastName,
       email: formData.email,
-      company: formData.company || "N/A", // Using a simple placeholder for company if not explicitly asked on form
+      company: formData.company || "N/A",
       message: `Interest: ${formData.interest}\n\nDetails:\n${formData.message}`,
     };
 
     try {
-      // Logic preserved as requested
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -102,18 +102,24 @@ const ContactClient: React.FC = () => {
           ? "Failed, Try Again"
           : "Submit Request";
 
+  // Reusable styles to match the dark theme design
+  const inputClasses =
+    "w-full bg-transparent border-b border-white/10 py-4 text-xl md:text-3xl font-display focus:border-white focus:outline-none transition-colors placeholder:text-gray-800 text-white rounded-none";
+  const labelClasses =
+    "block text-xs font-bold uppercase tracking-widest text-gray-500 mb-4";
+
   return (
-    <div className="bg-white min-h-screen pt-32 md:pt-40 pb-24 text-black">
+    <div className="bg-[#050505] min-h-screen pt-32 md:pt-40 pb-24 text-white">
       <div className="container mx-auto px-6 md:px-12">
         {/* Header */}
         <div className="flex flex-col items-start mb-24 md:mb-32">
           <Reveal>
-            <h1 className="font-display text-[12vw] leading-[0.8] font-black uppercase tracking-tighter text-black mb-12">
+            <h1 className="font-display text-[12vw] leading-[0.8] font-black uppercase tracking-tighter text-white mb-12">
               Let's Talk
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="text-xl md:text-2xl font-display font-medium max-w-2xl leading-relaxed">
+            <p className="text-xl md:text-2xl font-display font-medium max-w-2xl leading-relaxed text-gray-400">
               Ready to transform your digital presence? We take on a limited
               number of clients per quarter to ensure exceptional quality.
             </p>
@@ -124,14 +130,11 @@ const ContactClient: React.FC = () => {
           {/* Left Column: Form */}
           <div className="lg:col-span-7">
             <form onSubmit={handleSubmit} className="space-y-12">
-              {/* Name Fields (Split to satisfy API) */}
+              {/* Name Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <Reveal delay={0.2}>
                   <div className="relative group">
-                    <label
-                      htmlFor="firstName"
-                      className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-4"
-                    >
+                    <label htmlFor="firstName" className={labelClasses}>
                       First Name
                     </label>
                     <input
@@ -142,16 +145,13 @@ const ContactClient: React.FC = () => {
                       onChange={handleChange}
                       required
                       placeholder="John"
-                      className="w-full bg-transparent border-b border-black/20 py-4 text-xl md:text-3xl font-display focus:border-black focus:outline-none transition-colors placeholder:text-gray-300 text-black"
+                      className={inputClasses}
                     />
                   </div>
                 </Reveal>
                 <Reveal delay={0.25}>
                   <div className="relative group">
-                    <label
-                      htmlFor="lastName"
-                      className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-4"
-                    >
+                    <label htmlFor="lastName" className={labelClasses}>
                       Last Name
                     </label>
                     <input
@@ -162,7 +162,7 @@ const ContactClient: React.FC = () => {
                       onChange={handleChange}
                       required
                       placeholder="Doe"
-                      className="w-full bg-transparent border-b border-black/20 py-4 text-xl md:text-3xl font-display focus:border-black focus:outline-none transition-colors placeholder:text-gray-300 text-black"
+                      className={inputClasses}
                     />
                   </div>
                 </Reveal>
@@ -170,10 +170,7 @@ const ContactClient: React.FC = () => {
 
               <Reveal delay={0.3}>
                 <div className="relative group">
-                  <label
-                    htmlFor="email"
-                    className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-4"
-                  >
+                  <label htmlFor="email" className={labelClasses}>
                     Email
                   </label>
                   <input
@@ -184,18 +181,15 @@ const ContactClient: React.FC = () => {
                     onChange={handleChange}
                     required
                     placeholder="john@company.com"
-                    className="w-full bg-transparent border-b border-black/20 py-4 text-xl md:text-3xl font-display focus:border-black focus:outline-none transition-colors placeholder:text-gray-300 text-black"
+                    className={inputClasses}
                   />
                 </div>
               </Reveal>
 
-              {/* Added Company Field to match API requirements */}
+              {/* Company Field */}
               <Reveal delay={0.35}>
                 <div className="relative group">
-                  <label
-                    htmlFor="company"
-                    className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-4"
-                  >
+                  <label htmlFor="company" className={labelClasses}>
                     Company Name
                   </label>
                   <input
@@ -206,17 +200,14 @@ const ContactClient: React.FC = () => {
                     onChange={handleChange}
                     required
                     placeholder="Acme Corp"
-                    className="w-full bg-transparent border-b border-black/20 py-4 text-xl md:text-3xl font-display focus:border-black focus:outline-none transition-colors placeholder:text-gray-300 text-black"
+                    className={inputClasses}
                   />
                 </div>
               </Reveal>
 
               <Reveal delay={0.4}>
                 <div className="relative group">
-                  <label
-                    htmlFor="interest"
-                    className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-4"
-                  >
+                  <label htmlFor="interest" className={labelClasses}>
                     Interest
                   </label>
                   <select
@@ -225,30 +216,40 @@ const ContactClient: React.FC = () => {
                     value={formData.interest}
                     onChange={handleChange}
                     required
-                    className="w-full bg-transparent border-b border-black/20 py-4 text-xl md:text-3xl font-display focus:border-black focus:outline-none transition-colors text-black appearance-none rounded-none cursor-pointer"
+                    className="w-full bg-transparent border-b border-white/10 py-4 text-xl md:text-3xl font-display focus:border-white focus:outline-none transition-colors text-white appearance-none rounded-none cursor-pointer"
                   >
-                    <option value="" disabled>
+                    <option
+                      value=""
+                      disabled
+                      className="text-gray-600 bg-[#050505]"
+                    >
                       Select a service...
                     </option>
-                    <option value="New Website">New Website</option>
-                    <option value="Branding & Identity">
+                    <option value="New Website" className="bg-[#050505]">
+                      New Website
+                    </option>
+                    <option
+                      value="Branding & Identity"
+                      className="bg-[#050505]"
+                    >
                       Branding & Identity
                     </option>
-                    <option value="Growth Marketing">Growth Marketing</option>
-                    <option value="Other Inquiry">Other Inquiry</option>
+                    <option value="Growth Marketing" className="bg-[#050505]">
+                      Growth Marketing
+                    </option>
+                    <option value="Other Inquiry" className="bg-[#050505]">
+                      Other Inquiry
+                    </option>
                   </select>
                   <div className="absolute right-0 bottom-6 pointer-events-none">
-                    <ArrowRight className="w-6 h-6 text-black" />
+                    <ArrowRight className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </Reveal>
 
               <Reveal delay={0.5}>
                 <div className="relative group">
-                  <label
-                    htmlFor="message"
-                    className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-4"
-                  >
+                  <label htmlFor="message" className={labelClasses}>
                     Details
                   </label>
                   <textarea
@@ -259,7 +260,7 @@ const ContactClient: React.FC = () => {
                     onChange={handleChange}
                     required
                     placeholder="Tell us about your project..."
-                    className="w-full bg-transparent border-b border-black/20 py-4 text-xl md:text-2xl font-display focus:border-black focus:outline-none transition-colors placeholder:text-gray-300 text-black resize-none"
+                    className="w-full bg-transparent border-b border-white/10 py-4 text-xl md:text-2xl font-display focus:border-white focus:outline-none transition-colors placeholder:text-gray-800 text-white resize-none rounded-none"
                   />
                 </div>
               </Reveal>
@@ -271,12 +272,12 @@ const ContactClient: React.FC = () => {
                   className={`mt-8 px-12 py-6 rounded-none text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center gap-4 w-full md:w-auto justify-center 
                     ${
                       status === "success"
-                        ? "bg-green-600 text-white cursor-not-allowed"
+                        ? "bg-green-500 text-white cursor-not-allowed"
                         : status === "error"
                           ? "bg-red-600 text-white"
                           : loading
-                            ? "bg-gray-500 text-white cursor-wait"
-                            : "bg-black text-white hover:bg-gray-900"
+                            ? "bg-gray-600 text-white cursor-wait"
+                            : "bg-white text-black hover:bg-purple-500 hover:text-white"
                     }`}
                 >
                   {submitButtonText}
@@ -284,33 +285,31 @@ const ContactClient: React.FC = () => {
                 </button>
               </Reveal>
 
-              {/* Optional User Feedback */}
+              {/* User Feedback */}
               {status === "success" && (
-                <p className="text-sm text-green-600 font-bold uppercase tracking-widest mt-4">
-                  Thank you! We have received your request and will be in touch
-                  shortly.
+                <p className="text-sm text-green-400 font-bold uppercase tracking-widest mt-4">
+                  Thank you! We have received your request.
                 </p>
               )}
               {status === "error" && (
-                <p className="text-sm text-red-600 font-bold uppercase tracking-widest mt-4">
-                  An error occurred. Please check your network or try again
-                  later.
+                <p className="text-sm text-red-400 font-bold uppercase tracking-widest mt-4">
+                  An error occurred. Please try again later.
                 </p>
               )}
             </form>
           </div>
 
-          {/* Right Column: Info (No Changes) */}
-          <div className="lg:col-span-5 lg:pl-12 lg:border-l border-black/10 flex flex-col justify-between h-full pt-12 lg:pt-0">
+          {/* Right Column: Info */}
+          <div className="lg:col-span-5 lg:pl-12 lg:border-l border-white/10 flex flex-col justify-between h-full pt-12 lg:pt-0">
             <div>
               <Reveal delay={0.2}>
                 <div className="mb-12">
-                  <span className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">
+                  <span className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-purple-400 mb-4">
                     <Mail className="w-4 h-4" /> Email
                   </span>
                   <a
                     href="mailto:hello@casevia.io"
-                    className="text-2xl font-display font-medium hover:text-gray-600 transition-colors"
+                    className="text-2xl font-display font-medium hover:text-purple-400 transition-colors text-white"
                   >
                     hello@casevia.io
                   </a>
@@ -319,10 +318,10 @@ const ContactClient: React.FC = () => {
 
               <Reveal delay={0.3}>
                 <div className="mb-12">
-                  <span className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">
+                  <span className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-purple-400 mb-4">
                     <MapPin className="w-4 h-4" /> Office
                   </span>
-                  <p className="text-2xl font-display font-medium leading-relaxed">
+                  <p className="text-2xl font-display font-medium leading-relaxed text-gray-300">
                     Torstraße 12
                     <br />
                     10119 Berlin
@@ -334,11 +333,11 @@ const ContactClient: React.FC = () => {
             </div>
 
             <Reveal delay={0.4}>
-              <div className="bg-gray-50 p-8 border border-black/5">
+              <div className="bg-white/5 p-8 border border-white/10 rounded-none">
                 <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">
                   Availability
                 </p>
-                <p className="font-display text-lg font-medium mb-4">
+                <p className="font-display text-lg font-medium mb-4 text-white">
                   Currently accepting new projects for Q4 2024.
                 </p>
                 <div className="flex items-center gap-2">
@@ -346,7 +345,7 @@ const ContactClient: React.FC = () => {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                   </span>
-                  <span className="text-xs font-bold uppercase tracking-widest">
+                  <span className="text-xs font-bold uppercase tracking-widest text-green-400">
                     Online Now
                   </span>
                 </div>

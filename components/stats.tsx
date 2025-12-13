@@ -1,59 +1,124 @@
+"use client";
 import React from "react";
 import { Reveal } from "./ui/Reveal";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+
+const clients = {
+  startups: [
+    { name: "Insyllium", logo: "In" },
+    { name: "Insylink", logo: "Ik" },
+    { name: "Menyro", logo: "Me" },
+    { name: "Tvojpazar", logo: "Tj" },
+  ],
+  scaleups: [
+    { name: "LansGR", logo: "Lg" },
+    { name: "Velora", logo: "Ve" },
+    { name: "Aesthetica", logo: "Ae" },
+    { name: "NexGen", logo: "Ng" },
+  ],
+  enterprises: [
+    { name: "Kroma", logo: "Kr" },
+    { name: "Ventus", logo: "Vn" },
+    { name: "Oculus", logo: "Oc" },
+    { name: "Forma", logo: "Fm" },
+  ],
+};
 
 export const Stats: React.FC = () => {
   return (
-    <section id="stats" className="py-32 bg-gray-50 border-b border-black/5">
+    <section className="py-24 bg-[#050505] text-white">
       <div className="container mx-auto px-6 md:px-12">
-        {/* Layout Grid - Top Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
-          {/* Left Column: Title & Label */}
-          <div className="lg:col-span-5 relative">
-            <Reveal>
-              <span className="block mb-6 text-xs font-bold uppercase tracking-[0.25em] text-gray-400">
-                Our Mission
-              </span>
-            </Reveal>
+        {/* Faded Top Divider */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-24"></div>
 
-            <Reveal delay={0.1}>
-              <h2 className="font-display text-5xl md:text-7xl leading-[0.9] font-medium uppercase tracking-tighter text-black mb-12">
-                Design as the silent ambassador.
-              </h2>
-            </Reveal>
+        <div className="text-center mb-16">
+          <Reveal>
+            <h2 className="font-display text-2xl md:text-4xl font-medium text-white mb-4">
+              Trusted by ambitious brands
+            </h2>
+            <p className="text-gray-500 text-xs font-bold uppercase tracking-widest">
+              From day one startups to global enterprises
+            </p>
+          </Reveal>
+        </div>
 
-            <Reveal delay={0.2}>
-              <p className="text-gray-500 text-sm font-medium uppercase tracking-wide leading-loose mb-12 max-w-md">
-                We strip away the unnecessary, revealing the core of your
-                business. We believe in systems over decoration and performance
-                over trends.
-              </p>
-            </Reveal>
+        <div className="space-y-12">
+          {/* Startups Row */}
+          <Reveal width="100%">
+            <div className="relative py-8">
+              {/* Faded Divider */}
+              <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
 
-            <Reveal delay={0.3}>
-              <Link
-                href="/about"
-                className="group flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] border-b border-black/20 pb-2 hover:text-gray-600 hover:border-black transition-all w-max"
-              >
-                Read Our Story
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Reveal>
-          </div>
-
-          {/* Right Column: Image Composition */}
-          <div className="lg:col-span-7 relative pt-8 lg:pt-0">
-            <Reveal delay={0.4}>
-              <div className="relative aspect-[4/3] md:aspect-[16/9] overflow-hidden bg-white">
-                <img
-                  src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2670&auto=format&fit=crop"
-                  alt="Agency Office"
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 ease-expo"
-                />
+              <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+                <div className="w-full md:w-32 shrink-0 text-center md:text-left">
+                  <span className="flex items-center justify-center md:justify-start gap-2 text-xs font-bold uppercase tracking-widest text-blue-400">
+                    <div className="w-2 h-2 rounded-full border border-blue-400"></div>
+                    Startups
+                  </span>
+                </div>
+                <div className="flex-1 flex flex-wrap justify-center md:justify-between items-center gap-8 md:gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                  {clients.startups.map((c, i) => (
+                    <h3
+                      key={i}
+                      className="font-display text-xl md:text-2xl font-bold text-white/80"
+                    >
+                      {c.name}
+                    </h3>
+                  ))}
+                </div>
               </div>
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
+
+          {/* Scaleups Row */}
+          <Reveal width="100%" delay={0.1}>
+            <div className="relative py-8">
+              {/* Faded Divider */}
+              <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+
+              <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+                <div className="w-full md:w-32 shrink-0 text-center md:text-left">
+                  <span className="flex items-center justify-center md:justify-start gap-2 text-xs font-bold uppercase tracking-widest text-purple-500">
+                    <div className="w-2 h-2 rounded-full border border-purple-500"></div>
+                    Scaleups
+                  </span>
+                </div>
+                <div className="flex-1 flex flex-wrap justify-center md:justify-between items-center gap-8 md:gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                  {clients.scaleups.map((c, i) => (
+                    <h3
+                      key={i}
+                      className="font-display text-xl md:text-2xl font-bold text-white/80"
+                    >
+                      {c.name}
+                    </h3>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Enterprise Row */}
+          <Reveal width="100%" delay={0.2}>
+            <div className="relative py-8">
+              <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+                <div className="w-full md:w-32 shrink-0 text-center md:text-left">
+                  <span className="flex items-center justify-center md:justify-start gap-2 text-xs font-bold uppercase tracking-widest text-emerald-400">
+                    <div className="w-2 h-2 rounded-full border border-emerald-400"></div>
+                    Enterprise
+                  </span>
+                </div>
+                <div className="flex-1 flex flex-wrap justify-center md:justify-between items-center gap-8 md:gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                  {clients.enterprises.map((c, i) => (
+                    <h3
+                      key={i}
+                      className="font-display text-xl md:text-2xl font-bold text-white/80"
+                    >
+                      {c.name}
+                    </h3>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

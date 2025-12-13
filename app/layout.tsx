@@ -55,7 +55,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="bg-white text-black antialiased font-sans">
+      <body className="text-black antialiased font-sans">
         <Navbar />
         {children}
         <Footer />

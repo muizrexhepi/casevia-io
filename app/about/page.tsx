@@ -1,212 +1,223 @@
 "use client";
-import React, { useEffect } from "react";
-import { ArrowRight, Check } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import Link from "next/link";
 
+const teamMembers = [
+  {
+    name: "Alexander V.",
+    role: "Founder & Strategy",
+    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    name: "Sarah Jenkins",
+    role: "Head of Design",
+    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    name: "Marcus Thorne",
+    role: "Technical Director",
+    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    name: "Elara Vane",
+    role: "Brand Lead",
+    img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop",
+  },
+];
+
 const AboutPage: React.FC = () => {
+  const [hoveredMember, setHoveredMember] = useState<number | null>(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="bg-white text-black min-h-screen pt-32 md:pt-40 pb-24">
-      <div className="container mx-auto px-6 md:px-12">
-        {/* Hero Section */}
-        <div className="flex flex-col items-start justify-center mb-24 md:mb-32">
-          <Reveal>
-            <span className="block text-left text-xs font-bold uppercase tracking-[0.25em] text-gray-400 mb-6">
-              Established 2024
-            </span>
-          </Reveal>
-          <Reveal width="100%">
-            <h1 className="font-display text-[11vw] md:text-[8vw] leading-[0.8] font-black uppercase tracking-tighter text-left mb-12">
-              The Agency
-            </h1>
-          </Reveal>
-          <Reveal delay={0.1} width="100%">
-            <div className="w-full h-px bg-black/10"></div>
-          </Reveal>
-        </div>
+    <div className="bg-[#050505] text-white min-h-screen">
+      {/* Hero Section - Left Aligned for Impact */}
+      <section className="pt-40 md:pt-60 pb-24 px-6 md:px-12 container mx-auto text-left relative z-10">
+        <Reveal>
+          <span className="block text-xs font-bold uppercase tracking-[0.25em] text-purple-500 mb-6 text-left">
+            Agency
+          </span>
+        </Reveal>
+        <Reveal width="100%" delay={0.1}>
+          <h1 className="font-display text-[12vw] leading-[0.8] font-black uppercase tracking-tighter text-left mb-12 text-white">
+            We Are <br /> Casevia.
+          </h1>
+        </Reveal>
 
-        {/* Narrative Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 mb-32">
-          <div className="lg:col-span-5">
-            <Reveal delay={0.2}>
-              <h2 className="font-display text-4xl md:text-5xl font-medium uppercase tracking-tight leading-tight">
-                Casevia was born from a singular obsession: to eliminate the gap
-                between ambition and execution.
-              </h2>
-            </Reveal>
-          </div>
-          <div className="lg:col-span-7 flex flex-col gap-8">
-            <Reveal delay={0.3}>
-              <p className="text-sm md:text-base text-gray-500 font-medium leading-loose uppercase tracking-wide">
-                We saw too many great B2B companies struggling to communicate
-                their value. They had the product, but their digital presence
-                felt outdated, cluttered, or generic.
-              </p>
-            </Reveal>
-            <Reveal delay={0.4}>
-              <p className="text-sm md:text-base text-gray-500 font-medium leading-loose uppercase tracking-wide">
-                We exist to fix that. We are a collective of strategists,
-                designers, and engineers who believe that clarity is the
-                ultimate sophistication. We strip away the noise to reveal the
-                core of your business.
-              </p>
-            </Reveal>
-          </div>
-        </div>
-
-        {/* Large Visual */}
-        <div className="mb-32">
-          <Reveal width="100%">
-            <div className="w-full aspect-[16/9] bg-gray-100 overflow-hidden relative">
-              <img
-                src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2670&auto=format&fit=crop"
-                alt="Berlin Office"
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-              />
-              <div className="absolute bottom-0 left-0 p-8 md:p-12 bg-white/90 backdrop-blur-sm">
-                <p className="font-display text-xl uppercase font-bold tracking-tight">
-                  Berlin HQ
-                </p>
-                <p className="text-xs uppercase tracking-widest text-gray-500">
-                  Torstraße 12, Mitte
-                </p>
-              </div>
-            </div>
+        <div className="flex justify-start mt-12">
+          <Reveal delay={0.2}>
+            <p className="text-left text-sm md:text-lg font-medium uppercase tracking-widest max-w-xl leading-loose text-gray-400">
+              A digital design agency bridging the gap between{" "}
+              <span className="text-white font-bold">ambition</span> and{" "}
+              <span className="text-white font-bold">reality</span>.
+            </p>
           </Reveal>
         </div>
+      </section>
 
-        {/* Core Values / Philosophy */}
-        <div className="mb-32">
-          <Reveal>
-            <h2 className="font-display text-5xl md:text-7xl font-medium uppercase tracking-tighter mb-24">
-              Philosophy
-            </h2>
-          </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-black/10 pt-12">
-            <Reveal delay={0.1}>
-              <div className="group">
-                <span className="block text-xs font-bold uppercase tracking-[0.25em] text-gray-400 mb-6">
-                  01
-                </span>
-                <h3 className="font-display text-2xl font-bold uppercase mb-4 group-hover:translate-x-2 transition-transform duration-300">
-                  Essentialism
-                </h3>
-                <p className="text-gray-500 text-xs font-medium uppercase tracking-widest leading-loose">
-                  We don't add features. We remove distractions. Every pixel and
-                  line of code must serve a purpose.
-                </p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.2}>
-              <div className="group">
-                <span className="block text-xs font-bold uppercase tracking-[0.25em] text-gray-400 mb-6">
-                  02
-                </span>
-                <h3 className="font-display text-2xl font-bold uppercase mb-4 group-hover:translate-x-2 transition-transform duration-300">
-                  Velocity
-                </h3>
-                <p className="text-gray-500 text-xs font-medium uppercase tracking-widest leading-loose">
-                  Speed is a feature. We build systems that load instantly and
-                  workflows that move your business forward, fast.
-                </p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.3}>
-              <div className="group">
-                <span className="block text-xs font-bold uppercase tracking-[0.25em] text-gray-400 mb-6">
-                  03
-                </span>
-                <h3 className="font-display text-2xl font-bold uppercase mb-4 group-hover:translate-x-2 transition-transform duration-300">
-                  Impact
-                </h3>
-                <p className="text-gray-500 text-xs font-medium uppercase tracking-widest leading-loose">
-                  We measure success not by awards, but by your revenue growth,
-                  lead generation, and market position.
-                </p>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-
-        {/* Team / Leadership - Minimal List */}
-        <div className="mb-32">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-black/10 pb-8">
+      {/* Editorial Layout: The Manifesto - Consistent Dark BG */}
+      <section className="py-32 border-t border-white/10 bg-[#050505]">
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="flex flex-col items-center text-center max-w-5xl mx-auto">
             <Reveal>
-              <h2 className="font-display text-4xl md:text-5xl font-medium uppercase tracking-tight">
-                Leadership
-              </h2>
+              <span className="block text-xs font-bold uppercase tracking-[0.25em] text-purple-500 mb-6">
+                Manifesto
+              </span>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mt-4 md:mt-0">
-                The minds behind the work
-              </p>
+              <h2 className="font-display text-5xl md:text-8xl font-medium uppercase tracking-tighter leading-none mb-16 text-white">
+                Design is <br /> Silence.
+              </h2>
+            </Reveal>
+
+            <div className="space-y-12 max-w-3xl">
+              <Reveal delay={0.2}>
+                <p className="font-display text-2xl md:text-4xl leading-relaxed font-light text-gray-400">
+                  In a world screaming for attention, the quietest room is the
+                  most powerful. We believe that{" "}
+                  <span className="text-white">
+                    true luxury is the absence of friction.
+                  </span>
+                </p>
+              </Reveal>
+            </div>
+
+            <Reveal delay={0.3} width="100%">
+              <div className="w-full aspect-[2.4/1] bg-gray-900 overflow-hidden relative group border-y border-white/10 mt-32">
+                <img
+                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2301&auto=format&fit=crop"
+                  alt="Office Aesthetics"
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 ease-out opacity-60 group-hover:opacity-80"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent"></div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Philosophy Grid - Consistent Dark BG */}
+      <section className="py-32 bg-[#050505] text-white relative overflow-hidden">
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
+          <div className="text-left mb-24">
+            <Reveal>
+              <span className="block text-xs font-bold uppercase tracking-[0.25em] text-purple-500 mb-6">
+                Values
+              </span>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="font-display text-5xl md:text-7xl font-medium uppercase tracking-tighter text-white">
+                Our Standards
+              </h2>
             </Reveal>
           </div>
 
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 border border-white/10">
             {[
               {
-                name: "Alexander V.",
-                role: "Founder & Strategy",
-                img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop",
+                title: "Precision",
+                desc: "We measure twice, cut once. Every pixel serves a purpose.",
               },
               {
-                name: "Sarah J.",
-                role: "Head of Design",
-                img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop",
+                title: "Velocity",
+                desc: "Speed is the ultimate competitive advantage in the digital age.",
               },
               {
-                name: "Marcus T.",
-                role: "Technical Director",
-                img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop",
+                title: "Legacy",
+                desc: "We build brands that are designed to outlast the competition.",
               },
-            ].map((member, i) => (
-              <Reveal key={i} delay={i * 0.1}>
-                <div className="flex items-center justify-between py-6 border-b border-black/5 group hover:bg-gray-50 transition-colors px-4 -mx-4">
-                  <div className="flex items-center gap-6">
-                    <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200">
-                      <img
-                        src={member.img}
-                        alt={member.name}
-                        className="w-full h-full object-cover grayscale"
-                      />
-                    </div>
-                    <h3 className="font-display text-xl font-medium uppercase tracking-wide">
-                      {member.name}
-                    </h3>
-                  </div>
-                  <span className="text-xs font-bold uppercase tracking-widest text-gray-400 group-hover:text-black transition-colors">
-                    {member.role}
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-[#050505] p-12 hover:bg-[#080808] transition-colors duration-500 group"
+              >
+                <Reveal delay={idx * 0.1}>
+                  <span className="block text-xs font-bold text-gray-600 mb-8 group-hover:text-purple-500 transition-colors">
+                    0{idx + 1}
                   </span>
-                </div>
-              </Reveal>
+                  <h3 className="font-display text-3xl font-bold uppercase mb-6 text-white group-hover:text-purple-400 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm font-medium uppercase tracking-wide leading-loose">
+                    {item.desc}
+                  </p>
+                </Reveal>
+              </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* CTA Footer on About Page */}
-        <div className="bg-[#0a0a0a] text-white p-12 md:p-24 text-center">
+      {/* Interactive Team Section - Consistent Dark BG */}
+      <section className="py-32 bg-[#050505] relative border-t border-white/10">
+        <div className="container mx-auto px-6 md:px-12">
           <Reveal>
-            <h2 className="font-display text-4xl md:text-6xl font-medium uppercase tracking-tight mb-8">
-              Ready to Define Your Story?
-            </h2>
+            <span className="block text-xs font-bold uppercase tracking-[0.25em] text-purple-500 mb-12 text-left">
+              The Collective
+            </span>
           </Reveal>
-          <Reveal delay={0.1}>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-4 text-xs font-bold uppercase tracking-widest border-b border-white pb-2 hover:text-gray-300 hover:border-gray-300 transition-all"
+
+          <div className="relative">
+            {/* Background Image Container - Fixed/Absolute centered */}
+            <div
+              className="hidden md:block absolute top-1/2 left-3/4 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[500px] z-0 pointer-events-none overflow-hidden transition-opacity duration-500 mix-blend-screen"
+              style={{ opacity: hoveredMember !== null ? 1 : 0 }}
             >
-              Start a Conversation <ArrowRight className="w-4 h-4" />
-            </Link>
-          </Reveal>
+              {teamMembers.map((member, idx) => (
+                <img
+                  key={idx}
+                  src={member.img}
+                  alt=""
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 grayscale opacity-50 ${hoveredMember === idx ? "opacity-100" : "opacity-0"}`}
+                />
+              ))}
+            </div>
+
+            {/* List */}
+            <div className="relative z-10">
+              {teamMembers.map((member, idx) => (
+                <Reveal key={idx} delay={idx * 0.05} width="100%">
+                  <div
+                    className="border-b border-white/10 group cursor-pointer"
+                    onMouseEnter={() => setHoveredMember(idx)}
+                    onMouseLeave={() => setHoveredMember(null)}
+                  >
+                    <div className="py-12 flex items-center justify-between transition-all duration-300 group-hover:pl-8">
+                      <h3 className="font-display text-4xl md:text-7xl font-medium uppercase tracking-tighter text-gray-600 group-hover:text-white transition-colors duration-300">
+                        {member.name}
+                      </h3>
+                      <span className="text-xs font-bold uppercase tracking-widest text-gray-600 group-hover:text-purple-400 transition-colors">
+                        {member.role}
+                      </span>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
         </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <div className="bg-[#050505] text-white py-32 text-center border-t border-white/10">
+        <Reveal>
+          <h2 className="font-display text-4xl md:text-6xl font-medium uppercase tracking-tight mb-8 text-white">
+            Enough about us.
+          </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-4 text-xs font-bold uppercase tracking-widest bg-white text-black px-8 py-4 hover:bg-purple-500 hover:text-white transition-all duration-300 rounded-none"
+          >
+            Tell us about you <ArrowRight className="w-4 h-4" />
+          </Link>
+        </Reveal>
       </div>
     </div>
   );

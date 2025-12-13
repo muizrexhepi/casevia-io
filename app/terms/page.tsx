@@ -2,7 +2,7 @@
 import { Reveal } from "@/components/ui/Reveal";
 import React, { useEffect } from "react";
 
-const TermsPage: React.FC = () => {
+export default function TermsPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -36,12 +36,11 @@ const TermsPage: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white text-black min-h-screen pt-32 md:pt-40 pb-24">
+    <div className="bg-[#050505] text-white min-h-screen pt-32 md:pt-40 pb-24">
       <div className="container mx-auto px-6 md:px-12">
-        {/* Header */}
         <div className="flex flex-col items-start justify-center mb-24 md:mb-32">
           <Reveal>
-            <span className="block text-left text-xs font-bold uppercase tracking-[0.25em] text-gray-400 mb-6">
+            <span className="block text-left text-xs font-bold uppercase tracking-[0.25em] text-purple-400 mb-6">
               Legal
             </span>
           </Reveal>
@@ -51,35 +50,32 @@ const TermsPage: React.FC = () => {
             </h1>
           </Reveal>
           <Reveal delay={0.1} width="100%">
-            <div className="w-full h-px bg-black/10"></div>
+            <div className="w-full h-px bg-white/10"></div>
           </Reveal>
         </div>
 
-        {/* Content Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
-          {/* Sidebar */}
           <div className="lg:col-span-4">
             <Reveal delay={0.2}>
               <div className="sticky top-32">
-                <p className="text-xs font-bold uppercase tracking-[0.25em] text-gray-400 mb-2">
+                <p className="text-xs font-bold uppercase tracking-[0.25em] text-gray-500 mb-2">
                   Last Updated
                 </p>
-                <p className="font-display text-xl font-medium uppercase tracking-tight">
+                <p className="font-display text-xl font-medium uppercase tracking-tight text-white">
                   December 12, 2024
                 </p>
               </div>
             </Reveal>
           </div>
 
-          {/* Main Content */}
           <div className="lg:col-span-8 space-y-16">
             {sections.map((section, idx) => (
               <Reveal key={idx} delay={idx * 0.1}>
-                <div className="border-b border-black/10 pb-16">
-                  <h2 className="font-display text-2xl md:text-3xl font-medium uppercase tracking-tight mb-8">
+                <div className="border-b border-white/10 pb-16">
+                  <h2 className="font-display text-2xl md:text-3xl font-medium uppercase tracking-tight mb-8 text-gray-200">
                     {section.title}
                   </h2>
-                  <p className="text-sm md:text-base leading-loose text-gray-500 font-medium uppercase tracking-wide">
+                  <p className="text-sm md:text-base leading-loose text-gray-400 font-medium uppercase tracking-wide">
                     {section.content}
                   </p>
                 </div>
@@ -90,6 +86,4 @@ const TermsPage: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default TermsPage;
+}

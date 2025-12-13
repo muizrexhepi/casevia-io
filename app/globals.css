@@ -1,9 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap");
+
 @import "tailwindcss";
 
+/* ---------------------------------------
+   TAILWIND CONFIGURATION
+---------------------------------------- */
 @theme {
+  /* Using your custom font definitions */
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
 
+  /* Using your custom color palette (Next.js components used #050505) */
   --color-gray-50: #f9f9f9;
   --color-gray-100: #f3f3f3;
   --color-gray-200: #e5e5e5;
@@ -19,33 +26,69 @@
 }
 
 /* ---------------------------------------
-   BASE
+   BASE STYLES (GLOBAL VARIABLES & RESETS)
 ---------------------------------------- */
 @layer base {
+  :root {
+    /* Define dark theme colors from your original CSS for easy reference/override */
+    --background: #050505;
+    --foreground: #ffffff;
+  }
+
   html {
-    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-sans); /* From your Tailwind v4 config */
+  }
+
+  body {
+    overflow-x: hidden;
+    /* Apply dark theme colors */
+    background-color: var(--background);
+    color: var(--foreground);
   }
 }
 
 /* ---------------------------------------
-   TEXT SELECTION
+   CUSTOM SELECTION
+   Electric Purple Highlight (from original CSS)
 ---------------------------------------- */
 ::selection {
-  background-color: #000;
-  color: #fff;
+  background-color: #581c87; /* Purple 900 */
+  color: #ffffff;
 }
 
 /* ---------------------------------------
-   PREMIUM REVEAL ANIMATION
+   PREMIUM GRAIN OVERLAY
+---------------------------------------- */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  /* SVG Noise Generator */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ---------------------------------------
+   CINEMATIC REVEAL ANIMATION (MODIFIED)
+   Using the sharper/faster timings from your original CSS
 ---------------------------------------- */
 .reveal {
   opacity: 0;
-  filter: blur(5x);
-  transform: translateY(60px) scale(0.96);
+  filter: blur(10px); /* Restored blur from original CSS */
+  transform: translateY(60px) scale(0.98); /* Restored scale from original CSS */
   transition:
-    opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 1.2s var(--ease-expo),
+    /* Using Tailwind variable for timing function */ transform 1.2s
+      var(--ease-expo),
+    filter 1.2s var(--ease-expo);
   will-change: opacity, transform, filter;
 }
 
@@ -56,24 +99,40 @@
 }
 
 /* ---------------------------------------
-   SCROLLBAR (SUBTLE / AGENCY)
+   SCROLLBAR (DARK THEME, SHARP EDGES)
+   Used the dark theme scrollbar from your original CSS
 ---------------------------------------- */
-body::-webkit-scrollbar {
-  width: 6px;
-}
-body::-webkit-scrollbar-track {
-  background: #fff;
-}
-body::-webkit-scrollbar-thumb {
-  background-color: #e5e5e5;
-  border-radius: 3px;
-}
-body::-webkit-scrollbar-thumb:hover {
-  background-color: #a3a3a3;
+/* Chrome, Safari, Edge */
+::-webkit-scrollbar {
+  width: 8px; /* Restored 8px width from original CSS */
 }
 
-/* Utility for text outlines */
-.stroke-text {
-  -webkit-text-stroke: 1px black;
-  color: transparent;
+::-webkit-scrollbar-track {
+  background: var(--background); /* Use variable for background color */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-gray-800); /* Neutral 800 */
+  border: 2px solid var(--background); /* Creates a padding effect */
+  border-radius: 0px; /* Sharp edges */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-gray-700);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-800) var(--background);
+}
+
+/* ---------------------------------------
+   UTILITIES
+---------------------------------------- */
+@layer utilities {
+  .stroke-text {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3); /* White stroke for dark background */
+    color: transparent;
+  }
 }

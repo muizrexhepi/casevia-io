@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { servicesData } from "@/components/services";
 import ServiceClientPage from "./service-client";
+import { SERVICES_DATA } from "@/lib/services";
 
 type PageProps = {
   params: Promise<{
@@ -16,7 +16,7 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { id } = await params;
 
-  const service = servicesData.find((s) => s.id === id);
+  const service = SERVICES_DATA.find((s) => s.id === id);
 
   if (!service) {
     return {
@@ -44,7 +44,7 @@ export async function generateMetadata({
 export default async function ServicePage({ params }: PageProps) {
   const { id } = await params;
 
-  const service = servicesData.find((s) => s.id === id);
+  const service = SERVICES_DATA.find((s) => s.id === id);
 
   if (!service) {
     notFound();
