@@ -65,7 +65,7 @@ export const Footer: React.FC = () => {
                   Explore
                 </span>
                 <ul className="space-y-4">
-                  {["Work", "Services", "Agency", "Contact"].map((item) => (
+                  {["Work", "Services", "About", "Contact"].map((item) => (
                     <li key={item}>
                       <Link
                         href={`/${item.toLowerCase()}`}
