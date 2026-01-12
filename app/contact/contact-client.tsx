@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { ArrowRight, Mail, MapPin } from "lucide-react";
-import { Reveal } from "@/components/ui/Reveal";
+import { ArrowRight, ChevronDown } from "lucide-react";
+import { Button } from "@/components/UI"; // Assuming your button component path
 
-// Define the shape of the form data
 interface FormData {
   firstName: string;
   lastName: string;
@@ -14,7 +13,7 @@ interface FormData {
   message: string;
 }
 
-const ContactClient: React.FC = () => {
+const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
@@ -23,12 +22,11 @@ const ContactClient: React.FC = () => {
     company: "",
     message: "",
   });
-  const [loading, setLoading] = useState(false);
+
   const [status, setStatus] = useState<
     "idle" | "success" | "error" | "sending"
   >("idle");
 
-  // Scrolls to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -38,20 +36,14 @@ const ContactClient: React.FC = () => {
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-    // Reset status on input change
+    setFormData({ ...formData, [e.target.name]: e.target.value });
     if (status !== "idle") setStatus("idle");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setStatus("sending");
 
-    // The API route expects: firstName, lastName, email, company, message
     const payload = {
       firstName: formData.firstName,
       lastName: formData.lastName,
@@ -63,9 +55,7 @@ const ContactClient: React.FC = () => {
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
@@ -73,289 +63,221 @@ const ContactClient: React.FC = () => {
 
       if (response.ok && data.success) {
         setStatus("success");
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          interest: "",
-          company: "",
-          message: "",
-        });
       } else {
         setStatus("error");
-        console.error("Submission error:", data.error || "Unknown error");
       }
     } catch (error) {
       setStatus("error");
-      console.error("Network or fetch error:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
-  const submitButtonText =
-    status === "sending"
-      ? "Sending..."
-      : status === "success"
-        ? "Sent Successfully!"
-        : status === "error"
-          ? "Failed, Try Again"
-          : "Submit Request";
-
-  // Reusable styles to match the dark theme design
-  const inputClasses =
-    "w-full bg-transparent border-b border-white/10 py-4 text-xl md:text-3xl font-display focus:border-white focus:outline-none transition-colors placeholder:text-gray-800 text-white rounded-none";
-  const labelClasses =
-    "block text-xs font-bold uppercase tracking-widest text-gray-500 mb-4";
-
   return (
-    <div className="bg-[#050505] min-h-screen pt-32 md:pt-40 pb-24 text-white">
-      <div className="container mx-auto px-6 md:px-12">
-        {/* Header */}
-        <div className="flex flex-col items-start mb-24 md:mb-32">
-          <Reveal>
-            <h1 className="font-display text-[12vw] leading-[0.8] font-black uppercase tracking-tighter text-white mb-12">
-              Let's Talk
+    <div className="pt-32 md:pt-48 pb-32 reveal active">
+      <div className="max-w-screen-2xl mx-auto px-6 md:px-12">
+        {/* Header Section */}
+        <div className="grid lg:grid-cols-2 gap-24 mb-32">
+          <div>
+            <h1 className="text-5xl md:text-8xl lg:text-[8rem] font-normal leading-[0.9] tracking-tighter text-gradient mb-12">
+              Let's begin.
             </h1>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="text-xl md:text-2xl font-display font-medium max-w-2xl leading-relaxed text-gray-400">
-              Ready to transform your digital presence? We take on a limited
-              number of clients per quarter to ensure exceptional quality.
+            <p className="text-xl md:text-2xl text-[#4A1D3A]/80 font-normal max-w-xl leading-[1.3] tracking-tight">
+              Engineering excellence starts with a conversation. Tell us about
+              your vision, and let's architect the future of your operations.
             </p>
-          </Reveal>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
-          {/* Left Column: Form */}
-          <div className="lg:col-span-7">
-            <form onSubmit={handleSubmit} className="space-y-12">
-              {/* Name Fields */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <Reveal delay={0.2}>
-                  <div className="relative group">
-                    <label htmlFor="firstName" className={labelClasses}>
-                      First Name
-                    </label>
-                    <input
-                      id="firstName"
-                      name="firstName"
-                      type="text"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      required
-                      placeholder="John"
-                      className={inputClasses}
-                    />
-                  </div>
-                </Reveal>
-                <Reveal delay={0.25}>
-                  <div className="relative group">
-                    <label htmlFor="lastName" className={labelClasses}>
-                      Last Name
-                    </label>
-                    <input
-                      id="lastName"
-                      name="lastName"
-                      type="text"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      required
-                      placeholder="Doe"
-                      className={inputClasses}
-                    />
-                  </div>
-                </Reveal>
-              </div>
-
-              <Reveal delay={0.3}>
-                <div className="relative group">
-                  <label htmlFor="email" className={labelClasses}>
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    placeholder="john@company.com"
-                    className={inputClasses}
-                  />
-                </div>
-              </Reveal>
-
-              {/* Company Field */}
-              <Reveal delay={0.35}>
-                <div className="relative group">
-                  <label htmlFor="company" className={labelClasses}>
-                    Company Name
-                  </label>
-                  <input
-                    id="company"
-                    name="company"
-                    type="text"
-                    value={formData.company}
-                    onChange={handleChange}
-                    required
-                    placeholder="Acme Corp"
-                    className={inputClasses}
-                  />
-                </div>
-              </Reveal>
-
-              <Reveal delay={0.4}>
-                <div className="relative group">
-                  <label htmlFor="interest" className={labelClasses}>
-                    Interest
-                  </label>
-                  <select
-                    id="interest"
-                    name="interest"
-                    value={formData.interest}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-transparent border-b border-white/10 py-4 text-xl md:text-3xl font-display focus:border-white focus:outline-none transition-colors text-white appearance-none rounded-none cursor-pointer"
-                  >
-                    <option
-                      value=""
-                      disabled
-                      className="text-gray-600 bg-[#050505]"
-                    >
-                      Select a service...
-                    </option>
-                    <option value="New Website" className="bg-[#050505]">
-                      New Website
-                    </option>
-                    <option
-                      value="Branding & Identity"
-                      className="bg-[#050505]"
-                    >
-                      Branding & Identity
-                    </option>
-                    <option value="Growth Marketing" className="bg-[#050505]">
-                      Growth Marketing
-                    </option>
-                    <option value="Other Inquiry" className="bg-[#050505]">
-                      Other Inquiry
-                    </option>
-                  </select>
-                  <div className="absolute right-0 bottom-6 pointer-events-none">
-                    <ArrowRight className="w-6 h-6 text-white" />
-                  </div>
-                </div>
-              </Reveal>
-
-              <Reveal delay={0.5}>
-                <div className="relative group">
-                  <label htmlFor="message" className={labelClasses}>
-                    Details
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    placeholder="Tell us about your project..."
-                    className="w-full bg-transparent border-b border-white/10 py-4 text-xl md:text-2xl font-display focus:border-white focus:outline-none transition-colors placeholder:text-gray-800 text-white resize-none rounded-none"
-                  />
-                </div>
-              </Reveal>
-
-              <Reveal delay={0.6}>
-                <button
-                  type="submit"
-                  disabled={loading || status === "success"}
-                  className={`mt-8 px-12 py-6 rounded-none text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center gap-4 w-full md:w-auto justify-center 
-                    ${
-                      status === "success"
-                        ? "bg-green-500 text-white cursor-not-allowed"
-                        : status === "error"
-                          ? "bg-red-600 text-white"
-                          : loading
-                            ? "bg-gray-600 text-white cursor-wait"
-                            : "bg-white text-black hover:bg-purple-500 hover:text-white"
-                    }`}
-                >
-                  {submitButtonText}
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </Reveal>
-
-              {/* User Feedback */}
-              {status === "success" && (
-                <p className="text-sm text-green-400 font-bold uppercase tracking-widest mt-4">
-                  Thank you! We have received your request.
-                </p>
-              )}
-              {status === "error" && (
-                <p className="text-sm text-red-400 font-bold uppercase tracking-widest mt-4">
-                  An error occurred. Please try again later.
-                </p>
-              )}
-            </form>
           </div>
 
-          {/* Right Column: Info */}
-          <div className="lg:col-span-5 lg:pl-12 lg:border-l border-white/10 flex flex-col justify-between h-full pt-12 lg:pt-0">
-            <div>
-              <Reveal delay={0.2}>
-                <div className="mb-12">
-                  <span className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-purple-400 mb-4">
-                    <Mail className="w-4 h-4" /> Email
-                  </span>
-                  <a
-                    href="mailto:hello@casevia.io"
-                    className="text-2xl font-display font-medium hover:text-purple-400 transition-colors text-white"
-                  >
-                    hello@casevia.io
-                  </a>
-                </div>
-              </Reveal>
+          <div className="flex flex-col justify-end space-y-10">
+            <div className="p-10 glass rounded-[2.5rem]">
+              <h4 className="text-[12px] font-bold text-[#D1326E] tracking-tight mb-6 uppercase">
+                Direct Access
+              </h4>
+              <div className="space-y-4">
+                <p className="text-2xl font-normal tracking-tight text-[#221221]">
+                  partnerships@casevia.io
+                </p>
+                <p className="text-2xl font-normal tracking-tight text-[#221221]">
+                  +49 30 1234 5678
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-              <Reveal delay={0.3}>
-                <div className="mb-12">
-                  <span className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-purple-400 mb-4">
-                    <MapPin className="w-4 h-4" /> Office
-                  </span>
-                  <p className="text-2xl font-display font-medium leading-relaxed text-gray-300">
-                    Torstraße 12
-                    <br />
-                    10119 Berlin
-                    <br />
-                    Germany
-                  </p>
-                </div>
-              </Reveal>
+        {status !== "success" ? (
+          <form
+            className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-16 max-w-7xl"
+            onSubmit={handleSubmit}
+          >
+            {/* First Name */}
+            <div className="space-y-3 border-b border-[#221221]/10 pb-8 group focus-within:border-[#D1326E] transition-colors">
+              <label className="text-[11px] font-bold text-[#D1326E] tracking-tight opacity-60 group-focus-within:opacity-100 transition-opacity uppercase">
+                First Name
+              </label>
+              <input
+                required
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                type="text"
+                className="w-full bg-transparent text-2xl md:text-4xl font-normal focus:outline-none placeholder-[#221221]/10 py-1"
+                placeholder="John"
+              />
             </div>
 
-            <Reveal delay={0.4}>
-              <div className="bg-white/5 p-8 border border-white/10 rounded-none">
-                <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">
-                  Availability
-                </p>
-                <p className="font-display text-lg font-medium mb-4 text-white">
-                  Currently accepting new projects for Q4 2024.
-                </p>
-                <div className="flex items-center gap-2">
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+            {/* Last Name */}
+            <div className="space-y-3 border-b border-[#221221]/10 pb-8 group focus-within:border-[#D1326E] transition-colors">
+              <label className="text-[11px] font-bold text-[#D1326E] tracking-tight opacity-60 group-focus-within:opacity-100 transition-opacity uppercase">
+                Last Name
+              </label>
+              <input
+                required
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                type="text"
+                className="w-full bg-transparent text-2xl md:text-4xl font-normal focus:outline-none placeholder-[#221221]/10 py-1"
+                placeholder="Doe"
+              />
+            </div>
+
+            {/* Email */}
+            <div className="space-y-3 border-b border-[#221221]/10 pb-8 group focus-within:border-[#D1326E] transition-colors">
+              <label className="text-[11px] font-bold text-[#D1326E] tracking-tight opacity-60 group-focus-within:opacity-100 transition-opacity uppercase">
+                Corporate Email
+              </label>
+              <input
+                required
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                type="email"
+                className="w-full bg-transparent text-2xl md:text-4xl font-normal focus:outline-none placeholder-[#221221]/10 py-1"
+                placeholder="john@company.com"
+              />
+            </div>
+
+            {/* Enterprise/Company */}
+            <div className="space-y-3 border-b border-[#221221]/10 pb-8 group focus-within:border-[#D1326E] transition-colors">
+              <label className="text-[11px] font-bold text-[#D1326E] tracking-tight opacity-60 group-focus-within:opacity-100 transition-opacity uppercase">
+                Enterprise
+              </label>
+              <input
+                required
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
+                type="text"
+                className="w-full bg-transparent text-2xl md:text-4xl font-normal focus:outline-none placeholder-[#221221]/10 py-1"
+                placeholder="Company Name"
+              />
+            </div>
+
+            {/* Interest Select */}
+            <div className="space-y-3 border-b border-[#221221]/10 pb-8 relative group focus-within:border-[#D1326E] transition-colors">
+              <label className="text-[11px] font-bold text-[#D1326E] tracking-tight opacity-60 group-focus-within:opacity-100 transition-opacity uppercase">
+                Primary Interest
+              </label>
+              <select
+                required
+                name="interest"
+                value={formData.interest}
+                onChange={handleChange}
+                className="w-full bg-transparent text-2xl md:text-4xl font-normal focus:outline-none py-1 appearance-none cursor-pointer"
+              >
+                <option value="">Select Domain...</option>
+                <option value="New Website">New Website</option>
+                <option value="Branding & Identity">Branding & Identity</option>
+                <option value="Growth Marketing">Growth Marketing</option>
+                <option value="Other Inquiry">Other Inquiry</option>
+              </select>
+              <ChevronDown
+                className="absolute bottom-10 right-0 pointer-events-none text-[#221221]/30 group-focus-within:text-[#D1326E] transition-colors"
+                size={28}
+              />
+            </div>
+
+            {/* Message/Details */}
+            <div className="md:col-span-2 space-y-3 border-b border-[#221221]/10 pb-8 group focus-within:border-[#D1326E] transition-colors">
+              <label className="text-[11px] font-bold text-[#D1326E] tracking-tight opacity-60 group-focus-within:opacity-100 transition-opacity uppercase">
+                Brief Summary
+              </label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows={1}
+                className="w-full bg-transparent text-2xl md:text-4xl font-normal focus:outline-none placeholder-[#221221]/10 py-1 resize-none"
+                placeholder="What are we building together?"
+              />
+            </div>
+
+            {/* Footer / Submit */}
+            <div className="md:col-span-2 flex flex-col lg:flex-row lg:items-center justify-between gap-12 mt-12">
+              <div className="max-w-2xl">
+                {status === "error" && (
+                  <p className="text-red-500 font-bold text-sm mb-4 uppercase tracking-widest">
+                    Transmission Error. Please verify your connection and try
+                    again.
+                  </p>
+                )}
+                <label className="flex items-start gap-6 cursor-pointer group">
+                  <div className="relative flex-shrink-0 mt-1">
+                    <input required type="checkbox" className="peer sr-only" />
+                    <div className="w-8 h-8 border-2 border-[#221221]/10 rounded-lg group-hover:border-[#D1326E] transition-all peer-checked:bg-[#D1326E] peer-checked:border-[#D1326E]"></div>
+                    <svg
+                      className="absolute top-1.5 left-1.5 w-5 h-5 text-white opacity-0 peer-checked:opacity-100 transition-opacity"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <span className="text-base text-[#4A1D3A]/60 font-normal leading-snug">
+                    I acknowledge the processing of my corporate data in
+                    accordance with Casevia's standards.
                   </span>
-                  <span className="text-xs font-bold uppercase tracking-widest text-green-400">
-                    Online Now
-                  </span>
-                </div>
+                </label>
               </div>
-            </Reveal>
+
+              <Button
+                variant="primary"
+                size="lg"
+                type="submit"
+                disabled={status === "sending"}
+                className="text-lg px-16 py-8 min-w-[300px]"
+              >
+                {status === "sending" ? "Processing..." : "Initiate Project"}
+                <ArrowRight size={28} className="ml-4" />
+              </Button>
+            </div>
+          </form>
+        ) : (
+          /* Success State */
+          <div className="py-24 text-left animate-in fade-in zoom-in duration-1000">
+            <h2 className="text-6xl md:text-8xl font-normal tracking-tighter text-[#D1326E] mb-10 leading-none">
+              Transmission <br />
+              Success.
+            </h2>
+            <p className="text-xl md:text-3xl text-[#4A1D3A] max-w-3xl leading-snug font-light tracking-tight">
+              Your project parameters have been received. An engineering lead
+              from our Berlin studio will respond within 24 hours.
+            </p>
+            <Button
+              variant="outline"
+              className="mt-16 text-lg px-12 py-6"
+              onClick={() => setStatus("idle")}
+            >
+              Send another brief
+            </Button>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default ContactClient;
+export default ContactPage;
