@@ -1,292 +1,197 @@
 "use client";
 import React, { useEffect } from "react";
-import { Check, ArrowRight, Zap, Shield, Minus } from "lucide-react";
-import { Reveal } from "@/components/ui/Reveal";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { Reveal } from "@/components/ui/Reveal";
+import { Button } from "@/components/UI";
+
+const PRICING_PLANS = [
+  {
+    name: "Digital Launch",
+    description:
+      "Essential digital presence for startups. Built for speed, clarity, and immediate market entry.",
+    setupPrice: "2,500",
+    monthlyPrice: "250",
+    features: [
+      "Single-Page Nexus",
+      "Mobile Optimization",
+      "SEO Fundamentals",
+      "Lead Capture Systems",
+    ],
+  },
+  {
+    name: "Scale Catalyst",
+    description:
+      "Full-scale digital transformation. Custom design with advanced content control and interactions.",
+    setupPrice: "7,500",
+    monthlyPrice: "550",
+    features: [
+      "Multi-Page Strategy",
+      "Visual Content Editor",
+      "Custom Animations",
+      "Performance Analytics",
+      "Full SEO Audit",
+    ],
+  },
+  {
+    name: "Enterprise Ecosystem",
+    description:
+      "Complex systems, SaaS platforms, and large-scale infrastructure built for global performance.",
+    setupPrice: "15,000",
+    monthlyPrice: "1,200",
+    features: [
+      "Custom API Integrations",
+      "User Auth Systems",
+      "Dedicated Lead Engineer",
+      "24/7 Priority Support",
+      "SLA Guarantee",
+    ],
+  },
+];
 
 const PricingClient = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const comparisonFeatures = [
-    {
-      name: "Design Revisions",
-      standard: "2 Rounds",
-      pro: "Unlimited",
-      enterprise: "Unlimited",
-    },
-    {
-      name: "Content Management",
-      standard: "Standard",
-      pro: "Easy Visual Editor",
-      enterprise: "Custom Workflows",
-    },
-    {
-      name: "Animations",
-      standard: "Standard",
-      pro: "Custom Interactions",
-      enterprise: "Advanced WebGL",
-    },
-    {
-      name: "SEO Setup",
-      standard: "Basic",
-      pro: "Advanced Strategy",
-      enterprise: "Full Audit & Exec",
-    },
-    {
-      name: "Delivery Time",
-      standard: "1-2 Weeks",
-      pro: "3-5 Weeks",
-      enterprise: "6+ Weeks",
-    },
-    {
-      name: "Post-Launch Support",
-      standard: "Email",
-      pro: "Slack Channel",
-      enterprise: "Dedicated Manager",
-    },
-  ];
-
   return (
-    <div className="bg-[#050505] text-white min-h-screen pt-32 md:pt-40 pb-24">
-      <div className="container mx-auto px-6 md:px-12 text-left">
-        {/* Header */}
-        <div className="flex flex-col items-start justify-center mb-24 md:mb-32 text-left">
+    <div className="reveal active bg-[#fbf9f8] min-h-screen">
+      {/* Page Hero Section */}
+      <section className="pt-32 md:pt-48 pb-20 px-6 md:px-12">
+        <div className="max-w-screen-2xl mx-auto">
           <Reveal>
-            <span className="block text-left text-xs font-bold uppercase tracking-[0.25em] text-purple-500 mb-6">
-              Investment
-            </span>
-          </Reveal>
-          <Reveal width="100%">
-            <h1 className="font-display text-[11vw] md:text-[8vw] leading-[0.8] font-black uppercase tracking-tighter text-left mb-12 text-white">
-              Pricing & <br /> Plans
+            <h1 className="text-5xl md:text-8xl lg:text-[8rem] font-normal leading-[0.85] tracking-tighter text-gradient mb-12">
+              Transparent <br /> investment <br /> structures.
             </h1>
           </Reveal>
-          <Reveal delay={0.1} width="100%">
-            <div className="w-full h-px bg-white/10"></div>
+          <Reveal delay={0.1}>
+            <p className="text-xl md:text-2xl text-[#4A1D3A]/70 max-w-3xl leading-relaxed font-normal tracking-tight">
+              Predictable pricing for high-performance engineering. From rapid
+              MVPs to enterprise-grade digital ecosystems.
+            </p>
           </Reveal>
         </div>
+      </section>
 
-        {/* Detailed Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-32">
-          {/* Standard */}
-          <Reveal delay={0.1} className="h-full">
-            <div className="flex flex-col h-full p-8 md:p-12 bg-[#0a0a0a] border border-white/10 hover:border-white/30 transition-all duration-500 group text-left">
-              <div className="mb-8">
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block text-left">
-                  Entry
-                </span>
-                <h3 className="font-display text-3xl font-medium uppercase tracking-tight mb-4 text-white">
-                  The Launch
-                </h3>
-                <div className="flex items-baseline gap-1 mb-2">
-                  <span className="font-display text-5xl font-medium tracking-tighter text-white">
-                    $1,500
-                  </span>
-                </div>
-                <p className="text-gray-500 text-[10px] uppercase tracking-widest mb-6">
-                  + $150/mo maintenance
-                </p>
-                <p className="text-gray-400 text-xs font-medium leading-relaxed uppercase tracking-wide text-left">
-                  Essential digital presence for startups. Speed and clarity.
-                </p>
-              </div>
-              <div className="flex-1 border-t border-white/10 pt-8 mb-8">
-                <ul className="space-y-4">
-                  {[
-                    "One-Page Site",
-                    "Mobile Optimized",
-                    "SEO Fundamentals",
-                    "Lead Capture Form",
-                  ].map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gray-500 text-left"
-                    >
-                      <Check className="w-3 h-3 text-white" /> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-auto">
-                <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-4 text-left">
-                  50% Deposit Required
-                </p>
-                <Link
-                  href="/contact"
-                  className="block w-full py-4 border border-white/20 text-center text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all"
-                >
-                  Select Plan
-                </Link>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Professional */}
-          <Reveal delay={0.2} className="h-full">
-            <div className="flex flex-col h-full p-8 md:p-12 bg-[#0a0a0a] border border-purple-500/50 hover:border-purple-500 transition-all duration-500 group relative text-left">
-              <div className="absolute top-0 right-0 p-4">
-                <Zap className="w-5 h-5 text-purple-500" />
-              </div>
-              <div className="mb-8">
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-purple-400 mb-2 block text-left">
-                  Recommended
-                </span>
-                <h3 className="font-display text-3xl font-medium uppercase tracking-tight mb-4 text-white">
-                  The Scale
-                </h3>
-                <div className="flex items-baseline gap-1 mb-2">
-                  <span className="font-display text-5xl font-medium tracking-tighter text-white">
-                    $5,000
-                  </span>
-                </div>
-                <p className="text-gray-500 text-[10px] uppercase tracking-widest mb-6">
-                  + $300/mo maintenance
-                </p>
-                <p className="text-gray-400 text-xs font-medium leading-relaxed uppercase tracking-wide text-left">
-                  Full-scale digital transformation. Custom design with content
-                  control.
-                </p>
-              </div>
-              <div className="flex-1 border-t border-white/10 pt-8 mb-8">
-                <ul className="space-y-4">
-                  {[
-                    "Multi-Page Strategy",
-                    "Visual Content Editor",
-                    "Custom Animations",
-                    "Performance Analytics",
-                    "News/Blog Section",
-                  ].map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gray-300 text-left"
-                    >
-                      <Check className="w-3 h-3 text-purple-400" /> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-auto">
-                <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-4 text-left">
-                  50% Deposit Required
-                </p>
-                <Link
-                  href="/contact"
-                  className="block w-full py-4 bg-white text-black text-center text-xs font-bold uppercase tracking-widest hover:bg-purple-500 hover:text-white transition-all"
-                >
-                  Select Plan
-                </Link>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Enterprise */}
-          <Reveal delay={0.3} className="h-full">
-            <div className="flex flex-col h-full p-8 md:p-12 bg-[#0a0a0a] border border-white/10 hover:border-white/30 transition-all duration-500 group text-left">
-              <div className="mb-8">
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block text-left">
-                  Corporation
-                </span>
-                <h3 className="font-display text-3xl font-medium uppercase tracking-tight mb-4 text-white">
-                  Custom
-                </h3>
-                <div className="flex items-baseline gap-1 mb-2">
-                  <span className="font-display text-5xl font-medium tracking-tighter text-white">
-                    Talk to Us
-                  </span>
-                </div>
-                <p className="text-gray-500 text-[10px] uppercase tracking-widest mb-6">
-                  Custom SLA
-                </p>
-                <p className="text-gray-400 text-xs font-medium leading-relaxed uppercase tracking-wide text-left">
-                  Complex systems, SaaS platforms, and large-scale ecommerce.
-                </p>
-              </div>
-              <div className="flex-1 border-t border-white/10 pt-8 mb-8">
-                <ul className="space-y-4">
-                  {[
-                    "Custom Functionality",
-                    "API Integrations",
-                    "User Auth Systems",
-                    "Dedicated Team",
-                    "24/7 Priority Support",
-                  ].map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gray-500 text-left"
-                    >
-                      <Check className="w-3 h-3 text-white" /> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-auto">
-                <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-4 text-left">
-                  Based on requirements
-                </p>
-                <Link
-                  href="/contact"
-                  className="block w-full py-4 border border-white/20 text-center text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all"
-                >
-                  Contact Sales
-                </Link>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* Feature Comparison Table */}
-        <div className="mb-32">
-          <Reveal>
-            <h2 className="font-display text-3xl md:text-5xl font-medium uppercase tracking-tight mb-12 text-white">
-              Comparison
-            </h2>
-          </Reveal>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-white/10">
-                  <th className="py-6 px-4 text-xs font-bold uppercase tracking-widest text-gray-500 text-left">
-                    Feature
-                  </th>
-                  <th className="py-6 px-4 text-xs font-bold uppercase tracking-widest text-white text-left">
-                    The Launch
-                  </th>
-                  <th className="py-6 px-4 text-xs font-bold uppercase tracking-widest text-purple-400 text-left">
-                    The Scale
-                  </th>
-                  <th className="py-6 px-4 text-xs font-bold uppercase tracking-widest text-white text-left">
-                    Custom
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonFeatures.map((row, idx) => (
-                  <tr
-                    key={idx}
-                    className="border-b border-white/5 hover:bg-white/5 transition-colors"
+      {/* Pricing Grid Section */}
+      <section className="pb-32 px-6 md:px-12">
+        <div className="max-w-screen-2xl mx-auto">
+          <div className="grid lg:grid-cols-3 gap-8 md:gap-10">
+            {PRICING_PLANS.map((plan, i) => {
+              const isHighlighted = plan.name === "Scale Catalyst";
+              return (
+                <Reveal key={i} delay={i * 0.1} width="100%">
+                  <div
+                    className={`p-10 md:p-12 h-full rounded-[3.5rem] flex flex-col justify-between transition-all duration-700 relative overflow-hidden shadow-sm group hover:scale-[1.02] ${
+                      isHighlighted
+                        ? "bg-[#221221] text-white shadow-2xl border-none"
+                        : "bg-white/40 backdrop-blur-xl border border-[#221221]/5"
+                    }`}
                   >
-                    <td className="py-6 px-4 text-sm font-medium font-display uppercase tracking-wide text-gray-300 text-left">
-                      {row.name}
-                    </td>
-                    <td className="py-6 px-4 text-xs font-bold uppercase tracking-widest text-gray-500 text-left">
-                      {row.standard}
-                    </td>
-                    <td className="py-6 px-4 text-xs font-bold uppercase tracking-widest text-white text-left">
-                      {row.pro}
-                    </td>
-                    <td className="py-6 px-4 text-xs font-bold uppercase tracking-widest text-gray-500 text-left">
-                      {row.enterprise}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                    {isHighlighted && (
+                      <div className="absolute top-0 right-0 w-48 h-48 bg-[#D1326E]/10 blur-[100px] rounded-full pointer-events-none group-hover:opacity-100 opacity-60 transition-opacity" />
+                    )}
+
+                    <div className="relative z-10">
+                      <h3 className="text-3xl font-normal mb-4 tracking-tighter italic">
+                        {plan.name}
+                      </h3>
+                      <p
+                        className={`font-normal text-base mb-12 leading-relaxed ${
+                          isHighlighted ? "text-white/60" : "text-[#4A1D3A]/70"
+                        }`}
+                      >
+                        {plan.description}
+                      </p>
+
+                      <div className="space-y-8 mb-12">
+                        {plan.features.map((feature, idx) => (
+                          <div key={idx} className="flex items-center gap-4">
+                            <CheckCircle2
+                              size={18}
+                              className="text-[#D1326E]"
+                            />
+                            <span className="text-sm font-medium tracking-tight uppercase">
+                              {feature}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="space-y-10 mb-16">
+                        <div>
+                          <p
+                            className={`text-[11px] font-bold tracking-tight mb-3 uppercase ${
+                              isHighlighted
+                                ? "text-white/30"
+                                : "text-[#221221]/30"
+                            }`}
+                          >
+                            One-time Nexus Fee
+                          </p>
+                          <p className="text-5xl font-normal tracking-tighter italic">
+                            €{plan.setupPrice}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-[11px] font-bold tracking-tight mb-3 text-[#D1326E] uppercase">
+                            Monthly Evolution Retainer
+                          </p>
+                          <p className="text-3xl font-normal text-[#D1326E] tracking-tighter italic">
+                            €{plan.monthlyPrice}{" "}
+                            <span
+                              className={`text-[10px] font-bold tracking-tight ml-1 ${
+                                isHighlighted
+                                  ? "text-white/30"
+                                  : "text-[#221221]/30"
+                              }`}
+                            >
+                              / MONTH
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <Link href="/contact" className="w-full">
+                      <Button
+                        variant={isHighlighted ? "secondary" : "outline"}
+                        className="w-full py-8 text-sm tracking-tight uppercase font-bold"
+                      >
+                        Initiate Partnership
+                      </Button>
+                    </Link>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Custom Requirements Section */}
+      <section className="py-24 bg-[#221221]/5 border-y border-[#221221]/5">
+        <div className="max-w-screen-2xl mx-auto px-6 md:px-12 text-center">
+          <Reveal>
+            <h2 className="text-4xl md:text-6xl font-normal tracking-tighter mb-10 text-gradient italic">
+              Custom Requirements?
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="text-xl text-[#4A1D3A]/70 max-w-2xl mx-auto mb-12 font-normal tracking-tight">
+              For large-scale infrastructure and specialized R&D projects, we
+              offer tailor-made engagement models.
+            </p>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <Link href="/contact">
+              <Button variant="primary" size="lg" className="px-12 py-6">
+                Consult an Engineer <ArrowRight className="ml-2" size={20} />
+              </Button>
+            </Link>
+          </Reveal>
+        </div>
+      </section>
     </div>
   );
 };

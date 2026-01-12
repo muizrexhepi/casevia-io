@@ -4,11 +4,7 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import { NAV_LINKS } from "@/lib/constants";
 import Link from "next/link";
 
-interface NavbarProps {
-  onCtaClick: () => void;
-}
-
-export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
+export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -131,7 +127,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
           <button
             onClick={() => {
               setIsOpen(false);
-              onCtaClick();
+              window.location.href = "/contact";
             }}
             className="w-full py-10 mt-12 text-3xl font-bold text-left border-t border-[#221221]/10 flex justify-between items-center group text-[#D1326E]"
           >

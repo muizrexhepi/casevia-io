@@ -1,9 +1,9 @@
 import { PricingPlan, FaqItem, CaseStudy } from "./types";
 
 export const NAV_LINKS = [
-  { label: "Work", href: "#work" },
+  { label: "Work", href: "/work" },
   { label: "Methodology", href: "#methodology" },
-  { label: "Investment", href: "#pricing" },
+  { label: "Pricing", href: "/pricing" },
   { label: "FAQ", href: "#faq" },
 ];
 

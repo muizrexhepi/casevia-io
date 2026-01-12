@@ -1,149 +1,92 @@
-"use client";
-
-import React, { useEffect } from "react";
+import React from "react";
+import { Metadata } from "next";
 import { Reveal } from "@/components/ui/Reveal";
 
-const PrivacyPage: React.FC = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+export const metadata: Metadata = {
+  title: "Privacy Policy | Casevia",
+  description: "Enterprise-grade data protection and privacy standards.",
+};
 
+export default function PrivacyPage() {
   const sections = [
     {
-      title: "01. Data Collection",
+      id: "01",
+      title: "Data Collection",
       content:
-        "We collect information you provide directly to us. For example, we collect information when you create an account, subscribe, participate in any interactive features of our services, fill out a form, request customer support, or otherwise communicate with us.",
+        "We collect information necessary to architect your digital systems, including technical requirements and professional contact details provided during consultations.",
     },
     {
-      title: "02. Usage of Information",
+      id: "02",
+      title: "Usage & Security",
       content:
-        "We use the information we collect to provide, maintain, and improve our services, such as administering your account, processing transactions, and sending you related information, including confirmations and invoices.",
+        "Your data is used exclusively for project execution. We implement multi-layer encryption and localized data persistence to protect your business legacy.",
     },
     {
-      title: "03. Data Sharing",
+      id: "03",
+      title: "Your Rights",
       content:
-        "We may share personal information with vendors, consultants, and other service providers who need access to such information to carry out work on our behalf. We do not sell your personal data to third parties.",
-    },
-    {
-      title: "04. Security",
-      content:
-        "Casevia takes reasonable measures to help protect information about you from loss, theft, misuse and unauthorized access, disclosure, alteration and destruction. However, no internet transmission is completely secure.",
-    },
-    {
-      title: "05. Cookies",
-      content:
-        "We use cookies and similar tracking technologies to track the activity on our Service and hold certain information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.",
+        "As an enterprise partner, you maintain full control over your project data. You may request data audits or deletion at any stage of our partnership.",
     },
   ];
 
   return (
-    <div className="bg-[#050505] min-h-screen pt-32 md:pt-40 pb-24 text-white">
-      <div className="container mx-auto px-6 md:px-12">
+    <div className="pt-32 md:pt-48 pb-32 min-h-screen">
+      <div className="max-w-screen-2xl mx-auto px-6 md:px-12">
         {/* Header Section */}
-        <div className="flex flex-col items-start mb-24 md:mb-32">
+        <div className="max-w-5xl mb-24">
           <Reveal>
-            <span className="block text-left text-xs font-bold uppercase tracking-[0.25em] text-purple-400 mb-6">
-              Legal Framework
-            </span>
-          </Reveal>
-          <Reveal width="100%">
-            <h1 className="font-display text-[11vw] md:text-[8vw] leading-[0.8] font-black uppercase tracking-tighter text-left mb-12">
-              Privacy <br />
-              <span className="text-gray-500">Policy</span>
+            <h1 className="text-6xl md:text-8xl lg:text-[9rem] font-normal leading-[0.85] tracking-tighter text-gradient mb-12 italic">
+              Privacy <br /> Policy
             </h1>
           </Reveal>
-          <Reveal delay={0.1} width="100%">
-            <div className="w-full h-px bg-white/10"></div>
+          <Reveal delay={0.1}>
+            <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
+              <p className="text-[12px] font-bold text-[#D1326E] tracking-[0.2em] uppercase border-b border-[#D1326E]/20 pb-2">
+                Last Updated: January 12, 2026
+              </p>
+              <p className="text-xl text-[#221221]/60 font-medium tracking-tight">
+                Our commitment to your data integrity.
+              </p>
+            </div>
           </Reveal>
         </div>
 
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
-          {/* Left Column: Metadata */}
-          <div className="lg:col-span-4">
-            <Reveal delay={0.2}>
-              <div className="sticky top-32 space-y-8">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.25em] text-gray-500 mb-2">
-                    Last Updated
-                  </p>
-                  <p className="font-display text-xl font-medium uppercase tracking-tight text-white">
-                    December 12, 2024
-                  </p>
-                </div>
-
-                <div className="p-8 border border-white/10 bg-white/5">
-                  <p className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-4">
-                    Compliance
-                  </p>
-                  <p className="text-sm text-gray-400 leading-relaxed">
-                    Our data processing standards are engineered to meet
-                    enterprise-grade security requirements and GDPR frameworks.
-                  </p>
-                </div>
-              </div>
-            </Reveal>
+        {/* Enterprise Grid Layout */}
+        <div className="grid lg:grid-cols-12 gap-16 md:gap-24 border-t border-[#221221]/5 pt-20">
+          <div className="lg:col-span-4 sticky top-32 h-fit">
+            <h2 className="text-[11px] font-bold text-[#221221]/40 tracking-[0.3em] uppercase mb-8">
+              Governance Framework
+            </h2>
+            <p className="text-lg text-[#221221]/80 leading-relaxed mb-8">
+              Casevia operates under strict European data protection standards,
+              ensuring that every line of code we write for you respects user
+              privacy.
+            </p>
           </div>
 
-          {/* Right Column: Legal Sections */}
-          <div className="lg:col-span-8">
-            <div className="space-y-24">
-              {sections.map((section, idx) => (
-                <Reveal key={idx} delay={0.1}>
-                  <div className="group">
-                    <h2 className="font-display text-2xl md:text-4xl font-medium uppercase tracking-tight mb-8 text-white group-hover:text-purple-400 transition-colors duration-300">
+          <div className="lg:col-span-8 space-y-24">
+            {sections.map((section) => (
+              <Reveal key={section.id} width="100%">
+                <div className="group">
+                  <div className="flex items-start gap-8 mb-6">
+                    <span className="text-[#D1326E] font-bold text-sm tracking-tighter pt-1">
+                      {section.id}
+                    </span>
+                    <h3 className="text-3xl md:text-5xl font-normal tracking-tighter text-[#221221] group-hover:italic transition-all">
                       {section.title}
-                    </h2>
-                    <p className="text-lg md:text-xl leading-relaxed text-gray-400 font-normal tracking-tight">
+                    </h3>
+                  </div>
+                  <div className="pl-12">
+                    <p className="text-xl md:text-2xl text-[#4A1D3A]/80 leading-relaxed font-normal tracking-tight max-w-3xl">
                       {section.content}
                     </p>
-                    <div className="mt-16 w-full h-px bg-white/5 group-last:hidden"></div>
                   </div>
-                </Reveal>
-              ))}
-            </div>
-
-            {/* Bottom Contact CTA */}
-            <Reveal delay={0.5}>
-              <div className="mt-32 p-12 border border-white/10 bg-gradient-to-br from-white/5 to-transparent">
-                <h3 className="font-display text-2xl font-medium uppercase mb-4">
-                  Inquiries?
-                </h3>
-                <p className="text-gray-400 mb-8 max-w-md italic">
-                  If you have questions regarding our data practices, contact
-                  our legal engineering lead.
-                </p>
-                <a
-                  href="mailto:legal@casevia.io"
-                  className="inline-flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-white hover:text-purple-400 transition-colors"
-                >
-                  legal@casevia.io{" "}
-                  <ArrowRight className="w-4 h-4 text-purple-400" />
-                </a>
-              </div>
-            </Reveal>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </div>
     </div>
   );
-};
-
-// Simple Arrow icon if lucide-react isn't already imported in your actual Privacy file
-const ArrowRight = ({ className }: { className?: string }) => (
-  <svg
-    className={className}
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M5 12h14m-7-7 7 7-7 7" />
-  </svg>
-);
-
-export default PrivacyPage;
+}

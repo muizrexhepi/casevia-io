@@ -52,6 +52,7 @@ body::after {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   display: inline-block;
+  box-decoration-break: clone;
 }
 
 .no-scrollbar::-webkit-scrollbar {

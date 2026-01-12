@@ -45,7 +45,7 @@ export default function HomePage() {
       <section className="relative min-h-screen flex flex-col justify-center pt-24 pb-12 overflow-hidden">
         <div className="max-w-screen-2xl mx-auto px-6 md:px-12 w-full text-left relative z-10">
           <div className="max-w-7xl">
-            <h1 className="text-5xl md:text-8xl lg:text-9xl font-normal leading-[1] tracking-tighter text-gradient mb-12 animate-in fade-in slide-in-from-left-12 duration-1000">
+            <h1 className="text-5xl md:text-8xl lg:text-[7rem] max-w-6xl font-normal leading-[1em] tracking-tighter text-gradient mb-12 animate-in fade-in slide-in-from-left-12 duration-1000">
               Engineering the software powering growth.
             </h1>
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12">

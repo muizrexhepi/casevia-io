@@ -1,307 +1,254 @@
-// ==================== PROJECT-PAGE-CLIENT.TSX ====================
 "use client";
 import React, { useEffect } from "react";
-import {
-  ArrowUpRight,
-  CheckCircle2,
-  TrendingUp,
-  Zap,
-  Award,
-} from "lucide-react";
-import { usePathname } from "next/navigation";
-import { Reveal } from "@/components/ui/Reveal";
 import Link from "next/link";
-import { getProjectBySlug, Project } from "@/lib/projects";
+import { ArrowRight, User } from "lucide-react"; // Added User icon for testimonial
+import { Reveal } from "@/components/ui/Reveal";
+import { Project } from "@/lib/projects";
 
 interface ProjectPageClientProps {
   project: Project;
 }
 
 export default function ProjectPageClient({ project }: ProjectPageClientProps) {
-  const location = usePathname();
-
+  // Logic: Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location]);
-
-  const nextLink = project.nextProjectSlug
-    ? `/work/${project.nextProjectSlug}`
-    : "/work";
-
-  const nextTitle = project.nextProjectTitle || "Back to Archive";
+  }, []);
 
   return (
-    <div className="bg-[#050505] text-white min-h-screen pt-32 md:pt-40">
-      <div className="container mx-auto px-6 md:px-12 text-left">
-        {/* Header Section */}
-        <div className="flex flex-col items-start justify-start mb-16 md:mb-24">
+    <div className="bg-white min-h-screen reveal active">
+      {/* SECTION 1: HEADER & HERO 
+        Styled with: pt-32 md:pt-48 pb-20
+      */}
+      <section className="pt-32 md:pt-48 pb-20">
+        <div className="max-w-screen-2xl mx-auto px-6 md:px-12">
+          {/* Back Button */}
           <Reveal>
-            <span className="block text-left text-xs font-bold uppercase tracking-[0.25em] text-purple-500 mb-6">
-              Case Study
-            </span>
-          </Reveal>
-          <Reveal width="100%">
-            <h1 className="font-display text-[10vw] md:text-[8vw] leading-[0.85] font-black uppercase tracking-tighter text-left mb-8">
-              {project.title.split(" ").slice(0, 1)} <br />
-              {project.title.split(" ").slice(1).join(" ")}
-            </h1>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <p className="text-lg md:text-xl text-gray-400 font-medium mb-12 max-w-3xl leading-relaxed">
-              {project.tagline}
-            </p>
+            <Link
+              href="/work"
+              className="text-[#D1326E] text-[13px] font-bold tracking-tight mb-16 hover:opacity-60 transition-all flex items-center gap-3 group w-fit"
+            >
+              <span className="w-8 h-8 rounded-full border border-[#D1326E]/20 flex items-center justify-center group-hover:bg-[#D1326E] group-hover:text-white transition-all">
+                ←
+              </span>
+              Back to projects
+            </Link>
           </Reveal>
 
-          {/* Faded Divider */}
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+          {/* Title & Info Grid */}
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 mb-20 items-end">
+            <div className="lg:col-span-8">
+              <Reveal>
+                <p className="text-[13px] font-bold text-[#D1326E] tracking-tight mb-8">
+                  {project.category} • {project.year}
+                </p>
+              </Reveal>
+              <Reveal delay={0.1}>
+                {/* Note: Added inline gradient style since 'text-gradient' class might not be in your CSS */}
+                <h1 className="text-5xl md:text-8xl lg:text-[8rem] font-normal leading-[0.85] tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-br from-[#4A1D3A] to-[#D1326E]">
+                  {project.title}
+                </h1>
+              </Reveal>
+            </div>
 
-          <div className="w-full pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-4 text-[10px] md:text-xs font-bold uppercase tracking-[0.15em] text-gray-400 text-left">
-            <Reveal delay={0.2}>
-              <span>{project.category}</span>
-            </Reveal>
-            <Reveal delay={0.3}>
-              <span>Casevia Project</span>
-            </Reveal>
-            <Reveal delay={0.4}>
-              <span>{project.year}</span>
-            </Reveal>
+            {/* Sidebar Stats (Role/Impact) */}
+            <div className="lg:col-span-4">
+              <Reveal delay={0.2}>
+                <div className="space-y-10 border-l border-[#221221]/10 pl-10">
+                  <div>
+                    <p className="text-[11px] font-bold text-[#221221]/40 tracking-tight mb-2">
+                      Core Category
+                    </p>
+                    <p className="text-xl font-normal tracking-tight text-[#4A1D3A]">
+                      {project.category}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-bold text-[#221221]/40 tracking-tight mb-2">
+                      Primary Highlight
+                    </p>
+                    <p className="text-xl font-normal tracking-tight text-[#4A1D3A]">
+                      {/* Dynamically grabbing the first stat or a fallback */}
+                      {project.stats[0]?.val} {project.stats[0]?.label}
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
           </div>
-        </div>
 
-        {/* Hero Image */}
-        <div className="mb-24 md:mb-32">
-          <Reveal width="100%" delay={0.5}>
-            <div className="w-full aspect-video md:aspect-[2.4/1] bg-[#111] overflow-hidden rounded-sm border border-white/10 relative group">
+          {/* Hero Image */}
+          <Reveal width="100%" delay={0.3}>
+            <div className="w-full aspect-[21/9] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl relative bg-[#111]">
               <img
                 src={project.heroImage}
-                alt={`${project.title} Hero`}
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-90 transition-opacity duration-700"
+                alt={project.title}
+                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#221221]/40 to-transparent" />
             </div>
           </Reveal>
         </div>
+      </section>
 
-        {/* Stats Grid with Icons */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-0 relative pb-16 md:pb-24 mb-24 md:mb-32 text-left">
-          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-
-          {project.stats.map((stat, i) => (
-            <Reveal key={i} delay={i * 0.1}>
-              <div
-                className={`flex flex-col items-start justify-start ${i !== 0 ? "md:border-l md:border-white/10 md:pl-12" : ""}`}
-              >
-                <div className="mb-3 text-purple-500">
-                  {stat.icon === "trend" && <TrendingUp className="w-6 h-6" />}
-                  {stat.icon === "zap" && <Zap className="w-6 h-6" />}
-                  {stat.icon === "check" && (
-                    <CheckCircle2 className="w-6 h-6" />
-                  )}
-                  {stat.icon === "award" && <Award className="w-6 h-6" />}
+      {/* SECTION 2: METRICS BAR
+        Styled with: py-20 bg-[#221221]
+      */}
+      <section className="py-20 bg-[#221221] text-white">
+        <div className="max-w-screen-2xl mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 lg:gap-24">
+            {project.stats.map((metric, i) => (
+              <Reveal key={i} delay={i * 0.1}>
+                <div className="text-left">
+                  <p className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tighter text-[#D1326E] mb-3">
+                    {metric.val}
+                  </p>
+                  <div className="h-0.5 w-8 bg-[#D1326E]/40 mb-3" />
+                  <p className="text-[12px] font-bold tracking-tight text-white/40 uppercase">
+                    {metric.label}
+                  </p>
                 </div>
-                <span className="font-display text-4xl md:text-6xl font-medium tracking-tight mb-2 md:mb-4">
-                  {stat.val}
-                </span>
-                <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 text-left">
-                  {stat.label}
-                </span>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        {/* The Challenge */}
-        <div className="flex flex-col md:flex-row justify-between items-start mb-24 md:mb-32 text-left gap-12">
-          <div className="md:w-1/3">
-            <Reveal>
-              <h2 className="font-display text-4xl md:text-5xl font-medium uppercase tracking-tight text-left">
-                The Challenge
-              </h2>
-            </Reveal>
+              </Reveal>
+            ))}
           </div>
-          <div className="md:w-1/2">
-            <Reveal delay={0.1}>
-              <div className="space-y-6 text-gray-300 font-medium">
-                <p className="text-base md:text-lg leading-loose text-left">
+        </div>
+      </section>
+
+      {/* SECTION 3: MAIN CONTENT (Challenge/Outcome + Sidebar)
+        Styled with: py-24 md:py-32
+      */}
+      <section className="py-24 md:py-32">
+        <div className="max-w-screen-2xl mx-auto px-6 md:px-12 grid lg:grid-cols-12 gap-24">
+          {/* Left Column: Text Content */}
+          <div className="lg:col-span-7 space-y-32">
+            {/* Challenge */}
+            <div>
+              <Reveal>
+                <div className="text-[12px] font-bold text-[#D1326E] tracking-tight mb-8">
+                  01 / The Challenge
+                </div>
+                <h2 className="text-4xl md:text-7xl font-normal tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#4A1D3A] to-[#D1326E] leading-[1] mb-10 italic">
+                  Addressing inefficiencies
+                </h2>
+                <p className="text-xl md:text-2xl text-[#4A1D3A]/90 leading-relaxed font-normal tracking-tight">
                   {project.brief}
                 </p>
+              </Reveal>
+            </div>
+
+            {/* Outcome (Execution/Impact) */}
+            <div>
+              <Reveal>
+                <div className="text-[12px] font-bold text-[#D1326E] tracking-tight mb-8">
+                  02 / The Outcome
+                </div>
+                <h2 className="text-4xl md:text-7xl font-normal tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#4A1D3A] to-[#D1326E] leading-[1] mb-10 italic">
+                  Sustainable Growth
+                </h2>
+                <div className="space-y-8">
+                  <p className="text-xl md:text-2xl text-[#4A1D3A]/90 leading-relaxed font-normal tracking-tight">
+                    {project.execution}
+                  </p>
+                  {project.impact && (
+                    <div className="pl-6 border-l-2 border-[#D1326E]/30">
+                      <p className="text-lg text-[#4A1D3A]/80 font-medium">
+                        {project.impact}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </Reveal>
+            </div>
+
+            {/* Extra Image (Secondary) */}
+            <Reveal width="100%">
+              <div className="w-full aspect-[16/9] rounded-[2rem] overflow-hidden shadow-lg mt-12">
+                <img
+                  src={project.secondaryImage}
+                  alt="Secondary View"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </Reveal>
           </div>
-        </div>
 
-        {/* Image Break */}
-        <div className="mb-24 md:mb-32">
-          <Reveal width="100%">
-            <div className="w-full aspect-[4/3] md:aspect-[2/1] bg-[#111] overflow-hidden flex items-center justify-center rounded-sm border border-white/10 relative group">
-              <img
-                src={project.secondaryImage}
-                alt="Project Details"
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-90 transition-opacity duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-            </div>
-          </Reveal>
-        </div>
+          {/* Right Column: Sticky Sidebar */}
+          <div className="lg:col-span-5">
+            <div className="sticky top-32 space-y-10">
+              {/* Tech Stack Card */}
+              {project.techStack && (
+                <Reveal delay={0.2} width="100%">
+                  <div className="p-10 md:p-12 border border-[#221221]/5 rounded-[2.5rem] bg-white/40 backdrop-blur-xl shadow-xl">
+                    <h3 className="text-[12px] font-bold text-[#D1326E] tracking-tight mb-10 uppercase">
+                      Technical Stack
+                    </h3>
+                    <div className="flex flex-wrap gap-3">
+                      {project.techStack.map((tech, i) => (
+                        <span
+                          key={i}
+                          className="px-5 py-2.5 rounded-full bg-white border border-[#221221]/5 text-[11px] font-bold text-[#221221] shadow-sm tracking-tight uppercase"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </Reveal>
+              )}
 
-        {/* Key Deliverables Section - NEW */}
-        {project.deliverables && (
-          <div className="mb-24 md:mb-32">
-            <Reveal>
-              <h2 className="font-display text-3xl md:text-4xl font-medium uppercase tracking-tight mb-12 text-left">
-                Key Deliverables
-              </h2>
-            </Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {project.deliverables.map((item, i) => (
-                <Reveal key={i} delay={i * 0.1}>
-                  <div className="bg-[#0a0a0a] p-6 md:p-8 border border-white/10 rounded-sm hover:border-purple-500/30 transition-colors duration-300">
-                    <div className="flex items-start gap-4">
-                      <CheckCircle2 className="w-5 h-5 text-purple-500 mt-1 flex-shrink-0" />
+              {/* Testimonial Card */}
+              {project.quote && (
+                <Reveal delay={0.4} width="100%">
+                  <div className="p-10 md:p-12 bg-white rounded-[3rem] shadow-2xl relative overflow-hidden group border border-[#221221]/5">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#D1326E]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                    <div className="text-6xl text-[#D1326E]/10 font-serif leading-none mb-2">
+                      “
+                    </div>
+                    <p className="text-xl md:text-2xl font-medium italic text-[#4A1D3A] leading-snug mb-10 relative z-10">
+                      {project.quote.text}
+                    </p>
+                    <div className="flex items-center gap-5">
+                      <div className="w-14 h-14 bg-[#D1326E]/10 rounded-full flex items-center justify-center shrink-0">
+                        <User className="text-[#D1326E]" size={24} />
+                      </div>
                       <div>
-                        <h3 className="font-bold text-sm uppercase tracking-wider mb-2 text-white">
-                          {item.title}
-                        </h3>
-                        <p className="text-sm text-gray-400 leading-relaxed">
-                          {item.description}
+                        <p className="text-lg font-bold text-[#221221]">
+                          {project.quote.author}
+                        </p>
+                        <p className="text-sm text-[#D1326E] font-bold tracking-tight">
+                          {project.quote.title}
                         </p>
                       </div>
                     </div>
                   </div>
                 </Reveal>
-              ))}
+              )}
             </div>
           </div>
-        )}
-
-        {/* Quote Section */}
-        {project.quote && (
-          <div className="bg-[#0a0a0a] p-8 md:p-24 mb-24 md:mb-32 border border-white/10 text-left relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl"></div>
-            <div className="max-w-4xl mr-auto relative z-10">
-              <Reveal>
-                <p className="font-display text-2xl md:text-4xl font-medium leading-tight mb-12 text-gray-200">
-                  &ldquo;{project.quote.text}&rdquo;
-                </p>
-              </Reveal>
-              <Reveal delay={0.2}>
-                <div className="flex flex-col items-start">
-                  <span className="font-bold text-xs uppercase tracking-[0.2em] mb-1 text-white">
-                    {project.quote.author}
-                  </span>
-                  <span className="text-[10px] uppercase tracking-widest text-gray-500">
-                    {project.quote.title}
-                  </span>
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        )}
-
-        {/* The Solution */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-32 mb-24 md:mb-32 items-center text-left">
-          <div className="order-2 lg:order-1">
-            <Reveal>
-              <h2 className="font-display text-3xl md:text-5xl font-medium uppercase tracking-tight mb-8 text-left">
-                Our Approach
-              </h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div className="space-y-6 text-gray-300 font-medium">
-                <p className="text-base md:text-lg leading-loose text-left">
-                  {project.execution}
-                </p>
-              </div>
-            </Reveal>
-          </div>
-          <Reveal delay={0.2} width="100%" className="order-1 lg:order-2">
-            <div className="aspect-[3/4] bg-[#111] overflow-hidden rounded-sm border border-white/10 relative group">
-              <img
-                src={project.heroImage}
-                alt="Strategic Solution"
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-90 transition-opacity duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-transparent"></div>
-            </div>
-          </Reveal>
         </div>
+      </section>
 
-        {/* Tech Stack Section - NEW */}
-        {project.techStack && (
-          <div className="mb-24 md:mb-32 bg-[#0a0a0a] border border-white/10 rounded-sm p-8 md:p-12">
-            <Reveal>
-              <h2 className="font-display text-3xl md:text-4xl font-medium uppercase tracking-tight mb-8 text-left">
-                Technology Stack
-              </h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div className="flex flex-wrap gap-3">
-                {project.techStack.map((tech, i) => (
-                  <span
-                    key={i}
-                    className="px-4 py-2 bg-[#050505] border border-white/10 rounded-sm text-xs font-bold uppercase tracking-wider text-gray-400 hover:border-purple-500/50 hover:text-purple-400 transition-all duration-300"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </Reveal>
-          </div>
-        )}
-
-        {/* Results Impact Section - NEW */}
-        {project.impact && (
-          <div className="mb-24 md:mb-32">
-            <Reveal>
-              <h2 className="font-display text-3xl md:text-4xl font-medium uppercase tracking-tight mb-8 text-left">
-                Business Impact
-              </h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="text-base md:text-lg text-gray-300 leading-loose max-w-4xl">
-                {project.impact}
-              </p>
-            </Reveal>
-          </div>
-        )}
-
-        {/* Next Project Footer */}
-        <div className="relative pt-24 pb-12 text-left">
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-
+      {/* SECTION 4: FOOTER CTA
+        Styled with: py-24 md:py-40 bg-[#221221]
+      */}
+      <section className="py-24 md:py-40 bg-[#221221] text-white text-center overflow-hidden relative">
+        <div className="max-w-screen-2xl mx-auto px-6 md:px-12 relative z-10">
           <Reveal>
-            <h2 className="font-display text-4xl md:text-6xl font-medium uppercase tracking-tight text-left mb-16">
-              Next Case
+            <h2 className="text-5xl md:text-8xl lg:text-[8rem] font-normal tracking-tighter mb-16 leading-[0.9]">
+              Ready to build <br />
+              your legacy?
             </h2>
           </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <Reveal delay={0.1}>
-              <Link href={nextLink} className="group block cursor-pointer">
-                <div className="aspect-[4/3] bg-[#111] overflow-hidden mb-6 relative rounded-sm border border-white/10">
-                  <img
-                    src={
-                      project.nextProjectSlug
-                        ? getProjectBySlug(project.nextProjectSlug)?.heroImage
-                        : project.image
-                    }
-                    alt={nextTitle}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-60 group-hover:opacity-100 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-700"></div>
-                </div>
-                <div className="flex justify-between items-center text-left">
-                  <h3 className="font-display text-xl font-bold uppercase group-hover:text-purple-400 transition-colors text-white">
-                    {nextTitle}
-                  </h3>
-                  <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-purple-400" />
-                </div>
-              </Link>
-            </Reveal>
-          </div>
+          <Reveal delay={0.1}>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center text-lg px-16 py-8 bg-white text-[#221221] rounded-full font-bold hover:bg-[#D1326E] hover:text-white transition-colors duration-300"
+            >
+              Start Project <ArrowRight className="ml-4" size={28} />
+            </Link>
+          </Reveal>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
