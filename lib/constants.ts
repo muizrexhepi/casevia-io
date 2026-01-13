@@ -230,43 +230,43 @@ export const CASE_STUDIES: CaseStudy[] = [
 
 export const PRICING_PLANS: PricingPlan[] = [
   {
-    name: "Foundation MVP",
-    setupPrice: "4,500",
-    monthlyPrice: "249",
+    name: "Launchpad",
+    setupPrice: "2,950", // Accessible for small businesses
+    monthlyPrice: "149", // Easy "Yes" for maintenance
     description:
-      "Bespoke engineering for high-potential startups and specific business automations.",
+      "A high-speed, conversion-focused website for small businesses and startups.",
     features: [
-      "Proprietary Core Logic",
-      "Production-Ready MVP",
-      "Scalable Architecture",
-      "Ongoing Support Retainer",
+      "5-Page Custom Design",
+      "Mobile-First Responsive",
+      "Next.js Speed Optimization",
+      "CMS for Easy Edits", // Sanity or simple MDX
     ],
   },
   {
-    name: "Scale Catalyst",
-    setupPrice: "9,500",
-    monthlyPrice: "499",
+    name: "Growth Engine",
+    setupPrice: "5,500", // Standard agency rate
+    monthlyPrice: "299", // Pure profit MRR
     isPopular: true,
     description:
-      "Full-cycle digital transformation for medium enterprises scaling their operations.",
+      "Complete brand overhaul and marketing infrastructure for scaling companies.",
     features: [
-      "Multi-System Integration",
-      "Advanced Data Orchestration",
-      "Enterprise Cloud Security",
-      "Priority Engineering Access",
+      "10+ Page Strategy & Design",
+      "Advanced Animations (Framer Motion)",
+      "SEO Technical Foundation",
+      "Analytics & Conversion Tracking",
     ],
   },
   {
-    name: "Vision Enterprise",
-    setupPrice: "18,000+",
-    monthlyPrice: "999",
+    name: "E-Commerce / Custom",
+    setupPrice: "8,500+",
+    monthlyPrice: "499",
     description:
-      "Long-term strategic partnership and dedicated squad for complex digital ecosystems.",
+      "Robust online stores or custom web applications for specific business needs.",
     features: [
-      "SaaS Platform Engineering",
-      "Custom AI/ML Workflows",
-      "Strategic Technical Roadmap",
-      "Full Infrastructure Oversight",
+      "Shopify or Custom E-com Integration",
+      "Inventory Management Setup",
+      "Payment Gateway Integration",
+      "Priority 24/7 Support",
     ],
   },
 ];

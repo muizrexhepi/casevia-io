@@ -8,23 +8,23 @@ export default function Methodology() {
   const steps = [
     {
       num: "01",
-      title: "Discovery & Audit", // Was "Logic Forge"
-      desc: "We de-risk your project before writing code. Deep technical feasibility audits and architecture planning.",
+      title: "Strategy & Blueprint",
+      desc: "We analyze your competitors and map out a site structure designed to convert visitors into paying customers. No guessing.",
     },
     {
       num: "02",
-      title: "Core Engineering", // Was "Nexus Engine"
-      desc: "Building high-performance API architectures and resilient backends capable of handling massive scale.",
+      title: "Visual Architecture",
+      desc: "We design a premium, brand-aligned interface that positions you as the market leader. High-end aesthetics that build instant trust.",
     },
     {
       num: "03",
-      title: "AI Integration", // Was "Cognitive Flow"
-      desc: "Deploying custom LLMs and machine learning workflows to automate your specific business intelligence.",
+      title: "Next.js Development",
+      desc: "We build your site using the same tech stack as Netflix and Uber. Blazing fast load times, perfect SEO, and unhackable security.",
     },
     {
       num: "04",
-      title: "Scale & Optimize", // Was "Hyper Scaling"
-      desc: "Cloud-native orchestration. We ensure your system remains fast even when processing millions of events.",
+      title: "Managed Growth",
+      desc: "Launch is just day one. We host, update, and maintain your digital headquarters so you never have to log into a server again.",
     },
   ];
 
@@ -35,8 +35,10 @@ export default function Methodology() {
           <div className="lg:w-1/3 flex flex-col items-start text-left">
             <div className="flex flex-col lg:sticky lg:top-32">
               <div>
-                <span className={TEXT.label}>Our Process</span>
-                <h2 className={TEXT.sectionTitle}>The Engineering Standard</h2>
+                <span className={TEXT.label}>Our Standard</span>
+                <h2 className={TEXT.sectionTitle}>
+                  Precision is not optional.
+                </h2>
               </div>
 
               <p className={`${TEXT.body} mb-8`}>

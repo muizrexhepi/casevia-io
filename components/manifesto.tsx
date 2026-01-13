@@ -13,19 +13,16 @@ export default function Manifesto() {
         <span className="text-xs md:text-sm font-bold text-[#D1326E] tracking-[0.4em] uppercase">
           Manifesto
         </span>
-
-        <h2 className="text-4xl md:text-7xl lg:text-[8rem] font-normal leading-none tracking-tighter max-w-7xl italic">
-          We believe that code is the{" "}
-          <span className="text-[#D1326E]">invisible architecture</span> of
-          human freedom.
+        <h2 className="text-4xl md:text-7xl lg:text-[6rem] font-medium leading-[1] tracking-tight mb-16 max-w-6xl mx-auto">
+          Code is the <span className="text-[#D1326E] italic">leverage</span>{" "}
+          that separates the disruptors from the disrupted.
         </h2>
-
         <div className="h-px w-32 bg-[#D1326E]/40 my-4" />
 
-        <p className="text-xl md:text-2xl text-white/50 font-normal max-w-3xl leading-relaxed">
-          Casevia was built for the disruptors. We bring enterprise-grade
-          engineering rigor to those who have the vision to redefine their
-          industries.
+        <p className="text-xl md:text-2xl text-white/60 font-normal max-w-3xl mx-auto leading-relaxed">
+          You don't need another freelancer. You need an architect. Casevia
+          exists for the founders who understand that software is not an
+          expense—it is the modern balance sheet.
         </p>
       </div>
     </section>
