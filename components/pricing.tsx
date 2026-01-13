@@ -6,22 +6,36 @@ import { PRICING_PLANS } from "@/lib/constants";
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-20 md:py-32">
+    <section id="pricing" className="py-32 md:py-40">
       <div className="max-w-screen-2xl mx-auto px-6 md:px-12">
-        <div className="flex flex-col md:flex-row justify-between items-end gap-10 mb-20">
-          <div className="flex flex-col">
-            <span className={TEXT.label}>Engagement Models</span>
-            <h2 className={TEXT.sectionTitle}>Investment Plans</h2>
+        {/* Header */}
+        <div className="mb-20">
+          <div className="grid lg:grid-cols-12 gap-16 items-end">
+            {/* Left: Title */}
+            <div className="lg:col-span-5">
+              <span className={TEXT.label}>Pricing</span>
+              <h2 className={`${TEXT.sectionTitle} mt-4`}>
+                Fixed scope. <span className="text-gradient">Fixed price.</span>
+                <br />
+                No surprises.
+              </h2>
+            </div>
+
+            {/* Right: Description */}
+            <div className="lg:col-span-7 lg:border-l lg:border-[#D1326E]/20 lg:pl-12">
+              <p className={`${TEXT.body} text-[#221221]/70 max-w-xl`}>
+                Choose between rapid MVP builds or dedicated engineering squads.
+                Every engagement includes transparent pricing, clear
+                deliverables, and production-ready code from day one.
+              </p>
+            </div>
           </div>
-          <p className={`${TEXT.body} max-w-md mb-2`}>
-            Transparent pricing for clear results. Choose between project-based
-            MVP builds or dedicated engineering squads.
-          </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-6 md:gap-10">
+        {/* Pricing Cards */}
+        <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
           {PRICING_PLANS.map((plan, i) => {
-            const isHighlighted = plan.name === "Scale Catalyst";
+            const isHighlighted = plan.name === "Growth Engine";
             return (
               <div
                 key={i}
@@ -68,7 +82,7 @@ export default function Pricing() {
                         <span
                           className={`text-[10px] font-bold ${isHighlighted ? "text-white/30" : "text-[#221221]/30"}`}
                         >
-                          / MO
+                          /MO
                         </span>
                       </p>
                     </div>

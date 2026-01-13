@@ -18,7 +18,7 @@ export const TEXT = {
   h3: "text-2xl md:text-3xl font-medium tracking-tight text-[#221221]",
 
   // BODY TEXT: Standardized opacity and leading for readability.
-  body: "text-lg md:text-[1.15rem] text-[#4A1D3A]/80 font-normal leading-[1.6]",
+  body: "text-lg md:text-[1.15rem] lg:text-[1.3rem] text-[#4A1D3A]/80 font-normal leading-[1.6]",
 
   // LINKS: Standardized hover effects.
   link: "text-[#D1326E] text-base font-bold flex items-center gap-2 hover:gap-4 transition-all duration-300 tracking-tight cursor-pointer mt-4",

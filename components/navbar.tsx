@@ -45,7 +45,7 @@ export const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ${scrolled ? "bg-[#FBF9F8]/60 backdrop-blur-2xl py-4 border-b border-[#221221]/5" : "bg-transparent py-8 md:py-10"}`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? "bg-[#FBF9F8]/60 backdrop-blur-2xl py-4 border-[#221221]/5" : "bg-transparent py-8 md:py-10"}`}
     >
       <div className="max-w-screen-2xl mx-auto px-6 md:px-12 flex justify-between items-center">
         <div className="flex items-center gap-16">

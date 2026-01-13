@@ -4,13 +4,12 @@ import React, { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 
 type CaseStudy = {
   slug: string;
   title: string;
   subtitle: string;
-  imageUrl: string; // Ensure this is a valid path string
+  imageUrl: string;
   category: string;
 };
 
@@ -22,7 +21,7 @@ export const ProjectCarousel = ({ items }: ProjectCarouselProps) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     loop: false,
-    dragFree: true, // Allows "flick" scrolling like native iOS
+    dragFree: true,
   });
 
   const [canScrollPrev, setCanScrollPrev] = useState(false);
@@ -46,7 +45,7 @@ export const ProjectCarousel = ({ items }: ProjectCarouselProps) => {
   useEffect(() => {
     if (!emblaApi) return;
     emblaApi.on("select", onSelect);
-    onSelect(); // Initial check
+    onSelect();
   }, [emblaApi, onSelect]);
 
   return (
@@ -68,11 +67,10 @@ export const ProjectCarousel = ({ items }: ProjectCarouselProps) => {
                 <img
                   src={project.imageUrl}
                   alt={project.title}
-                  //   fill
-                  className="object-cover transition-transform duration-700 group-hover/card:scale-105"
+                  className="object-cover w-full h-full transition-transform duration-700 group-hover/card:scale-105"
                 />
 
-                {/* Gradient Overlay for Text Readability */}
+                {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#221221]/90 via-[#221221]/20 to-transparent opacity-80" />
 
                 {/* Content */}
@@ -98,7 +96,7 @@ export const ProjectCarousel = ({ items }: ProjectCarouselProps) => {
         </div>
       </div>
 
-      {/* Navigation Buttons (Desktop Only usually, but good to have) */}
+      {/* Navigation Buttons (Desktop Only) */}
       <div className="hidden md:flex justify-end gap-4 px-12 mt-4">
         <button
           onClick={scrollPrev}

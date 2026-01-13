@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/UI"; // Assuming your button component path
+import { TEXT } from "@/lib/styles";
 
 interface FormData {
   firstName: string;
@@ -77,10 +78,8 @@ const ContactPage: React.FC = () => {
         {/* Header Section */}
         <div className="grid lg:grid-cols-2 gap-24 mb-32">
           <div>
-            <h1 className="text-5xl md:text-8xl lg:text-[8rem] font-normal leading-[0.9] tracking-tighter text-gradient mb-12">
-              Let's begin.
-            </h1>
-            <p className="text-xl md:text-2xl text-[#4A1D3A]/80 font-normal max-w-xl leading-[1.3] tracking-tight">
+            <h1 className={`${TEXT.h1} mb-12`}>Let's begin.</h1>
+            <p className={`${TEXT.body} max-w-2xl`}>
               Engineering excellence starts with a conversation. Tell us about
               your vision, and let's architect the future of your operations.
             </p>

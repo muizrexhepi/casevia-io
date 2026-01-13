@@ -21,7 +21,7 @@ export default function Hero() {
             <span className="text-gradient">actually sell.</span>
           </h1>
 
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
+          <div className="flex flex-col gap-10">
             <p className={`${TEXT.body} max-w-2xl`}>
               Most websites are just digital brochures. We build
               high-performance marketing engines designed to turn visitors into
