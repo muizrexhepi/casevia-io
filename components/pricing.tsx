@@ -1,227 +1,93 @@
-import React from "react";
-import { Reveal } from "./ui/Reveal";
-import { Check } from "lucide-react";
+// components/sections/Pricing.tsx
 import Link from "next/link";
+import { Button } from "@/components/UI";
+import { TEXT } from "@/lib/styles";
+import { PRICING_PLANS } from "@/lib/constants";
 
-export const Pricing: React.FC = () => {
+export default function Pricing() {
   return (
-    <section id="pricing" className="py-16 md:py-32 bg-[#050505] text-white">
-      <div className="container mx-auto px-6 md:px-12">
-        {/* Header - Left Aligned Global */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 gap-12 text-left">
-          <div className="md:w-2/3">
-            <Reveal>
-              <span className="block mb-6 text-xs font-bold uppercase tracking-[0.25em] text-purple-500 text-left">
-                Investment
-              </span>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="font-display text-4xl md:text-7xl font-medium uppercase tracking-tighter leading-[0.9] text-left text-white">
-                Transparent <br /> Value
-              </h2>
-            </Reveal>
+    <section id="pricing" className="py-20 md:py-32">
+      <div className="max-w-screen-2xl mx-auto px-6 md:px-12">
+        <div className="flex flex-col md:flex-row justify-between items-end gap-10 mb-20">
+          <div className="flex flex-col">
+            <span className={TEXT.label}>Engagement Models</span>
+            <h2 className={TEXT.sectionTitle}>Investment Plans</h2>
           </div>
-          <div className="md:w-1/3 text-left">
-            <Reveal delay={0.2}>
-              <p className="text-gray-400 text-sm font-medium uppercase tracking-wide leading-loose text-left">
-                Flat rates. No hidden fees. We work with a 50% deposit structure
-                to ensure mutual commitment.
-              </p>
-            </Reveal>
-          </div>
+          <p className={`${TEXT.body} max-w-md mb-2`}>
+            Transparent pricing for clear results. Choose between project-based
+            MVP builds or dedicated engineering squads.
+          </p>
         </div>
 
-        {/* 3-Column Pricing Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-          {/* Plan 1: Launch */}
-          <Reveal delay={0.1} className="h-full">
-            <div className="flex flex-col h-full p-8 md:p-10 bg-[#0a0a0a] border border-white/10 hover:border-white/30 transition-all duration-500 group relative overflow-hidden text-left">
-              <div className="mb-8 relative z-10">
-                <span className="inline-block px-3 py-1 mb-6 bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-[0.25em] text-gray-300">
-                  Starter
-                </span>
-                <h3 className="font-display text-3xl font-medium uppercase tracking-tight mb-2 text-white">
-                  The Launch
-                </h3>
-                <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-6">
-                  Essential Brand Presence
-                </p>
+        <div className="grid lg:grid-cols-3 gap-6 md:gap-10">
+          {PRICING_PLANS.map((plan, i) => {
+            const isHighlighted = plan.name === "Scale Catalyst";
+            return (
+              <div
+                key={i}
+                className={`
+                  p-10 md:p-12 rounded-[2.5rem] flex flex-col justify-between relative overflow-hidden transition-all duration-500 group
+                  ${
+                    isHighlighted
+                      ? "bg-[#221221] text-white shadow-2xl scale-[1.02]"
+                      : "bg-white border border-[#221221]/5 hover:border-[#D1326E]/30 shadow-sm"
+                  }
+                `}
+              >
+                {isHighlighted && (
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-[#D1326E]/10 blur-[80px] rounded-full pointer-events-none group-hover:opacity-100 opacity-60 transition-opacity" />
+                )}
 
-                <div className="flex items-baseline gap-1 mb-2">
-                  <span className="font-display text-5xl font-medium tracking-tighter text-white">
-                    $1,500
-                  </span>
-                </div>
-                <p className="text-gray-500 text-[10px] uppercase tracking-widest mb-6">
-                  + $150/mo maintenance
-                </p>
-                <p className="text-gray-400 text-sm leading-relaxed border-t border-white/10 pt-6">
-                  Perfect for startups needing a high-impact landing page to
-                  validate their market.
-                </p>
-              </div>
+                <div className="relative z-10 flex flex-col h-full">
+                  <h3 className="text-3xl font-medium mb-4 tracking-tight">
+                    {plan.name}
+                  </h3>
+                  <p
+                    className={`text-base leading-relaxed mb-10 flex-grow ${isHighlighted ? "text-white/60" : "text-[#4A1D3A]/70"}`}
+                  >
+                    {plan.description}
+                  </p>
 
-              <div className="flex-1 mb-8 relative z-10">
-                <ul className="space-y-4">
-                  {[
-                    "Single Page Application",
-                    "Mobile Responsive",
-                    "Contact Form Integration",
-                    "Basic SEO",
-                    "1 Week Turnaround",
-                  ].map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gray-400"
+                  <div className="space-y-8 mb-12">
+                    <div>
+                      <p
+                        className={`text-[10px] font-bold tracking-wider uppercase mb-2 ${isHighlighted ? "text-white/30" : "text-[#221221]/30"}`}
+                      >
+                        Setup / Audit Fee
+                      </p>
+                      <p className="text-4xl md:text-5xl font-medium tracking-tighter">
+                        €{plan.setupPrice}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold tracking-wider uppercase mb-2 text-[#D1326E]">
+                        Monthly Retainer
+                      </p>
+                      <p className="text-3xl font-medium text-[#D1326E] tracking-tighter flex items-baseline gap-2">
+                        €{plan.monthlyPrice}
+                        <span
+                          className={`text-[10px] font-bold ${isHighlighted ? "text-white/30" : "text-[#221221]/30"}`}
+                        >
+                          / MO
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+
+                  <Link href="/contact" className="w-full mt-auto">
+                    <Button
+                      variant={isHighlighted ? "secondary" : "outline"}
+                      className="w-full py-6 text-sm tracking-wide font-bold"
                     >
-                      <Check className="w-3 h-3 text-purple-500" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="relative z-10 mt-auto">
-                <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-4">
-                  50% Deposit • 50% Launch
-                </p>
-                <Link
-                  href="/contact"
-                  className="block w-full text-center py-4 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-[0.25em] hover:bg-white hover:text-black transition-all duration-300"
-                >
-                  Start Project
-                </Link>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Plan 2: Scale (Subtle Purple) */}
-          <Reveal delay={0.2} className="h-full">
-            <div className="flex flex-col h-full p-8 md:p-10 bg-[#0a0a0a] border border-purple-900/30 hover:border-purple-500/50 transition-all duration-500 group relative overflow-hidden text-left">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-purple-900/5 blur-[80px] rounded-full pointer-events-none"></div>
-
-              <div className="mb-8 relative z-10">
-                <span className="inline-block px-3 py-1 mb-6 bg-purple-900/20 border border-purple-500/20 text-[10px] font-bold uppercase tracking-[0.25em] text-purple-300">
-                  Growth
-                </span>
-                <h3 className="font-display text-3xl font-medium uppercase tracking-tight mb-2 text-white">
-                  The Scale
-                </h3>
-                <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-6">
-                  Conversion System
-                </p>
-
-                <div className="flex items-baseline gap-1 mb-2">
-                  <span className="font-display text-5xl font-medium tracking-tighter text-white">
-                    $5,000
-                  </span>
+                      Start Project
+                    </Button>
+                  </Link>
                 </div>
-                <p className="text-gray-500 text-[10px] uppercase tracking-widest mb-6">
-                  + $300/mo maintenance
-                </p>
-                <p className="text-gray-300 text-sm leading-relaxed border-t border-white/10 pt-6">
-                  Comprehensive digital platform designed to convert traffic
-                  into revenue.
-                </p>
               </div>
-
-              <div className="flex-1 mb-8 relative z-10">
-                <ul className="space-y-4">
-                  {[
-                    "Multi-Page Architecture",
-                    "Easy Content Management",
-                    "Advanced Animations",
-                    "Analytics Setup",
-                    "Conversion Optimization",
-                  ].map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gray-300"
-                    >
-                      <Check className="w-3 h-3 text-purple-400" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="relative z-10 mt-auto">
-                <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-4">
-                  50% Deposit • 50% Launch
-                </p>
-                <Link
-                  href="/contact"
-                  className="block w-full text-center py-4 bg-purple-900/20 border border-purple-500/30 text-white text-xs font-bold uppercase tracking-[0.25em] hover:bg-purple-900/40 hover:border-purple-500/50 transition-all duration-300"
-                >
-                  Select Plan
-                </Link>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Plan 3: Enterprise */}
-          <Reveal delay={0.3} className="h-full">
-            <div className="flex flex-col h-full p-8 md:p-10 bg-[#0a0a0a] border border-white/10 hover:border-white/30 transition-all duration-500 group relative overflow-hidden text-left">
-              <div className="mb-8 relative z-10">
-                <span className="inline-block px-3 py-1 mb-6 bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-[0.25em] text-gray-300">
-                  Enterprise
-                </span>
-                <h3 className="font-display text-3xl font-medium uppercase tracking-tight mb-2 text-white">
-                  Custom
-                </h3>
-                <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-6">
-                  Market Leadership
-                </p>
-
-                <div className="flex items-baseline gap-1 mb-2">
-                  <span className="font-display text-5xl font-medium tracking-tighter text-white">
-                    Book Call
-                  </span>
-                </div>
-                <p className="text-gray-500 text-[10px] uppercase tracking-widest mb-6">
-                  Custom Support SLA
-                </p>
-                <p className="text-gray-400 text-sm leading-relaxed border-t border-white/10 pt-6">
-                  Complex infrastructure, SaaS platforms, and large-scale
-                  ecommerce systems.
-                </p>
-              </div>
-
-              <div className="flex-1 mb-8 relative z-10">
-                <ul className="space-y-4">
-                  {[
-                    "Custom Functionality",
-                    "3rd Party Integrations",
-                    "User Accounts / Portals",
-                    "Dedicated Success Manager",
-                    "Priority Support",
-                  ].map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gray-400"
-                    >
-                      <Check className="w-3 h-3 text-purple-500" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="relative z-10 mt-auto">
-                <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-4">
-                  Custom Terms
-                </p>
-                <Link
-                  href="/contact"
-                  className="block w-full text-center py-4 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-[0.25em] hover:bg-white hover:text-black transition-all duration-300"
-                >
-                  Contact Sales
-                </Link>
-              </div>
-            </div>
-          </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
   );
-};
+}

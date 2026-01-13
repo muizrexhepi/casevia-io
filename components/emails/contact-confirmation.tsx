@@ -16,68 +16,125 @@ interface ContactConfirmationProps {
   userEmail: string;
 }
 
-// --- Styles for a clean, modern look ---
+// Casevia Brand Colors
 const main = {
-  backgroundColor: "#f9fafb",
-  fontFamily: "Helvetica, Arial, sans-serif",
+  backgroundColor: "#FFF5F9",
+  fontFamily:
+    "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif",
   padding: "40px 0",
 };
 
 const container = {
   margin: "0 auto",
-  width: "580px",
+  width: "600px",
   backgroundColor: "#ffffff",
-  border: "1px solid #e5e7eb",
-  borderRadius: "12px",
-  boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+  border: "1px solid rgba(34, 18, 33, 0.05)",
+  borderRadius: "28px",
   overflow: "hidden" as const,
 };
 
+const header = {
+  background: "linear-gradient(135deg, #221221 0%, #D1326E 50%, #6326E1 100%)",
+  padding: "40px",
+  textAlign: "center" as const,
+};
+
+const logoStyle = {
+  fontSize: "42px",
+  fontWeight: "800",
+  color: "#ffffff",
+  letterSpacing: "-0.03em",
+  margin: "0",
+};
+
 const contentBox = {
-  padding: "30px 40px",
+  padding: "48px 40px",
+};
+
+const heading = {
+  fontSize: "32px",
+  fontWeight: "400",
+  color: "#221221",
+  marginBottom: "24px",
+  letterSpacing: "-0.03em",
+  lineHeight: "1.2",
 };
 
 const paragraph = {
   fontSize: "16px",
   lineHeight: "26px",
-  color: "#374151",
-};
-
-const heading = {
-  fontSize: "28px",
-  fontWeight: "700",
-  color: "#111827",
-  marginBottom: "20px",
-};
-
-const button = {
-  backgroundColor: "#111827",
-  borderRadius: "8px",
-  color: "#ffffff",
-  fontSize: "16px",
-  textDecoration: "none",
-  textAlign: "center" as const,
-  display: "block",
-  padding: "14px 28px",
-  fontWeight: "600",
-  width: "250px",
-  margin: "30px auto",
-};
-
-const logoStyle = {
-  textAlign: "center" as const,
-  fontSize: "32px",
-  fontWeight: "extrabold" as const,
-  color: "#111827",
-  padding: "15px 0 25px 0",
+  color: "rgba(74, 29, 58, 0.8)",
+  margin: "0 0 20px 0",
 };
 
 const highlight = {
-  backgroundColor: "#fef3c7",
-  padding: "16px 20px",
+  backgroundColor: "rgba(209, 50, 110, 0.05)",
+  border: "1px solid rgba(209, 50, 110, 0.1)",
+  padding: "24px",
+  borderRadius: "16px",
+  marginTop: "28px",
+  marginBottom: "28px",
+};
+
+const highlightTitle = {
+  fontSize: "14px",
+  fontWeight: "700",
+  color: "#D1326E",
+  textTransform: "uppercase" as const,
+  letterSpacing: "0.05em",
+  marginBottom: "12px",
+};
+
+const highlightText = {
+  fontSize: "16px",
+  lineHeight: "24px",
+  color: "rgba(74, 29, 58, 0.9)",
+  margin: "0",
+};
+
+const button = {
+  backgroundColor: "#D1326E",
+  borderRadius: "50px",
+  color: "#ffffff",
+  fontSize: "15px",
+  textDecoration: "none",
+  textAlign: "center" as const,
+  display: "inline-block",
+  padding: "16px 32px",
+  fontWeight: "700",
+  letterSpacing: "-0.01em",
+  margin: "32px 0",
+};
+
+const emailTag = {
+  backgroundColor: "rgba(34, 18, 33, 0.03)",
+  padding: "12px 20px",
   borderRadius: "8px",
-  marginTop: "20px",
-  marginBottom: "20px",
+  fontSize: "14px",
+  color: "#221221",
+  fontWeight: "600",
+  marginTop: "24px",
+  display: "inline-block",
+};
+
+const divider = {
+  borderTop: "1px solid rgba(34, 18, 33, 0.08)",
+  margin: "32px 0",
+};
+
+const footer = {
+  fontSize: "14px",
+  lineHeight: "22px",
+  color: "rgba(74, 29, 58, 0.6)",
+  margin: "0",
+};
+
+const signature = {
+  fontSize: "16px",
+  lineHeight: "26px",
+  color: "#221221",
+  margin: "24px 0 0 0",
+  fontWeight: "400",
 };
 
 export const ContactConfirmation = ({
@@ -87,59 +144,63 @@ export const ContactConfirmation = ({
   <Html>
     <Head />
     <Preview>
-      We've received your message - Our team will be in touch soon!
+      We've received your message, {firstName} — Our engineering team will be in
+      touch within 24 hours
     </Preview>
     <Body style={main}>
       <Container style={container}>
-        <Section style={contentBox}>
-          <div style={logoStyle}>Casevia</div>
+        <Section style={header}>
+          <Heading as="h1" style={logoStyle}>
+            casevia
+          </Heading>
+        </Section>
 
-          <Heading as="h1" style={heading}>
-            Thanks for reaching out, {firstName}!
+        <Section style={contentBox}>
+          <Heading as="h2" style={heading}>
+            Thanks for reaching out, {firstName}.
           </Heading>
 
           <Text style={paragraph}>
-            We've received your message and our team will get back to you within{" "}
-            <strong>24 hours</strong>.
+            We've received your inquiry and our engineering team is reviewing
+            your requirements. You'll hear back from us within{" "}
+            <strong>24 hours</strong> with a personalized response.
           </Text>
 
           <Section style={highlight}>
-            <Text style={{ ...paragraph, margin: "0", fontWeight: "600" }}>
-              What happens next?
-            </Text>
-            <Text style={{ ...paragraph, marginTop: "8px", marginBottom: "0" }}>
-              Our team is reviewing your inquiry and will provide a personalized
-              response tailored to your needs.
+            <Text style={highlightTitle}>What Happens Next?</Text>
+            <Text style={highlightText}>
+              Our senior engineers will analyze your technical needs and craft a
+              tailored solution architecture. We'll reach out to schedule a
+              deep-dive session to discuss your project in detail.
             </Text>
           </Section>
 
           <Text style={paragraph}>
-            In the meantime, feel free to explore our{" "}
-            <strong>resources and documentation</strong>, or schedule a demo
-            directly if you'd like to see Casevia in action.
+            In the meantime, explore how we've helped enterprises across three
+            continents architect scalable, resilient systems that power growth.
           </Text>
 
-          <Text style={{ ...paragraph, fontWeight: "bold", marginTop: "25px" }}>
-            Your registered email: {userEmail}
-          </Text>
-
-          <Section style={{ textAlign: "center" }}>
-            <Button style={button} href="https://casevia.io/demo">
-              Schedule a Demo
+          <div style={{ textAlign: "center" as const }}>
+            <Button style={button} href="https://casevia.io/work">
+              View Case Studies
             </Button>
-          </Section>
+          </div>
 
-          <Hr style={{ borderTop: "1px solid #e5e7eb", margin: "20px 0" }} />
+          <Text style={{ ...paragraph, marginTop: "32px" }}>
+            Your registered email:
+          </Text>
+          <div style={emailTag}>{userEmail}</div>
 
-          <Text style={paragraph}>
-            Have more questions? Feel free to reply to this email—we're here to
-            help!
+          <Hr style={divider} />
+
+          <Text style={footer}>
+            Questions? Simply reply to this email — we're here to help.
           </Text>
 
-          <Text style={paragraph}>
-            Best regards,
+          <Text style={signature}>
+            <strong>The Casevia Engineering Team</strong>
             <br />
-            The Casevia Team
+            Mitte, Berlin — European HQ
           </Text>
         </Section>
       </Container>

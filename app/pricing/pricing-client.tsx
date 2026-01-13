@@ -4,50 +4,7 @@ import { CheckCircle2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/UI";
-
-const PRICING_PLANS = [
-  {
-    name: "Digital Launch",
-    description:
-      "Essential digital presence for startups. Built for speed, clarity, and immediate market entry.",
-    setupPrice: "2,500",
-    monthlyPrice: "250",
-    features: [
-      "Single-Page Nexus",
-      "Mobile Optimization",
-      "SEO Fundamentals",
-      "Lead Capture Systems",
-    ],
-  },
-  {
-    name: "Scale Catalyst",
-    description:
-      "Full-scale digital transformation. Custom design with advanced content control and interactions.",
-    setupPrice: "7,500",
-    monthlyPrice: "550",
-    features: [
-      "Multi-Page Strategy",
-      "Visual Content Editor",
-      "Custom Animations",
-      "Performance Analytics",
-      "Full SEO Audit",
-    ],
-  },
-  {
-    name: "Enterprise Ecosystem",
-    description:
-      "Complex systems, SaaS platforms, and large-scale infrastructure built for global performance.",
-    setupPrice: "15,000",
-    monthlyPrice: "1,200",
-    features: [
-      "Custom API Integrations",
-      "User Auth Systems",
-      "Dedicated Lead Engineer",
-      "24/7 Priority Support",
-      "SLA Guarantee",
-    ],
-  },
-];
+import { PRICING_PLANS } from "@/lib/constants";
 
 const PricingClient = () => {
   useEffect(() => {
@@ -55,7 +12,7 @@ const PricingClient = () => {
   }, []);
 
   return (
-    <div className="reveal active bg-[#fbf9f8] min-h-screen">
+    <div className="reveal active min-h-screen">
       {/* Page Hero Section */}
       <section className="pt-32 md:pt-48 pb-20 px-6 md:px-12">
         <div className="max-w-screen-2xl mx-auto">
@@ -82,7 +39,7 @@ const PricingClient = () => {
               return (
                 <Reveal key={i} delay={i * 0.1} width="100%">
                   <div
-                    className={`p-10 md:p-12 h-full rounded-[3.5rem] flex flex-col justify-between transition-all duration-700 relative overflow-hidden shadow-sm group hover:scale-[1.02] ${
+                    className={`p-10 md:p-12 h-full rounded-[3.5rem] flex flex-col justify-between transition-all duration-700 relative overflow-hidden shadow-sm group ${
                       isHighlighted
                         ? "bg-[#221221] text-white shadow-2xl border-none"
                         : "bg-white/40 backdrop-blur-xl border border-[#221221]/5"
@@ -170,10 +127,10 @@ const PricingClient = () => {
       </section>
 
       {/* Custom Requirements Section */}
-      <section className="py-24 bg-[#221221]/5 border-y border-[#221221]/5">
+      <section className="py-24">
         <div className="max-w-screen-2xl mx-auto px-6 md:px-12 text-center">
           <Reveal>
-            <h2 className="text-4xl md:text-6xl font-normal tracking-tighter mb-10 text-gradient italic">
+            <h2 className="text-4xl md:text-6xl font-normal tracking-tighter mb-10 text-gradient italic px-3">
               Custom Requirements?
             </h2>
           </Reveal>

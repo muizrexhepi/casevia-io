@@ -100,7 +100,7 @@ export const Navbar = () => {
 
       {/* Mobile drawer */}
       {isOpen && (
-        <div className="fixed inset-0 bg-[#FBF9F8]/98 backdrop-blur-3xl z-[100] flex flex-col p-8 animate-in fade-in duration-500 overflow-y-auto no-scrollbar">
+        <div className="fixed inset-0 bg-[#FBF9F8]/98 backdrop-blur-3xl z-[100] flex flex-col p-6 animate-in fade-in duration-500 overflow-y-auto no-scrollbar">
           <div className="flex justify-between items-center mb-16">
             <span className="text-4xl font-extrabold tracking-tighter text-gradient">
               casevia
