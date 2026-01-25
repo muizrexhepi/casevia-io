@@ -17,13 +17,13 @@ export default function Hero() {
       <div className="max-w-screen-2xl mx-auto px-6 md:px-12 w-full text-left relative z-10">
         <div className="max-w-4xl relative z-20">
           <h1 className={`${TEXT.h1} mb-10`}>
-            We build websites that <br className="hidden lg:block" />
+            We build software that <br className="hidden lg:block" />
             <span className="text-gradient">actually sell.</span>
           </h1>
 
           <div className="flex flex-col gap-10">
             <p className={`${TEXT.body} max-w-2xl`}>
-              Most websites are just digital brochures. We build
+              Most software are just digital brochures. We build
               high-performance marketing engines designed to turn visitors into
               revenue. Fast, beautiful, and built for growth.
             </p>

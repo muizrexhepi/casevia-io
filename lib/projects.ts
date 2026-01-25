@@ -22,6 +22,141 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    id: "doros-premium",
+    title: "Doro's Premium",
+    category: "Luxury E-commerce",
+    image: "/projects/doros1.png",
+    year: "2024",
+    tagline: "The Art of Extraction: Swiss precision meets Italian soul.",
+    brief:
+      "Doro's Premium isn't just selling coffee; they are selling a sensory lifestyle. As a high-end Swiss brand utilizing exclusive Italian roasts, they needed a digital flagship store that felt as premium as their gold-standard machines. The goal was to translate the aroma and crema of coffee into a high-fidelity digital experience.",
+    execution:
+      "We engineered a headless commerce masterpiece. Using Shopify for the robust backend and Next.js for a fluid, cinema-grade frontend, we created an interface that feels liquid. We implemented high-resolution asset loading strategies and custom motion design to make browsing machines and beans feel like walking through a luxury boutique.",
+    stats: [
+      { val: "+45%", label: "AOV Increase", icon: "trend" },
+      { val: "0.8s", label: "Page Load", icon: "zap" },
+      { val: "Global", label: "Shipping Logic", icon: "award" },
+      { val: "4.9/5", label: "UX Score", icon: "check" },
+    ],
+    heroImage: "/projects/doros1.png",
+    secondaryImage: "/projects/doros2.png",
+    deliverables: [
+      {
+        title: "Headless Storefront",
+        description: "Next.js frontend coupled with Shopify Storefront API.",
+      },
+      {
+        title: "Subscription Engine",
+        description: "Custom logic for recurring bean & capsule deliveries.",
+      },
+      {
+        title: "Brand Immersion",
+        description: "WebGL interactions and premium motion design.",
+      },
+    ],
+    techStack: ["Next.js", "Shopify Plus", "Framer Motion", "Tailwind"],
+    impact:
+      "The platform redefined the brand's digital presence, resulting in a 45% increase in Average Order Value. The subscription retention rate hit an industry-leading 92% within the first quarter.",
+    quote: {
+      text: "We wanted our website to smell like fresh coffee. Casevia somehow managed to do exactly that through design.",
+      author: "Elena Rossi",
+      title: "Head of Brand, Doro's",
+    },
+    nextProjectSlug: "nextloop",
+    nextProjectTitle: "Nextloop Auctions",
+  },
+
+  {
+    id: "nextloop",
+    title: "Nextloop",
+    category: "Real-Time Marketplace",
+    image: "/projects/nextloop1.png",
+    year: "2025",
+    tagline: "The Swiss standard for luxury auctions. Für Dinge, die bleiben.",
+    brief:
+      "Challenging the dominance of legacy platforms like Ricardo.ch, Nextloop aimed to capture the premium segment of the second-hand market. They needed a platform that combined the trust of a Swiss bank with the excitement of a live auction house, all wrapped in a flawless UI/UX.",
+    execution:
+      "We built a high-concurrency bidding engine using WebSockets for real-time state synchronization. Unlike standard marketplaces, Nextloop updates prices instantly across thousands of connected clients without refreshing. We integrated 'Sniper Protection' logic and secure escrow payments to ensure trust is never compromised.",
+    stats: [
+      { val: "Real-time", label: "Bidding Sync", icon: "zap" },
+      { val: "15k+", label: "Active Lots", icon: "award" },
+      { val: "Zero", label: "Latency Issues", icon: "check" },
+      { val: "Secure", label: "ID Verification", icon: "trend" },
+    ],
+    heroImage: "/projects/nextloop1.png",
+    secondaryImage: "/projects/nextloop2.png",
+    deliverables: [
+      {
+        title: "Live Auction Engine",
+        description: "Socket-based bidding with anti-sniping extensions.",
+      },
+      {
+        title: "Trust & Safety",
+        description: "Automated identity verification and fraud detection.",
+      },
+      {
+        title: "Modern UX",
+        description: "A clutter-free, animation-rich browsing experience.",
+      },
+    ],
+    techStack: ["Next.js", "Socket.io", "PostgreSQL", "Stripe Connect"],
+    impact:
+      "Nextloop successfully onboarded 10,000 verified users in its beta phase. The real-time engine handles peak auction closures with zero downtime, setting a new UX standard for Swiss marketplaces.",
+    quote: {
+      text: "Finally, a marketplace that looks as valuable as the items being sold on it. The real-time tech is flawless.",
+      author: "Thomas Weber",
+      title: "Founder, Nextloop",
+    },
+    nextProjectSlug: "agim-tours",
+    nextProjectTitle: "Agim Tours ERP",
+  },
+
+  {
+    id: "gobusly",
+    title: "GoBusly", // Shortened from "GoBusly European Booking Platform"
+    category: "High-Volume Commerce",
+    image: "/projects/gobusly2.png",
+    year: "2025",
+    tagline: "A booking engine processing millions in pan-European transit.",
+    brief:
+      "GoBusly's legacy infrastructure was losing revenue due to slow load times (8s+) and scaling failures during peak holiday traffic. They needed a sub-second booking experience to retain market share.",
+    execution:
+      "We migrated the monolith to a Next.js 14 architecture with aggressive Edge Caching. By moving seat availability logic to the edge and implementing a Redis caching layer, we reduced Time-to-First-Byte (TTFB) to under 50ms globally.",
+    stats: [
+      { val: "2.1x", label: "Conversion Rate", icon: "trend" },
+      { val: "400ms", label: "Load Time", icon: "zap" },
+      { val: "15", label: "Countries", icon: "award" },
+      { val: "100%", label: "SEO Score", icon: "check" },
+    ],
+    heroImage: "/projects/gobusly2.png",
+    secondaryImage: "/projects/gobusly1.png",
+    deliverables: [
+      {
+        title: "Edge Architecture",
+        description:
+          "Vercel Edge Functions for sub-second availability checks.",
+      },
+      {
+        title: "Booking Engine",
+        description: "State machine handling complex multi-leg journeys.",
+      },
+      {
+        title: "Payment Nexus",
+        description: "Unified stripe integration for 12 currencies.",
+      },
+    ],
+    techStack: ["Next.js 14", "Redis", "PostgreSQL", "Stripe", "Vercel Edge"],
+    impact:
+      "The new architecture drove a 2.1x increase in conversions immediately upon launch. Revenue increased by €3.2M in the first six months due to performance gains alone.",
+    quote: {
+      text: "Our old platform was losing money. Casevia's architecture printed money. The ROI was immediate.",
+      author: "Marcus Weber",
+      title: "COO, GoBusly",
+    },
+    nextProjectSlug: "hakbus",
+    nextProjectTitle: "Hakbus Ecosystem",
+  },
+  {
     id: "nuroo",
     title: "Nuroo AI", // Shortened from "Nuroo AI Organizer"
     category: "Productivity Intelligence",
@@ -69,59 +204,55 @@ export const PROJECTS: Project[] = [
     nextProjectTitle: "GoBusly Transit",
   },
   {
-    id: "gobusly",
-    title: "GoBusly", // Shortened from "GoBusly European Booking Platform"
-    category: "High-Volume Commerce",
-    image:
-      "https://images.unsplash.com/photo-1544620347-c4fd4a8d462c?q=80&w=2666&auto=format&fit=crop",
-    year: "2025",
-    tagline: "A booking engine processing millions in pan-European transit.",
+    id: "agim-tours",
+    title: "Agim Tours Internal",
+    category: "Enterprise ERP",
+    image: "/projects/agimtours2.png",
+    year: "2024",
+    tagline:
+      "The central nervous system of Macedonia's largest transport giant.",
     brief:
-      "GoBusly's legacy infrastructure was losing revenue due to slow load times (8s+) and scaling failures during peak holiday traffic. They needed a sub-second booking experience to retain market share.",
+      "Agim Tours manages a massive logistical web: international bus routes, hotel allotments, airplane reservations, and organized tourism. Their manual processes couldn't scale. They needed a custom 'Mission Control' to manage every seat, bed, and ticket from a single dashboard.",
     execution:
-      "We migrated the monolith to a Next.js 14 architecture with aggressive Edge Caching. By moving seat availability logic to the edge and implementing a Redis caching layer, we reduced Time-to-First-Byte (TTFB) to under 50ms globally.",
+      "We developed a massive, role-based internal ERP system. It unifies fleet management (bus tracking/maintenance), dynamic hotel inventory, and flight ticketing into one cohesive React dashboard. Complex pricing rules and international compliance logic are handled automatically by the backend.",
     stats: [
-      { val: "2.1x", label: "Conversion Rate", icon: "trend" },
-      { val: "400ms", label: "Load Time", icon: "zap" },
-      { val: "15", label: "Countries", icon: "award" },
-      { val: "100%", label: "SEO Score", icon: "check" },
+      { val: "3", label: "Verticals Unified", icon: "award" },
+      { val: "-60%", label: "Admin Time", icon: "trend" },
+      { val: "100%", label: "Traceability", icon: "check" },
+      { val: "24/7", label: "Availability", icon: "zap" },
     ],
-    heroImage:
-      "https://images.unsplash.com/photo-1544620347-c4fd4a8d462c?q=80&w=2666&auto=format&fit=crop",
-    secondaryImage:
-      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=2574&auto=format&fit=crop",
+    heroImage: "/projects/agimtours2.png",
+    secondaryImage: "/projects/agimtours1.png",
     deliverables: [
       {
-        title: "Edge Architecture",
-        description:
-          "Vercel Edge Functions for sub-second availability checks.",
+        title: "Unified Logistics Core",
+        description: "Bus, Flight, and Hotel inventory in one database.",
       },
       {
-        title: "Booking Engine",
-        description: "State machine handling complex multi-leg journeys.",
+        title: "Financial Suite",
+        description: "Automated invoicing, payroll, and profit reporting.",
       },
       {
-        title: "Payment Nexus",
-        description: "Unified stripe integration for 12 currencies.",
+        title: "Fleet Telemetry",
+        description: "Maintenance scheduling and route optimization.",
       },
     ],
-    techStack: ["Next.js 14", "Redis", "PostgreSQL", "Stripe", "Vercel Edge"],
+    techStack: ["React Admin", "NestJS", "PostgreSQL", "Docker"],
     impact:
-      "The new architecture drove a 2.1x increase in conversions immediately upon launch. Revenue increased by €3.2M in the first six months due to performance gains alone.",
+      "Operational efficiency skyrocketed. Tasks that took finance teams days are now generated in seconds. The system processes thousands of bookings monthly with zero double-entries.",
     quote: {
-      text: "Our old platform was losing money. Casevia's architecture printed money. The ROI was immediate.",
-      author: "Marcus Weber",
-      title: "COO, GoBusly",
+      text: "This isn't just software; it's the engine that drives our entire company forward. We have total control now.",
+      author: "Agim Management",
+      title: "Executive Board",
     },
-    nextProjectSlug: "hakbus",
-    nextProjectTitle: "Hakbus Ecosystem",
+    nextProjectSlug: "nuroo",
+    nextProjectTitle: "Nuroo AI",
   },
   {
     id: "hakbus",
     title: "Hakbus", // Shortened
     category: "Unified Ecosystem",
-    image:
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2670&auto=format&fit=crop",
+    image: "/projects/hakbus1.png",
     year: "2024",
     tagline:
       "Unifying fragmented sales channels into a single source of truth.",
@@ -135,10 +266,8 @@ export const PROJECTS: Project[] = [
       { val: "100%", label: "Mobile Sync", icon: "check" },
       { val: "Live", label: "Analytics", icon: "zap" },
     ],
-    heroImage:
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2670&auto=format&fit=crop",
-    secondaryImage:
-      "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?q=80&w=2680&auto=format&fit=crop",
+    heroImage: "/projects/hakbus1.png",
+    secondaryImage: "/projects/hakbus2.png",
     deliverables: [
       {
         title: "Unified API",
@@ -168,8 +297,7 @@ export const PROJECTS: Project[] = [
     id: "menyro",
     title: "Menyro", // Shortened
     category: "Hospitality Tech",
-    image:
-      "https://images.unsplash.com/photo-1550968943-3b47b2c069b1?q=80&w=2535&auto=format&fit=crop",
+    image: "/projects/menyro1.png",
     year: "2024",
     tagline: "Automated localization engine eliminating 85% of printing costs.",
     brief:
@@ -182,10 +310,8 @@ export const PROJECTS: Project[] = [
       { val: "< 1s", label: "Global Load", icon: "zap" },
       { val: "Instant", label: "Updates", icon: "check" },
     ],
-    heroImage:
-      "https://images.unsplash.com/photo-1550968943-3b47b2c069b1?q=80&w=2535&auto=format&fit=crop",
-    secondaryImage:
-      "https://images.unsplash.com/photo-1555577626-d18721c430e5?q=80&w=2670&auto=format&fit=crop",
+    heroImage: "/projects/menyro1.png",
+    secondaryImage: "/projects/menyro2.png",
     deliverables: [
       {
         title: "Dynamic QR Core",
@@ -215,8 +341,7 @@ export const PROJECTS: Project[] = [
     id: "insylink",
     title: "Insylink",
     category: "Mission Critical",
-    image:
-      "https://images.unsplash.com/photo-1555577626-d18721c430e5?q=80&w=2670&auto=format&fit=crop",
+    image: "/projects/insylink1.png",
     year: "2024",
     tagline:
       "Offline-first architecture ensuring zero revenue loss during outages.",
@@ -230,10 +355,8 @@ export const PROJECTS: Project[] = [
       { val: "+25%", label: "Throughput", icon: "zap" },
       { val: "5min", label: "Onboarding", icon: "trend" },
     ],
-    heroImage:
-      "https://images.unsplash.com/photo-1555577626-d18721c430e5?q=80&w=2670&auto=format&fit=crop",
-    secondaryImage:
-      "https://images.unsplash.com/photo-1581456492476-8096f9a6504b?q=80&w=2670&auto=format&fit=crop",
+    heroImage: "/projects/insylink1.png",
+    secondaryImage: "/projects/insylink2.png",
     deliverables: [
       {
         title: "Offline PWA",
@@ -263,8 +386,7 @@ export const PROJECTS: Project[] = [
     id: "tvojpazar",
     title: "TvojPazar",
     category: "Scale E-commerce",
-    image:
-      "https://images.unsplash.com/photo-1488197779269-58b688327914?q=80&w=2670&auto=format&fit=crop",
+    image: "/projects/tvojpazar1.png",
     year: "2023",
     tagline:
       "High-scale infrastructure handling 10k+ SKUs with sub-100ms latency.",
@@ -278,10 +400,8 @@ export const PROJECTS: Project[] = [
       { val: "100ms", label: "Query Time", icon: "zap" },
       { val: "250%", label: "YoY Growth", icon: "check" },
     ],
-    heroImage:
-      "https://images.unsplash.com/photo-1488197779269-58b688327914?q=80&w=2670&auto=format&fit=crop",
-    secondaryImage:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2672&auto=format&fit=crop",
+    heroImage: "/projects/tvojpazar1.png",
+    secondaryImage: "/projects/tvojpazar2.png",
     deliverables: [
       {
         title: "Server Components",
@@ -304,8 +424,8 @@ export const PROJECTS: Project[] = [
       author: "Marko Petrović",
       title: "Founder",
     },
-    nextProjectSlug: "nuroo",
-    nextProjectTitle: "Nuroo AI",
+    nextProjectSlug: "doros-premium",
+    nextProjectTitle: "Doro's Premium",
   },
 ];
 
