@@ -1,101 +1,110 @@
-// components/sections/Pricing.tsx
+"use client";
+
 import Link from "next/link";
-import { Button } from "@/components/UI";
+import { ArrowRight, Check } from "lucide-react";
 import { TEXT } from "@/lib/styles";
 import { PRICING_PLANS } from "@/lib/constants";
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-32 md:py-40">
+    <section id="pricing" className="py-20 md:py-32">
       <div className="max-w-screen-2xl mx-auto px-6 md:px-12">
-        {/* Header */}
-        <div className="mb-20">
-          <div className="grid lg:grid-cols-12 gap-16 items-end">
-            {/* Left: Title */}
-            <div className="lg:col-span-5">
-              <span className={TEXT.label}>Pricing</span>
-              <h2 className={`${TEXT.sectionTitle} mt-4`}>
-                Fixed scope. <span className="text-gradient">Fixed price.</span>
-                <br />
-                No surprises.
-              </h2>
-            </div>
-
-            {/* Right: Description */}
-            <div className="lg:col-span-7 lg:border-l lg:border-[#D1326E]/20 lg:pl-12">
-              <p className={`${TEXT.body} text-[#221221]/70 max-w-xl`}>
-                Choose between rapid MVP builds or dedicated engineering squads.
-                Every engagement includes transparent pricing, clear
-                deliverables, and production-ready code from day one.
-              </p>
-            </div>
-          </div>
+        {/* Centered Minimal Header */}
+        <div className="mb-24 text-center">
+          <span
+            className={`${TEXT.label} text-[#D1326E] mb-6 block uppercase tracking-[0.4em]`}
+          >
+            Investment
+          </span>
+          <h2
+            className={`${TEXT.sectionTitle} max-w-4xl mx-auto leading-[0.95]`}
+          >
+            Fixed scope. <span className="text-gradient">Fixed price.</span>
+            <br />
+            No surprises.
+          </h2>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
+        {/* Simplified Pricing Cards */}
+        <div className="grid lg:grid-cols-3 gap-8 items-start">
           {PRICING_PLANS.map((plan, i) => {
             const isHighlighted = plan.name === "Growth Engine";
+
             return (
               <div
                 key={i}
                 className={`
-                  p-10 md:p-12 rounded-[2.5rem] flex flex-col justify-between relative overflow-hidden transition-all duration-500 group
+                  p-10 md:p-14 rounded-[3rem] relative transition-all duration-700 
                   ${
                     isHighlighted
-                      ? "bg-[#221221] text-white shadow-2xl scale-[1.02]"
-                      : "bg-white border border-[#221221]/5 hover:border-[#D1326E]/30 shadow-sm"
+                      ? "bg-[#221221] text-white shadow-2xl scale-[1.05] z-10"
+                      : "bg-[#FDFBFD] border border-[#221221]/5 hover:border-[#D1326E]/20"
                   }
                 `}
               >
+                {/* Premium Glow for Highlighted Card */}
                 {isHighlighted && (
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-[#D1326E]/10 blur-[80px] rounded-full pointer-events-none group-hover:opacity-100 opacity-60 transition-opacity" />
+                  <div className="absolute inset-0 opacity-20 pointer-events-none">
+                    <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#D1326E] blur-[100px] rounded-full" />
+                  </div>
                 )}
 
-                <div className="relative z-10 flex flex-col h-full">
-                  <h3 className="text-3xl font-medium mb-4 tracking-tight">
+                <div className="relative z-10">
+                  <h3 className="text-2xl font-medium mb-2 tracking-tight">
                     {plan.name}
                   </h3>
                   <p
-                    className={`text-base leading-relaxed mb-10 flex-grow ${isHighlighted ? "text-white/60" : "text-[#4A1D3A]/70"}`}
+                    className={`text-sm mb-12 ${isHighlighted ? "text-white/50" : "text-[#221221]/50"}`}
                   >
-                    {plan.description}
+                    {/* Shortening the description to a single line or removing it for cleaner UI */}
+                    Perfect for rapid market entry.
                   </p>
 
-                  <div className="space-y-8 mb-12">
-                    <div>
-                      <p
-                        className={`text-[10px] font-bold tracking-wider uppercase mb-2 ${isHighlighted ? "text-white/30" : "text-[#221221]/30"}`}
-                      >
-                        Setup / Audit Fee
-                      </p>
-                      <p className="text-4xl md:text-5xl font-medium tracking-tighter">
-                        €{plan.setupPrice}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-bold tracking-wider uppercase mb-2 text-[#D1326E]">
-                        Monthly Retainer
-                      </p>
-                      <p className="text-3xl font-medium text-[#D1326E] tracking-tighter flex items-baseline gap-2">
-                        €{plan.monthlyPrice}
-                        <span
-                          className={`text-[10px] font-bold ${isHighlighted ? "text-white/30" : "text-[#221221]/30"}`}
-                        >
-                          /MO
-                        </span>
-                      </p>
-                    </div>
+                  <div className="mb-12">
+                    <span className="text-6xl md:text-7xl font-medium tracking-tighter">
+                      €{plan.setupPrice.toLocaleString()}
+                    </span>
+                    <p
+                      className={`mt-4 text-[10px] font-bold tracking-[0.2em] uppercase ${isHighlighted ? "text-[#D1326E]" : "text-[#D1326E]"}`}
+                    >
+                      + €{plan.monthlyPrice}/mo Retainer
+                    </p>
                   </div>
 
-                  <Link href="/contact" className="w-full mt-auto">
-                    <Button
-                      variant={isHighlighted ? "secondary" : "outline"}
-                      className="w-full py-6 text-sm tracking-wide font-bold"
+                  {/* High-impact Button */}
+                  <Link href="/contact" className="block w-full group">
+                    <div
+                      className={`
+                      w-full py-5 rounded-2xl flex items-center justify-center gap-3 font-bold text-sm tracking-widest uppercase transition-all duration-300
+                      ${
+                        isHighlighted
+                          ? "bg-[#D1326E] text-white hover:bg-white hover:text-[#221221]"
+                          : "bg-[#221221] text-white hover:bg-[#D1326E]"
+                      }
+                    `}
                     >
                       Start Project
-                    </Button>
+                      <ArrowRight
+                        size={18}
+                        className="group-hover:translate-x-1 transition-transform"
+                      />
+                    </div>
                   </Link>
+
+                  {/* Minimal Feature List - Only show the absolute essentials */}
+                  <ul className="mt-12 space-y-4 pt-12 border-t border-current/10">
+                    {["Premium Design", "Next.js Build", "SEO Optimized"].map(
+                      (feature, idx) => (
+                        <li
+                          key={idx}
+                          className="flex items-center gap-3 text-sm opacity-70"
+                        >
+                          <Check size={14} className="text-[#D1326E]" />
+                          {feature}
+                        </li>
+                      ),
+                    )}
+                  </ul>
                 </div>
               </div>
             );

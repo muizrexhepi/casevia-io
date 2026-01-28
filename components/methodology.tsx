@@ -1,77 +1,124 @@
-// components/sections/Methodology.tsx
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+"use client";
+
+import {
+  ArrowRight,
+  LineChart,
+  Palette,
+  ShieldCheck,
+  Rocket,
+} from "lucide-react";
 import { TEXT } from "@/lib/styles";
 
 export default function Methodology() {
-  // Updated copy to be more descriptive of the ACTUAL service provided
   const steps = [
     {
       num: "01",
-      title: "Strategy & Blueprint",
-      desc: "We analyze your competitors and map out a site structure designed to convert visitors into paying customers. No guessing.",
+      icon: LineChart,
+      title: "Market Intelligence",
+      desc: "We map high-conversion blueprints based on competitor analysis and user behavior.",
     },
     {
       num: "02",
-      title: "Visual Architecture",
-      desc: "We design a premium, brand-aligned interface that positions you as the market leader. High-end aesthetics that build instant trust.",
+      icon: Palette,
+      title: "Trust-Based Design",
+      desc: "We craft premium interfaces that build instant psychological authority.",
     },
     {
       num: "03",
-      title: "Next.js Development",
-      desc: "We build your site using the same tech stack as Netflix and Uber. Blazing fast load times, perfect SEO, and unhackable security.",
+      icon: ShieldCheck,
+      title: "Compliant Engineering",
+      desc: "GDPR-ready, unhackable Next.js infrastructure optimized for dominant SEO.",
     },
     {
       num: "04",
-      title: "Managed Growth",
-      desc: "Launch is just day one. We host, update, and maintain your digital headquarters so you never have to log into a server again.",
+      icon: Rocket,
+      title: "Autonomous Growth",
+      desc: "We manage hosting and updates so you scale without technical overhead.",
     },
   ];
 
   return (
-    <section id="methodology" className="py-20 md:py-32 overflow-hidden">
-      <div className="max-w-screen-2xl mx-auto px-6 md:px-12">
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 items-start">
-          <div className="lg:w-1/3 flex flex-col items-start text-left">
-            <div className="flex flex-col lg:sticky lg:top-32">
-              <div>
-                <span className={TEXT.label}>Our Standard</span>
-                <h2 className={TEXT.sectionTitle}>
-                  Precision is not optional.
-                </h2>
-              </div>
+    <section
+      id="methodology"
+      className="relative py-20 md:py-32 overflow-hidden"
+    >
+      <div className="max-w-screen-2xl mx-auto px-6 md:px-12 relative z-10">
+        <div className="flex flex-col lg:flex-row gap-20 items-start">
+          {/* Left Column: Minimalist Header */}
+          <div className="lg:w-1/3 flex flex-col items-start text-left lg:sticky lg:top-32">
+            <span
+              className={`${TEXT.label} text-[#D1326E] mb-6 block uppercase tracking-[0.4em]`}
+            >
+              The Process
+            </span>
+            <h2 className={`${TEXT.sectionTitle} mb-8 leading-[0.95]`}>
+              Software built for <span className="text-gradient">scale.</span>
+            </h2>
+            {/* Paragraph removed for visual impact */}
 
-              <p className={`${TEXT.body} mb-8`}>
-                We don't just "write code." We follow a proprietary engineering
-                standard built to convert complex business challenges into
-                resilient, owned infrastructure.
-              </p>
-
-              <Link href="/contact" className={TEXT.link}>
-                View Service Matrix <ArrowRight size={20} />
-              </Link>
+            <div className="flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-[#221221]/40">
+              <div className="h-px w-8 bg-[#221221]/10" />
+              Four Steps to Revenue
             </div>
           </div>
 
-          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {steps.map((item, idx) => (
-              <div
-                key={idx}
-                className="group p-10 border border-[#221221]/5 rounded-[2rem] bg-gray-50/50 hover:bg-white hover:border-[#D1326E]/20 hover:shadow-xl transition-all duration-500 relative overflow-hidden flex flex-col justify-between min-h-[300px]"
-              >
-                <div className="absolute top-6 right-8 text-6xl font-medium text-[#D1326E]/5 group-hover:text-[#D1326E]/10 transition-colors select-none">
-                  {item.num}
-                </div>
-                <h3
-                  className={`${TEXT.h3} mb-4 group-hover:text-[#D1326E] transition-colors relative z-10`}
+          {/* Right Column: Visual Grid Workflow */}
+          <div className="lg:w-2/3 w-full relative">
+            {/* Subtle Connecting Lines Background Graphic */}
+            <svg
+              className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.03] hidden md:block"
+              viewBox="0 0 800 600"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M 100 150 C 200 150, 300 150, 400 150 C 500 150, 600 300, 700 300"
+                stroke="#221221"
+                strokeWidth="4"
+                strokeDasharray="10 10"
+              />
+              <path
+                d="M 100 450 C 200 450, 300 450, 400 450 C 500 450, 600 300, 700 300"
+                stroke="#221221"
+                strokeWidth="4"
+                strokeDasharray="10 10"
+              />
+            </svg>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {steps.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="group relative p-10 rounded-[2.5rem] bg-white border border-[#221221]/5 hover:border-[#D1326E]/20 hover:shadow-xl hover:shadow-[#D1326E]/5 transition-all duration-500 overflow-hidden"
                 >
-                  {item.title}
-                </h3>
-                <p className={`${TEXT.body} text-base md:text-lg`}>
-                  {item.desc}
-                </p>
-              </div>
-            ))}
+                  {/* Large Faded Number */}
+                  <div className="absolute -top-2 -right-2 text-[8rem] font-bold text-[#221221]/[0.02] group-hover:text-[#D1326E]/[0.04] transition-colors select-none leading-none">
+                    {item.num}
+                  </div>
+
+                  <div className="relative z-10 flex flex-col h-full">
+                    {/* Abstract Icon Header */}
+                    <div className="mb-8 relative w-16 h-16">
+                      <div className="absolute inset-0 bg-[#D1326E]/20 blur-xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div className="relative w-full h-full rounded-2xl bg-[#FDFBFD] border border-[#221221]/10 flex items-center justify-center group-hover:border-[#D1326E]/30 transition-colors">
+                        <item.icon
+                          className="text-[#221221] group-hover:text-[#D1326E] transition-colors duration-500"
+                          size={28}
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                    </div>
+
+                    <h3 className="text-2xl font-medium tracking-tight text-[#221221] mb-4">
+                      {item.title}
+                    </h3>
+                    <p className="text-base text-[#221221]/60 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
